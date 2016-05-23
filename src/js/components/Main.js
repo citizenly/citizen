@@ -1,5 +1,6 @@
 var React = require('react');
 var Link = require('react-router').Link;
+var IndexLink = require("react-router").IndexLink;
 var Message = require('./Message');
 
 // The main application layout
@@ -14,10 +15,10 @@ var App = React.createClass({
               <nav className="mainMenu">
                 <ul>
                   <li>
-                    <Link to="/">Home</Link>
+                    <IndexLink activeClassName="active" to="/">Home</IndexLink>
                   </li>
                   <li>
-                    <Link to="/rep">Rep</Link>
+                    <Link activeClassName="active" to="/rep">Rep</Link>
                   </li>
                 </ul>
               </nav>
@@ -29,16 +30,16 @@ var App = React.createClass({
                     Login/Signup
                   </li>
                   <li>
-                    <Link to="/rep">Rep Info</Link>
+                    <Link activeClassName="active" to="/rep">Rep Info</Link>
                   </li>
                   <li>
-                    <Link to="/compare">Compare</Link>
+                    <Link activeClassName="active" to="/compare">Compare</Link>
                   </li>
                   <li>
-                    <Link to="/petitions">Petitions</Link>
+                    <Link activeClassName="active" to="/petitions">Petitions</Link>
                   </li>
                   <li>
-                    <Link to="/bills">Bills</Link>
+                    <Link activeClassName="active" to="/bills">Bills</Link>
                   </li>
                   <li>
                     Settings

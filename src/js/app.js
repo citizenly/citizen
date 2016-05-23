@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
-var Link = ReactRouter.Link;
+//var Link = ReactRouter.Link;
 var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
 
@@ -20,7 +20,16 @@ var Bills = require('./components/Bills.js');
 var NotFound = require('./components/404.js');
 
 
-/* The routes. This section says:
+// -----------------------------------------------------------------------------
+// Middleware
+// -----------------------------------------------------------------------------
+
+
+
+// -----------------------------------------------------------------------------
+// The routes
+// -----------------------------------------------------------------------------
+/* This section says:
   - If the route starts with /, load the App component
   - If the route is /, load the Home component INSIDE App as this.props.children
   - If the route is /order, load the Order component INSIDE App as this.props.children

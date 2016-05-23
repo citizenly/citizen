@@ -8,13 +8,13 @@ var Rep = React.createClass({
     var rep = rep || {};
     return {
       rep: {
-        name: rep.name || '**Justin Trudeau**',
-        constituency: rep.constituency || '**Papineau**',
+        name: rep.name || '**Codrin Diaconu**',
+        constituency: rep.constituency || '**Downtown**',
         province: rep.province || '**QC**',
         party: rep.party || '**Liberal**',
         img: rep.img || '../images/567_1.jpg',
-        electedYear: rep.electedYear || '**2015**',
-        electedVotes: rep.electedVotes || '**52%**',
+        electedYear: rep.electedYear || '**2016**',
+        electedVotes: rep.electedVotes || '**92%**',
       },
      };
   },
@@ -44,16 +44,16 @@ var Rep = React.createClass({
           <nav className="bottomMenu">
             <ul>
               <li>
-                <Link to="/compare">Compare</Link>
+                <Link to="/compare" activeClassName="active">Compare</Link>
               </li>
               <li>
-                <Link to="/petitions">Petitions</Link>
+                <Link to="/petitions" activeClassName="active">Petitions</Link>
               </li>
               <li>
-                <Link to="/feed">What they're doing</Link>
+                <Link to="/feed" activeClassName="active">What they're doing</Link>
               </li>
               <li>
-                <Link to="/bills">What would you do?</Link>
+                <Link to="/bills" activeClassName="active">What would you do?</Link>
               </li>
             </ul>
           </nav>
