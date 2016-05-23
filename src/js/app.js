@@ -8,7 +8,7 @@ var Link = ReactRouter.Link;
 var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
 
-require('./../scss/app.scss');
+
 
 var App = require('./components/Main.js');
 var Home = require('./components/Home.js');
