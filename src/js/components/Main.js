@@ -1,5 +1,6 @@
 var React = require('react');
 var Link = require('react-router').Link;
+var IndexLink = require("react-router").IndexLink;
 var Message = require('./Message');
 
 // The main application layout
@@ -8,20 +9,45 @@ var App = React.createClass({
   render: function() {
     return (
         <div>
-        <header>
-          <Message/>
-            <nav className="mainMenu">
+          <header>
+            <Message/>
+              {/*Our menu for navigating around the app whilst developing*/}
+              <nav className="mainMenu">
                 <ul>
                   <li>
-                    <Link to="/order">Order</Link>
+                    <IndexLink activeClassName="active" to="/">Home</IndexLink>
+                  </li>
+                  <li>
+                    <Link activeClassName="active" to="/rep">Rep</Link>
                   </li>
                 </ul>
               </nav>
-        </header>
-        <main>{this.props.children}</main>
-        <footer>
-            <p>&copy; CITYZEN 2016</p>
-        </footer>
+              
+              {/*Actual menu*/}
+              <nav className="mainMenu">
+                <ul>
+                  <li>
+                    Login/Signup
+                  </li>
+                  <li>
+                    <Link activeClassName="active" to="/rep">Rep Info</Link>
+                  </li>
+                  <li>
+                    <Link activeClassName="active" to="/compare">Compare</Link>
+                  </li>
+                  <li>
+                    <Link activeClassName="active" to="/petitions">Petitions</Link>
+                  </li>
+                  <li>
+                    <Link activeClassName="active" to="/bills">Bills</Link>
+                  </li>
+                  <li>
+                    Settings
+                  </li>
+                </ul>
+              </nav>
+          </header>
+          <main>{this.props.children}</main>
         </div>
     );
   }
