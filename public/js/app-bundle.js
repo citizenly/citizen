@@ -25720,11 +25720,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'col s4 offset-s4 center-block' },
-	          React.createElement(
-	            'span',
-	            { className: 'flow-text' },
-	            React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
-	          )
+	          React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
 	        ),
 	        React.createElement(
 	          'p',
@@ -25752,11 +25748,11 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'col s4 responsive-img center-block' },
+	          { className: 'col s8 offset-s2 center-block' },
 	          React.createElement(
 	            'span',
 	            { className: 'flow-text' },
-	            React.createElement('img', { src: 'images/canadamap.png' })
+	            React.createElement('img', { className: 'responsive-img', src: 'images/canadamap.png' })
 	          )
 	        )
 	      )
