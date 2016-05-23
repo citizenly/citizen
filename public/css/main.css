@@ -6162,7 +6162,8 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 5em; } }
 /* Global --------------------------------------------------------------- */
 h1 {
-  font-family: Oswald; }
+  font-family: Oswald;
+  font-size: 3em; }
 
 h2 {
   font-family: Oswald; }

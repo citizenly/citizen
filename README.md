@@ -7,11 +7,13 @@ npm install
 gem install sass
 
 
-//run these 2 commands to get started
+//run these 3 commands to get started
 
 node server.js
 
 webpack -watch
+
+sass --watch src/scss/app.scss:public/css/main.css
 
 
 // SCSS
