@@ -13,8 +13,8 @@ var Home = React.createClass({
         <h1>Who's Representing Me?</h1>
           
         <form method="post">
-        <input type="text" name="postalcode" placeholder="enter your postal code" value="" onChange=""/>
-        <button onClick="" type="button" disabled="">Find Out</button>
+          <input type="text" name="postalcode" placeholder="enter your postal code" value="" onChange=""/>
+          <button onClick="" type="button" disabled="">Find Out</button>
         </form>
       </div>
     );

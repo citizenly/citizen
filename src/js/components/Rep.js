@@ -28,24 +28,35 @@ var Rep = React.createClass({
           <p>{this.state.rep.party} MP for {this.state.rep.constituency} ({this.state.rep.province})</p>
           <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVotes} of the vote</p>
         </div>
-        <div className="repStats">stats to come later</div>
+        <div className="repStats">
+          <p>In agreement with...</p>
+          <div>
+            <p>you</p>
+            <p>**?**</p>
+          </div>
+          <div>
+            <p>your neighbours</p>
+            <p>**34%**</p>
+          </div>
+          <p>... in her voting.</p>
+        </div>
         <div className="bottomNav">
           <nav className="bottomMenu">
-                <ul>
-                  <li>
-                    <Link to="/compare">Compare</Link>
-                  </li>
-                  <li>
-                    <Link to="/petitions">Petitions</Link>
-                  </li>
-                  <li>
-                    <Link to="/feed">What they're doing</Link>
-                  </li>
-                  <li>
-                    <Link to="/bills">What would you do?</Link>
-                  </li>
-                </ul>
-              </nav>
+            <ul>
+              <li>
+                <Link to="/compare">Compare</Link>
+              </li>
+              <li>
+                <Link to="/petitions">Petitions</Link>
+              </li>
+              <li>
+                <Link to="/feed">What they're doing</Link>
+              </li>
+              <li>
+                <Link to="/bills">What would you do?</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     );

@@ -29,16 +29,16 @@ var App = React.createClass({
                     Login/Signup
                   </li>
                   <li>
-                    Rep Info
+                    <Link to="/rep">Rep Info</Link>
                   </li>
                   <li>
-                    Bills
+                    <Link to="/compare">Compare</Link>
                   </li>
                   <li>
-                    Data Visualisation
+                    <Link to="/petitions">Petitions</Link>
                   </li>
                   <li>
-                    Petitions
+                    <Link to="/bills">Bills</Link>
                   </li>
                   <li>
                     Settings
