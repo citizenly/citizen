@@ -8,20 +8,45 @@ var App = React.createClass({
   render: function() {
     return (
         <div>
-        <header>
-          <Message/>
-            <nav className="mainMenu">
+          <header>
+            <Message/>
+              {/*Our menu for navigating around the app whilst developing*/}
+              <nav className="mainMenu">
                 <ul>
                   <li>
-                    <Link to="/order">Order</Link>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/rep">Rep</Link>
                   </li>
                 </ul>
               </nav>
-        </header>
-        <main>{this.props.children}</main>
-        <footer>
-            <p>&copy; CITYZEN 2016</p>
-        </footer>
+              
+              {/*Actual menu*/}
+              <nav className="mainMenu">
+                <ul>
+                  <li>
+                    Login/Signup
+                  </li>
+                  <li>
+                    Rep Info
+                  </li>
+                  <li>
+                    Bills
+                  </li>
+                  <li>
+                    Data Visualisation
+                  </li>
+                  <li>
+                    Petitions
+                  </li>
+                  <li>
+                    Settings
+                  </li>
+                </ul>
+              </nav>
+          </header>
+          <main>{this.props.children}</main>
         </div>
     );
   }
