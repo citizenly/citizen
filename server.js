@@ -1,5 +1,19 @@
 var express = require('express');
 var app = express();
+var cors = require('cors')
+
+ 
+var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
+var corsOptionsDelegate = function(req, callback){
+  var corsOptions;
+  if(whitelist.indexOf(req.header('Origin')) !== -1){
+    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response 
+  } else {
+    corsOptions = { origin: false }; // disable CORS for this request 
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options 
+};
+ 
 
 /*
 this says: serve all the files in the src directory if they match the URL
@@ -16,7 +30,7 @@ This says: for any path NOT served by the middleware above, send the file called
 For example, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component
 */
 
-app.get('/*', function(request, response) {
+app.get('/*', cors(corsOptionsDelegate),  function(request, response, next) {
   response.sendFile(__dirname + '/src/index.html');
 });
 app.listen(process.env.PORT || 8080, function() {
