@@ -13,9 +13,7 @@ var Home = React.createClass({
       <div className="main container center-block">
        <div className="row center-block">
         <div className="col s4 offset-s4 center-block"> 
-          <span className="flow-text">
             <img className= "responsive-img" src="images/citizenlogo.png"></img>
-          </span>
         </div>
         <p className="col s8 offset-s2 center-block">In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
         <div className= "col s8 offset-s2 center-block">
@@ -25,7 +23,11 @@ var Home = React.createClass({
           <button onClick="" type="button" disabled="">Find Out</button>
         </form>
         </div>
-          <div className="col s4 responsive-img center-block"><span className="flow-text"><img src="images/canadamap.png"></img></span></div>
+        <div className="col s8 offset-s2 center-block"> 
+          <span className="flow-text">
+            <img className= "responsive-img" src="images/canadamap.png"></img>
+          </span>
+        </div>
       </div>
       </div>
     );

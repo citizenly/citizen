@@ -52,7 +52,7 @@
 	var ReactRouter = __webpack_require__(159);
 	var Router = ReactRouter.Router;
 	var Route = ReactRouter.Route;
-	var Link = ReactRouter.Link;
+	//var Link = ReactRouter.Link;
 	var IndexRoute = ReactRouter.IndexRoute;
 	var browserHistory = ReactRouter.browserHistory;
 	
@@ -65,7 +65,14 @@
 	var Bills = __webpack_require__(269);
 	var NotFound = __webpack_require__(270);
 	
-	/* The routes. This section says:
+	// -----------------------------------------------------------------------------
+	// Middleware
+	// -----------------------------------------------------------------------------
+	
+	// -----------------------------------------------------------------------------
+	// The routes
+	// -----------------------------------------------------------------------------
+	/* This section says:
 	  - If the route starts with /, load the App component
 	  - If the route is /, load the Home component INSIDE App as this.props.children
 	  - If the route is /order, load the Order component INSIDE App as this.props.children
@@ -25215,6 +25222,7 @@
 	
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(159).Link;
+	var IndexLink = __webpack_require__(159).IndexLink;
 	var Message = __webpack_require__(221);
 	
 	// The main application layout
@@ -25240,8 +25248,8 @@
 	              'li',
 	              null,
 	              React.createElement(
-	                Link,
-	                { to: '/' },
+	                IndexLink,
+	                { activeClassName: 'active', to: '/' },
 	                'Home'
 	              )
 	            ),
@@ -25250,7 +25258,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/rep' },
+	                { activeClassName: 'active', to: '/rep' },
 	                'Rep'
 	              )
 	            )
@@ -25272,7 +25280,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/rep' },
+	                { activeClassName: 'active', to: '/rep' },
 	                'Rep Info'
 	              )
 	            ),
@@ -25281,7 +25289,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/compare' },
+	                { activeClassName: 'active', to: '/compare' },
 	                'Compare'
 	              )
 	            ),
@@ -25290,7 +25298,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/petitions' },
+	                { activeClassName: 'active', to: '/petitions' },
 	                'Petitions'
 	              )
 	            ),
@@ -25299,7 +25307,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/bills' },
+	                { activeClassName: 'active', to: '/bills' },
 	                'Bills'
 	              )
 	            ),
@@ -25712,11 +25720,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'col s4 offset-s4 center-block' },
-	          React.createElement(
-	            'span',
-	            { className: 'flow-text' },
-	            React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
-	          )
+	          React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
 	        ),
 	        React.createElement(
 	          'p',
@@ -25744,11 +25748,11 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'col s4 responsive-img center-block' },
+	          { className: 'col s8 offset-s2 center-block' },
 	          React.createElement(
 	            'span',
 	            { className: 'flow-text' },
-	            React.createElement('img', { src: 'images/canadamap.png' })
+	            React.createElement('img', { className: 'responsive-img', src: 'images/canadamap.png' })
 	          )
 	        )
 	      )
@@ -29709,13 +29713,13 @@
 	    var rep = rep || {};
 	    return {
 	      rep: {
-	        name: rep.name || '**Justin Trudeau**',
-	        constituency: rep.constituency || '**Papineau**',
+	        name: rep.name || '**Codrin Diaconu**',
+	        constituency: rep.constituency || '**Downtown**',
 	        province: rep.province || '**QC**',
 	        party: rep.party || '**Liberal**',
 	        img: rep.img || '../images/567_1.jpg',
-	        electedYear: rep.electedYear || '**2015**',
-	        electedVotes: rep.electedVotes || '**52%**'
+	        electedYear: rep.electedYear || '**2016**',
+	        electedVotes: rep.electedVotes || '**92%**'
 	      }
 	    };
 	  },
@@ -29813,7 +29817,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/compare' },
+	                { to: '/compare', activeClassName: 'active' },
 	                'Compare'
 	              )
 	            ),
@@ -29822,7 +29826,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/petitions' },
+	                { to: '/petitions', activeClassName: 'active' },
 	                'Petitions'
 	              )
 	            ),
@@ -29831,7 +29835,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/feed' },
+	                { to: '/feed', activeClassName: 'active' },
 	                'What they\'re doing'
 	              )
 	            ),
@@ -29840,7 +29844,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/bills' },
+	                { to: '/bills', activeClassName: 'active' },
 	                'What would you do?'
 	              )
 	            )
