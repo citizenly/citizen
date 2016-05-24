@@ -25720,7 +25720,7 @@
 	                React.createElement(
 	                    'div',
 	                    { className: 'col s4 offset-s4 center-block' },
-	                    React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
+	                    React.createElement('img', { className: 'citizenlogo responsive-img', src: 'images/citizenlogo.png' })
 	                ),
 	                React.createElement(
 	                    'div',
@@ -25763,35 +25763,6 @@
 	                'div',
 	                { className: 'col s8 offset-s2 center-block' },
 	                React.createElement('img', { className: 'responsive-img', src: 'images/canadamap.png' })
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: 'row' },
-	                React.createElement(
-	                    'div',
-	                    { className: 'col m1 grey center' },
-	                    '1'
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: 'col m1 center' },
-	                    '2'
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: 'col m1 grey center' },
-	                    '3'
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: 'col m1 center' },
-	                    '4'
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: 'col m1 grey center' },
-	                    '5'
-	                )
 	            )
 	        );
 	    }
@@ -29766,49 +29737,61 @@
 	      { className: 'main repInfoPage' },
 	      React.createElement(
 	        'div',
-	        { className: 'repInfo' },
-	        React.createElement('img', { src: this.state.rep.img }),
+	        { className: 'repInfo row' },
 	        React.createElement(
-	          'h3',
-	          null,
-	          'You are being represented by:'
+	          'div',
+	          { className: 'col s3' },
+	          React.createElement('img', { className: 'responsive-img', src: this.state.rep.img })
 	        ),
 	        React.createElement(
-	          'h1',
-	          null,
-	          this.state.rep.name
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          this.state.rep.party,
-	          ' MP for ',
-	          this.state.rep.constituency,
-	          ' (',
-	          this.state.rep.province,
-	          ')'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          'Won in ',
-	          this.state.rep.electedYear,
-	          ' with ',
-	          this.state.rep.electedVotes,
-	          ' of the vote'
+	          'div',
+	          { className: 'col s9 flow-text center' },
+	          React.createElement(
+	            'h3',
+	            null,
+	            'You are being represented by:'
+	          ),
+	          React.createElement(
+	            'h1',
+	            null,
+	            this.state.rep.name
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            this.state.rep.party,
+	            ' MP for ',
+	            this.state.rep.constituency,
+	            ' (',
+	            this.state.rep.province,
+	            ')'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'Won in ',
+	            this.state.rep.electedYear,
+	            ' with ',
+	            this.state.rep.electedVotes,
+	            ' of the vote'
+	          )
 	        )
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'repStats' },
+	        { className: 'repStats row' },
 	        React.createElement(
-	          'p',
-	          null,
-	          'In agreement with...'
+	          'div',
+	          { className: 'col s10 offset-2 center' },
+	          React.createElement(
+	            'p',
+	            null,
+	            'In agreement with...'
+	          )
 	        ),
 	        React.createElement(
 	          'div',
-	          null,
+	          { className: 'col s3 offset-3 center' },
 	          React.createElement(
 	            'p',
 	            null,
@@ -29822,7 +29805,7 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          null,
+	          { className: 'col s3 offset-3 center' },
 	          React.createElement(
 	            'p',
 	            null,
@@ -29835,51 +29818,71 @@
 	          )
 	        ),
 	        React.createElement(
-	          'p',
-	          null,
-	          '... in her voting.'
+	          'div',
+	          { className: 'col s10 offset-2 center' },
+	          React.createElement(
+	            'p',
+	            null,
+	            '... in her voting.'
+	          )
 	        )
 	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'bottomNav' },
 	        React.createElement(
-	          'nav',
+	          'div',
 	          { className: 'bottomMenu row' },
 	          React.createElement(
 	            'div',
-	            { className: 'compare col s3 center card-panel hoverable' },
+	            { className: 'col s3 center' },
 	            React.createElement(
-	              Link,
-	              { to: '/compare', activeClassName: 'active' },
-	              'COMPARE'
+	              'div',
+	              { className: 'bottomMenu-item compare card-panel hoverable' },
+	              React.createElement(
+	                Link,
+	                { to: '/compare', activeClassName: 'active' },
+	                'COMPARE'
+	              )
 	            )
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'petitions col s3 center card-panel hoverable' },
+	            { className: 'col s3 center' },
 	            React.createElement(
-	              Link,
-	              { to: '/petitions', activeClassName: 'active' },
-	              'PETITIONS'
+	              'div',
+	              { className: 'bottomMenu-item petitions card-panel hoverable' },
+	              React.createElement(
+	                Link,
+	                { to: '/petitions', activeClassName: 'active' },
+	                'PETITIONS'
+	              )
 	            )
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'feed col s3 center card-panel hoverable' },
+	            { className: 'col s3 center' },
 	            React.createElement(
-	              Link,
-	              { to: '/feed', activeClassName: 'active' },
-	              'WHAT THEY\'RE DOING'
+	              'div',
+	              { className: 'bottomMenu-item feed card-panel hoverable' },
+	              React.createElement(
+	                Link,
+	                { to: '/feed', activeClassName: 'active' },
+	                'WHAT THEY\'RE DOING'
+	              )
 	            )
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'bills col s3 center card-panel hoverable' },
+	            { className: 'col s3 center' },
 	            React.createElement(
-	              Link,
-	              { to: '/bills', activeClassName: 'active' },
-	              'WHAT WOULD YOU DO?'
+	              'div',
+	              { className: 'bottomMenu-item bills card-panel hoverable' },
+	              React.createElement(
+	                Link,
+	                { to: '/bills', activeClassName: 'active' },
+	                'WHAT WOULD YOU DO?'
+	              )
 	            )
 	          )
 	        )

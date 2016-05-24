@@ -1,6 +1,23 @@
+.bottomMenu-item {
+    font-family: Oswald;
+    width: 20vw;
+    margin: 0 auto;
+    color: white;
+    height: 20vw;
+    font-size: 3vw;
+}
+
+
+
+.bottomMenu-item a {
+    color: white;
+}
+
+
+
 .compare {
     background-color: #2D81CF;
-    font-family: Oswald;
+
 }
 
 .petitions {
@@ -15,3 +32,6 @@
     background-color: #8675B3;
 }
 
+.card-panel {
+padding: 10px;
+}

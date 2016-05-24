@@ -15,7 +15,7 @@ var Home = React.createClass({
         <div className="row center-block">
         
             <div className="col s4 offset-s4 center-block"> 
-               <img className= "responsive-img" src="images/citizenlogo.png"></img>
+               <img className= "citizenlogo responsive-img" src="images/citizenlogo.png"></img>
             </div>
             
             <div className="col s12 center-block flow-text">
@@ -41,14 +41,6 @@ var Home = React.createClass({
             <img className= "responsive-img" src="images/canadamap.png"></img>
         </div>
         
-        <div className="row">
-         <div className="col m1 grey center">1</div>
-         <div className="col m1 center">2</div>
-         <div className="col m1 grey center">3</div>
-         <div className="col m1 center">4</div>
-         <div className="col m1 grey center">5</div>
-      </div>
-      
     </div>
       
     );

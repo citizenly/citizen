@@ -6160,6 +6160,36 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
+.citizenlogo {
+  position: relative;
+  -moz-animation-name: dropHeader;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-out;
+  -moz-animation-duration: 0.6s;
+  -webkit-animation-name: dropHeader;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-duration: 0.6s;
+  animation-name: dropHeader;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-duration: 0.6s; }
+
+@-moz-keyframes dropHeader {
+  0% {
+    -moz-transform: translateY(-80px); }
+  100% {
+    -moz-transform: translateY(0); } }
+@-webkit-keyframes dropHeader {
+  0% {
+    -webkit-transform: translateY(-80px); }
+  100% {
+    -webkit-transform: translateY(0); } }
+@keyframes dropHeader {
+  0% {
+    transform: translateY(-80px); }
+  100% {
+    transform: translateY(0); } }
 .specialh1 {
   font-family: Oswald, sans-serif;
   font-weight: medium;
@@ -6234,9 +6264,19 @@ body {
 #box-one:target, #box-two:target, #box-three:target {
   z-index: 1; }
 
+.bottomMenu-item {
+  font-family: Oswald;
+  width: 20vw;
+  margin: 0 auto;
+  color: white;
+  height: 20vw;
+  font-size: 3vw; }
+
+.bottomMenu-item a {
+  color: white; }
+
 .compare {
-  background-color: #2D81CF;
-  font-family: Oswald; }
+  background-color: #2D81CF; }
 
 .petitions {
   background-color: #44A487; }
@@ -6246,6 +6286,9 @@ body {
 
 .bills {
   background-color: #8675B3; }
+
+.card-panel {
+  padding: 10px; }
 
 /* Global --------------------------------------------------------------- */
 h1, h2 {
