@@ -25733,10 +25733,10 @@
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: 'col s12 flow-text' },
+	                    { className: 'col s12' },
 	                    React.createElement(
 	                        'p',
-	                        { className: 'specialh1 flow-text' },
+	                        { className: 'specialh1' },
 	                        'WHO\'S REPRESENTING ME?'
 	                    )
 	                )
@@ -30000,92 +30000,122 @@
 	
 	// bills landing page
 	var Bills = React.createClass({
-		displayName: 'Bills',
+	  displayName: 'Bills',
 	
-		render: function render() {
-			return React.createElement(
-				'div',
-				{ className: 'row' },
-				React.createElement(
-					'div',
-					{ className: 'tabbed-area col s12' },
-					React.createElement(
-						'ul',
-						{ className: 'tabs group' },
-						React.createElement(
-							'li',
-							null,
-							React.createElement(
-								'a',
-								{ href: '#box-one' },
-								'TITLE'
-							)
-						),
-						React.createElement(
-							'li',
-							null,
-							React.createElement(
-								'a',
-								{ href: '#box-two' },
-								'SUMMARY'
-							)
-						),
-						React.createElement(
-							'li',
-							null,
-							React.createElement(
-								'a',
-								{ href: '#box-three' },
-								'FULL TEXT'
-							)
-						),
-						React.createElement(
-							'li',
-							null,
-							React.createElement(
-								'a',
-								{ href: '#box-four' },
-								'HOUSE DEBATE'
-							)
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'box-wrap' },
-						React.createElement(
-							'div',
-							{ id: 'box-one' },
-							'Title of the bill'
-						),
-						React.createElement(
-							'div',
-							{ id: 'box-two' },
-							'Summary of the bill'
-						),
-						React.createElement(
-							'div',
-							{ id: 'box-three' },
-							'Full text of the bill'
-						),
-						React.createElement(
-							'div',
-							{ id: 'box-four' },
-							'House debate of the bill'
-						)
-					)
-				),
-				React.createElement(
-					'div',
-					{ className: 'col s3 offset-s3 center-block' },
-					React.createElement('img', { className: 'responsive-img', src: 'images/red button.png' })
-				),
-				React.createElement(
-					'div',
-					{ className: 'col s3 offset-s3 center-block' },
-					React.createElement('img', { className: 'responsive-img', src: 'images/green button.png' })
-				)
-			);
-		}
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'row' },
+	      React.createElement(
+	        'div',
+	        { className: 'tabbed-area col s12' },
+	        React.createElement(
+	          'ul',
+	          { className: 'tabs group' },
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'a',
+	              { href: '#box-one' },
+	              'TITLE'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'a',
+	              { href: '#box-two' },
+	              'SUMMARY'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'a',
+	              { href: '#box-three' },
+	              'FULL TEXT'
+	            )
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'a',
+	              { href: '#box-four' },
+	              'HOUSE DEBATE'
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'box-wrap' },
+	          React.createElement(
+	            'div',
+	            { id: 'box-one' },
+	            'Title of the bill'
+	          ),
+	          React.createElement(
+	            'div',
+	            { id: 'box-two' },
+	            'Summary of the bill'
+	          ),
+	          React.createElement(
+	            'div',
+	            { id: 'box-three' },
+	            'Full text of the bill'
+	          ),
+	          React.createElement(
+	            'div',
+	            { id: 'box-four' },
+	            'House debate of the bill'
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'billbuttons-section row' },
+	        React.createElement(
+	          'div',
+	          { className: 'col s3 center' },
+	          React.createElement(
+	            'div',
+	            { className: 'arrow' },
+	            'arrow'
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'col s3 center' },
+	          React.createElement(
+	            'div',
+	            { className: 'button' },
+	            React.createElement('img', { className: 'responsive-img', src: 'images/red button.png' })
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'col s3 center' },
+	          React.createElement(
+	            'div',
+	            { className: 'button' },
+	            React.createElement('img', { className: 'responsive-img', src: 'images/green button.png' })
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'col s3 center' },
+	          React.createElement(
+	            'div',
+	            { className: 'arrow' },
+	            'arrow'
+	          )
+	        )
+	      )
+	    );
+	  }
 	});
 	
 	module.exports = Bills;

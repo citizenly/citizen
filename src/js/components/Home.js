@@ -22,8 +22,8 @@ var Home = React.createClass({
                 <p className="col s12 flow-text">In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
             </div>
             
-            <div className="col s12 flow-text">
-                <p className="specialh1 flow-text">WHO'S REPRESENTING ME?</p>
+            <div className="col s12">
+                <p className="specialh1">WHO'S REPRESENTING ME?</p>
             </div>
         </div>
             

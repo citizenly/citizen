@@ -6165,15 +6165,15 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   -moz-animation-name: dropHeader;
   -moz-animation-iteration-count: 1;
   -moz-animation-timing-function: ease-out;
-  -moz-animation-duration: 0.6s;
+  -moz-animation-duration: 0.7s;
   -webkit-animation-name: dropHeader;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: ease-out;
-  -webkit-animation-duration: 0.6s;
+  -webkit-animation-duration: 0.7s;
   animation-name: dropHeader;
   animation-iteration-count: 1;
   animation-timing-function: ease-out;
-  animation-duration: 0.6s; }
+  animation-duration: 0.7s; }
 
 @-moz-keyframes dropHeader {
   0% {
@@ -6190,26 +6190,105 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     transform: scale(0.5); }
   100% {
     transform: scale(1); } }
+/*.citizenlogo.bounceOut {
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+}
+
+@-webkit-keyframes bounce {
+  from, 20%, 53%, 80%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
+
+  40%, 43% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    -webkit-transform: translate3d(0, -30px, 0);
+    transform: translate3d(0, -30px, 0);
+  }
+
+  70% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    -webkit-transform: translate3d(0, -15px, 0);
+    transform: translate3d(0, -15px, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(0,-4px,0);
+    transform: translate3d(0,-4px,0);
+  }
+}
+
+@keyframes bounce {
+  from, 20%, 53%, 80%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
+
+  40%, 43% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    -webkit-transform: translate3d(0, -30px, 0);
+    transform: translate3d(0, -30px, 0);
+  }
+
+  70% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    -webkit-transform: translate3d(0, -15px, 0);
+    transform: translate3d(0, -15px, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(0,-4px,0);
+    transform: translate3d(0,-4px,0);
+  }
+}
+
+.bounce {
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+
+*/
 input[type=text] {
-  width: 80%; }
+  width: 80%;
+  border-radius: 20px 0px 0px 20px;
+  /* background-color: transparent; */
+  /* border: none; */
+  border-bottom: 1px solid #9e9e9e;
+  /* height: 3rem; */
+  padding: 0;
+  box-shadow: none;
+  /* box-sizing: content-box; */ }
 
 .specialh1 {
   font-family: Oswald, sans-serif;
   font-weight: medium;
-  font-size: 1.5em; }
+  font-size: 1.7em; }
 
 .postcodebutton {
   background-color: #44A487;
+  border: 0px;
   color: white;
   font-family: Oswald, sans-serif;
-  border-radius: 0px 10px 10px 0px; }
+  border-radius: 0px 10px 10px 0px;
+  height: 2em; }
 
 .postcodeinput {
   border-bottom: 1px solid #9e9e9e;
   border-radius: 20px 0px 0px 20px;
   font-family: Arimo;
   outline: none;
-  height: 3rem;
+  height: 2rem;
   font-size: 1rem;
   margin: 0 0 15px 0;
   padding: 0;
@@ -6274,10 +6353,11 @@ body {
 .bottomMenu-item {
   font-family: Oswald;
   width: 20vw;
-  margin: 0 auto;
   color: white;
+  margin: 0 auto;
   height: 20vw;
-  font-size: 3vw; }
+  font-size: 4vw;
+  text-align: left; }
 
 .bottomMenu-item a {
   color: white; }
@@ -6295,10 +6375,84 @@ body {
   background-color: #8675B3; }
 
 .card-panel {
-  padding: 10px; }
+  padding: 3px; }
 
 /* Global --------------------------------------------------------------- */
 h1, h2 {
   font-family: Oswald, sans-serif; }
+
+p {
+  font-family: Arimo;
+  font-size: 1.2em; }
+
+.flow-text {
+  font-family: Arimo;
+  font-weight: 300; }
+  @media only screen and (min-width: 360px) {
+    .flow-text {
+      font-size: 1rem; } }
+  @media only screen and (min-width: 390px) {
+    .flow-text {
+      font-size: 1.02rem; } }
+  @media only screen and (min-width: 420px) {
+    .flow-text {
+      font-size: 1.04rem; } }
+  @media only screen and (min-width: 450px) {
+    .flow-text {
+      font-size: 1.06rem; } }
+  @media only screen and (min-width: 480px) {
+    .flow-text {
+      font-size: 1.08rem; } }
+  @media only screen and (min-width: 510px) {
+    .flow-text {
+      font-size: 1.1rem; } }
+  @media only screen and (min-width: 540px) {
+    .flow-text {
+      font-size: 1.12rem; } }
+  @media only screen and (min-width: 570px) {
+    .flow-text {
+      font-size: 1.14rem; } }
+  @media only screen and (min-width: 600px) {
+    .flow-text {
+      font-size: 1.16rem; } }
+  @media only screen and (min-width: 630px) {
+    .flow-text {
+      font-size: 1.18rem; } }
+  @media only screen and (min-width: 660px) {
+    .flow-text {
+      font-size: 1.2rem; } }
+  @media only screen and (min-width: 690px) {
+    .flow-text {
+      font-size: 1.22rem; } }
+  @media only screen and (min-width: 720px) {
+    .flow-text {
+      font-size: 1.24rem; } }
+  @media only screen and (min-width: 750px) {
+    .flow-text {
+      font-size: 1.26rem; } }
+  @media only screen and (min-width: 780px) {
+    .flow-text {
+      font-size: 1.28rem; } }
+  @media only screen and (min-width: 810px) {
+    .flow-text {
+      font-size: 1.3rem; } }
+  @media only screen and (min-width: 840px) {
+    .flow-text {
+      font-size: 1.32rem; } }
+  @media only screen and (min-width: 870px) {
+    .flow-text {
+      font-size: 1.34rem; } }
+  @media only screen and (min-width: 900px) {
+    .flow-text {
+      font-size: 1.36rem; } }
+  @media only screen and (min-width: 930px) {
+    .flow-text {
+      font-size: 1.38rem; } }
+  @media only screen and (min-width: 960px) {
+    .flow-text {
+      font-size: 1.4rem; } }
+  @media only screen and (max-width: 360px) {
+    .flow-text {
+      font-size: 1rem; } }
 
 /*# sourceMappingURL=main.css.map */
