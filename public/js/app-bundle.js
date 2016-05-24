@@ -52,7 +52,7 @@
 	var ReactRouter = __webpack_require__(159);
 	var Router = ReactRouter.Router;
 	var Route = ReactRouter.Route;
-	var Link = ReactRouter.Link;
+	//var Link = ReactRouter.Link;
 	var IndexRoute = ReactRouter.IndexRoute;
 	var browserHistory = ReactRouter.browserHistory;
 	
@@ -65,7 +65,14 @@
 	var Bills = __webpack_require__(269);
 	var NotFound = __webpack_require__(270);
 	
-	/* The routes. This section says:
+	// -----------------------------------------------------------------------------
+	// Middleware
+	// -----------------------------------------------------------------------------
+	
+	// -----------------------------------------------------------------------------
+	// The routes
+	// -----------------------------------------------------------------------------
+	/* This section says:
 	  - If the route starts with /, load the App component
 	  - If the route is /, load the Home component INSIDE App as this.props.children
 	  - If the route is /order, load the Order component INSIDE App as this.props.children
@@ -25215,6 +25222,7 @@
 	
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(159).Link;
+	var IndexLink = __webpack_require__(159).IndexLink;
 	var Message = __webpack_require__(221);
 	
 	// The main application layout
@@ -25240,8 +25248,8 @@
 	              'li',
 	              null,
 	              React.createElement(
-	                Link,
-	                { to: '/' },
+	                IndexLink,
+	                { activeClassName: 'active', to: '/' },
 	                'Home'
 	              )
 	            ),
@@ -25250,7 +25258,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/rep' },
+	                { activeClassName: 'active', to: '/rep' },
 	                'Rep'
 	              )
 	            )
@@ -25272,7 +25280,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/rep' },
+	                { activeClassName: 'active', to: '/rep' },
 	                'Rep Info'
 	              )
 	            ),
@@ -25281,7 +25289,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/compare' },
+	                { activeClassName: 'active', to: '/compare' },
 	                'Compare'
 	              )
 	            ),
@@ -25290,7 +25298,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/petitions' },
+	                { activeClassName: 'active', to: '/petitions' },
 	                'Petitions'
 	              )
 	            ),
@@ -25299,7 +25307,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/bills' },
+	                { activeClassName: 'active', to: '/bills' },
 	                'Bills'
 	              )
 	            ),
@@ -25712,44 +25720,40 @@
 	        React.createElement(
 	          'div',
 	          { className: 'col s4 offset-s4 center-block' },
-	          React.createElement(
-	            'span',
-	            { className: 'flow-text' },
-	            React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
-	          )
+	          React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
 	        ),
 	        React.createElement(
 	          'p',
-	          { className: 'col s8 offset-s2 center-block' },
+	          { className: 'col s8 offset-s2 center-block flow-text' },
 	          'In a democracy, you elect someone to make decisions for you. Check out what they\'re doing in your name.'
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'col s8 offset-s2 center-block' },
+	          { className: 'col s8 offset-s2 center-block flow-text' },
 	          React.createElement(
-	            'h1',
-	            null,
+	            'p',
+	            { className: 'specialh1 flow-text' },
 	            'WHO\'S REPRESENTING ME?'
 	          ),
 	          React.createElement(
 	            'form',
 	            { method: 'post' },
-	            React.createElement('input', { type: 'text', name: 'postalcode', placeholder: 'enter your postal code', value: '' }),
 	            React.createElement(
-	              'button',
-	              { onClick: '', type: 'button', disabled: '' },
-	              'Find Out'
+	              'div',
+	              { className: 'col s10 center-block flow-text' },
+	              React.createElement('input', { className: 'postcodeinput', type: 'text', name: 'postalcode', placeholder: 'enter your postal code', value: '' }),
+	              React.createElement(
+	                'button',
+	                { className: 'postcodebutton', onClick: '', type: 'button', disabled: '' },
+	                'FIND OUT'
+	              )
 	            )
 	          )
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'col s4 responsive-img center-block' },
-	          React.createElement(
-	            'span',
-	            { className: 'flow-text' },
-	            React.createElement('img', { src: 'images/canadamap.png' })
-	          )
+	          { className: 'col s8 offset-s2 center-block' },
+	          React.createElement('img', { className: 'responsive-img', src: 'images/canadamap.png' })
 	        )
 	      )
 	    );
@@ -29709,13 +29713,13 @@
 	    var rep = rep || {};
 	    return {
 	      rep: {
-	        name: rep.name || '**Justin Trudeau**',
-	        constituency: rep.constituency || '**Papineau**',
+	        name: rep.name || '**Codrin Diaconu**',
+	        constituency: rep.constituency || '**Downtown**',
 	        province: rep.province || '**QC**',
 	        party: rep.party || '**Liberal**',
 	        img: rep.img || '../images/567_1.jpg',
-	        electedYear: rep.electedYear || '**2015**',
-	        electedVotes: rep.electedVotes || '**52%**'
+	        electedYear: rep.electedYear || '**2016**',
+	        electedVotes: rep.electedVotes || '**92%**'
 	      }
 	    };
 	  },
@@ -29813,7 +29817,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/compare' },
+	                { to: '/compare', activeClassName: 'active' },
 	                'Compare'
 	              )
 	            ),
@@ -29822,7 +29826,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/petitions' },
+	                { to: '/petitions', activeClassName: 'active' },
 	                'Petitions'
 	              )
 	            ),
@@ -29831,7 +29835,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/feed' },
+	                { to: '/feed', activeClassName: 'active' },
 	                'What they\'re doing'
 	              )
 	            ),
@@ -29840,7 +29844,7 @@
 	              null,
 	              React.createElement(
 	                Link,
-	                { to: '/bills' },
+	                { to: '/bills', activeClassName: 'active' },
 	                'What would you do?'
 	              )
 	            )
@@ -29960,23 +29964,92 @@
 	
 	// bills landing page
 	var Bills = React.createClass({
-	  displayName: 'Bills',
+		displayName: 'Bills',
 	
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'main billsPage' },
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'h1',
-	          null,
-	          'Bills Landing Page'
-	        )
-	      )
-	    );
-	  }
+		render: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'row' },
+				React.createElement(
+					'div',
+					{ className: 'tabbed-area col s12' },
+					React.createElement(
+						'ul',
+						{ className: 'tabs group' },
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								'a',
+								{ href: '#box-one' },
+								'TITLE'
+							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								'a',
+								{ href: '#box-two' },
+								'SUMMARY'
+							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								'a',
+								{ href: '#box-three' },
+								'FULL TEXT'
+							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								'a',
+								{ href: '#box-four' },
+								'HOUSE DEBATE'
+							)
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'box-wrap' },
+						React.createElement(
+							'div',
+							{ id: 'box-one' },
+							'Title of the bill'
+						),
+						React.createElement(
+							'div',
+							{ id: 'box-two' },
+							'Summary of the bill'
+						),
+						React.createElement(
+							'div',
+							{ id: 'box-three' },
+							'Full text of the bill'
+						),
+						React.createElement(
+							'div',
+							{ id: 'box-four' },
+							'House debate of the bill'
+						)
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'col s3 offset-s3 center-block' },
+					React.createElement('img', { className: 'responsive-img', src: 'images/red button.png' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'col s3 offset-s3 center-block' },
+					React.createElement('img', { className: 'responsive-img', src: 'images/green button.png' })
+				)
+			);
+		}
 	});
 	
 	module.exports = Bills;
