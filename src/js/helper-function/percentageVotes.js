@@ -1,28 +1,20 @@
-// The package "should" must be installed:   
-// `npm install should`
+var csv = require('csv-parser')
+var fs = require('fs')
+ 
 
-var parse = require("csv-parse");
-var election = require("../assets/table_tableau12.csv");
-//require('should');
+var percentageVotes = function (ridingId, callback) {
+  ridingId = ridingId.toString();
+  var votes = "";
+  fs.createReadStream('./src/assets/mpRidingVote.csv')
+    .pipe(csv())
+    .on('data', function(data) {
+      if (ridingId === data.RidingId && data.Majority.length > 0) {
+        votes = data.PercentageVotes;
+        callback(votes);
+      } 
+    })
+} 
 
-
-parse(election, function(err, data){
-    if(err) throw err;
-    else {
-      console.log(data);
-    }
-    
-    });
-
-
-// parse(
-//   'ColumnOne,ColumnTwo\nfirst,Data\nsecond,MoreData',
-//   {'columns':true, 'objname': "ColumnOne"},
-//   function(err, data){
-//     if(err) throw err;
-//     data.should.eql({
-//       first: { ColumnOne: 'first', ColumnTwo: 'Data' },
-//       second: { ColumnOne: 'second', ColumnTwo: 'MoreData' } 
-//     });
-//   }
-// );
+module.exports = {
+  percentageVotes: percentageVotes
+}
