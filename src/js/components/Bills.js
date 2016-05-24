@@ -36,12 +36,28 @@ var Bills = React.createClass({
 	</div>
 </div>
 
-<div className="col s3 offset-s3 center-block">
-        <img className= "responsive-img" src="images/red button.png"></img>
-</div>
-<div className="col s3 offset-s3 center-block">
-        <img className= "responsive-img" src="images/green button.png"></img>
-</div>
+          <div className="billbuttons-section row">
+            <div className="col s3 center">
+                    <div className="arrow">
+        				arrow
+                    </div>
+            </div>
+            <div className="col s3 center">
+                    <div className="button">
+        				<img className= "responsive-img" src="images/red button.png"></img>
+                    </div>
+            </div>
+            <div className="col s3 center">
+                    <div className="button">
+                	 	<img className= "responsive-img" src="images/green button.png"></img>
+                    </div>
+            </div>
+            <div className="col s3 center">
+                    <div className="arrow">
+        				arrow
+                    </div>
+            </div>
+          </div>
     </div>
 
     );
@@ -49,3 +65,5 @@ var Bills = React.createClass({
 });
 
 module.exports = Bills;
+
+
