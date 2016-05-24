@@ -6160,12 +6160,82 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
-/* Global --------------------------------------------------------------- */
-h1 {
-  font-family: Oswald;
-  font-size: 3em; }
+.specialh1 {
+  font-family: Oswald, sans-serif;
+  font-weight: medium;
+  font-size: 1.5em; }
 
-h2 {
-  font-family: Oswald; }
+.postcodebutton {
+  background-color: #44A487;
+  color: white;
+  font-family: Oswald, sans-serif;
+  border-radius: 0px 10px 10px 0px; }
+
+.postcodeinput {
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 20px 0px 0px 20px;
+  outline: none;
+  height: 3rem;
+  font-size: 1rem;
+  margin: 0 0 15px 0;
+  padding: 0;
+  transition: all 0.3s;
+  display: inline-block; }
+
+body {
+  font-family: Oswald, sans-serif; }
+
+.tabs {
+  list-style: none; }
+
+.tabs li {
+  display: inline; }
+
+.tabs li a {
+  color: white;
+  float: left;
+  display: block;
+  padding: 4px 10px;
+  margin-left: -1px;
+  position: relative;
+  left: 1px;
+  background: #B095C3;
+  text-decoration: none; }
+
+.tabs li a:hover {
+  background: #ccc; }
+
+.group:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0; }
+
+.box-wrap {
+  position: relative;
+  min-height: 250px;
+  font-family: sans-serif;
+  background-color: #B095C3; }
+
+.tabbed-area div div {
+  padding: 20px;
+  min-height: 250px;
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  color: white; }
+
+.tabbed-area div div, .tabs li a {
+  border: 1px solid #ccc; }
+
+#box-one:target, #box-two:target, #box-three:target {
+  z-index: 1; }
+
+/* Global --------------------------------------------------------------- */
+h1, h2 {
+  font-family: Oswald, sans-serif; }
 
 /*# sourceMappingURL=main.css.map */

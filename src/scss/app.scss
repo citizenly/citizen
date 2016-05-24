@@ -2,14 +2,11 @@
 @import 'materialize';
 //import styles from 
 @import 'home';
+@import 'bills';
 
 /* Global --------------------------------------------------------------- */
 
-h1 {
-    font-family: Oswald;
-    font-size: 3em;
+h1, h2 {
+    font-family: Oswald, sans-serif;
 }
 
-h2 {
-    font-family: Oswald;
-}
