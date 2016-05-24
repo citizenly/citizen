@@ -27,12 +27,18 @@ app.use(bodyParser());
 
 /* This says: for any path NOT served by the middleware above, send the file called index.html instead. Eg, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component */
 
+// New AJAX call to the rep name for the url
+app.get('/repnameget', function(req, res) {
+
+});
+
+
 // AJAX call to get the Rep object and make it available to the frontend
-app.post('/repget', function(req, res) {
+app.get('/repinfoget', function(req, res) {
   handleResult(req.body.postalcode, function(rep) {
     handlePercentageVote(rep.ridingId, function(r) {
       rep.electedVote = r;
-      res.send(rep);
+      res.send(rep.name);
     });
   });
 });

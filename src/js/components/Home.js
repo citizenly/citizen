@@ -17,7 +17,7 @@ var Home = React.createClass({
     var pc = this.refs.postalcode.value;
     var userPostalCode = formattedPc.validatePC(pc);
     e.preventDefault();
-    axios.post('/repget', {
+    axios.get('/repget', {
     postalcode: userPostalCode
   })
   .then(function (response) {
