@@ -6177,19 +6177,22 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 @-moz-keyframes dropHeader {
   0% {
-    -moz-transform: translateY(-80px); }
+    -moz-transform: scale(0.5); }
   100% {
-    -moz-transform: translateY(0); } }
+    -moz-transform: scale(1); } }
 @-webkit-keyframes dropHeader {
   0% {
-    -webkit-transform: translateY(-80px); }
+    -webkit-transform: scale(0.5); }
   100% {
-    -webkit-transform: translateY(0); } }
+    -webkit-transform: scale(1); } }
 @keyframes dropHeader {
   0% {
-    transform: translateY(-80px); }
+    transform: scale(0.5); }
   100% {
-    transform: translateY(0); } }
+    transform: scale(1); } }
+input[type=text] {
+  width: 80%; }
+
 .specialh1 {
   font-family: Oswald, sans-serif;
   font-weight: medium;
@@ -6204,6 +6207,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .postcodeinput {
   border-bottom: 1px solid #9e9e9e;
   border-radius: 20px 0px 0px 20px;
+  font-family: Arimo;
   outline: none;
   height: 3rem;
   font-size: 1rem;
@@ -6211,6 +6215,9 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   padding: 0;
   transition: all 0.3s;
   display: inline-block; }
+
+.postcodeinputandentry {
+  font-family: Arimo; }
 
 body {
   font-family: Oswald, sans-serif; }

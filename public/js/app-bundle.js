@@ -25716,24 +25716,24 @@
 	            { className: 'main container center-block' },
 	            React.createElement(
 	                'div',
-	                { className: 'row center-block' },
+	                { className: 'row' },
 	                React.createElement(
 	                    'div',
-	                    { className: 'col s4 offset-s4 center-block' },
+	                    { className: 'col s4 offset-s4' },
 	                    React.createElement('img', { className: 'citizenlogo responsive-img', src: 'images/citizenlogo.png' })
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: 'col s12 center-block flow-text' },
+	                    { className: 'col s12 flow-text' },
 	                    React.createElement(
 	                        'p',
-	                        { className: 'col s12 center-block flow-text' },
+	                        { className: 'col s12 flow-text' },
 	                        'In a democracy, you elect someone to make decisions for you. Check out what they\'re doing in your name.'
 	                    )
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: 'col s12 center-block flow-text' },
+	                    { className: 'col s12 flow-text' },
 	                    React.createElement(
 	                        'p',
 	                        { className: 'specialh1 flow-text' },
