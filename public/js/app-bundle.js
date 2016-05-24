@@ -25714,11 +25714,13 @@
 	  displayName: 'Home',
 	
 	  handleSubmit: function handleSubmit(e) {
+	    var that = this;
 	    e.preventDefault();
-	    axios.post('/rep', {
+	    axios.post('/repget', {
 	      postalcode: this.refs.postalcode.value
 	    }).then(function (response) {
 	      data.setData('rep', response.data);
+	      that.props.history.push('/rep');
 	    }).catch(function (response) {
 	      console.log(response);
 	    });
@@ -25758,7 +25760,7 @@
 	              React.createElement('input', { ref: 'postalcode', className: 'postcodeinput', type: 'text', name: 'postalcode', placeholder: 'enter your postal code' }),
 	              React.createElement(
 	                'button',
-	                { className: 'postcodebutton', onClick: this.handleSubmit, type: 'button', disabled: '' },
+	                { className: 'postcodebutton', onClick: this.handleSubmit, type: 'button' },
 	                'FIND OUT'
 	              )
 	            )

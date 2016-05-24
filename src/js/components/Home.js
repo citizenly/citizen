@@ -8,12 +8,14 @@ var data = require("../data");
 // home "page"
 var Home = React.createClass({
   handleSubmit: function(e){
+    var that = this;
     e.preventDefault();
-    axios.post('/rep', {
+    axios.post('/repget', {
     postalcode: this.refs.postalcode.value
   })
   .then(function (response) {
     data.setData('rep', response.data);
+    that.props.history.push('/rep');
   })
   .catch(function (response) {
     console.log(response);
@@ -33,7 +35,7 @@ var Home = React.createClass({
         <form>
           <div className="col s10 center-block flow-text">
           <input ref="postalcode" className="postcodeinput" type="text" name="postalcode" placeholder="enter your postal code" />
-          <button className="postcodebutton" onClick={this.handleSubmit} type="button" disabled="">FIND OUT</button>
+          <button className="postcodebutton" onClick={this.handleSubmit} type="button">FIND OUT</button>
           </div>
         </form>
         </div>
