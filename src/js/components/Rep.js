@@ -41,23 +41,21 @@ var Rep = React.createClass({
           <p>... in her voting.</p>
         </div>
         <div className="bottomNav">
-          <nav className="bottomMenu">
-            <ul>
-              <li>
-                <Link to="/compare" activeClassName="active">Compare</Link>
-              </li>
-              <li>
-                <Link to="/petitions" activeClassName="active">Petitions</Link>
-              </li>
-              <li>
-                <Link to="/feed" activeClassName="active">What they're doing</Link>
-              </li>
-              <li>
-                <Link to="/bills" activeClassName="active">What would you do?</Link>
-              </li>
-            </ul>
+          <nav className="bottomMenu row">
+            <div className="compare col s3 center card-panel hoverable">
+              <Link to="/compare" activeClassName="active">COMPARE</Link>
+            </div>
+             <div className="petitions col s3 center card-panel hoverable">
+              <Link to="/petitions" activeClassName="active">PETITIONS</Link>
+            </div>
+             <div className="feed col s3 center card-panel hoverable">
+              <Link to="/feed" activeClassName="active">WHAT THEY'RE DOING</Link>
+            </div>
+             <div className="bills col s3 center card-panel hoverable">
+              <Link to="/bills" activeClassName="active">WHAT WOULD YOU DO?</Link>
+            </div>
           </nav>
-        </div>
+         </div>
       </div>
     );
   }

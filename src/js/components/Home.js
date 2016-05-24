@@ -10,26 +10,47 @@ var Home = React.createClass({
   render: function() {
     // user enters postalcode and rep's name is retrieved from Represent API - https://represent.opennorth.ca/api/
     return (
-      <div className="main container center-block">
-       <div className="row center-block">
-        <div className="col s4 offset-s4 center-block"> 
-            <img className= "responsive-img" src="images/citizenlogo.png"></img>
+    <div className="main container center-block">
+      
+        <div className="row center-block">
+        
+            <div className="col s4 offset-s4 center-block"> 
+               <img className= "responsive-img" src="images/citizenlogo.png"></img>
+            </div>
+            
+            <div className="col s12 center-block flow-text">
+                <p className="col s12 center-block flow-text">In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
+            </div>
+            
+            <div className="col s12 center-block flow-text">
+                <p className="specialh1 flow-text">WHO'S REPRESENTING ME?</p>
+            </div>
         </div>
-        <p className="col s8 offset-s2 center-block flow-text">In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
-        <div className="col s8 offset-s2 center-block flow-text">
-        <p className="specialh1 flow-text">WHO'S REPRESENTING ME?</p>
-        <form method="post">
-          <div className="col s10 center-block flow-text">
-          <input className="postcodeinput" type="text" name="postalcode" placeholder="enter your postal code" value="" />
-          <button className="postcodebutton" onClick="" type="button" disabled="">FIND OUT</button>
-          </div>
-        </form>
+            
+          
+        <div className="row postcodeinputandentry">
+            <div className="col s12">
+                <form method="post">
+                   <input className="postcodeinput" type="text" name="postalcode" placeholder="enter your postal code" value=""/>
+                    <button className="postcodebutton" onClick="" type="button" disabled="">FIND OUT</button>
+                </form>
+            </div>
         </div>
+        
         <div className="col s8 offset-s2 center-block"> 
             <img className= "responsive-img" src="images/canadamap.png"></img>
         </div>
+        
+        <div className="row">
+         <div className="col m1 grey center">1</div>
+         <div className="col m1 center">2</div>
+         <div className="col m1 grey center">3</div>
+         <div className="col m1 center">4</div>
+         <div className="col m1 grey center">5</div>
       </div>
-      </div>
+      
+    </div>
+      
     );
   }
 });

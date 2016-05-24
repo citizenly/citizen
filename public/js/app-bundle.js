@@ -25707,57 +25707,94 @@
 	
 	// home "page"
 	var Home = React.createClass({
-	  displayName: 'Home',
+	    displayName: 'Home',
 	
-	  render: function render() {
-	    // user enters postalcode and rep's name is retrieved from Represent API - https://represent.opennorth.ca/api/
-	    return React.createElement(
-	      'div',
-	      { className: 'main container center-block' },
-	      React.createElement(
-	        'div',
-	        { className: 'row center-block' },
-	        React.createElement(
-	          'div',
-	          { className: 'col s4 offset-s4 center-block' },
-	          React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'col s8 offset-s2 center-block flow-text' },
-	          'In a democracy, you elect someone to make decisions for you. Check out what they\'re doing in your name.'
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'col s8 offset-s2 center-block flow-text' },
-	          React.createElement(
-	            'p',
-	            { className: 'specialh1 flow-text' },
-	            'WHO\'S REPRESENTING ME?'
-	          ),
-	          React.createElement(
-	            'form',
-	            { method: 'post' },
+	    render: function render() {
+	        // user enters postalcode and rep's name is retrieved from Represent API - https://represent.opennorth.ca/api/
+	        return React.createElement(
+	            'div',
+	            { className: 'main container center-block' },
 	            React.createElement(
-	              'div',
-	              { className: 'col s10 center-block flow-text' },
-	              React.createElement('input', { className: 'postcodeinput', type: 'text', name: 'postalcode', placeholder: 'enter your postal code', value: '' }),
-	              React.createElement(
-	                'button',
-	                { className: 'postcodebutton', onClick: '', type: 'button', disabled: '' },
-	                'FIND OUT'
-	              )
+	                'div',
+	                { className: 'row center-block' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'col s4 offset-s4 center-block' },
+	                    React.createElement('img', { className: 'responsive-img', src: 'images/citizenlogo.png' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'col s12 center-block flow-text' },
+	                    React.createElement(
+	                        'p',
+	                        { className: 'col s12 center-block flow-text' },
+	                        'In a democracy, you elect someone to make decisions for you. Check out what they\'re doing in your name.'
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'col s12 center-block flow-text' },
+	                    React.createElement(
+	                        'p',
+	                        { className: 'specialh1 flow-text' },
+	                        'WHO\'S REPRESENTING ME?'
+	                    )
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'row postcodeinputandentry' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'col s12' },
+	                    React.createElement(
+	                        'form',
+	                        { method: 'post' },
+	                        React.createElement('input', { className: 'postcodeinput', type: 'text', name: 'postalcode', placeholder: 'enter your postal code', value: '' }),
+	                        React.createElement(
+	                            'button',
+	                            { className: 'postcodebutton', onClick: '', type: 'button', disabled: '' },
+	                            'FIND OUT'
+	                        )
+	                    )
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'col s8 offset-s2 center-block' },
+	                React.createElement('img', { className: 'responsive-img', src: 'images/canadamap.png' })
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'row' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'col m1 grey center' },
+	                    '1'
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'col m1 center' },
+	                    '2'
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'col m1 grey center' },
+	                    '3'
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'col m1 center' },
+	                    '4'
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'col m1 grey center' },
+	                    '5'
+	                )
 	            )
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'col s8 offset-s2 center-block' },
-	          React.createElement('img', { className: 'responsive-img', src: 'images/canadamap.png' })
-	        )
-	      )
-	    );
-	  }
+	        );
+	    }
 	});
 	
 	module.exports = Home;
@@ -29808,45 +29845,41 @@
 	        { className: 'bottomNav' },
 	        React.createElement(
 	          'nav',
-	          { className: 'bottomMenu' },
+	          { className: 'bottomMenu row' },
 	          React.createElement(
-	            'ul',
-	            null,
+	            'div',
+	            { className: 'compare col s3 center card-panel hoverable' },
 	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                Link,
-	                { to: '/compare', activeClassName: 'active' },
-	                'Compare'
-	              )
-	            ),
+	              Link,
+	              { to: '/compare', activeClassName: 'active' },
+	              'COMPARE'
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'petitions col s3 center card-panel hoverable' },
 	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                Link,
-	                { to: '/petitions', activeClassName: 'active' },
-	                'Petitions'
-	              )
-	            ),
+	              Link,
+	              { to: '/petitions', activeClassName: 'active' },
+	              'PETITIONS'
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'feed col s3 center card-panel hoverable' },
 	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                Link,
-	                { to: '/feed', activeClassName: 'active' },
-	                'What they\'re doing'
-	              )
-	            ),
+	              Link,
+	              { to: '/feed', activeClassName: 'active' },
+	              'WHAT THEY\'RE DOING'
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'bills col s3 center card-panel hoverable' },
 	            React.createElement(
-	              'li',
-	              null,
-	              React.createElement(
-	                Link,
-	                { to: '/bills', activeClassName: 'active' },
-	                'What would you do?'
-	              )
+	              Link,
+	              { to: '/bills', activeClassName: 'active' },
+	              'WHAT WOULD YOU DO?'
 	            )
 	          )
 	        )

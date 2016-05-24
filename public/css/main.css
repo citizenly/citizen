@@ -6234,6 +6234,19 @@ body {
 #box-one:target, #box-two:target, #box-three:target {
   z-index: 1; }
 
+.compare {
+  background-color: #2D81CF;
+  font-family: Oswald; }
+
+.petitions {
+  background-color: #44A487; }
+
+.feed {
+  background-color: #B095C4; }
+
+.bills {
+  background-color: #8675B3; }
+
 /* Global --------------------------------------------------------------- */
 h1, h2 {
   font-family: Oswald, sans-serif; }
