@@ -3,9 +3,9 @@ var data = {};
 
 function getData(key) {
   if(key){
-    return data[key]
+    return data[key];
   } else {
-    return data
+    return data;
   }
 }
 

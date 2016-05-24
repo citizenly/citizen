@@ -1,22 +1,24 @@
 var React = require('react');
 var Link = require('react-router').Link;
+//var EventEmitter = require('../events');
+var data = require("../data.js");
+
 
 var Rep = React.createClass({
   getInitialState: function() {
-    // get initial state with rep's info based on postcode
-    // retrieve from openparliament.ca API - https://api.openparliament.ca/
-    var rep = rep || {};
+    // get initial state with rep's info based on postal code
+    var rep = data.getData('rep') || {};
     return {
       rep: {
         name: rep.name || '**Codrin Diaconu**',
         constituency: rep.constituency || '**Downtown**',
         province: rep.province || '**QC**',
-        party: rep.party || '**Liberal**',
+        party: rep.party || '**Communist**',
         img: rep.img || '../images/567_1.jpg',
         electedYear: rep.electedYear || '**2016**',
-        electedVotes: rep.electedVotes || '**92%**',
+        electedVote: rep.electedVote || '**92%**',
       },
-     };
+    };
   },
   render: function() {
     return (

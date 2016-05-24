@@ -16,5 +16,12 @@ module.exports = {
       }
     ]
   },
+   resolve: {
+        root: __dirname,
+        alias: {
+            RepAPI: 'src/js/helper-function/index.js'
+        },
+        extensions:['', '.js', '.jsx']
+   },
   devtool: 'sourcemap'
 };
