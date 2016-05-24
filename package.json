@@ -41,5 +41,8 @@
     "style-loader": "^0.13.1",
     "superagent": "^2.0.0-alpha.3",
     "webpack": "^1.12.14"
+  },
+  "devDependencies": {
+    "should": "^8.4.0"
   }
 }
