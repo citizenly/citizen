@@ -9,45 +9,39 @@ var App = React.createClass({
   render: function() {
     return (
         <div>
-          <header>
-            <Message/>
-              {/*Our menu for navigating around the app whilst developing*/}
               <nav className="mainMenu">
-                <ul>
-                  <li>
-                    <IndexLink activeClassName="active" to="/">Home</IndexLink>
+                <ul class="navigation">
+                  <li class="nav-item">
+                    <IndexLink activeClassName="active" to="/">**HOME - just for us now**</IndexLink>
                   </li>
-                  <li>
-                    <Link activeClassName="active" to="/rep">Rep</Link>
+                  <li class="nav-item">
+                    <Link activeClassName="active" to="/login">LOGIN</Link>
+                  </li>
+                  <li class="nav-item">
+                    <Link activeClassName="active" to="/rep">YOUR REPRESENTATIVE</Link>
+                  </li>
+                  <li class="nav-item">
+                    <Link activeClassName="active" to="/bills">WHAT WOULD YOU DO?</Link>
+                  </li>
+                  <li class="nav-item">
+                    <Link activeClassName="active" to="/feed">WHAT THEY'RE DOING</Link>
+                  </li>
+                  <li class="nav-item">
+                    <Link activeClassName="active" to="/petitions">PETITIONS</Link>
+                  </li>
+                  <li class="nav-item">
+                    <Link activeClassName="active" to="/compare">COMPARE</Link>
                   </li>
                 </ul>
               </nav>
-              
-              {/*Actual menu*/}
-              <nav className="mainMenu">
-                <ul>
-                  <li>
-                    Login/Signup
-                  </li>
-                  <li>
-                    <Link activeClassName="active" to="/rep">Rep Info</Link>
-                  </li>
-                  <li>
-                    <Link activeClassName="active" to="/compare">Compare</Link>
-                  </li>
-                  <li>
-                    <Link activeClassName="active" to="/petitions">Petitions</Link>
-                  </li>
-                  <li>
-                    <Link activeClassName="active" to="/bills">Bills</Link>
-                  </li>
-                  <li>
-                    Settings
-                  </li>
-                </ul>
-              </nav>
-          </header>
-          <main>{this.props.children}</main>
+          
+              <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+              <label for="nav-trigger"></label>
+          
+
+              <div class="site-wrap">
+                <main>{this.props.children}</main>
+              </div>
         </div>
     );
   }

@@ -62,31 +62,21 @@ var Rep = React.createClass({
 
       </div>
       
-      <div className="bottomNav">
-          <div className="bottomMenu row">
-            <div className="col s3 center">
-                    <div className="bottomMenu-item compare card-panel hoverable">
-              <Link to="/compare" activeClassName="active">COMPARE</Link>
-                    </div>
-            </div>
-            <div className="col s3 center">
-                    <div className="bottomMenu-item petitions card-panel hoverable">
-                    <Link to="/petitions" activeClassName="active">PETITIONS</Link>
-                    </div>
-            </div>
-            <div className="col s3 center">
-                    <div className="bottomMenu-item feed card-panel hoverable">
-                    <Link to="/feed" activeClassName="active">WHAT THEY'RE DOING</Link>
-                    </div>
-            </div>
-            <div className="col s3 center">
-                    <div className="bottomMenu-item bills card-panel hoverable">
-                    <Link to="/bills" activeClassName="active">WHAT WOULD YOU DO?</Link>
-                    </div>
-            </div>
-          </div>
-         </div>
-      </div>
+      <footer>
+        <div className="bottomMenu-item compare">
+          <Link to="/compare" activeClassName="active">COMPARE</Link>
+        </div>
+        <div className="bottomMenu-item petitions card-panel hoverable">
+          <Link to="/petitions" activeClassName="active">PETITIONS</Link>
+        </div>
+        <div className="bottomMenu-item feed card-panel hoverable">
+          <Link to="/feed" activeClassName="active">WHAT THEY'RE DOING</Link>
+        </div>
+        <div className="bottomMenu-item bills card-panel hoverable">
+          <Link to="/bills" activeClassName="active">WHAT WOULD YOU DO?</Link>
+        </div>
+     </footer>
+  </div>
     );
   }
 });
