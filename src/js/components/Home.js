@@ -1,12 +1,31 @@
 var React = require('react');
-var Link = require('react-router').Link;
-
+//var Link = require('react-router').Link;
 import {Button, Icon, Input, Row, Col} from 'react-materialize';
+var axios = require('axios');
+//var EventEmitter = require("../events.js");
+var data = require("../data");
+var formattedPc = require("../helperFunctions/validatePc.js");
 
-
+var userPostalCode = "";
 
 // home "page"
 var Home = React.createClass({
+  
+  //we recive the postal code, we call formattedPc to be sure to have the valid format, we do an ajax call to the bakcend to fetch all the data of the PM and we set the postal code
+  handleSubmit: function(e){
+    var pc = this.refs.postalcode.value;
+    var userPostalCode = formattedPc.validatePC(pc);
+    e.preventDefault();
+    axios.post('/rep', {
+    postalcode: userPostalCode
+  })
+  .then(function (response) {
+    data.setData('rep', response.data);
+  })
+  .catch(function (response) {
+    console.log(response);
+  });
+  },
   render: function() {
     // user enters postalcode and rep's name is retrieved from Represent API - https://represent.opennorth.ca/api/
     return (
@@ -26,15 +45,16 @@ var Home = React.createClass({
                 <p className="specialh1">WHO'S REPRESENTING ME?</p>
             </div>
         </div>
-            
-          
-        <div className="row postcodeinputandentry">
-            <div className="col s12">
-                <form method="post">
-                   <input className="postcodeinput" type="text" name="postalcode" placeholder="enter your postal code" value=""/>
-                    <button className="postcodebutton" onClick="" type="button" disabled="">FIND OUT</button>
-                </form>
-            </div>
+
+        <p className="col s8 offset-s2 center-block flow-text">In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
+        <div className="col s8 offset-s2 center-block flow-text">
+        <p className="specialh1 flow-text">WHO'S REPRESENTING ME?</p>
+        <form>
+          <div className="col s10 center-block flow-text">
+          <input ref="postalcode" className="postcodeinput" type="text" name="postalcode" placeholder="enter your postal code" />
+          <button className="postcodebutton" onClick={this.handleSubmit} type="button" disabled="">FIND OUT</button>
+          </div>
+        </form>
         </div>
         
         <div className="col s8 offset-s2 center-block"> 
