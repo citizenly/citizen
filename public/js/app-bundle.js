@@ -25724,36 +25724,36 @@
 	        ),
 	        React.createElement(
 	          'p',
-	          { className: 'col s8 offset-s2 center-block' },
+	          { className: 'col s8 offset-s2 center-block flow-text' },
 	          'In a democracy, you elect someone to make decisions for you. Check out what they\'re doing in your name.'
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'col s8 offset-s2 center-block' },
+	          { className: 'col s8 offset-s2 center-block flow-text' },
 	          React.createElement(
-	            'h1',
-	            null,
+	            'p',
+	            { className: 'specialh1 flow-text' },
 	            'WHO\'S REPRESENTING ME?'
 	          ),
 	          React.createElement(
 	            'form',
 	            { method: 'post' },
-	            React.createElement('input', { type: 'text', name: 'postalcode', placeholder: 'enter your postal code', value: '' }),
 	            React.createElement(
-	              'button',
-	              { onClick: '', type: 'button', disabled: '' },
-	              'Find Out'
+	              'div',
+	              { className: 'col s10 center-block flow-text' },
+	              React.createElement('input', { className: 'postcodeinput', type: 'text', name: 'postalcode', placeholder: 'enter your postal code', value: '' }),
+	              React.createElement(
+	                'button',
+	                { className: 'postcodebutton', onClick: '', type: 'button', disabled: '' },
+	                'FIND OUT'
+	              )
 	            )
 	          )
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'col s8 offset-s2 center-block' },
-	          React.createElement(
-	            'span',
-	            { className: 'flow-text' },
-	            React.createElement('img', { className: 'responsive-img', src: 'images/canadamap.png' })
-	          )
+	          React.createElement('img', { className: 'responsive-img', src: 'images/canadamap.png' })
 	        )
 	      )
 	    );
@@ -29964,23 +29964,92 @@
 	
 	// bills landing page
 	var Bills = React.createClass({
-	  displayName: 'Bills',
+		displayName: 'Bills',
 	
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'main billsPage' },
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'h1',
-	          null,
-	          'Bills Landing Page'
-	        )
-	      )
-	    );
-	  }
+		render: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'row' },
+				React.createElement(
+					'div',
+					{ className: 'tabbed-area col s12' },
+					React.createElement(
+						'ul',
+						{ className: 'tabs group' },
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								'a',
+								{ href: '#box-one' },
+								'TITLE'
+							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								'a',
+								{ href: '#box-two' },
+								'SUMMARY'
+							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								'a',
+								{ href: '#box-three' },
+								'FULL TEXT'
+							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								'a',
+								{ href: '#box-four' },
+								'HOUSE DEBATE'
+							)
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'box-wrap' },
+						React.createElement(
+							'div',
+							{ id: 'box-one' },
+							'Title of the bill'
+						),
+						React.createElement(
+							'div',
+							{ id: 'box-two' },
+							'Summary of the bill'
+						),
+						React.createElement(
+							'div',
+							{ id: 'box-three' },
+							'Full text of the bill'
+						),
+						React.createElement(
+							'div',
+							{ id: 'box-four' },
+							'House debate of the bill'
+						)
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'col s3 offset-s3 center-block' },
+					React.createElement('img', { className: 'responsive-img', src: 'images/red button.png' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'col s3 offset-s3 center-block' },
+					React.createElement('img', { className: 'responsive-img', src: 'images/green button.png' })
+				)
+			);
+		}
 	});
 	
 	module.exports = Bills;
