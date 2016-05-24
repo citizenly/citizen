@@ -1,20 +1,3 @@
-/*
-http://represent.opennorth.ca/postcodes/L5G4L3/?sets=federal-electoral-districts
-Request
-URLs must include the postal code in uppercase letters with no spaces.URLs
-
-https://api.openparliament.ca/politicians/ziad-aboultaif/
-Name
-Constituency
-Party
-Image
-When elected and how many votes 
-Stats
-Voter numbers (how many people voted to create a given stat)
-Most frequently used words
-What they're doing - activity feed
-
-*/
 
 var request = require("request");
 var unaccented = require("./src/js/helper-function/unaccented.js");
