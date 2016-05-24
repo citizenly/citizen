@@ -4,13 +4,20 @@ import {Button, Icon, Input, Row, Col} from 'react-materialize';
 var axios = require('axios');
 //var EventEmitter = require("../events.js");
 var data = require("../data");
+var formattedPc = require("../helperFunctions/validatePc.js");
+
+var userPostalCode = "";
 
 // home "page"
 var Home = React.createClass({
+  
+  //we recive the postal code, we call formattedPc to be sure to have the valid format, we do an ajax call to the bakcend to fetch all the data of the PM and we set the postal code
   handleSubmit: function(e){
+    var pc = this.refs.postalcode.value;
+    var userPostalCode = formattedPc.validatePC(pc);
     e.preventDefault();
     axios.post('/rep', {
-    postalcode: this.refs.postalcode.value
+    postalcode: userPostalCode
   })
   .then(function (response) {
     data.setData('rep', response.data);
