@@ -1,25 +1,12 @@
-/*
-http://represent.opennorth.ca/postcodes/L5G4L3/?sets=federal-electoral-districts
+/* http://represent.opennorth.ca/postcodes/L5G4L3/?sets=federal-electoral-districts
 Request
-URLs must include the postal code in uppercase letters with no spaces.URLs
-
-https://api.openparliament.ca/politicians/ziad-aboultaif/
-Name
-Constituency
-Party
-Image
-When elected and how many votes 
-Stats
-Voter numbers (how many people voted to create a given stat)
-Most frequently used words
-What they're doing - activity feed
-
-*/
+URLs must include the postal code in uppercase letters with no spaces.URLs */
 
 var request = require("request");
-var unaccented = require("./src/js/helper-function/unaccented.js");
-var percentageVotes = require("./src/js/helper-function/percentageVotes.js");
+var unaccented = require("./unaccented.js");
+var percentageVotes = require("./percentageVotes.js");
 var rep = {};
+var postCode = '';
 //The user input their postal code.  With this data, we request the name of their MP
 
 //We have to validate that the postal code is all upperCase, that it has only 6 characters without white space and that these characters follow LNL NLN
@@ -38,6 +25,7 @@ function handleResult (postalCode, callback) {
     else {
       //At this point, we have a valid postal code, so we look for the name of the MP
       // this is probably asynchronous, so the handleResult func requires a callback
+      postCode = postalCode;
       var findMPbyPC = `http://represent.opennorth.ca/postcodes/${postalCode}/?sets=federal-electoral-districts`;
       request(findMPbyPC, function(err, result) {
         if (err){
@@ -88,12 +76,4 @@ function handlePercentageVote(ridingId, callback){
     });
 }
 
-
-// call the handleResult function as a callback containing the handlePercentageVote as a callback, then add vote to the object
-handleResult('H4R1E9', function(rep) {
-  handlePercentageVote(rep.ridingId, function(r) {
-    rep.electedVote = r;
-    console.log(rep);
-    return rep;
-  });
-});
+module.exports = {handleResult: handleResult, handlePercentageVote: handlePercentageVote};
