@@ -13,14 +13,16 @@ var Home = React.createClass({
   
   //we recive the postal code, we call formattedPc to be sure to have the valid format, we do an ajax call to the bakcend to fetch all the data of the PM and we set the postal code
   handleSubmit: function(e){
+    var that = this;
     var pc = this.refs.postalcode.value;
     var userPostalCode = formattedPc.validatePC(pc);
     e.preventDefault();
-    axios.post('/rep', {
+    axios.post('/repget', {
     postalcode: userPostalCode
   })
   .then(function (response) {
     data.setData('rep', response.data);
+    that.props.history.push('/rep');
   })
   .catch(function (response) {
     console.log(response);
@@ -52,7 +54,7 @@ var Home = React.createClass({
         <form>
           <div className="col s10 center-block flow-text">
           <input ref="postalcode" className="postcodeinput" type="text" name="postalcode" placeholder="enter your postal code" />
-          <button className="postcodebutton" onClick={this.handleSubmit} type="button" disabled="">FIND OUT</button>
+          <button className="postcodebutton" onClick={this.handleSubmit} type="button">FIND OUT</button>
           </div>
         </form>
         </div>
