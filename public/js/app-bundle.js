@@ -58,12 +58,12 @@
 	
 	var App = __webpack_require__(220);
 	var Home = __webpack_require__(224);
-	var Rep = __webpack_require__(283);
-	var Compare = __webpack_require__(284);
-	var Petitions = __webpack_require__(285);
-	var Feed = __webpack_require__(286);
-	var Bills = __webpack_require__(287);
-	var NotFound = __webpack_require__(288);
+	var Rep = __webpack_require__(285);
+	var Compare = __webpack_require__(286);
+	var Petitions = __webpack_require__(287);
+	var Feed = __webpack_require__(288);
+	var Bills = __webpack_require__(289);
+	var NotFound = __webpack_require__(290);
 	
 	// -----------------------------------------------------------------------------
 	// Middleware
@@ -25707,16 +25707,23 @@
 	
 	var axios = __webpack_require__(265);
 	//var EventEmitter = require("../events.js");
-	var data = __webpack_require__(289);
+	var data = __webpack_require__(283);
+	var formattedPc = __webpack_require__(284);
+	
+	var userPostalCode = "";
 	
 	// home "page"
 	var Home = React.createClass({
 	  displayName: 'Home',
 	
+	
+	  //we recive the postal code, we call formattedPc to be sure to have the valid format, we do an ajax call to the bakcend to fetch all the data of the PM and we set the postal code
 	  handleSubmit: function handleSubmit(e) {
+	    var pc = this.refs.postalcode.value;
+	    var userPostalCode = formattedPc.validatePC(pc);
 	    e.preventDefault();
 	    axios.post('/rep', {
-	      postalcode: this.refs.postalcode.value
+	      postalcode: userPostalCode
 	    }).then(function (response) {
 	      data.setData('rep', response.data);
 	    }).catch(function (response) {
@@ -30884,6 +30891,66 @@
 
 /***/ },
 /* 283 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	/* global localStorage */
+	var data = {};
+	
+	function getData(key) {
+	  if (key) {
+	    return data[key];
+	  } else {
+	    return data;
+	  }
+	}
+	
+	function setData(key, value) {
+	  data[key] = value;
+	
+	  // this is optional. you could extend this to keep track of values across browsing sessions
+	  localStorage.setItem(key, JSON.stringify(value));
+	}
+	
+	module.exports = {
+	  setData: setData,
+	  getData: getData
+	};
+
+/***/ },
+/* 284 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	/*We have to validate that the postal code is all upperCase, 
+	that it has only 6 characters without white space nor dash
+	and that these characters follow LNL NLN
+	*/
+	
+	function validatePC(postcode) {
+	  var pc = postcode.toUpperCase().replace(/\s+/g, "");
+	  pc = pc.replace(/\-/g, "");
+	  if (pc.length !== 6) {
+	    return "invalid postal code";
+	  } else {
+	    var valid = /([ABCEGHJKLMNPRSTVXY]\d)([ABCEGHJKLMNPRSTVWXYZ]\d){2}/i;
+	    var ok = valid.test(pc);
+	    if (!ok) {
+	      return "invalid postal code";
+	    } else {
+	      return pc;
+	    }
+	  }
+	}
+	
+	module.exports = {
+	  validatePC: validatePC
+	};
+
+/***/ },
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30891,7 +30958,7 @@
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(159).Link;
 	//var EventEmitter = require('../events');
-	var data = __webpack_require__(289);
+	var data = __webpack_require__(283);
 	
 	var Rep = React.createClass({
 	  displayName: 'Rep',
@@ -31046,7 +31113,7 @@
 	module.exports = Rep;
 
 /***/ },
-/* 284 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31078,7 +31145,7 @@
 	module.exports = Compare;
 
 /***/ },
-/* 285 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31110,7 +31177,7 @@
 	module.exports = Petitions;
 
 /***/ },
-/* 286 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31142,7 +31209,7 @@
 	module.exports = Feed;
 
 /***/ },
-/* 287 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31243,7 +31310,7 @@
 	module.exports = Bills;
 
 /***/ },
-/* 288 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31265,35 +31332,6 @@
 	});
 	
 	module.exports = NotFound;
-
-/***/ },
-/* 289 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	/* global localStorage */
-	var data = {};
-	
-	function getData(key) {
-	  if (key) {
-	    return data[key];
-	  } else {
-	    return data;
-	  }
-	}
-	
-	function setData(key, value) {
-	  data[key] = value;
-	
-	  // this is optional. you could extend this to keep track of values across browsing sessions
-	  localStorage.setItem(key, JSON.stringify(value));
-	}
-	
-	module.exports = {
-	  setData: setData,
-	  getData: getData
-	};
 
 /***/ }
 /******/ ]);
