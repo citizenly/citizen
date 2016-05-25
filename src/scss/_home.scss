@@ -17,9 +17,10 @@
 }
 
 
-
 .citizenlogo {
     position: relative;
+    max-width: 30%;
+    height: auto;
     
     -moz-animation-name: dropHeader;
     -moz-animation-iteration-count: 1;
@@ -67,11 +68,16 @@
         font-family: Oswald, sans-serif;
         font-weight: medium;
         font-size: 1.7em;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
 }
 
 p {
     margin-bottom: 15px;
     margin-top: 15px;
+    text-align: center;
+    font-size: 1.2em;
 }
 
 .postcodeinputandentry {
@@ -101,7 +107,6 @@ p {
 }
 
 input[type=text] {
-    width: 80%;
     border-radius: 20px 0px 0px 20px;
     height: 100%;
     padding: 0;

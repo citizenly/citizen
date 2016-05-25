@@ -39,6 +39,7 @@ var Rep = React.createClass({
   render: function() {
     return (
       <div className="rep-container">
+
         <div className="rep-info">
           <div className="rep-pic">
             <img src={this.state.rep.img} />
