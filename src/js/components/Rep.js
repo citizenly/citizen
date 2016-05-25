@@ -59,18 +59,18 @@ var Rep = React.createClass({
             <p>In agreement with...</p>
           </div>
           
-          <div>
-            <p>you</p>
-            <p>**?**</p>
+          <div className="neighbours">
+            <h2>neighbours</h2>
+            <h1>**34%**</h1>
           </div>
           
-          <div>
-            <p>your neighbours</p>
-            <p>**34%**</p>
+          <div className="you">
+            <h2>you</h2>
+            <h1>**?**</h1>
           </div>
           
-          <div className="inhervoting">
-            <p>... in her voting.</p>
+          <div className="intheirvoting">
+            <p>... in their voting.</p>
           </div>
       
       </div>
