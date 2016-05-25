@@ -15,20 +15,14 @@ var InvalidPcMessage = React.createClass({
       message: event.message
     });
     
-    setTimeout(function() {
-      that.setState({
-        message: ''
-      });
-    }, event.duration)
-    
   },
   componentDidMount: function() {
     
     event.on('show_message', this.handleInvalidPCMessage);
   },
-  componentWillUnmount: function() {
-    event.off('show_message', this.handleInvalidPCMessage);
-  },
+  // componentWillUnmount: function() {
+  //   event.off('show_message', this.handleInvalidPCMessage);
+  //},
   render: function() {
     
     var message = this.state.message;
