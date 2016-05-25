@@ -40,7 +40,7 @@ var Home = React.createClass({
         <form>
           <div className="col s10 center-block flow-text">
           <input ref="postalcode" className="postcodeinput" type="text" name="postalcode" placeholder="enter your postal code" />
-          <button className="postcodebutton" onClick={this.handleSubmit} type="button" disabled="">FIND OUT</button>
+          <button className="postcodebutton" onClick={this.handleSubmit} type="button" maxlength="7" disabled="">FIND OUT</button>
           </div>
         </form>
         </div>
