@@ -2,6 +2,7 @@ var React = require('react');
 var Link = require('react-router').Link;
 var IndexLink = require("react-router").IndexLink;
 var Message = require('./Message');
+import { withRouter } from 'react-router';
 
 // The main application layout
 // this.props.children will be set by React Router depending on the current route
@@ -78,6 +79,6 @@ onClick: function (e) {
   }
 });
 
-module.exports = App;
 
 
+module.exports = withRouter(App);

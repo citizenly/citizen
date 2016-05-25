@@ -1,3 +1,23 @@
+
+.main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    flex: 1 1 0;
+    margin-left: 15px;
+    /* Should be equivalent to: */
+    /* flex-grow: 1; */
+    /* flex-shrink: 1; */
+    /* flex-basis: 0; */
+}
+
+
+
 .citizenlogo {
     position: relative;
     
@@ -41,19 +61,7 @@
     }
 }
 
-input[type=text] {
-    width: 80%;
-    border-radius: 20px 0px 0px 20px;
 
-
-    /* background-color: transparent; */
-    /* border: none; */
-    border-bottom: 1px solid #9e9e9e;
-    /* height: 3rem; */
-    padding: 0;
-    box-shadow: none;
-    /* box-sizing: content-box; */
-}
 
 .specialh1 {
         font-family: Oswald, sans-serif;
@@ -61,33 +69,47 @@ input[type=text] {
         font-size: 1.7em;
 }
 
+p {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.postcodeinputandentry {
+    font-family: Arimo;
+}
+
 .postcodebutton {
     background-color: #44A487;
-    border: 0px;
+    border: 1px solid #44A487;
     color: white;
     font-family: Oswald, sans-serif;
     border-radius: 0px 10px 10px 0px;
-    height: 2em;
+    height: 100%;
 
 }
 
 .postcodeinput {
-    border-bottom: 1px solid #9e9e9e;
     border-radius: 20px 0px 0px 20px;
     font-family: Arimo;
     outline: none;
     height: 2rem;
     font-size: 1rem;
-    margin: 0 0 15px 0;
+    margin: 0;
     padding: 0;
     transition: all 0.3s;
     display: inline-block;
 }
 
-
-.postcodeinputandentry {
-    font-family: Arimo;
+input[type=text] {
+    width: 80%;
+    border-radius: 20px 0px 0px 20px;
+    height: 100%;
+    padding: 0;
+    box-shadow: none;
+    /* box-sizing: content-box; */
 }
+
+
 
 .citizenlogo {
     max-width: 50%;

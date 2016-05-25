@@ -1,28 +1,44 @@
 var React = require('react');
 var Link = require('react-router').Link;
-//var EventEmitter = require('../events');
-var data = require("../data.js");
+// required for ajax calls
+var axios = require('axios');
 
 
 var Rep = React.createClass({
   getInitialState: function() {
-    // get initial state with rep's info based on postal code
-    var rep = data.getData('rep') || {};
+    // set inital state as an empty object, to be populated with rep info on componentDidMount
     return {
       rep: {
-        name: rep.name || '**Codrin Diaconu**',
-        constituency: rep.constituency || '**Downtown**',
-        province: rep.province || '**QC**',
-        party: rep.party || '**Communist**',
-        img: rep.img || '../images/567_1.jpg',
-        electedYear: rep.electedYear || '**2016**',
-        electedVote: rep.electedVote || '**92%**',
+        name: '',
+        constituency: '',
+        province: '',
+        party: '',
+        img: '',
+        electedYear: '',
+        electedVote: ''
       },
     };
   },
+  componentDidMount: function() {
+    var that = this;
+    // get rep info using nameFormatted in url
+    var nameFormatted = this.props.params.repName;
+    axios.post('/repinfoget', {
+      repName: nameFormatted
+    })
+    // update this.state with the rep object
+    .then(function(response) {
+      var updateData = that.state.rep;
+      updateData = response.data;
+       that.setState({rep: updateData});
+    })
+    .catch(function(response) {
+      console.log(response);
+    });
+  },
   render: function() {
     return (
-      
+
       <div className="rep-container">
       
           <div className="rep-info">
@@ -34,7 +50,7 @@ var Rep = React.createClass({
                     <h3>You are being represented by:</h3>
                     <h1>{this.state.rep.name}</h1>
                     <p>{this.state.rep.party} MP for {this.state.rep.constituency} ({this.state.rep.province})</p>
-                    <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVotes} of the vote</p>
+                    <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVotes}% of the vote</p>
                 </div>
           </div>
       
@@ -57,7 +73,6 @@ var Rep = React.createClass({
           <div>
                 <p>... in her voting.</p>
           </div>
-
       </div>
       
       <footer>
@@ -75,6 +90,7 @@ var Rep = React.createClass({
         </div>
      </footer>
   </div>
+
     );
   }
 });

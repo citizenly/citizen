@@ -27,20 +27,6 @@ img {
 }
 
 
-.main {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.content {
-    flex: 1 1 0;
-    /* Should be equivalent to: */
-    /* flex-grow: 1; */
-    /* flex-shrink: 1; */
-    /* flex-basis: 0; */
-}
-
 footer {
   position: fixed;
   bottom: 0;
