@@ -64,13 +64,13 @@ var Rep = React.createClass({
         <div className="bottomMenu-item compare">
           <Link to="/compare" activeClassName="active">COMPARE</Link>
         </div>
-        <div className="bottomMenu-item petitions card-panel hoverable">
+        <div className="bottomMenu-item petitions">
           <Link to="/petitions" activeClassName="active">PETITIONS</Link>
         </div>
-        <div className="bottomMenu-item feed card-panel hoverable">
+        <div className="bottomMenu-item feed">
           <Link to="/feed" activeClassName="active">WHAT THEY'RE DOING</Link>
         </div>
-        <div className="bottomMenu-item bills card-panel hoverable">
+        <div className="bottomMenu-item bills">
           <Link to="/bills" activeClassName="active">WHAT WOULD YOU DO?</Link>
         </div>
      </footer>
