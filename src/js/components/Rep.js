@@ -9,13 +9,13 @@ var Rep = React.createClass({
     // set inital state as an empty object, to be populated with rep info on componentDidMount
     return {
       rep: {
-        name: '',
-        constituency: '',
-        province: '',
-        party: '',
-        img: '',
-        electedYear: '',
-        electedVote: ''
+        name: "",
+        constituency: "",
+        province: "",
+        party: "",
+        img: "",
+        electedYear: "",
+        electedVote: ""
       },
     };
   },
@@ -41,37 +41,37 @@ var Rep = React.createClass({
 
       <div className="rep-container">
       
-          <div className="rep-info">
-                <div className="rep-pic">
-                    <img src={this.state.rep.img} />
-                </div>
-                    
-                <div className="rep-text">
-                    <h3>You are being represented by:</h3>
-                    <h1>{this.state.rep.name}</h1>
-                    <p>{this.state.rep.party} MP for {this.state.rep.constituency} ({this.state.rep.province})</p>
-                    <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
-                </div>
+        <div className="rep-info">
+          <div className="rep-pic">
+            <img src={this.state.rep.img} />
           </div>
+                  
+          <div className="rep-text">
+            <h3>You are being represented by:</h3>
+            <h1>{this.state.rep.name}</h1>
+            <p>{this.state.rep.party} MP for {this.state.rep.constituency} ({this.state.rep.province})</p>
+            <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
+          </div>
+        </div>
       
-      <div className="rep-stats-container">
+        <div className="rep-stats-container">
       
           <div>
-                <p>In agreement with...</p>
+            <p>In agreement with...</p>
           </div>
           
           <div>
-                <p>you</p>
-                <p>**?**</p>
+            <p>you</p>
+            <p>**?**</p>
           </div>
           
           <div>
-                <p>your neighbours</p>
-                <p>**34%**</p>
+            <p>your neighbours</p>
+            <p>**34%**</p>
           </div>
           
           <div>
-                <p>... in her voting.</p>
+            <p>... in her voting.</p>
           </div>
       </div>
       
@@ -88,7 +88,7 @@ var Rep = React.createClass({
         <div className="bottomMenu-item bills">
           <Link to="/bills" activeClassName="active">WHAT WOULD YOU DO?</Link>
         </div>
-     </footer>
+      </footer>
   </div>
 
     );
