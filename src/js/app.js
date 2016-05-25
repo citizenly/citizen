@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
@@ -41,7 +40,7 @@ var routes = (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
-      <Route path="rep" component={Rep}/>
+      <Route path="rep/:repName" component={Rep}/>
       <Route path="compare" component={Compare}/>
       <Route path="petitions" component={Petitions}/>
       <Route path="feed" component={Feed}/>
