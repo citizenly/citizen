@@ -57,16 +57,15 @@ var Home = React.createClass({
       </div>
        
       <form onSubmit={this.handleSubmit}>
-        <div>
+        <div className="postcodeinputandentry">
           <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
           <button className="postcodebutton" type="submit">FIND OUT</button>
-
         </div>
         <Message/>
       </form>
   
-      <div> 
-        <img className= "responsive-img" src="images/canadamap.png"></img>
+      <div className= "canadamap"> 
+        <img  src="images/canadamap.png"></img>
       </div>
         
       </div>

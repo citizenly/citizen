@@ -33,11 +33,11 @@ var Rep = React.createClass({
        that.setState({rep: updateData});
     })
     .catch(function(response) {
-      console.log(response);
     });
   },
   render: function() {
     return (
+      <div>
       <div className="rep-container">
 
         <div className="rep-info">
@@ -51,10 +51,11 @@ var Rep = React.createClass({
             <p>{this.state.rep.party} MP for {this.state.rep.constituency} ({this.state.rep.province})</p>
             <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
           </div>
-        </div>
+          
+      </div>
       
-        <div className="rep-stats-container">
-          <div>
+      <div className="rep-stats-container">
+          <div className="agreement">
             <p>In agreement with...</p>
           </div>
           
@@ -68,12 +69,13 @@ var Rep = React.createClass({
             <p>**34%**</p>
           </div>
           
-          <div>
+          <div className="inhervoting">
             <p>... in her voting.</p>
           </div>
-        </div>
       
-        <footer>
+      </div>
+    </div>
+     <footer>
           <div className="bottomMenu-item compare">
             <Link to="/compare" activeClassName="active">COMPARE</Link>
           </div>
