@@ -38,7 +38,7 @@ ul {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   position: relative;
-  left: -325px;
+  left: -275px;
 }
 
 
@@ -54,14 +54,14 @@ ul a {
   padding-right: 0 !important; /* important overrides media queries */
   font-size: 13px;
   font-weight: bold;
-  text-align: center;
+  text-align: right;
   color: #aaa;
   cursor: pointer;
   text-decoration: none;
 }
 
 ul a:hover {
-  background: #eee;
+  color: black;
 }
 
 nav li {
@@ -74,7 +74,7 @@ nav li:last-child {
   border-right: none;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 767px) {
   
   .hamburger {
     padding: 15px;
