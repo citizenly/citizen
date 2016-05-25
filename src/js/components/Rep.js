@@ -9,13 +9,13 @@ var Rep = React.createClass({
     // set inital state as an empty object, to be populated with rep info on componentDidMount
     return {
       rep: {
-        name: '',
-        constituency: '',
-        province: '',
-        party: '',
-        img: '',
-        electedYear: '',
-        electedVote: ''
+        name: "",
+        constituency: "",
+        province: "",
+        party: "",
+        img: "",
+        electedYear: "",
+        electedVote: ""
       },
     };
   },
