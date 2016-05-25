@@ -4,20 +4,15 @@ and that these characters follow LNL NLN
 */
 
 function validatePC(postcode) {
-  var pc = postcode.toUpperCase().replace(/\s+/g, "");
-  pc = pc.replace(/\-/g, "");
-  if(pc.length !== 6){
-    return "invalid postal code";
+var pc = postcode.toUpperCase().replace(/\s+/g, "");
+pc = pc.replace(/\-/g, "");
+  var valid = /([ABCEGHJKLMNPRSTVXY]\d)([ABCEGHJKLMNPRSTVWXYZ]\d){2}/i;
+  var ok = valid.test(pc);
+  if (!ok){
+    return "invalid";
   }
-  else {
-    var valid = /([ABCEGHJKLMNPRSTVXY]\d)([ABCEGHJKLMNPRSTVWXYZ]\d){2}/i;
-    var ok = valid.test(pc);
-    if (!ok){
-      return "invalid postal code";
-    }
-    else{
-      return pc;
-    }
+  else{
+    return pc;
   }
 }
 

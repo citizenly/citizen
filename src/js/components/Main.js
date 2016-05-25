@@ -1,7 +1,6 @@
 var React = require('react');
 var Link = require('react-router').Link;
 var IndexLink = require("react-router").IndexLink;
-var Message = require('./Message');
 import { withRouter } from 'react-router';
 
 // The main application layout
@@ -11,7 +10,6 @@ var App = React.createClass({
     return (
         <div>
           <header>
-            <Message/>
               {/*Our menu for navigating around the app whilst developing*/}
               <nav className="mainMenu">
                 <ul>
