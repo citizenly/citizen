@@ -1,7 +1,7 @@
 var React = require('react');
 var Link = require('react-router').Link;
 var IndexLink = require("react-router").IndexLink;
-var Message = require('./Message');
+var Message = require('./InvalidPcMessage');
 import { withRouter } from 'react-router';
 
 // The main application layout

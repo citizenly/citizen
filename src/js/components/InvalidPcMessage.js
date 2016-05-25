@@ -1,15 +1,16 @@
 var React = require('react');
+
 var event = require('../events');
 
-var Message = React.createClass({
+var InvalidPcMessage = React.createClass({
   getInitialState: function() {
     return {
       message: ''
     };
   },
-  handleNewMessage: function(event) {
-    var that= this;
-    
+  handleInvalidPCMessage: function(event) {
+      var that= this;
+      
     this.setState({
       message: event.message
     });
@@ -18,16 +19,18 @@ var Message = React.createClass({
       that.setState({
         message: ''
       });
-    }, event.duration);
+    }, event.duration)
     
   },
   componentDidMount: function() {
-    event.on('show_message', this.handleNewMessage);
+    
+    event.on('show_message', this.handleInvalidPCMessage);
   },
   componentWillUnmount: function() {
-    event.off('show_message', this.handleNewMessage);
+    event.off('show_message', this.handleInvalidPCMessage);
   },
   render: function() {
+    
     var message = this.state.message;
     
     return (
@@ -36,4 +39,4 @@ var Message = React.createClass({
   }
 });
 
-module.exports = Message;
+module.exports = InvalidPcMessage;
