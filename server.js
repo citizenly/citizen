@@ -25,11 +25,16 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 
 
-/* insert any app.get or app.post you need here. only if you do the advanced part */
+/* insert any app.get or app.post you need here. */
 // New AJAX call to the rep name for the url
 app.post('/repnameget', function(req, res) {
   getRepName(req.body.postalcode, function(nameFormatted) {
-    res.send(nameFormatted);
+    if(nameFormatted === "Sorry, this is not a valid Canadian postal code") {
+      res.redirect('/');  
+    }
+    else {
+      res.send(nameFormatted);
+    }
   });
 });
 
