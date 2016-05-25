@@ -9,7 +9,8 @@
 
 .content {
     flex: 1 1 0;
-    margin-left: 15px;
+    max-width: 90%;
+    text-align: center;
     /* Should be equivalent to: */
     /* flex-grow: 1; */
     /* flex-shrink: 1; */
@@ -17,9 +18,17 @@
 }
 
 
+.canadamap {
+    max-width: 90%;
+    height: auto;
+    margin-top: 20px;
+}
 
 .citizenlogo {
     position: relative;
+    max-width: 30%;
+    height: auto;
+    margin-bottom: 20px;
     
     -moz-animation-name: dropHeader;
     -moz-animation-iteration-count: 1;
@@ -63,30 +72,10 @@
 
 
 
-.specialh1 {
-        font-family: Oswald, sans-serif;
-        font-weight: medium;
-        font-size: 1.7em;
-}
-
-p {
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-
 .postcodeinputandentry {
-    font-family: Arimo;
+    height: 1.5em;
 }
 
-.postcodebutton {
-    background-color: #44A487;
-    border: 1px solid #44A487;
-    color: white;
-    font-family: Oswald, sans-serif;
-    border-radius: 0px 10px 10px 0px;
-    height: 100%;
-
-}
 
 .postcodeinput {
     border-radius: 20px 0px 0px 20px;
@@ -101,21 +90,23 @@ p {
 }
 
 input[type=text] {
-    width: 80%;
     border-radius: 20px 0px 0px 20px;
     height: 100%;
     padding: 0;
     box-shadow: none;
-    /* box-sizing: content-box; */
-}
-
-.postcodeinputandentry {
     font-family: Arimo;
+    font-size: 0.8em;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 
-
-.citizenlogo {
-    max-width: 50%;
-    height: auto;
+.postcodebutton {
+    background-color: #44A487;
+    border: 1px solid #44A487;
+    color: white;
+    font-family: Oswald, sans-serif;
+    height: 100%;
+    font-size: 0.8em;
 }
+
