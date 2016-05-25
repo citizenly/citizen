@@ -44,7 +44,7 @@ var Home = React.createClass({
     <div className="main">
   
       <div className= "citizenlogo"> 
-        <img src="images/citizenlogo.png"></img>
+        <img alt="citizen app logo" src="images/citizenlogo.png"></img>
       </div>
       
       <div className="content">
@@ -52,7 +52,7 @@ var Home = React.createClass({
           <p>In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
         </div>
         <div>
-          <p className="specialh1">WHO'S REPRESENTING ME?</p>
+          <h1>WHO'S REPRESENTING ME?</h1>
         </div>
       </div>
        
@@ -65,7 +65,7 @@ var Home = React.createClass({
       </form>
   
       <div className= "canadamap"> 
-        <img  src="images/canadamap.png"></img>
+        <img alt="canada map" src="images/canadamap.png"></img>
       </div>
         
       </div>

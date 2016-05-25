@@ -10,6 +10,7 @@
 .content {
     flex: 1 1 0;
     max-width: 90%;
+    text-align: center;
     /* Should be equivalent to: */
     /* flex-grow: 1; */
     /* flex-shrink: 1; */
@@ -17,10 +18,17 @@
 }
 
 
+.canadamap {
+    max-width: 90%;
+    height: auto;
+    margin-top: 20px;
+}
+
 .citizenlogo {
     position: relative;
     max-width: 30%;
     height: auto;
+    margin-bottom: 20px;
     
     -moz-animation-name: dropHeader;
     -moz-animation-iteration-count: 1;
@@ -64,22 +72,6 @@
 
 
 
-.specialh1 {
-        font-family: Oswald, sans-serif;
-        font-weight: medium;
-        font-size: 1.7em;
-        text-align: center;
-        margin-top: 10px;
-        margin-bottom: 10px;
-}
-
-p {
-    margin-bottom: 15px;
-    margin-top: 15px;
-    text-align: center;
-    font-size: 1.2em;
-}
-
 .postcodeinputandentry {
     height: 1.5em;
 }
@@ -118,8 +110,3 @@ input[type=text] {
     font-size: 0.8em;
 }
 
-.canadamap {
-    max-width: 90%;
-    height: auto;
-    margin-top: 20px;
-}
