@@ -44,30 +44,30 @@ var Home = React.createClass({
     <div className="main">
   
       <div className= "citizenlogo"> 
-         <img src="images/citizenlogo.png"></img>
+        <img src="images/citizenlogo.png"></img>
       </div>
       
       <div className="content">
         <div>
-            <p>In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
+          <p>In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
         </div>
         <div>
-            <p className="specialh1">WHO'S REPRESENTING ME?</p>
+          <p className="specialh1">WHO'S REPRESENTING ME?</p>
         </div>
       </div>
        
-        <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <div>
-            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
-            <button className="postcodebutton" type="submit">FIND OUT</button>
+          <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
+          <button className="postcodebutton" type="submit">FIND OUT</button>
 
-          </div>
-          <Message/>
-        </form>
-  
-        <div> 
-            <img className= "responsive-img" src="images/canadamap.png"></img>
         </div>
+        <Message/>
+      </form>
+  
+      <div> 
+        <img className= "responsive-img" src="images/canadamap.png"></img>
+      </div>
         
       </div>
   

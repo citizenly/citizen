@@ -18,19 +18,19 @@ var Bills = React.createClass({
 		<div className="box-wrap">
 	
 		<div id="box-one">
-		  Title of the bill
+		  <h3>Title of the bill</h3>
 		</div>
 		
 		<div id="box-two">
-		  Summary of the bill
+		  <h3>Summary of the bill</h3>
 		</div>
 		
 		<div id="box-three">
-		  Full text of the bill
+		  <h3>Full text of the bill</h3>
 		</div>
 
     <div id="box-four">
-		  House debate of the bill
+		  <h3>House debate of the bill</h3>
 		</div>
 		
 	</div>
