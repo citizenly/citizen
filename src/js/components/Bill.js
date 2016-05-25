@@ -4,10 +4,11 @@ var React = require('react');
 var axios = require('axios');
 
 
-var Bills = React.createClass({
+var Bill = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
+      show: "title",
       bill: {
         id: "**C-14**",
         title: "**An Act to amend the Criminal Code and to make related amendments to other Acts (medical assistance in dying)**",
@@ -38,86 +39,97 @@ var Bills = React.createClass({
       console.log(response);
     });
   },
+  handleTabClick: function(data){
+    this.setState({show: data})
+  },
   render: function() {
     return (
-
-      <div>
-        <div className="billInfo">
-          <h3>What would you do?</h3>
-          <h1>Bills</h1>
-          <div className="billTags">
-            <ul>
-              <li>{this.state.bill.status}</li>
-              <li>{this.state.bill.lastVote}</li>
-              <li>{this.state.bill.proposedBy}</li>
-            </ul>
+ 
+ <div>
+    <div>
+        <div>
+          <div className="billInfo">
+            <div className="whatwouldyoudo">
+            What would you do?
+            </div>
+            
+            <div className="billandid">
+                <h3>Bill</h3>             
+                <h2>{this.state.bill.id}</h2>
+            </div>
+            
+            <div className="billTags">
+                  <div className="billTag">**status**{this.state.bill.status}</div>
+                  <div className="billTag">**lastvote**{this.state.bill.lastVote}</div>
+                  <div className="billTag">**proposedby**{this.state.bill.proposedBy}</div>
+            </div>
           </div>
-          <h2>{this.state.bill.id}</h2>
-          <h2>My representative voted: {this.state.bill.repsVote}</h2>
+            <h5>My representative voted:</h5>
+            <div className="billTag">{this.state.bill.repsVote}</div>
         </div>
 
         <div className="billTabs">
           <ul className="tabs group">
-            <li><a href="#box-one">TITLE</a></li>
-            <li><a href="#box-two">SUMMARY</a></li>
-            <li><a href="#box-three">FULL TEXT</a></li>
-            <li><a href="#box-four">HOUSE DEBATE</a></li>
+            <li className="bill__li"><a className="bill__a" href="#box-four" onClick={this.handleTabClick.bind(this, "debate")}>HOUSE DEBATE</a></li>
+            <li className="bill__li"><a className="bill__a" href="#box-three" onClick={this.handleTabClick.bind(this, "text")}>FULL TEXT</a></li>
+            <li className="bill__li"><a className="bill__a" href="#box-two" onClick={this.handleTabClick.bind(this, "summary")}>SUMMARY</a></li>
+            <li className="bill__li"><a className="bill__a" href="#box-one" onClick={this.handleTabClick.bind(this, "title")}>TITLE</a></li>
           </ul>
 
       		<div className="box-wrap">
         		<div id="box-one">
-        		  <h3>{this.state.bill.title}</h3>
+        		  <p className="bill__p">{this.state.show === "title" ? this.state.bill.title : ""}</p>
         		</div>
         		
         		<div id="box-two">
-        		  <h3>{this.state.bill.summary}</h3>
+        		  <p className="bill__p">{this.state.show === "summary" ? this.state.bill.summary : ""}</p>
         		</div>
         		
         		<div id="box-three">
-        		  <h3>{this.state.bill.text}</h3>
+        		  <p className="bill__p">{this.state.show === "text" ? this.state.bill.text : ""}</p>
         		</div>
         
             <div id="box-four">
-        		  <h3>{this.state.bill.houseDebate}</h3>
+        		  <p className="bill__p">{this.state.show === "debate" ? this.state.bill.houseDebate : ""}</p>
         		</div>
         	</div>
         	
         </div>
         
         <div className="voteCompare">
-          <div><p>**Whole Country**</p></div>
-          <div><p>**Your Neighbours**</p></div>
+          <div><p className="bill__p">**Whole Country**</p></div>
+          <div><p className="bill__p">**Your Neighbours**</p></div>
         </div>
 
+        </div>
+      
         <div className="vottingButtons">
-          <div>
-            <div className="arrow">
-              <p>arrow</p>
-            </div>
+        
+          <div className="leftarrow">
+              <img alt="left" src="images/arrowleft.png"></img>
+          </div>
+                  
+          <div className= "redbutton">
+              <img alt="no" src="images/red button.png"></img>
           </div>
           
-          <div>
-            <div>
-        	  	<img className= "responsive-img" src="images/red button.png"></img>
-            </div>
+           <div className= "share">
+              <img alt="share" src="images/twitter-logo.jpg"></img>
           </div>
           
-          <div>
-            <div>
-          	 	<img className= "responsive-img" src="images/green button.png"></img>
-            </div>
+          <div className= "greenbutton">
+              <img alt="yes" src="images/green button.png"></img>
           </div>
           
-          <div>
-            <div className="arrow">
-        			<p>arrow</p>
-            </div>
+          <div className="rightarrow">
+              <img alt="right" src="images/arrowright.png"></img>
           </div>
           
         </div>
-      </div>
+        
+    </div>
     );
   }
 });
 
-module.exports = Bills;
+module.exports = Bill;

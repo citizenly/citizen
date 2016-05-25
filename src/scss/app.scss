@@ -3,6 +3,7 @@
 //import styles from 
 @import 'home';
 @import 'bills';
+@import 'bill';
 @import 'rep';
 @import 'main';
 
@@ -29,16 +30,32 @@ h2 {
     text-transform: uppercase;
 }
 
+
 h3 {
+    font-family: Oswald, sans-serif;
+    font-weight: 800;
+    font-size: 1.7em;
+    text-align: center;
+    color: black;
+    text-transform: uppercase;
+}
+
+
+h4 {
     font-family: Arimo, sans-serif;
     font-size: 0.9em;
 }
 
+h5 {
+  font-family: Arimo, sans-serif;
+  font-size: 0.8em;
+  color: black; 
+  
+}
 
 p {
   font-family: Arimo, sans-serif;
   font-size: 0.8em;
-
 }
 
 footer {
