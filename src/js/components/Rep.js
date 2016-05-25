@@ -50,7 +50,7 @@ var Rep = React.createClass({
                     <h3>You are being represented by:</h3>
                     <h1>{this.state.rep.name}</h1>
                     <p>{this.state.rep.party} MP for {this.state.rep.constituency} ({this.state.rep.province})</p>
-                    <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVotes}% of the vote</p>
+                    <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
                 </div>
           </div>
       
