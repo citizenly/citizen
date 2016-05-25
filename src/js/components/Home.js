@@ -48,8 +48,8 @@ var Home = React.createClass({
         </div>
 
         <form>
-          <div className="col s10 center-block  ">
-            <input ref="postalcode" className="postcodeinput" type="text" name="postalcode" placeholder="enter your postal code" />
+          <div>
+            <input className="postcodeinput" ref="postalcode" type="text" name="postalcode" placeholder="enter your postal code" />
             <button className="postcodebutton" onClick={this.handleSubmit} type="button">FIND OUT</button>
           </div>
         </form>
@@ -59,8 +59,7 @@ var Home = React.createClass({
         </div>
         
       </div>
-      
-      <footer>Hello there</footer>
+  
     </div>
       
     );

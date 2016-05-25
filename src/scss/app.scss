@@ -52,47 +52,131 @@ footer {
 
 .navigation {
     list-style: none;
-    background: #111;
+    text-decoration: none;
+}
+
+li {
+  text-decoration: none;
+}
+
+
+
+//FOR HAMBURGER MENU
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font: 1em 'Roboto', sans-serif;
+  color: #555;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style: none;
+  max-width: 800px;
+  margin: 0 auto;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+h1 {
+  padding: 30px 0;
+  font: 1.5em 'Open Sans', sans-serif;
+  text-align: center;
+}
+
+nav {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #f5f5f5;
+}
+
+ul a {
+  display: block;
+  padding: 20px;
+  padding-right: 0 !important; /* important overrides media queries */
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  color: #aaa;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+ul a:hover {
+  background: #eee;
+}
+
+nav li {
+  float: left;
+  width: 20%;
+  border-right: 1px solid #ddd;
+}
+
+nav li:last-child {
+  border-right: none;
+}
+
+@media only screen and (max-width: 480px) {
+  
+  .hamburger {
+    padding: 15px;
+    display: block;
+  }
+  
+  nav {
+  border-top: none;
+  border-bottom: none;
+  background-color: rgba(0, 0, 0, 0);
+  width: 65px;
+}
+
+nav ul {
+  border-left: none;
+  border-right: none;
+}
+
+  .line {
+    border-bottom: 4px solid #bbb;
+    width: 35px;
+    margin-bottom: 6px;
+  }
+  
+  .line:last-child {
+    margin-bottom: 0;
+  }
+
+  nav li {
     width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
-}
-
-.site-wrap {
-    min-width: 100%;
-    min-height: 100%;
-    background-color: #fff;
-    position: relative;
-    top: 0;
-    bottom: 100%;
-    left: 0;
-    z-index: 1;
-    padding: 4em;
-    background-image: linear-gradient(135deg, 
-                      rgb(254,255,255) 0%,
-                      rgb(221,241,249) 35%,
-                      rgb(160,216,239) 100%);
-    background-size: 200%;
-}
-
-.nav-trigger {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-}
-
-label[for="nav-trigger"] {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 2;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
-    background-size: contain;
+    border-right: none;
+  }
+  
+  .menu {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s linear;
+    width: 325px;
+  }
+  
+  
+  
+  .slide-down {
+    height: 275px;
+  }
 }

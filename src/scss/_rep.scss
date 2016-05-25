@@ -33,3 +33,28 @@
 .bills {
     background-color: #8675B3;
 }
+
+img {
+    max-width: 100%;
+}
+
+.rep-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.rep-info {
+}
+
+.rep-pic {
+    max-width: 70%;
+}
+
+.rep-stats-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
