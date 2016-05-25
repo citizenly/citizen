@@ -12,15 +12,33 @@ body {
     margin: 0;
 }
 
-h1, h2 {
+h1 {
+      font-family: Oswald, sans-serif;
+      font-weight: 400;
+      font-size: 1.7em;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+}
+
+h2 {
     font-family: Oswald, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 
-img {
-    width: 100%;
-    height: auto;
+h3 {
+    font-family: Arimo, sans-serif;
+    font-size: 0.9em;
 }
 
+
+p {
+  font-family: Arimo, sans-serif;
+  font-size: 0.8em;
+
+}
 
 footer {
   position: fixed;
@@ -76,11 +94,6 @@ ul {
   border-right: 1px solid #ddd;
 }
 
-h1 {
-  padding: 30px 0;
-  font: 1.5em 'Open Sans', sans-serif;
-  text-align: center;
-}
 
 nav {
   border-top: 1px solid #ddd;

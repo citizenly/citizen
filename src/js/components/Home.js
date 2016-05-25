@@ -44,7 +44,7 @@ var Home = React.createClass({
     <div className="main">
   
       <div className= "citizenlogo"> 
-        <img src="images/citizenlogo.png"></img>
+        <img alt="citizen app logo" src="images/citizenlogo.png"></img>
       </div>
       
       <div className="content">
@@ -52,21 +52,20 @@ var Home = React.createClass({
           <p>In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
         </div>
         <div>
-          <p className="specialh1">WHO'S REPRESENTING ME?</p>
+          <h1>WHO'S REPRESENTING ME?</h1>
         </div>
       </div>
        
       <form onSubmit={this.handleSubmit}>
-        <div>
+        <div className="postcodeinputandentry">
           <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
           <button className="postcodebutton" type="submit">FIND OUT</button>
-
         </div>
         <Message/>
       </form>
   
-      <div> 
-        <img className= "responsive-img" src="images/canadamap.png"></img>
+      <div className= "canadamap"> 
+        <img alt="canada map" src="images/canadamap.png"></img>
       </div>
         
       </div>
