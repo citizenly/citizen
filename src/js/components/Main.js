@@ -25,14 +25,6 @@ onClick: function (e) {
 },
 
 
-
-/*
-      $('.hamburger').on('click', function(e) {
-  // Prevent link from jumping to the top of the page
-  e.preventDefault();
-  // If menu is already showing, slide it up. Otherwise, slide it down.
-  $('.menu').toggleClass('slide-down');*/
-  
   
   render: function() {
     return (
@@ -46,7 +38,7 @@ onClick: function (e) {
                   </a>
                   <ul className={"clearfix menu " + this.state.menutoggle} >
                     <li>
-                      <IndexLink activeClassName="active" to="/">**HOME - just for us now**</IndexLink>
+                      <IndexLink activeClassName="active" to="/">HOME</IndexLink>
                     </li>
                     <li>
                       <Link activeClassName="active" to="/login">LOGIN</Link>
