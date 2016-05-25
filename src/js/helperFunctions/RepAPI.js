@@ -1,10 +1,9 @@
 /* http://represent.opennorth.ca/postcodes/L5G4L3/?sets=federal-electoral-districts
-Request
-URLs must include the postal code in uppercase letters with no spaces.URLs */
-
+Request URLs must include the postal code in uppercase letters with no spaces.URLs */
 var request = require("request");
 var unaccented = require("./unaccented.js");
 var percentageVotes = require("./percentageVotes.js");
+
 
 //The user inputs their postal code.  With this data, we request the name of their MP and format it as name-surname
 function getRepName (postalCode, callback) {
@@ -15,7 +14,7 @@ function getRepName (postalCode, callback) {
   else {
     var valid = /([ABCEGHJKLMNPRSTVXY]\d)([ABCEGHJKLMNPRSTVWXYZ]\d){2}/i;
     var ok = valid.test(postalCode);
-    if (!ok){
+    if (!ok) {
       return "invalid postal code";
     }
     else {
@@ -37,11 +36,6 @@ function getRepName (postalCode, callback) {
     }
   }
 }
-
-// getRepName("H4A1B2", function(nameFormatted) {
-//   console.log(nameFormatted);
-// });
-
 
 function getRepInfo(nameFormatted, callback) {
   //with the name of MP formatted, we fetch his data
@@ -72,11 +66,6 @@ function getRepInfo(nameFormatted, callback) {
   });
 }
 
-// getRepInfo("marc-garneau", function(repInfo) {
-//   console.log(repInfo);
-// });
-
-
 // return the majority vote percentage using the riding ID and parsing a .csv
 function getPercentageVote(ridingId, callback){
   percentageVotes.percentageVotes(ridingId, function(r){
@@ -84,9 +73,6 @@ function getPercentageVote(ridingId, callback){
   });
 }
 
-// getPercentageVote("10004", function(vote) {
-//   console.log(vote);
-// });
 
 module.exports = {
   getRepName: getRepName,

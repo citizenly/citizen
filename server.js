@@ -1,10 +1,11 @@
 var express = require('express');
 var app = express();
-var cors = require('cors')
+var cors = require('cors');
 var request = require('request');
 var RepAPI = require('./src/js/helperFunctions/RepAPI.js');
-var handleResult = RepAPI.handleResult;
-var handlePercentageVote = RepAPI.handlePercentageVote;
+var getRepName = RepAPI.getRepName;
+var getRepInfo = RepAPI.getRepInfo;
+var getPercentageVote = RepAPI.getPercentageVote;
 var bodyParser = require("body-parser");
  
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
@@ -23,26 +24,28 @@ var corsOptionsDelegate = function(req, callback){
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 
+
 /* insert any app.get or app.post you need here. only if you do the advanced part */
-
-/* This says: for any path NOT served by the middleware above, send the file called index.html instead. Eg, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component */
-
 // New AJAX call to the rep name for the url
-app.get('/repnameget', function(req, res) {
-
+app.post('/repnameget', function(req, res) {
+  getRepName(req.body.postalcode, function(nameFormatted) {
+    res.send(nameFormatted);
+  });
 });
 
 
-// AJAX call to get the Rep object and make it available to the frontend
-app.get('/repinfoget', function(req, res) {
-  handleResult(req.body.postalcode, function(rep) {
-    handlePercentageVote(rep.ridingId, function(r) {
-      rep.electedVote = r;
-      res.send(rep.name);
+//AJAX call to get the Rep object and make it available to the frontend
+app.post('/repinfoget', function(req, res) {
+  getRepInfo(req.body.repName, function(rep) {
+    getPercentageVote(rep.ridingId, function(percentageVote) {
+      rep.electedVote = percentageVote;
+      res.send(rep);
     });
   });
 });
 
+
+/* This says: for any path NOT served by the middleware above, send the file called index.html instead. Eg, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component */
 app.get('/*', cors(corsOptionsDelegate),  function(request, response, next) {
   response.sendFile(__dirname + '/public/index.html');
 });
