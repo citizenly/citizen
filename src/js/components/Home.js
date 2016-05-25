@@ -47,42 +47,39 @@ var Home = React.createClass({
   render: function() {
     // user enters postalcode and rep's name is retrieved from Represent API - https://represent.opennorth.ca/api/
     return (
-    <div className="main container center-block">
+    <div className="main">
+  
+      <div className= "citizenlogo"> 
+         <img src="images/citizenlogo.png"></img>
+      </div>
       
-      <div className="row">
-        
-        <div className="col s4 offset-s4"> 
-         <img className= "citizenlogo responsive-img" src="images/citizenlogo.png"></img>
+      <div className="content">
+        <div>
+            <p>In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
         </div>
-              
-        <div className="col s12 flow-text">
-          <p className="col s12 flow-text">In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
-        </div>
-              
-        <div className="col s12">
-          <p className="specialh1">WHO'S REPRESENTING ME?</p>
+        <div>
+            <p className="specialh1">WHO'S REPRESENTING ME?</p>
         </div>
       </div>
-
-      <p className="col s8 offset-s2 center-block flow-text">In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
-      <div className="col s8 offset-s2 center-block flow-text">
-        <p className="specialh1 flow-text">WHO'S REPRESENTING ME?</p>
+       
         <form onSubmit={this.handleSubmit}>
-          <div className="col s10 center-block flow-text">
+        <div>
             <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
             <button className="postcodebutton" type="submit">FIND OUT</button>
+
           </div>
           <Message/>
         </form>
-      </div>
+  
+        <div> 
+            <img className= "responsive-img" src="images/canadamap.png"></img>
+        </div>
         
-      <div className="col s8 offset-s2 center-block"> 
-        <img className= "responsive-img" src="images/canadamap.png"></img>
       </div>
-        
-    </div>
+  
     );
   }
 });
 
+//marker
 module.exports = withRouter(Home);
