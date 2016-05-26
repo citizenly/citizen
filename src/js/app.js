@@ -17,6 +17,7 @@ var Petitions = require('./components/Petitions.js');
 var Feed = require('./components/Feed.js');
 var Bills = require('./components/Bills.js');
 var Bill = require('./components/Bill.js');
+var Login = require('./components/Login.js');
 var NotFound = require('./components/404.js');
 
 
@@ -47,6 +48,7 @@ var routes = (
       <Route path="feed" component={Feed}/>
       <Route path="bills/:filter" component={Bills}/>
       <Route path="bill" component={Bill}/>
+      <Route path="login" component={Login}/>
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>

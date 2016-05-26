@@ -7,7 +7,7 @@ var Feed = React.createClass({
     return (
       <div className="main feedPage">
         <div>
-          <h1>Feed Landing Page</h1>
+          <h1>FEED</h1>
         </div>
       </div>
     );

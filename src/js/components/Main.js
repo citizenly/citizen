@@ -36,7 +36,7 @@ onClick: function (e) {
                     <div className="line"></div>
                     <div className="line"></div>
                   </a>
-                  <ul className={"clearfix menu " + this.state.menutoggle} >
+                  <ul className={"main__ul clearfix menu " + this.state.menutoggle} >
                     <li>
                       <IndexLink activeClassName="active" to="/">HOME</IndexLink>
                     </li>
