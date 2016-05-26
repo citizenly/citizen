@@ -20,6 +20,7 @@ var Bill = React.createClass({
         repsVote: "**Didn't vote**",
         date: "**2016-05-12**"
       },
+      content: "",
     };
   },
   componentDidMount: function() {
@@ -38,9 +39,10 @@ var Bill = React.createClass({
     .catch(function(response) {
       console.log(response);
     });
+    this.setState({content: this.state.bill.title});
   },
   handleTabClick: function(data){
-    this.setState({show: data})
+    this.setState({content: data})
   },
   render: function() {
     return (
@@ -69,41 +71,29 @@ var Bill = React.createClass({
         </div>
 
         <div className="billTabs">
-          <ul className="bill__u">
-            <li className="bill__li"><a className="bill__a" href="#box-four" onClick={this.handleTabClick.bind(this, "debate")}>HOUSE DEBATE</a></li>
-            <li className="bill__li"><a className="bill__a" href="#box-three" onClick={this.handleTabClick.bind(this, "text")}>FULL TEXT</a></li>
-            <li className="bill__li"><a className="bill__a" href="#box-two" onClick={this.handleTabClick.bind(this, "summary")}>SUMMARY</a></li>
-            <li className="bill__li"><a className="bill__a" href="#box-one" onClick={this.handleTabClick.bind(this, "title")}>TITLE</a></li>
+          <ul>
+            <li onClick={this.handleTabClick.bind(this, this.state.bill.title)}>Title</li>
+            <li onClick={this.handleTabClick.bind(this, this.state.bill.summary)}>Summary</li>
+            <li onClick={this.handleTabClick.bind(this, this.state.bill.text)}>Full text</li>
+            <li><a onClick={this.handleTabClick.bind(this, this.state.bill.houseDebate)}>House Debate</a></li>
           </ul>
 
       		<div className="box-wrap">
-        		<div id="box-one">
-        		  <p className="bill__p">{this.state.show === "title" ? this.state.bill.title : ""}</p>
-        		</div>
-        		
-        		<div id="box-two">
-        		  <p className="bill__p">{this.state.show === "summary" ? this.state.bill.summary : ""}</p>
-        		</div>
-        		
-        		<div id="box-three">
-        		  <p className="bill__p">{this.state.show === "text" ? this.state.bill.text : ""}</p>
-        		</div>
-        
-            <div id="box-four">
-        		  <p className="bill__p">{this.state.show === "debate" ? this.state.bill.houseDebate : ""}</p>
+        		<div id="box">
+        		  <p>{this.state.content}</p>
         		</div>
         	</div>
         	
         </div>
         
         <div className="voteCompare">
-          <div><p className="bill__p">**Whole Country**</p></div>
-          <div><p className="bill__p">**Your Neighbours**</p></div>
+          <div><p>**Whole Country**</p></div>
+          <div><p>**Your Neighbours**</p></div>
         </div>
 
         </div>
       
-        <div className="vottingButtons">
+        <div className="votingButtons">
         
           <div className="leftarrow">
               <img alt="left" src="images/arrowleft.png"></img>
