@@ -25,13 +25,11 @@ var Bills = React.createClass({
       filter: filter
     })
     .then(function(response) {
-      var updateData = that.state.billList;
-      updateData = response.data;
-      that.setState({billList: updateData});
+      that.setState({billList: response.data});
       console.log(that.state.billList, 'that.state.billList');
-      loading: false;
     })
     .catch(function(response) {
+      console.log(response, 'response');
     });
   },
   // handleOnClick: function(e) {
@@ -49,6 +47,7 @@ var Bills = React.createClass({
   //   });
   // },
   render: function() {
+    console.log(this.state.billList, 'that.state.billList');
     return (
 
       <div>
@@ -73,9 +72,9 @@ var Bills = React.createClass({
           <h2>My representative voted: repsVote</h2>
         </div>
         
-        {this.state.billList.map(function(bill){
+        {this.state.billList.map(function(bill, i){
           return (
-            <h1>bill list: {this.state.billList.billId}</h1>
+            <h1 key={bill.billId + i}>bill list: {bill.billId}</h1>
           );
         })}
       </div>
@@ -84,30 +83,3 @@ var Bills = React.createClass({
 });
 
 module.exports = withRouter(Bills);
-
-
-      //{
-      //   id: "**C-14**",
-      //   title: "**An Act to amend the Criminal Code and to make related amendments to other Acts (medical assistance in dying)**",
-      //   status: "**Bill Not Active**",
-      //   lastVote: "**Passed**",
-      //   proposedBy: "**Jody Wilson-Raybould**",
-      //   repsVote: "**Didn't vote**",
-      //   date: "**2016-05-12**"
-      // }, {
-      //   id: "**C-10**",
-      //   title: "**An Act to amend the Air Canada Public Participation Act and to provide for certain other measures**",
-      //   status: "**Active**",
-      //   lastVote: "**Failed*",
-      //   proposedBy: "**Marc Garneau **",
-      //   repsVote: "**Yes**",
-      //   date: "**2016-05-11**"
-      // }, {
-      //   id: "**C-6**",
-      //   title: "**An Act to amend the Citizenship Act and to make consequential amendments to another Act**",
-      //   status: "**Active**",
-      //   lastVote: "**Passed**",
-      //   proposedBy: "**John McCallum**",
-      //   repsVote: "**No**",
-      //   date: "**2016-05-02**"
-      // }

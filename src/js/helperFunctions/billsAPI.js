@@ -11,6 +11,8 @@ Proposed by
 
 var request = require("request");
 var findBillId = require("./findBillId.js")
+var requestPromise = require("request-promise");
+var q = require("q");
 
 /*At this url there are all the votes of the current session of the current parlement
 'http://api.openparliament.ca/votes/?date=&session=42-1&format=json';
@@ -56,12 +58,16 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
     var date = vote.date;
     var number = vote.number;
     var billId = findBillId.findBillId(vote.bill_url);
+    var billUrl = vote.bill_url;
+    
 
     var bill = {
       result: result,
       date: date,
       number: number,
-      billId: billId
+      billId: billId,
+      billUrl: billUrl,
+      billTitle: ""
     };
 
     //Not all the votes is about a bill, so we want to keep only the bills
@@ -73,16 +79,46 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
   callback(bills);
 }
 
+
+
+//https://openparliament.ca/bills/42-1/C-2/?format=json
+//bill_url: "/bills/42-1/C-14/",
 function getTitleOfBill(bills, callback) {
+  
+  
+  
+  var deferred  = q.defer();
   bills.forEach(function(bill){
-    var billTitle;
+    var billUrl = bill.billUrl
+    var add = `https://openparliament.ca${billUrl}?format=json`;
+    
+    var options = {
+    uri: add,
+    // qs: {
+    //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
+    // },
+    headers: {
+        'User-Agent': 'marie.eve.gauthier@hotmail.com'
+    },
+    json: true // Automatically parses the JSON string in the response
+};
+    requestPromise(options).then(function(r){
+        // var rawbill = JSON.parse(r.body);
+        var billName = r.body.name.en;
+      deferred.resolve(billName);
+    })
   })
+ 
+    return deferred.promise
 }
+
+
 
 function getUniqueBillsByDate(bills, callback) {
 
   var bin = {};
   var allBills = [];
+  console.log(bills);
   bills.filter(function(obj) {
     bin[obj.billId] = bin[obj.billId] || [];
     bin[obj.billId].push(obj);
@@ -114,3 +150,26 @@ module.exports = {
   fixLimitByPage: fixLimitByPage
 };
 
+fixLimitByPage(function(limit) {
+  getAllVotes(limit, function(arrOfVotes) {
+    getListofBillsFromVotes(arrOfVotes, function(bills) {
+     getTitleOfBill(bills).then(function(data){
+       console.log(data)
+     })
+    });
+  });
+});
+
+
+// fixLimitByPage(function(limit) {
+//   getAllVotes(limit, function(arrOfVotes) {
+//     getListofBillsFromVotes(arrOfVotes, function(bills) {
+//       getTitleOfBill(bills, function(billsWithTitle) {
+//         getUniqueBillsByDate(billsWithTitle, function(uniqueBillsByDate) {
+//           console.log(uniqueBillsByDate);
+//           //res.send(uniqueBillsByDate);
+//         });
+//       });
+//     });
+//   });
+// });
