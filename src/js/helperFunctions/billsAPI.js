@@ -8,14 +8,9 @@ Status tag - active/inactive
 Proposed by
 */
 
-var apiUrl = "http://api.openparliament.ca:8080";
-
-
 var request = require("request");
 var findBillId = require("./findBillId.js");
 var makeRequest = require("./openAPI.js");
-// var requestPromise = require("request-promise");
-// var q = require("q");
 
 
 /*At this url there are all the votes of the current session of the current parlement
