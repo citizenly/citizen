@@ -18,11 +18,11 @@ var InvalidPcMessage = React.createClass({
   },
   componentDidMount: function() {
     
-    event.on('show_message', this.handleInvalidPCMessage);
+    event.addListener('show_message', this.handleInvalidPCMessage);
   },
-  // componentWillUnmount: function() {
-  //   event.off('show_message', this.handleInvalidPCMessage);
-  //},
+  componentWillUnmount: function() {
+    event.removeListener('show_message', this.handleInvalidPCMessage);
+  },
   render: function() {
     
     var message = this.state.message;

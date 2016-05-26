@@ -47,7 +47,7 @@ onClick: function (e) {
                       <Link activeClassName="active" to="/rep">YOUR REPRESENTATIVE</Link>
                     </li>
                     <li>
-                      <Link activeClassName="active" to="/bills">WHAT WOULD YOU DO?</Link>
+                      <Link activeClassName="active" to="/bills/active">WHAT WOULD YOU DO?</Link>
                     </li>
                     <li>
                       <Link activeClassName="active" to="/feed">WHAT THEY'RE DOING</Link>
