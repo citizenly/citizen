@@ -63,7 +63,7 @@ app.post('/postfilter', function(req, res) {
         getAllVotes(limit, function(arrOfVotes) {
           getListofBillsFromVotes(arrOfVotes, function(bills) {
             getUniqueBillsByDate(bills, function(listOfUniqueBillsByDate) {
-              console.log(listOfUniqueBillsByDate);
+              //console.log(listOfUniqueBillsByDate);
               res.send(listOfUniqueBillsByDate);
             });
           });

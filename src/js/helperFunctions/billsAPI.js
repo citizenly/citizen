@@ -62,7 +62,7 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
       billTitle: ""
     };
 
-    //Not all the votes is about a bill, so we want to keep only the bills
+    //Not all the votes is about a bill, so if the billId is not null, we want to keep it, it's a bill
     if (bill.billId.length > 0) {
       bills.push(bill);
     }
@@ -70,7 +70,39 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
   callback(bills);
 }
 
+//http://api.openparliament.ca/bills/?session=42-1&limit=500
+function getTitleOfBill(callback) {
+  var allBills = "/bills/?session=42-1&limit=500";
+  makeRequest(allBills, function(err, bills){
+    if(err){
+      return new Error("Oops.. we can't find the bills for the moment. Please try again!")
+    }
+    else {
+      var listofBills =
+      bills.forEach(function(bill){
+        var title = bill.name.en;
+        return (title);
+      });
+      callback(title);
+    }
+    console.log(bills);
+    callback(bills);
+  })
+}
 
+getTitleOfBill(function(bills){
+  console.log(typeof bills);
+})
+
+/*
+function getAllVotes(limit, callback) {
+  var allVotes = `votes/?date=&session=42-1&limit=${limit}&format=json`;
+  makeRequest(allVotes, function(err, res){
+    var arrOfVotes = res.objects;
+    callback(arrOfVotes);
+  });
+}
+*/
 
 // TO FIX
 // //https://openparliament.ca/bills/42-1/C-2/?format=json
@@ -141,15 +173,15 @@ module.exports = {
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
-fixLimitByPage(function(limit) {
-  getAllVotes(limit, function(arrOfVotes) {
-    getListofBillsFromVotes(arrOfVotes, function(bills) {
-      getUniqueBillsByDate(bills, function(uniqueBillsByDate) {
-        console.log(uniqueBillsByDate);
-      });
-    });
-  });
-});
+// fixLimitByPage(function(limit) {
+//   getAllVotes(limit, function(arrOfVotes) {
+//     getListofBillsFromVotes(arrOfVotes, function(bills) {
+//       getUniqueBillsByDate(bills, function(uniqueBillsByDate) {
+//         console.log(uniqueBillsByDate);
+//       });
+//     });
+//   });
+// });
 
 
 
