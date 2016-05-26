@@ -69,7 +69,7 @@ var Bill = React.createClass({
         </div>
 
         <div className="billTabs">
-          <ul className="tabs group">
+          <ul className="bill__u">
             <li className="bill__li"><a className="bill__a" href="#box-four" onClick={this.handleTabClick.bind(this, "debate")}>HOUSE DEBATE</a></li>
             <li className="bill__li"><a className="bill__a" href="#box-three" onClick={this.handleTabClick.bind(this, "text")}>FULL TEXT</a></li>
             <li className="bill__li"><a className="bill__a" href="#box-two" onClick={this.handleTabClick.bind(this, "summary")}>SUMMARY</a></li>
