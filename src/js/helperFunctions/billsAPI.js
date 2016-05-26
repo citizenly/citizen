@@ -8,6 +8,8 @@ Status tag - active/inactive
 Proposed by
 */
 
+var apiUrl = "http://api.openparliament.ca:8080";
+
 
 var request = require("request");
 var findBillId = require("./findBillId.js")
@@ -22,7 +24,7 @@ to the highest vote's number
 */
 
 function fixLimitByPage(callback) {
-  var add = 'http://api.openparliament.ca/votes/?session=42-1&limit=1&format=json';
+  var add = 'http://api.openparliament.ca:8080/votes/?session=42-1&limit=1&format=json';
   request(add, function(err, result){
     if (err) {
       callback(err);
@@ -38,7 +40,7 @@ function fixLimitByPage(callback) {
 
 //Calling this function with a callback, we recive an arrry of votes
 function getAllVotes(limit, callback) {
-  var allVotes = `http://api.openparliament.ca/votes/?date=&session=42-1&limit=${limit}&format=json`;
+  var allVotes = `http://api.openparliament.ca:8080/votes/?date=&session=42-1&limit=${limit}&format=json`;
   request(allVotes, function(err, result) {
     if (err) {
       callback(err);
@@ -90,7 +92,7 @@ function getTitleOfBill(bills, callback) {
   var deferred  = q.defer();
   bills.forEach(function(bill){
     var billUrl = bill.billUrl
-    var add = `https://openparliament.ca${billUrl}?format=json`;
+    var add = `http://api.openparliament.ca:8080${billUrl}?format=json`;
     
     var options = {
     uri: add,
