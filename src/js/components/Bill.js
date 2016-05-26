@@ -4,7 +4,7 @@ var React = require('react');
 var axios = require('axios');
 
 
-var Bills = React.createClass({
+var Bill = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
@@ -21,23 +21,23 @@ var Bills = React.createClass({
       },
     };
   },
-  componentDidMount: function() {
-    var that = this;
-    // get bill info using id passed from previous screen
-    var id = this.props.params.id;
-    axios.post('/billinfoget', {
-      id: id
-    })
-    // update this.state with the bill object
-    .then(function(response) {
-      var updateData = that.state.bill;
-      updateData = response.data;
-       that.setState({bill: updateData});
-    })
-    .catch(function(response) {
-      console.log(response);
-    });
-  },
+  // componentDidMount: function() {
+  //   var that = this;
+  //   // get bill info using id passed from previous screen
+  //   var id = this.props.params.id;
+  //   axios.post('/billinfoget', {
+  //     id: id
+  //   })
+  //   // update this.state with the bill object
+  //   .then(function(response) {
+  //     var updateData = that.state.bill;
+  //     updateData = response.data;
+  //     that.setState({bill: updateData});
+  //   })
+  //   .catch(function(response) {
+  //     console.log(response);
+  //   });
+  // },
   render: function() {
     return (
 
@@ -120,4 +120,4 @@ var Bills = React.createClass({
   }
 });
 
-module.exports = Bills;
+module.exports = Bill;

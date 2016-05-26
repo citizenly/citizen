@@ -1,14 +1,11 @@
 var React = require('react');
-//var Link = require('react-router').Link;
-import {Button, Icon, Input, Row, Col} from 'react-materialize';
 var axios = require('axios');
 var formattedPc = require("../helperFunctions/validatePc.js");
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 var event = require('../events');
 var Message = require('./InvalidPcMessage');
 
 
-// home "page"
 var Home = React.createClass({
   
   getInitialState: function () {
@@ -18,6 +15,7 @@ var Home = React.createClass({
   },
   //we receive the postal code, we call formattedPc to be sure we have the valid format, we do an ajax call to the bakcend to fetch all the data of the MP and we set the postal code
   handleSubmit: function(e) {
+
     e.preventDefault();
     var that = this;
     var pc = this.refs.postalcode.value;
@@ -29,7 +27,8 @@ var Home = React.createClass({
     else {
       axios.post('/repnameget', {
         postalcode: userPostalCode
-      }).then(function(response) {
+      })
+      .then(function(response) {
         var path = '/rep/' + response.data;
         that.props.router.push(path);
       })
@@ -44,30 +43,29 @@ var Home = React.createClass({
     <div className="main">
   
       <div className= "citizenlogo"> 
-         <img src="images/citizenlogo.png"></img>
+        <img alt="citizen app logo" src="images/citizenlogo.png"></img>
       </div>
       
       <div className="content">
         <div>
-            <p>In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
+          <p>In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
         </div>
         <div>
-            <p className="specialh1">WHO'S REPRESENTING ME?</p>
+          <h1>WHO'S REPRESENTING ME?</h1>
         </div>
       </div>
        
-        <form onSubmit={this.handleSubmit}>
-        <div>
-            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
-            <button className="postcodebutton" type="submit">FIND OUT</button>
-
-          </div>
-          <Message/>
-        </form>
-  
-        <div> 
-            <img className= "responsive-img" src="images/canadamap.png"></img>
+      <form onSubmit={this.handleSubmit}>
+        <div className="postcodeinputandentry">
+          <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
+          <button className="postcodebutton" type="submit">FIND OUT</button>
         </div>
+        <Message/>
+      </form>
+  
+      <div className= "canadamap"> 
+        <img alt="canada map" src="images/canadamap.png"></img>
+      </div>
         
       </div>
   
