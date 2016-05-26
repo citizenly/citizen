@@ -37,26 +37,26 @@ onClick: function (e) {
                     <div className="line"></div>
                   </a>
                   <ul className={"main__ul clearfix menu " + this.state.menutoggle} >
-                    <li>
-                      <IndexLink activeClassName="active" to="/">HOME</IndexLink>
+                    <li className={"main__li"}>
+                      <IndexLink activeClassName="active" to="/">Home</IndexLink>
                     </li>
-                    <li>
-                      <Link activeClassName="active" to="/login">LOGIN</Link>
+                    <li className={"main__li"}>
+                      <Link activeClassName="active" to="/login">Login</Link>
                     </li>
-                    <li>
-                      <Link activeClassName="active" to="/rep">YOUR REPRESENTATIVE</Link>
+                    <li className={"main__li"}>
+                      <Link activeClassName="active" to="/rep">Your Representative</Link>
                     </li>
-                    <li>
-                      <Link activeClassName="active" to="/bills">WHAT WOULD YOU DO?</Link>
+                    <li className={"main__li"}>
+                      <Link activeClassName="active" to="/bills">What would you do?</Link>
                     </li>
-                    <li>
-                      <Link activeClassName="active" to="/feed">WHAT THEY'RE DOING</Link>
+                    <li className={"main__li"}>
+                      <Link activeClassName="active" to="/feed">What they're doing</Link>
                     </li>
-                    <li>
-                      <Link activeClassName="active" to="/petitions">PETITIONS</Link>
+                    <li className={"main__li"}>
+                      <Link activeClassName="active" to="/petitions">Petitions</Link>
                     </li>
-                    <li>
-                      <Link activeClassName="active" to="/compare">COMPARE</Link>
+                    <li className={"main__li"}>
+                      <Link activeClassName="active" to="/compare">Compare</Link>
                     </li>
                   </ul>
               </nav>

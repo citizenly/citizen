@@ -1,24 +1,24 @@
-.whatwouldyoudo{
+.petitionsheading{
     font-family: Oswald, sans-serif;
     font-weight: 400;
     text-align: center;
     color: white;
-    background-color: #B095C4;
+    background-color: #44A487;
     padding: 10px, 10px, 10px, 10px;
     text-transform: uppercase;
 }
 
-.billandid {
+.petitionanname {
      display: flex;
 }
 
-.billTags {
+.petitionTags {
     display: flex;
     padding: 3px, 3px, 3px, 3px;
 
 }
 
-.billTag {
+.petitionTag {
     font-family: Oswald, sans-serif;
     font-weight: 400;
     font-size: 0.5em;
@@ -27,28 +27,28 @@
     text-transform: uppercase;
 }
 
-.billTabs {
+.petitionTabs {
 
 }
 
-.bill__p {
+.petition__p {
   color: white; 
   text-align: justify;
   margin: 0px 20px 20px 20px;
   
 }
 
-.bill__u {
+.petition__u {
     display: flex;
     flex-direction: row;
 }
 
-.bill__li {
+.petition__li {
     display: inline; 
 
 }
 
-.bill__a {
+.petition__a {
     color: white; 
     float: left; 
     display: block; 
@@ -61,30 +61,31 @@
 }
 
 
-.bill__a:hover {
+.petition__a:hover {
     background: #ccc; 
 
 }
 
 
-.box-wrap {
+.petition-wrap {
     min-height: 70px; 
     font-family: Arimo;
     background-color: rgba(0,0,0,0.5);
 }
     
 
-.votingButtons {
+
+.votingHands {
     display: flex;
     justify-content: space-around;
 }
 
-.redbutton {
+.redHand {
     padding: 10px, 10px, 10px, 10px;
     max-width: 100px;
 }
 
-.greenbutton {
+.greenHand {
     padding: 10px, 10px, 10px, 10px;
     max-width: 100px;
 }
