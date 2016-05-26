@@ -40,81 +40,8 @@ var Bills = React.createClass({
   },
   render: function() {
     return (
-
       <div>
-        <div className="billInfo">
-          <h3>What would you do?</h3>
-          <h1>Bills</h1>
-          <div className="billTags">
-            <ul>
-              <li>{this.state.bill.status}</li>
-              <li>{this.state.bill.lastVote}</li>
-              <li>{this.state.bill.proposedBy}</li>
-            </ul>
-          </div>
-          <h2>{this.state.bill.id}</h2>
-          <h2>My representative voted: {this.state.bill.repsVote}</h2>
-        </div>
-
-        <div className="billTabs">
-          <ul className="tabs group">
-            <li><a href="#box-one">TITLE</a></li>
-            <li><a href="#box-two">SUMMARY</a></li>
-            <li><a href="#box-three">FULL TEXT</a></li>
-            <li><a href="#box-four">HOUSE DEBATE</a></li>
-          </ul>
-
-      		<div className="box-wrap">
-        		<div id="box-one">
-        		  <h3>{this.state.bill.title}</h3>
-        		</div>
-        		
-        		<div id="box-two">
-        		  <h3>{this.state.bill.summary}</h3>
-        		</div>
-        		
-        		<div id="box-three">
-        		  <h3>{this.state.bill.text}</h3>
-        		</div>
-        
-            <div id="box-four">
-        		  <h3>{this.state.bill.houseDebate}</h3>
-        		</div>
-        	</div>
-        	
-        </div>
-        
-        <div className="voteCompare">
-          <div><p>**Whole Country**</p></div>
-          <div><p>**Your Neighbours**</p></div>
-        </div>
-
-        <div className="vottingButtons">
-          <div>
-            <div className="arrow">
-              <p>arrow</p>
-            </div>
-          </div>
-          
-          <div>
-            <div>
-        	  	<img className= "responsive-img" src="images/red button.png"></img>
-            </div>
-          </div>
-          
-          <div>
-            <div>
-          	 	<img className= "responsive-img" src="images/green button.png"></img>
-            </div>
-          </div>
-          
-          <div>
-            <div className="arrow">
-        			<p>arrow</p>
-            </div>
-          </div>
-          
-        </div>
+        <h1>List of bills</h1>
       </div>
     );
   }
