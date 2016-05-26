@@ -49,7 +49,6 @@ var Bills = React.createClass({
   render: function() {
     console.log(this.state.billList, 'that.state.billList');
     return (
-
       <div>
         <div className="billInfo">
           <h3>What would you do?</h3>
