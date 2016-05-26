@@ -5,9 +5,9 @@ var Link = require('react-router').Link;
 var Petitions = React.createClass({
   render: function() {
     return (
-      <div className="main peititionsPage">
+      <div className="main petitionsPage">
         <div>
-          <h1>Petitions Landing Page</h1>
+          <h1>List of petitions</h1>
         </div>
       </div>
     );

@@ -1,0 +1,113 @@
+.petitionsheading{
+    font-family: Oswald, sans-serif;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    background-color: #44A487;
+    padding: 10px, 10px, 10px, 10px;
+    text-transform: uppercase;
+}
+
+.petitionanname {
+     display: flex;
+}
+
+.petitionTags {
+    display: flex;
+    padding: 3px, 3px, 3px, 3px;
+
+}
+
+.petitionTag {
+    font-family: Oswald, sans-serif;
+    font-weight: 400;
+    font-size: 0.5em;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    text-transform: uppercase;
+}
+
+.petitionTabs {
+
+}
+
+.petition__p {
+  color: white; 
+  text-align: justify;
+  margin: 0px 20px 20px 20px;
+  
+}
+
+.petition__u {
+    display: flex;
+    flex-direction: row;
+}
+
+.petition__li {
+    display: inline; 
+
+}
+
+.petition__a {
+    color: white; 
+    float: left; 
+    display: block; 
+    padding: 4px 10px; 
+    margin-left: -1px; 
+    position: relative; 
+    left: 1px; 
+    background: rgba(0,0,0,0.5);
+    text-decoration: none;
+}
+
+
+.petition__a:hover {
+    background: #ccc; 
+
+}
+
+
+.petition-wrap {
+    min-height: 70px; 
+    font-family: Arimo;
+    background-color: rgba(0,0,0,0.5);
+}
+    
+
+
+.votingHands {
+    display: flex;
+    justify-content: space-around;
+}
+
+.redHand {
+    padding: 10px, 10px, 10px, 10px;
+    max-width: 100px;
+}
+
+.greenHand {
+    padding: 10px, 10px, 10px, 10px;
+    max-width: 100px;
+}
+
+.share {
+    max-width: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.leftarrow {
+    max-width: 30px;
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-top: 20px;
+    justify-content: bottom;
+}
+
+.rightarrow {
+    max-width: 30px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 20px;
+    justify-content: bottom;
+}
