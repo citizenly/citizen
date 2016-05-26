@@ -14,20 +14,39 @@
     max-width: 70%;
 }
 
+.rep-text {
+    margin-left: 20px;
+}
+
 .rep-stats-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    text-align: center;
     width: 100%;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 0.5px solid black;
+    border-bottom: 0.5px solid black;
 }
 
 .agreement {
     flex-basis: 100%;
+    margin-bottom: 20px;
 }
 
-.inhervoting {
+.intheirvoting {
     flex-basis: 100%;
+    margin-top: 20px;
+}
+
+.you {
+}
+
+.neighbours {
 }
 
 .bottomMenu-item {
@@ -38,8 +57,9 @@
     height: 20vw;
     font-size: 4vw;
     text-align: left;
+    padding-left: 8px;
+    padding-top: 8px;
 }
-
 
 
 .bottomMenu-item a {
