@@ -22,26 +22,23 @@ var Bill = React.createClass({
       },
     };
   },
-  componentDidMount: function() {
-    var that = this;
-    // get bill info using id passed from previous screen
-    var id = this.props.params.id;
-    axios.post('/billinfoget', {
-      id: id
-    })
-    // update this.state with the bill object
-    .then(function(response) {
-      var updateData = that.state.bill;
-      updateData = response.data;
-       that.setState({bill: updateData});
-    })
-    .catch(function(response) {
-      console.log(response);
-    });
-  },
-  handleTabClick: function(data){
-    this.setState({show: data})
-  },
+  // componentDidMount: function() {
+  //   var that = this;
+  //   // get bill info using id passed from previous screen
+  //   var id = this.props.params.id;
+  //   axios.post('/billinfoget', {
+  //     id: id
+  //   })
+  //   // update this.state with the bill object
+  //   .then(function(response) {
+  //     var updateData = that.state.bill;
+  //     updateData = response.data;
+  //     that.setState({bill: updateData});
+  //   })
+  //   .catch(function(response) {
+  //     console.log(response);
+  //   });
+  // },
   render: function() {
     return (
  

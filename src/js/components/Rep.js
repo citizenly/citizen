@@ -30,7 +30,7 @@ var Rep = React.createClass({
     .then(function(response) {
       var updateData = that.state.rep;
       updateData = response.data;
-       that.setState({rep: updateData});
+      that.setState({rep: updateData});
     })
     .catch(function(response) {
     });
