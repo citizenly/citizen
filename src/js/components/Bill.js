@@ -85,8 +85,8 @@ var Bill = React.createClass({
             </div>
           </div>
           <div className="myRepsVote">
-            <h5>My representative voted:</h5>
-            <div className="billTag">{this.state.bill.repsVote}</div>
+            <div>My representative voted:</div>
+            <div>{this.state.bill.repsVote}</div>
           </div>
         </div>
 

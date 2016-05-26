@@ -81,6 +81,11 @@ var Petition = React.createClass({
             </div>
           </div>
         </div>
+        
+        <div className="daysLeftAndNumber">
+            <div>{this.state.petition.daysLeft}</div>
+            <div>Days Left</div>
+          </div>
 
         <div className="petitionTabs">
           <ul>
@@ -96,11 +101,6 @@ var Petition = React.createClass({
         	</div>
         	
         </div>
-        
-            <div className="daysLeftAndNumber">
-                <h2>{this.state.petition.daysLeft}</h2>
-                <h3>Days Left</h3>             
-            </div>
             
         <div className="pollCompare">
           <div><p>**Whole Country**</p></div>

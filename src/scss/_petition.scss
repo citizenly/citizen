@@ -18,10 +18,15 @@
 
 .daysLeftAndNumber{
      display: flex;
-     flex-direction: column;
+     font-family: Oswald, sans-serif;
+     font-weight: 400;
+     font-size: 0.8em;
      align-items: center;
      justify-content: center;
-     margin-top: 30px;
+     padding-top: 25px;
+     padding-bottom: 25px;
+     text-transform: uppercase;
+     
 }
 
 
