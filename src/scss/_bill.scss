@@ -20,8 +20,8 @@
      display: flex;
      align-items: center;
      justify-content: center;
-     padding-top: 20px;
-     padding-bottom: 20px;
+     padding-top: 25px;
+     padding-bottom: 25px;
 }
 
 
@@ -39,6 +39,12 @@
 }
 
 .billTabs {
+    
+    .active {
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    }
+
     ul{
         display: flex;
         flex-direction: row;
@@ -55,10 +61,12 @@
         flex-grow: 1;
         text-align: left;
         color: black;
+        cursor: pointer;
     }
     
     li:hover, li:focus{
-        background: #ccc; 
+        background: rgba(0,0,0,0.6); 
+        color: white;
     }
 
 }
@@ -66,8 +74,7 @@
 .billTabs p, .voteCompare p {
   color: white; 
   text-align: justify;
-  margin: 0px 20px 20px 20px;
-  
+  padding: 10px;
 }
 
 .box-wrap {
@@ -104,7 +111,3 @@
 }
 
 
-.active {
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-}

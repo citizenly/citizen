@@ -39,20 +39,26 @@ var Bill = React.createClass({
        that.setState({bill: updateData});
     })
     .catch(function(response) {
-      console.log(response);
     });
     this.setState({content: this.state.bill.title});
   },
   handleTabClick: function(data){
-    var contentText;
-    switch(data) {
-      case 1: contentText = this.state.bill.title;
-      case 2: contentText = this.state.bill.summary;
-      case 3: contentText = this.state.bill.text;
-      case 4: contentText = this.state.bill.houseDebate;
+    
+    if(data===1) {
+      this.setState({content: this.state.bill.title});
     }
-    this.setState({content: contentText});
-    $("#tab-1").addClass("active");
+    else if(data===2) {
+      this.setState({content: this.state.bill.summary});
+    }
+    else if(data===3) {
+      this.setState({content: this.state.bill.text});
+    }
+    else if(data===4) {
+      this.setState({content: this.state.bill.houseDebate});
+    }
+    
+    $(".billTabs li").removeClass("active");
+    $("#tab-" + data).addClass("active");
     
   },
 
@@ -87,9 +93,9 @@ var Bill = React.createClass({
         <div className="billTabs">
           <ul>
             <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
-            <li id="tab-2" onClick={this.handleTabClick.bind(this, this.state.bill.summary)}>Summary</li>
-            <li id="tab-3" onClick={this.handleTabClick.bind(this, this.state.bill.text)}>Full text</li>
-            <li id="tab-4" onClick={this.handleTabClick.bind(this, this.state.bill.houseDebate)}>House Debate</li>
+            <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
+            <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
+            <li id="tab-4" onClick={this.handleTabClick.bind(this, 4)}>House Debate</li>
           </ul>
 
       		<div className="box-wrap">
