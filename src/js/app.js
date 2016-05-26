@@ -48,7 +48,7 @@ var routes = (
       <Route path="petitions" component={Petitions}/>
       <Route path="petition" component={Petition}/>
       <Route path="feed" component={Feed}/>
-      <Route path="bills" component={Bills}/>
+      <Route path="bills/:filter" component={Bills}/>
       <Route path="bill" component={Bill}/>
       <Route path="login" component={Login}/>
       <Route path="*" component={NotFound}/>

@@ -29,49 +29,53 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.main__ul {
-  font-family: Oswald, sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  list-style: none;
-  max-width: 600px;
-  margin: 0 auto;
-  position: relative;
-  left: -275px;
-}
 
-
-.main__nav {
+nav {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: #f5f5f5;
+  
+    ul {
+    font-family: Oswald, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    list-style: none;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    left: -275px;
+    }
+  
+    a {
+    display: block;
+    padding: 10px;
+    padding-right: 0 !important; /* important overrides media queries */
+    font-size: 13px;
+    font-weight: 400;
+    text-align: right;
+    color: #aaa;
+    cursor: pointer;
+    text-decoration: none;
+    }
+  
+    a:hover, a:focus {
+    color: black;
+    }
+  
+    li {
+    float: left;
+    width: 20%;
+    border-right: 1px solid #ddd;
+    }
+  
+    li:last-child {
+    border-right: none;
+  }
+
 }
 
-.main__ul a {
-  display: block;
-  padding: 10px;
-  padding-right: 0 !important; /* important overrides media queries */
-  font-size: 13px;
-  font-weight: 400;
-  text-align: right;
-  color: #aaa;
-  cursor: pointer;
-  text-decoration: none;
-}
 
-ul a:hover {
-  color: black;
-}
 
-nav li {
-  float: left;
-  width: 20%;
-  border-right: 1px solid #ddd;
-}
-
-nav li:last-child {
-  border-right: none;
-}
 
 @media only screen and (max-width: 767px) {
   
@@ -85,12 +89,18 @@ nav li:last-child {
     border-bottom: none;
     background-color: rgba(0, 0, 0, 0);
     width: 65px;
+    
+      ul {
+      border-left: none;
+      border-right: none;
+    }
+    
+    li {
+    width: 100%;
+    border-right: none;
+    }
 }
 
-nav ul {
-    border-left: none;
-    border-right: none;
-}
 
   .line {
     border-bottom: 4px solid #bbb;
@@ -102,18 +112,13 @@ nav ul {
     margin-bottom: 0;
   }
 
-  nav li {
-    width: 100%;
-    border-right: none;
-  }
-  
+
   .menu {
     height: 0;
     overflow: hidden;
     transition: height 0.3s linear;
     width: 325px;
   }
-  
   
   
   .slide-down {

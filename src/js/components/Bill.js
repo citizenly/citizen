@@ -2,6 +2,7 @@ var React = require('react');
 //var Link = require('react-router').Link;
 // required for ajax calls
 var axios = require('axios');
+var $ = require('jquery');
 
 
 var Bill = React.createClass({
@@ -23,6 +24,7 @@ var Bill = React.createClass({
       content: "",
     };
   },
+
   componentDidMount: function() {
     var that = this;
     // get bill info using id passed from previous screen
@@ -42,8 +44,18 @@ var Bill = React.createClass({
     this.setState({content: this.state.bill.title});
   },
   handleTabClick: function(data){
-    this.setState({content: data})
+    var contentText;
+    switch(data) {
+      case 1: contentText = this.state.bill.title;
+      case 2: contentText = this.state.bill.summary;
+      case 3: contentText = this.state.bill.text;
+      case 4: contentText = this.state.bill.houseDebate;
+    }
+    this.setState({content: contentText});
+    $("#tab-1").addClass("active");
+    
   },
+
   render: function() {
     return (
  
@@ -61,21 +73,23 @@ var Bill = React.createClass({
             </div>
             
             <div className="billTags">
-                  <div className="billTag">**status**{this.state.bill.status}</div>
-                  <div className="billTag">**lastvote**{this.state.bill.lastVote}</div>
-                  <div className="billTag">**proposedby**{this.state.bill.proposedBy}</div>
+                  <div>**status**{this.state.bill.status}</div>
+                  <div>**lastvote**{this.state.bill.lastVote}</div>
+                  <div>**proposedby**{this.state.bill.proposedBy}</div>
             </div>
           </div>
+          <div className="myRepsVote">
             <h5>My representative voted:</h5>
             <div className="billTag">{this.state.bill.repsVote}</div>
+          </div>
         </div>
 
         <div className="billTabs">
           <ul>
-            <li onClick={this.handleTabClick.bind(this, this.state.bill.title)}>Title</li>
-            <li onClick={this.handleTabClick.bind(this, this.state.bill.summary)}>Summary</li>
-            <li onClick={this.handleTabClick.bind(this, this.state.bill.text)}>Full text</li>
-            <li><a onClick={this.handleTabClick.bind(this, this.state.bill.houseDebate)}>House Debate</a></li>
+            <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
+            <li id="tab-2" onClick={this.handleTabClick.bind(this, this.state.bill.summary)}>Summary</li>
+            <li id="tab-3" onClick={this.handleTabClick.bind(this, this.state.bill.text)}>Full text</li>
+            <li id="tab-4" onClick={this.handleTabClick.bind(this, this.state.bill.houseDebate)}>House Debate</li>
           </ul>
 
       		<div className="box-wrap">
