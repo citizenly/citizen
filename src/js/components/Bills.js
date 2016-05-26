@@ -73,10 +73,11 @@ var Bills = React.createClass({
           <h2>My representative voted: repsVote</h2>
         </div>
         
-        {this.state.billList.map(function(pizza){
-                  return (
-          <h1>bill list: {this.state.billList}</h1>
-
+        {this.state.billList.map(function(bill){
+          return (
+            <h1>bill list: {this.state.billList.billId}</h1>
+          );
+        })}
       </div>
     );
   }

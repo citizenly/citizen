@@ -75,7 +75,7 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
 
 function getTitleOfBill(bills, callback) {
   bills.forEach(function(bill){
-    var 
+    var billTitle;
   })
 }
 
