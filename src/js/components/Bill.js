@@ -79,9 +79,9 @@ var Bill = React.createClass({
             </div>
             
             <div className="billTags">
-                  <div>**status**{this.state.bill.status}</div>
-                  <div>**lastvote**{this.state.bill.lastVote}</div>
-                  <div>**proposedby**{this.state.bill.proposedBy}</div>
+                  <div>{this.state.bill.status}</div>
+                  <div>{this.state.bill.lastVote}</div>
+                  <div>{this.state.bill.proposedBy}</div>
             </div>
           </div>
           <div className="myRepsVote">
