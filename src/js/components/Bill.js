@@ -9,7 +9,6 @@ var Bill = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
-      show: "title",
       bill: {
         id: "**C-14**",
         title: "**An Act to amend the Criminal Code and to make related amendments to other Acts (medical assistance in dying)**",
@@ -22,8 +21,11 @@ var Bill = React.createClass({
         date: "**2016-05-12**"
       },
       content: "",
+      vote: 0,
     };
+    
   },
+
 
   componentDidMount: function() {
     var that = this;
@@ -42,6 +44,11 @@ var Bill = React.createClass({
     });
     this.setState({content: this.state.bill.title});
   },
+  
+  /*handleState: function (){
+    Hey Alex! if you could do the function that updates the votes to +1 -1 here, and that relates to the switching between pressed and unpressed buttons, that'd be luverlee :)
+  },*/
+
   handleTabClick: function(data){
     
     if(data===1) {
@@ -60,6 +67,12 @@ var Bill = React.createClass({
     $(".billTabs li").removeClass("active");
     $("#tab-" + data).addClass("active");
     
+  },
+  
+  
+  updateVote: function() {
+    //set vote in state
+    //add pressed class to appropriate button
   },
 
   render: function() {
@@ -120,16 +133,20 @@ var Bill = React.createClass({
           </div>
                   
           <div className= "redbutton">
-              <img alt="no" src="images/red button.png"></img>
           </div>
+          
+          {/*<div className= "redbutton" onClick={this.handleButtonClick.bind(this, 1)}>
+          </div>*/}
           
            <div className= "share">
               <img alt="share" src="images/twitter-logo.jpg"></img>
           </div>
           
           <div className= "greenbutton">
-              <img alt="yes" src="images/green button.png"></img>
           </div>
+          
+          {/*<div className= "greenbutton" onClick={this.handleButtonClick.bind(this, 1)}>
+          </div>*/}
           
           <div className="rightarrow">
               <img alt="right" src="images/arrowright.png"></img>

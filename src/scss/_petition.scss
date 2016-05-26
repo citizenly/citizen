@@ -93,6 +93,9 @@
 }
     
 
+
+
+
 .pollingButtons {
     display: flex;
     justify-content: space-around;
@@ -104,9 +107,31 @@
     //bottom: 10px; //align it to the bottom and push it up 1px
 
     
-    .redhand, .greenhand {
+    .redglove, .greenglove {
         padding: 10px;
         max-width: 100px;
+        width: 50%;
+        height: 100px;
+        background: no-repeat center;
+        background-size: contain;
+    }
+    
+    .greenglove {
+        background-image: url("../../images/green glove.png");
+        margin-bottom: 35px;
+    }
+    
+    .redglove {
+        background-image: url("../../images/red glove.png");
+        margin-bottom: -20px;
+    }
+    
+    .greenglove-clicked {
+        background-image: url("../../images/green glove pressed.png");
+    }
+    
+    .redglove-clicked {
+    background-image: url("../../images/red glove pressed.png")
     }
     
     .share {
@@ -118,5 +143,4 @@
         max-width: 30px;
     }
 }
-
 

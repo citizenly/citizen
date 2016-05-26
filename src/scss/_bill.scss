@@ -105,6 +105,27 @@
     .redbutton, .greenbutton {
         padding: 10px;
         max-width: 100px;
+        width: 50%;
+        height: 100px;
+        background: no-repeat center;
+        background-size: contain;
+    }
+    
+    
+    .greenbutton {
+        background-image: url("../../images/green button.png");
+    }
+    
+    .redbutton {
+        background-image: url("../../images/red button.png");
+    }
+    
+    .greenButton-clicked {
+        background-image: url("../../images/green button pressed.png");
+    }
+    
+    .redButton-clicked {
+    background-image: url("../../images/red button pressed.png")
     }
     
     .share {

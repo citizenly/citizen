@@ -58,6 +58,48 @@ var Petition = React.createClass({
     
   },
 
+
+sharingMenu: function() {
+  'use strict';
+  
+  var isOpen  = true;
+  var button  = document.querySelector('#expand-navigation');
+  var wrapper = document.querySelector('.wrapper');
+  var overlay = document.querySelector('.overlay');
+  
+  button.addEventListener('click', navigationHandler);
+  document.addEventListener('click', closeNavigation);
+  
+  function navigationHandler(event) {
+    if (event == null) {
+      event = window.event;
+    }
+    
+    event.stopPropagation();
+    
+    !isOpen ? openNavigation() : closeNavigation();
+  }
+  
+  function openNavigation() {
+    isOpen = true;
+    
+    button.innerHTML  = '-';
+    wrapper.className = 'wrapper opened';
+    overlay.className = 'overlay on-overlay';
+  }
+
+  function closeNavigation() {
+    isOpen = false;
+    
+    button.innerHTML = '+';
+    wrapper.className = 'wrapper';
+    overlay.className = 'overlay';
+  }  
+},
+
+
+
+
   render: function() {
     return (
  
@@ -115,16 +157,14 @@ var Petition = React.createClass({
               <img alt="left" src="images/arrowleft.png"></img>
           </div>
                   
-          <div className= "redhand">
-              <img alt="no" src="images/red button.png"></img>
+          <div className= "redglove">
           </div>
           
            <div className= "share">
               <img alt="share" src="images/twitter-logo.jpg"></img>
           </div>
           
-          <div className= "greenhand">
-              <img alt="yes" src="images/green button.png"></img>
+          <div className= "greenglove">
           </div>
           
           <div className="rightarrow">
