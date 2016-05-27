@@ -64,8 +64,7 @@
         font-weight: 400;
         text-transform: uppercase;
         background: white;
-        padding: 4px 10px;
-        flex-grow: 1;
+        padding: 0px 15px;
         text-align: left;
         color: black;
         cursor: pointer;
@@ -98,6 +97,7 @@
     background: white;
     width: 100%;
     position: fixed;
+    cursor: pointer;
     bottom: 0; //align it to the bottom and dont push it up
     //bottom: 10px; //align it to the bottom and push it up 1px
 
