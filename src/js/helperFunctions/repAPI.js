@@ -3,32 +3,34 @@ Request URLs must include the postal code in uppercase letters with no spaces.UR
 var request = require("request");
 var unaccented = require("./unaccented.js");
 var percentageVotes = require("./percentageVotes.js");
+var makeRequest = require("./openAPI.js");
 
 
 //The user inputs their postal code.  With this data, we request the name of their MP and format it as name-surname
 function getRepName (postalCode, callback) {
-//At this point, we have a valid postal code, so we look for the name of the MP
-// this is probably asynchronous, so the handleResult func requires a callback
-var findMPbyPC = `http://represent.opennorth.ca/postcodes/${postalCode}/?sets=federal-electoral-districts`;
-request(findMPbyPC, function(err, result) {
-  if (err){
-    return "Sorry, this is not a valid canadian postal";
-  }
-  else {
-    var mpName = JSON.parse(result.body);
-    var name = mpName.representatives_centroid[0].name;
-    //we have to format the name to be sure that is all lowercase, without accent and with a dash between firstname and lastname
-    var nameFormatted = unaccented.unaccented(name); 
-    callback(nameFormatted);
-  }
-});
+  //At this point, we have a valid postal code, so we look for the name of the MP
+  // this is probably asynchronous, so the handleResult func requires a callback
+  var findMPbyPC = `http://represent.opennorth.ca/postcodes/${postalCode}/?sets=federal-electoral-districts`;
+  request(findMPbyPC, function(err, result) {
+    if (err){
+      return "Sorry, this is not a valid canadian postal";
+    }
+    else {
+      var mpName = JSON.parse(result.body);
+      var name = mpName.representatives_centroid[0].name;
+      //we have to format the name to be sure that is all lowercase, without accent and with a dash between firstname and lastname
+      var nameFormatted = unaccented.unaccented(name); 
+      callback(nameFormatted);
+    }
+  });
 }
 
 function getRepInfo(nameFormatted, callback) {
   //with the name of MP formatted, we fetch his data
-  var findMP = `https://api.openparliament.ca/politicians/${nameFormatted}/?format=json`;
-  request(findMP, function(err, result) {
-    var mp = JSON.parse(result.body);
+  var findMP = `politicians/${nameFormatted}/`;
+  // Make request to api.openparliament.ca and cache
+  makeRequest(findMP, function(err, result){
+    var mp = result;
     var name = mp.name;
     var constituency = mp.memberships[0].riding.name.en;
     var party = mp.memberships[0].party.short_name.en;
