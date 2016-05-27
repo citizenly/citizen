@@ -44,6 +44,9 @@ onClick: function (e) {
                       <Link activeClassName="active" to="/login">Login</Link>
                     </li>
                     <li>
+                      <Link activeClassName="active" to="/about">About</Link>
+                    </li>
+                    <li>
                       <Link activeClassName="active" to="/rep">Your Representative</Link>
                     </li>
                     <li>

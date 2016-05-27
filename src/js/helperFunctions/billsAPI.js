@@ -139,15 +139,15 @@ module.exports = {
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
-fixLimitByPage(function(limit) {
-  getAllVotes(limit, function(arrOfVotes) {
-    getListofBillsFromVotes(arrOfVotes, function(bills) {
-      getUniqueBillsByDate(bills, function(uniqueBillsByDate) {
-        console.log(uniqueBillsByDate);
-      });
-    });
-  });
-});
+// fixLimitByPage(function(limit) {
+//   getAllVotes(limit, function(arrOfVotes) {
+//     getListofBillsFromVotes(arrOfVotes, function(bills) {
+//       getUniqueBillsByDate(bills, function(uniqueBillsByDate) {
+//         console.log(uniqueBillsByDate);
+//       });
+//     });
+//   });
+// });
 
 
 
