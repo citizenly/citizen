@@ -43,22 +43,22 @@
     
         div {
         margin: 7px;
-        color: white;
+        color: black;
         font-family: Oswald, sans-serif;
         font-weight: 200;
         font-size: 0.8em;
-        background: rgba(0, 0, 0, 0.6);
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
         border-radius: 2px;
         padding: 0px 5px;
         }
 }
 
 .billTabs {
-    
+
     .active {
-    background-color: rgba(0,0,0,0.6);
-    color: white;
+    background-color: rgba(0,0,0,0.1);
+    color: black;
     }
 
     ul{
@@ -80,14 +80,14 @@
     }
     
     li:hover, li:focus{
-        background: rgba(0,0,0,0.6); 
-        color: white;
+        background: rgba(0,0,0,0.1); 
+        color: black;
     }
 
 }
 
 .billTabs p, .voteCompare p {
-  color: white; 
+  color: black; 
   text-align: justify;
   padding: 10px;
 }
@@ -95,7 +95,7 @@
 .box-wrap {
     min-height: 70px; 
     font-family: Arimo;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.1);
 }
     
 
@@ -134,16 +134,16 @@
     }
     
     .redButton-clicked {
-    background-image: url("../../images/redButtonPressed.png")
+        background-image: url("../../images/redButtonPressed.png")
     }
     
     .leftarrow {
-    background-image: url("../../images/redButtonPressed.png")
+        background-image: url("../../images/redButtonPressed.png")
     }
     
     
     .rightarrow {
-    background-image: url("../../images/redButtonPressed.png")
+        background-image: url("../../images/redButtonPressed.png")
     }
     
     

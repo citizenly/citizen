@@ -39,8 +39,8 @@
     
     div {
             margin: 7px;
-            background-color: rgba(0,0,0,0.6);
-            color: white;
+            background-color: rgba(0,0,0,0.1);
+            color: black;
             font-family: Oswald, sans-serif;
             font-weight: 400;
             font-size: 0.9em;
@@ -50,8 +50,8 @@
 .petitionTabs {
     
     .active {
-    background-color: rgba(0,0,0,0.6);
-    color: white;
+    background-color: rgba(0,0,0,0.1);
+    color: black;
     }
 
     ul{
@@ -74,22 +74,22 @@
     }
     
     li:hover, li:focus{
-        background: rgba(0,0,0,0.6); 
-        color: white;
+        background: rgba(0,0,0,0.1); 
+        color: black;
     }
 
 }
 
 .petitionTabs p, .pollCompare p {
-  color: white; 
+  color: black; 
   text-align: justify;
   padding: 10px;
 }
 
-.box-wrap {
+.petitions-box-wrap {
     min-height: 70px; 
     font-family: Arimo;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.1);
 }
     
 

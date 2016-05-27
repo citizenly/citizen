@@ -17,25 +17,19 @@
     justify-content: center;
     text-transform: uppercase;
     
-    
-        div {
-        margin: 2px;
-        color: white;
-        font-size: 0.8em;
-        background: rgba(0, 0, 0, 0.6);
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.8);
-        border-radius: 2px;
-        padding: 0px 5px;
-        }
-        
         a {
-        color: white;
+        margin: 2px;
         font-family: Oswald, sans-serif;
+        color: black;
         font-weight: 200;
         font-size: 0.8em;
-        padding: 0px 2px;
+        background: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+        border-radius: 2px;
+        padding: 0px 5px;
         text-decoration: none;
         }
+        
 }
 
 
