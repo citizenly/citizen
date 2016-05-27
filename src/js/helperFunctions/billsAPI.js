@@ -40,7 +40,7 @@ function getAllVotes(limit, callback) {
 }
 
 
-// Store only the bill info we need in the array of bill objects
+// Store only the bill info we need in the array of bill objects - without the title
 function getListofBillsFromVotes(arrOfVotes, callback) {
   var bills = [];
   arrOfVotes.forEach(function(vote) {
@@ -56,10 +56,10 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
       number: number,
       billId: billId,
       billUrl: billUrl,
-      billTitle: ""
+     // billTitle: ""
     };
 
-    //Not all the votes is about a bill, so we want to keep only the bills
+    //Not all the votes is about a bill, so if the billId is not null, we want to keep it because it's a bill
     if (bill.billId.length > 0) {
       bills.push(bill);
     }
@@ -67,38 +67,53 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
   callback(bills);
 }
 
+//http://api.openparliament.ca/bills/?session=42-1&limit=500
+function getTitleOfBill(callback) {
+  var billsWithTitle = [];
+  var allBills = "bills/?session=42-1&limit=500";
+  makeRequest(allBills, function(err, bills){
+    if(err){
+      callback(new Error("Oops.. we can't find the bills for the moment. Please try again!"));
+    }
+    else {
+      bills = bills.objects;
+      bills.forEach(function(bill) {
+        var title = bill.name.en;
+        var billId = bill.number;
+        
+        var billWithTitle = {
+          title: title,
+          billId: billId
+        };
+      
+        billsWithTitle.push(billWithTitle);
+      });
+      callback(billsWithTitle); 
+    }
+  });
+}
 
-
-
-// TO FIX
-// //https://openparliament.ca/bills/42-1/C-2/?format=json
-// //bill_url: "/bills/42-1/C-14/",
-// // Use the bill id to lookup the title
-// function getTitleOfBill(bills, callback) {
-//   var deferred  = q.defer();
-//   bills.forEach(function(bill){
-//     var billUrl = bill.billUrl
-//     var add = `https://openparliament.ca${billUrl}?format=json`;
+//In the array of bill objects, add the title of each bill 
+function getListOfBillsWithTitle(bills, billsWithTitle, callback){
+  var listOfBillsWithTitle = [];
+  bills = bills.map(function(bill){
+    var billId = bill.billId;
     
-//     var options = {
-//     uri: add,
-//     // qs: {
-//     //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
-//     // },
-//     headers: {
-//         'User-Agent': 'marie.eve.gauthier@hotmail.com'
-//     },
-//     json: true // Automatically parses the JSON string in the response
-// };
-//     requestPromise(options).then(function(r){
-//         // var rawbill = JSON.parse(r.body);
-//         var billName = r.body.name.en;
-//       deferred.resolve(billName);
-//     })
-//   })
-
-//     return deferred.promise
-// }
+    var title = billsWithTitle.find(function(billWithTitle) {
+      return billWithTitle.billId === billId;
+    });
+    
+    if(title){
+      bill.billTitle = title.title;
+      listOfBillsWithTitle.push(bill);
+    }
+    else{
+      bill.billTitle = 'N/A';
+      listOfBillsWithTitle.push(bill);
+    }
+  });
+  callback(listOfBillsWithTitle);
+}
 
 
 // Reduce the array to only unique bills and only the most recently voted on version of the bill
@@ -133,31 +148,24 @@ module.exports = {
   getAllVotes: getAllVotes,
   getListofBillsFromVotes: getListofBillsFromVotes,
   getUniqueBillsByDate: getUniqueBillsByDate,
-  fixLimitByPage: fixLimitByPage
+  fixLimitByPage: fixLimitByPage,
+  getListOfBillsWithTitle: getListOfBillsWithTitle,
+  getTitleOfBill: getTitleOfBill
+  
 };
 
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
-// fixLimitByPage(function(limit) {
-//   getAllVotes(limit, function(arrOfVotes) {
-//     getListofBillsFromVotes(arrOfVotes, function(bills) {
-//       getUniqueBillsByDate(bills, function(uniqueBillsByDate) {
-//         console.log(uniqueBillsByDate);
-//       });
-//     });
-//   });
-// });
-
-
 
 // fixLimitByPage(function(limit) {
 //   getAllVotes(limit, function(arrOfVotes) {
 //     getListofBillsFromVotes(arrOfVotes, function(bills) {
-//       getTitleOfBill(bills, function(billsWithTitle) {
-//         getUniqueBillsByDate(billsWithTitle, function(uniqueBillsByDate) {
-//           console.log(uniqueBillsByDate);
-//           //res.send(uniqueBillsByDate);
+//       getTitleOfBill(function(billsWithTitle){
+//         getListOfBillsWithTitle(bills, billsWithTitle, function(listOfBillsWithTitle){
+//           getUniqueBillsByDate(listOfBillsWithTitle, function (listOfUniqueBills){
+//             console.log(listOfUniqueBills);
+//           });
 //         });
 //       });
 //     });

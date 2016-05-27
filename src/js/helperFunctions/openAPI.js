@@ -43,4 +43,16 @@ function makeRequest(path, callback) {
 
 }
 
+//WHERE WE HAVE TO ADD THAT?
+//var options = {
+//     uri: add,
+//     // qs: {
+//     //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
+//     // },
+//     headers: {
+//         'User-Agent': 'marie.eve.gauthier@hotmail.com'
+//     },
+//     json: true // Automatically parses the JSON string in the response
+// };
+
 module.exports = makeRequest;

@@ -17,11 +17,15 @@
 }
 
 .myRepsVote {
+     font-family: Oswald, sans-serif;
+     font-weight: 400;
+     font-size: 0.8em;
      display: flex;
      align-items: center;
      justify-content: center;
      padding-top: 25px;
      padding-bottom: 25px;
+     text-transform: uppercase;
 }
 
 
@@ -29,13 +33,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3px, 3px, 3px, 3px;
-    font-family: Oswald, sans-serif;
-    font-weight: 400;
-    font-size: 0.5em;
-    color: white;
-    background-color: rgba(0,0,0,0.6);
     text-transform: uppercase;
+    
+    div {
+            margin: 7px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            font-family: Oswald, sans-serif;
+            font-weight: 400;
+            font-size: 0.9em;
+    }
 }
 
 .billTabs {
@@ -98,6 +105,27 @@
     .redbutton, .greenbutton {
         padding: 10px;
         max-width: 100px;
+        width: 50%;
+        height: 100px;
+        background: no-repeat center;
+        background-size: contain;
+    }
+    
+    
+    .greenbutton {
+        background-image: url("../../images/green button.png");
+    }
+    
+    .redbutton {
+        background-image: url("../../images/red button.png");
+    }
+    
+    .greenButton-clicked {
+        background-image: url("../../images/green button pressed.png");
+    }
+    
+    .redButton-clicked {
+    background-image: url("../../images/red button pressed.png")
     }
     
     .share {

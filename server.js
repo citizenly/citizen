@@ -12,6 +12,8 @@ var fixLimitByPage = BillsAPI.fixLimitByPage;
 var getAllVotes = BillsAPI.getAllVotes;
 var getListofBillsFromVotes = BillsAPI.getListofBillsFromVotes;
 var getUniqueBillsByDate = BillsAPI.getUniqueBillsByDate;
+var getTitleOfBill = BillsAPI.getTitleOfBill;
+var getListOfBillsWithTitle = BillsAPI.getListOfBillsWithTitle;
  
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
 var corsOptionsDelegate = function(req, callback){
@@ -62,9 +64,12 @@ app.post('/postfilter', function(req, res) {
       fixLimitByPage(function(limit) {
         getAllVotes(limit, function(arrOfVotes) {
           getListofBillsFromVotes(arrOfVotes, function(bills) {
-            getUniqueBillsByDate(bills, function(listOfUniqueBillsByDate) {
-              console.log(listOfUniqueBillsByDate);
-              res.send(listOfUniqueBillsByDate);
+            getTitleOfBill(function(billsWithTitle) {
+              getListOfBillsWithTitle(bills, billsWithTitle, function(listOfBillsWithTitle) {
+                getUniqueBillsByDate(listOfBillsWithTitle, function(listOfUniqueBills) {
+                  res.send(listOfUniqueBills);
+                });
+              });
             });
           });
         });
