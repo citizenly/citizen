@@ -11,6 +11,7 @@ var browserHistory = ReactRouter.browserHistory;
 
 var App = require('./components/Main.js');
 var Home = require('./components/Home.js');
+var About = require('./components/About.js');
 var Rep = require('./components/Rep.js');
 var Compare = require('./components/Compare.js');
 var Petitions = require('./components/Petitions.js');
@@ -43,13 +44,14 @@ var routes = (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
+      <Route path="about" component={About}/>
       <Route path="rep/:repName" component={Rep}/>
       <Route path="compare" component={Compare}/>
       <Route path="petitions" component={Petitions}/>
       <Route path="petition" component={Petition}/>
       <Route path="feed" component={Feed}/>
       <Route path="bills/:filter" component={Bills}/>
-      <Route path="bill" component={Bill}/>
+      <Route path="bill/:billId" component={Bill}/>
       <Route path="login" component={Login}/>
       <Route path="*" component={NotFound}/>
     </Route>

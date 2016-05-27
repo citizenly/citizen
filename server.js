@@ -58,7 +58,7 @@ app.post('/repinfoget', function(req, res) {
 
 /* BILLS FUNCTION CALLS ------------------------------------------------------- */
 app.post('/postfilter', function(req, res) {
-  req = "active";
+  req = req.body.filter;
   switch (req) {
     case 'active':
       fixLimitByPage(function(limit) {
@@ -76,8 +76,7 @@ app.post('/postfilter', function(req, res) {
       });
       break;
     default:
-      res.send("We will have more filter soon!");
-    
+      res.send("We will have more filters soon!");
   }
 });
 /* -------------------------------------------------------------------------- */

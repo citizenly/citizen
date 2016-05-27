@@ -1,16 +1,30 @@
 var React = require('react');
-//var Link = require('react-router').Link;
+var Link = require('react-router').Link;
 // required for ajax calls
 var axios = require('axios');
 import { withRouter } from 'react-router';
 
+// Bill constructor
+var Bill = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <h2>{this.props.billId} <span className="result">{this.props.result}</span></h2>
+        <h4>{this.props.billTitle}</h4>
+      </div>
+    );
+  }
+});
 
+
+// Bill constructor
 var Bills = React.createClass({
   getInitialState: function() {
     // set inital state to determine which list of bills is displayed - active by default
+    // ** need to fix my logic because it's always reverting to /active!
     return {
       filter: "active",
-      billList: []
+      billList: [],
     };
   },
   componentDidMount: function() {
@@ -22,32 +36,25 @@ var Bills = React.createClass({
     
     // post filter to server and this.setState({billList: response.data})
     axios.post('/postfilter', {
-      filter: filter
+      filter: filter,
+      loading: true
     })
     .then(function(response) {
       that.setState({billList: response.data});
-      console.log(that.state.billList, 'that.state.billList');
     })
     .catch(function(response) {
       console.log(response, 'response');
     });
   },
-  // handleOnClick: function(e) {
-  //   e.preventDefault();
-  //   var that = this;
-  //   var filter = "";
-  //   axios.post('/postfilter', {
-  //     filter: ""
-  //   }).then(function(response) {
-  //     var path = '/bills/' + response.data;
-  //     that.props.router.push(path);
-  //   })
-  //   .catch(function(response) {
-  //     console.log(response, 'response');
-  //   });
-  // },
+  renderBills: function(bill) {
+    return (
+      <li key={bill.billId}>
+        <Bill billTitle={bill.billTitle} billId={bill.billId} result={bill.result}/>
+      </li>
+    );
+  },
   render: function() {
-    console.log(this.state.billList, 'that.state.billList');
+    console.log(this.state.billList);
     return (
       <div>
         <div className="billInfo">
@@ -59,23 +66,22 @@ var Bills = React.createClass({
           
           <div className="billTags">
             <ul>
-              <li><button onClick={this.handleOnClick}></button>active</li>
-              <li>passed</li>
-              <li>failed</li>
-              <li>rep proposed</li>
-              <li>rep voted</li>
-              <li>all</li>
+              <li><Link activeClassName="active" to="/bills/active">active</Link></li>
+              <li><Link activeClassName="active" to="/bills/passed">passed</Link></li>
+              <li><Link activeClassName="active" to="/bills/failed">failed</Link></li>
+              <li><Link activeClassName="active" to="/bills/proposedbymyrep">rep proposed</Link></li>
+              <li><Link activeClassName="active" to="/bills/votedonbymyrep">rep voted</Link></li>
+              <li><Link activeClassName="active" to="/bills/all">all</Link></li>
             </ul>
           </div>
-          <h2>bill.id</h2>
-          <h2>My representative voted: repsVote</h2>
         </div>
         
-        {this.state.billList.map(function(bill, i){
-          return (
-            <h1 key={bill.billId + i}>bill list: {bill.billId}</h1>
-          );
-        })}
+        <div>
+          {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
+          <ul>
+            {this.state.billList.map(this.renderBills)}
+          </ul>
+        </div>
       </div>
     );
   }

@@ -1,113 +1,146 @@
-.petitionsheading{
+.petitions-heading{
     font-family: Oswald, sans-serif;
     font-weight: 400;
-    text-align: center;
     color: white;
     background-color: #44A487;
     padding: 10px, 10px, 10px, 10px;
     text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.petitionanname {
+.petitionandid{
      display: flex;
+     align-items: center;
+     justify-content: center;
 }
+
+.daysLeftAndNumber{
+     display: flex;
+     font-family: Oswald, sans-serif;
+     font-weight: 400;
+     font-size: 0.8em;
+     align-items: center;
+     justify-content: center;
+     padding-top: 25px;
+     padding-bottom: 25px;
+     text-transform: uppercase;
+     
+}
+
+
 
 .petitionTags {
     display: flex;
-    padding: 3px, 3px, 3px, 3px;
-
-}
-
-.petitionTag {
-    font-family: Oswald, sans-serif;
-    font-weight: 400;
-    font-size: 0.5em;
-    color: white;
-    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
+    
+    div {
+            margin: 7px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            font-family: Oswald, sans-serif;
+            font-weight: 400;
+            font-size: 0.9em;
+    }
 }
 
 .petitionTabs {
+    
+    .active {
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    }
+
+    ul{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        list-style: none;
+    }
+    
+    li {
+        font-family: Oswald, sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        background: white;
+        padding: 4px 10px;
+        flex-grow: 1;
+        text-align: left;
+        color: black;
+        cursor: pointer;
+    }
+    
+    li:hover, li:focus{
+        background: rgba(0,0,0,0.6); 
+        color: white;
+    }
 
 }
 
-.petition__p {
+.petitionTabs p, .pollCompare p {
   color: white; 
   text-align: justify;
-  margin: 0px 20px 20px 20px;
-  
+  padding: 10px;
 }
 
-.petition__u {
-    display: flex;
-    flex-direction: row;
-}
-
-.petition__li {
-    display: inline; 
-
-}
-
-.petition__a {
-    color: white; 
-    float: left; 
-    display: block; 
-    padding: 4px 10px; 
-    margin-left: -1px; 
-    position: relative; 
-    left: 1px; 
-    background: rgba(0,0,0,0.5);
-    text-decoration: none;
-}
-
-
-.petition__a:hover {
-    background: #ccc; 
-
-}
-
-
-.petition-wrap {
+.box-wrap {
     min-height: 70px; 
     font-family: Arimo;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.6);
 }
     
 
 
-.votingHands {
+
+
+.pollingButtons {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    background: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0; //align it to the bottom and dont push it up
+    //bottom: 10px; //align it to the bottom and push it up 1px
+
+    
+    .redglove, .greenglove {
+        padding: 10px;
+        max-width: 100px;
+        width: 50%;
+        height: 100px;
+        background: no-repeat center;
+        background-size: contain;
+    }
+    
+    .greenglove {
+        background-image: url("../../images/green glove.png");
+        margin-bottom: 35px;
+    }
+    
+    .redglove {
+        background-image: url("../../images/red glove.png");
+        margin-bottom: -20px;
+    }
+    
+    .greenglove-clicked {
+        background-image: url("../../images/green glove pressed.png");
+    }
+    
+    .redglove-clicked {
+    background-image: url("../../images/red glove pressed.png")
+    }
+    
+    .share {
+        max-width: 50px;
+        //margin: 0px 20px; //top and bottom 0px, left and right 20px
+    }
+    
+    .leftarrow, .rightarrow {
+        max-width: 30px;
+    }
 }
 
-.redHand {
-    padding: 10px, 10px, 10px, 10px;
-    max-width: 100px;
-}
-
-.greenHand {
-    padding: 10px, 10px, 10px, 10px;
-    max-width: 100px;
-}
-
-.share {
-    max-width: 50px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.leftarrow {
-    max-width: 30px;
-    margin-left: 10px;
-    margin-right: 20px;
-    margin-top: 20px;
-    justify-content: bottom;
-}
-
-.rightarrow {
-    max-width: 30px;
-    margin-left: 20px;
-    margin-right: 10px;
-    margin-top: 20px;
-    justify-content: bottom;
-}
