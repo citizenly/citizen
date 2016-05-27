@@ -9,6 +9,7 @@ var Bill = React.createClass({
   render: function() {
     return (
       <div>
+        {this.props==={} ? 'We will have more filters coming soon' : null}
         <h2>{this.props.billId} <span className="result">{this.props.result}</span></h2>
         <h4>{this.props.billTitle}</h4>
       </div>
@@ -23,24 +24,29 @@ var Bills = React.createClass({
     // set inital state to determine which list of bills is displayed - active by default
     // ** need to fix my logic because it's always reverting to /active!
     return {
-      filter: "active",
       billList: [],
     };
   },
   componentDidMount: function() {
+    this.loadData();
+  },
+  componentDidUpdate: function(prevProps) {
+    if(prevProps.params.filter !== this.props.params.filter) {
+      this.loadData();
+    }
+  },
+  loadData: function() {
     var that = this;
     // set filter as url parameter
-    var filter = this.state.filter;
-    var path = '/bills/' + filter;
-    this.props.router.push(path);
+    var filter = this.props.params.filter;
     
     // post filter to server and this.setState({billList: response.data})
+    this.setState({loading: true})
     axios.post('/postfilter', {
-      filter: filter,
-      loading: true
+      filter: filter
     })
     .then(function(response) {
-      that.setState({billList: response.data});
+      that.setState({billList: response.data, loading: false});
     })
     .catch(function(response) {
       console.log(response, 'response');

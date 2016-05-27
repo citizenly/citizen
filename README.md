@@ -13,7 +13,11 @@ node server.js
 
 webpack -watch
 
+memchached -d
+
 sass --watch src/scss/app.scss:public/css/main.css
+or
+node run sass
 
 
 // SCSS
