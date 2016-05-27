@@ -11,11 +11,13 @@
 }
 
 .rep-pic {
-    max-width: 70%;
+    max-width: 25%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .rep-text {
-    margin-left: 10px;
+    margin-left: 5px;
      h2 {
          font-weight: 200;
      }
@@ -28,31 +30,36 @@
     justify-content: space-around;
     text-align: center;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 25px;
     margin-bottom: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
+    
+    img {
+    max-width: 30px;
+    margin-top: 20px;
+    }
 }
 
 .agreement {
     flex-basis: 100%;
-    margin-bottom: 30px;
-    border-top: 0.5px dotted black;
-    
+    padding-top: 5px;
+    background-color: rgba(0,0,0,0.1);
+
     h2 {
-        font-size: 1.2em;
-        font-weight: 200;
+        font-size: 1.0em;
+        font-weight: 400;
     }
 }
 
 .intheirvoting {
     flex-basis: 100%;
-    margin-top: 20px;
-    border-bottom: 0.5px dotted black;
-    
+    padding-bottom: 5px;
+    background-color: rgba(0,0,0,0.1);
+
         h2 {
-        font-size: 1.2em;
-        font-weight: 200;
+        font-size: 1.0em;
+        font-weight: 400;
     }
 }
 
@@ -72,6 +79,14 @@
     }
 }
 
+.repstatsbackgroundcolor {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    background: rgba(0,0,0,0.1);
+    padding: 17px;
+
+}
 
 .bottomMenu-item {
     font-family: Oswald;
@@ -116,3 +131,24 @@ img {
     max-width: 100%;
 }
 
+
+#seperator {
+    background: #34495E;
+    height: 10px;
+    left: 0; right: 0;
+}
+
+.down {
+   width: 100%;
+ }
+
+.down:after {
+   content: '';
+   display: block;
+   margin: 0 auto;
+   width: 0px;
+   height: 0px;
+   border-left: 20px solid transparent;
+   border-right: 20px solid transparent;
+   border-top: 20px solid rgba(0,0,0,0.1);
+}
