@@ -76,7 +76,7 @@ app.post('/postfilter', function(req, res) {
       });
       break;
     default:
-      res.send("We will have more filters soon!");
+      res.send([]);
   }
 });
 /* -------------------------------------------------------------------------- */
