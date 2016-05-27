@@ -169,16 +169,6 @@ function getBallotsByPolitician(limit, politician, callback){
   });
 }
 
-// function getVoteNumber(bills, billId, callback){
-//   bills.map(function(bill){
-//     })
-// }
-
-fixLimitByPage(function(limit) {
-  getBallotsByPolitician(limit, "tony-clement", function(balllotsByPolitician){
-    console.log(balllotsByPolitician);
-  });
-});
 
 module.exports = {
   getAllVotes: getAllVotes,
@@ -193,6 +183,19 @@ module.exports = {
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
+fixLimitByPage(function(limit) {
+  getBallotsByPolitician(limit, "tony-clement", function(balllotsByPolitician){
+    console.log(balllotsByPolitician);
+  });
+});
+
+
+// function getVoteNumber(bills, billId, callback){
+//   bills.map(function(bill){
+//     })
+// }
+
+
 // fixLimitByPage(function(limit) {
 //   getAllVotes(limit, function(arrOfVotes) {
 //     getListofBillsFromVotes(arrOfVotes, function(bills) {
