@@ -65,7 +65,7 @@ var Bill = React.createClass({
   handleGBtnClick: function(e) {
     e.preventDefault();
     if (this.state.greenBtnToggle === "greenbutton") {
-      this.setState({greenBtnToggle:"greenButton-clicked"});
+      this.setState({greenBtnToggle:"greenButton-clicked", redBtnToggle:"redbutton"});
     }
     else if (this.state.greenBtnToggle === "greenButton-clicked") {
       this.setState({greenBtnToggle:"greenbutton"});
@@ -74,7 +74,7 @@ var Bill = React.createClass({
   handleRBtnClick: function(e) {
     e.preventDefault();
     if (this.state.redBtnToggle === "redbutton") {
-      this.setState({redBtnToggle:"redButton-clicked"});
+      this.setState({redBtnToggle:"redButton-clicked", greenBtnToggle: "greenbutton"});
     }
     else if (this.state.redBtnToggle === "redButton-clicked") {
       this.setState({redBtnToggle:"redbutton"});
