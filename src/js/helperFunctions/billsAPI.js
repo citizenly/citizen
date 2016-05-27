@@ -1,19 +1,9 @@
-/*
-ID / official name
-Title
-Summary
-Full Text
-House Debate
-Status tag - active/inactive
-Proposed by
-*/
 
 
 var request = require("request");
 var findBillId = require("./findBillId.js");
 var makeRequest = require("./openAPI.js");
-// var requestPromise = require("request-promise");
-// var q = require("q");
+
 
 
 /*At this url there are all the votes of the current session of the current parlement
@@ -23,11 +13,16 @@ As every vote in a session has a sequential number, we set the limit to
 to the highest vote's number */
 // Get number of most recent voting session to use a limit param in url requests
 function fixLimitByPage(callback) {
-  var url = 'votes/?session=42-1&limit=1';
+  var path = 'votes/?session=42-1&limit=1';
   // Make request to api.openparliament.ca and cache
-  makeRequest(url, function(err, res){
-    var numberLastVote = res.objects[0].number;
-    callback(numberLastVote);
+  makeRequest(path, function(err, res){
+    if(err){
+      callback(err)
+    }
+    else {
+      var numberLastVote = res.objects[0].number;
+      callback(numberLastVote);
+    }
   });
 }
  
@@ -35,10 +30,15 @@ function fixLimitByPage(callback) {
 //Calling this function with a callback, we recive an arrry of votes
 // Get array of objects of all bills voted on in current session
 function getAllVotes(limit, callback) {
-  var allVotes = `votes/?date=&session=42-1&limit=${limit}&format=json`;
-  makeRequest(allVotes, function(err, res){
-    var arrOfVotes = res.objects;
-    callback(arrOfVotes);
+  var path = `votes/?date=&session=42-1&limit=${limit}&format=json`;
+  makeRequest(path, function(err, res){
+    if(err){
+      callback(new Error("Oops.. we can't find the list of votes of the current session of the current parlement. Please try again!"));  
+    }
+    else{
+      var arrOfVotes = res.objects;
+      callback(arrOfVotes);
+    }
   });
 }
 
@@ -52,6 +52,8 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
     var number = vote.number;
     var billId = findBillId.findBillId(vote.bill_url);
     var billUrl = vote.bill_url;
+    var nay_total = vote.nay_total;
+    var yea_total = vote.yea_total;
 
     var bill = {
       result: result,
@@ -59,7 +61,8 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
       number: number,
       billId: billId,
       billUrl: billUrl,
-     // billTitle: ""
+      nay_total: nay_total,
+      yea_total: yea_total
     };
 
     //Not all the votes is about a bill, so if the billId is not null, we want to keep it because it's a bill
@@ -70,11 +73,11 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
   callback(bills);
 }
 
-//http://api.openparliament.ca/bills/?session=42-1&limit=500
+
 function getTitleOfBill(callback) {
   var billsWithTitle = [];
-  var allBills = "bills/?session=42-1&limit=500";
-  makeRequest(allBills, function(err, bills){
+  var path = "bills/?session=42-1&limit=500";
+  makeRequest(path, function(err, bills){
     if(err){
       callback(new Error("Oops.. we can't find the bills for the moment. Please try again!"));
     }
@@ -146,6 +149,36 @@ function getUniqueBillsByDate(bills, callback) {
   callback(allBills);
 }
 
+
+/*To know how vote every MP, we need to look at ballots:
+http://api.openparliament.ca/votes/ballots/?format=json
+The balllots can be filter by voteNumber and by politician
+//http://api.openparliament.ca/votes/ballots/?politician=sherry-romanado&vote=42-1%2F63
+*/
+function getBallotsByPolitician(limit, politician, callback){
+  //votes/ballots/?politician=tony-clement&format=json&limit=63
+  var path = `votes/ballots/?politician=${politician}&limit=${limit}`;
+  makeRequest(path, function(err, res){
+    if(err){
+      callback(new Error("Oops..we can't find how your MP voted on this bill. Please try again!"));
+    }
+    else {
+      var ballots = res.objects;
+      callback(ballots);
+    }
+  });
+}
+
+// function getVoteNumber(bills, billId, callback){
+//   bills.map(function(bill){
+//     })
+// }
+
+fixLimitByPage(function(limit) {
+  getBallotsByPolitician(limit, "tony-clement", function(balllotsByPolitician){
+    console.log(balllotsByPolitician);
+  });
+});
 
 module.exports = {
   getAllVotes: getAllVotes,
