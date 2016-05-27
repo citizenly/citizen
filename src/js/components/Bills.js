@@ -9,7 +9,7 @@ var Bill = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>{this.props.billId} <span className="result">{this.props.resultOfVote}</span></h2>
+        <h2>{this.props.billId} {this.props.resultOfVote ? <span className="result">{this.props.resultOfVote}</span> : null}</h2>
         <h4>{this.props.billTitle}</h4>
       </div>
     );
@@ -59,7 +59,7 @@ var Bills = React.createClass({
     );
   },
   render: function() {
-    console.log(this.state.billList);
+    console.log(this.state.billList, 'this.state.billList');
     return (
       <div>
         <div className="billInfo">

@@ -23,6 +23,38 @@ function fixLimitByPage(callback) {
     }
   });
 }
+
+
+// Get array of objects of all bills (Commons and Senate) in current session
+function getAllBills(limit, callback) {
+  var path = `bills/?session=42-1&limit=${limit}`;
+  makeRequest(path, function(err, res){
+    if(err){
+      callback(new Error("Oops.. we can't find the list of bill of the current session of parliament. Please try again!"));  
+    }
+    else{
+      var arrOfBills = res.objects;
+      callback(arrOfBills);
+    }
+  });
+}
+
+
+// Reduce the raw bill object to the name, and id
+function allBills(arrOfBills, callback) {
+  var allBills = [];
+  arrOfBills.forEach(function(bill) {
+    var billId = bill.number;
+    var billTitle = bill.name.en;
+
+    bill = {
+      billId: billId,
+      billTitle: billTitle
+    };
+    allBills.push(bill);
+  });
+  callback(allBills);
+}
  
 
 //Calling this function with a callback, we recive an arrry of votes
@@ -31,7 +63,7 @@ function getAllVotes(limit, callback) {
   var path = `votes/?date=&session=42-1&limit=${limit}&format=json`;
   makeRequest(path, function(err, res){
     if(err){
-      callback(new Error("Oops.. we can't find the list of votes of the current session of the current parlement. Please try again!"));  
+      callback(new Error("Oops.. we can't find the list of votes of the current session of parliament. Please try again!"));  
     }
     else{
       var arrOfVotes = res.objects;
@@ -204,9 +236,10 @@ module.exports = {
   fixLimitByPage: fixLimitByPage,
   getListOfBillsWithTitle: getListOfBillsWithTitle,
   getTitleOfBill: getTitleOfBill,
-  filterUniqueBillsByResult: filterUniqueBillsByResult
+  filterUniqueBillsByResult: filterUniqueBillsByResult,
+  getAllBills: getAllBills,
+  allBills: allBills
 };
-
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
@@ -222,6 +255,14 @@ module.exports = {
 //     })
 // }
 
+
+// fixLimitByPage(function(limit) {
+//   getAllBills(limit, function(arrOfBills) {
+//     allBills(arrOfBills, function(allBills) {
+//       console.log(allBills);
+//     });
+//   });
+// });
 
 // fixLimitByPage(function(limit) {
 //   getAllVotes(limit, function(arrOfVotes) {
