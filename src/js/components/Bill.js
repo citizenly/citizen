@@ -24,6 +24,8 @@ var Bill = React.createClass({
       },
       content: "",
       vote: 0,
+      greenBtnToggle: "greenbutton",
+      redBtnToggle: "redbutton"
     };
   },
   componentDidMount: function() {
@@ -60,37 +62,28 @@ var Bill = React.createClass({
     $(".billTabs li").removeClass("active");
     $("#tab-" + data).addClass("active");
   },
-  // onChange: function(value, e) {
-  //   var newCustomer = this.state.customer;
-  //   newCustomer[value] = e.target.value;
-  //   this.setState({customer: newCustomer});
-  //   this.checkData();
-  // },
-  // checkData: function() {
-  //   var checked = 0;
-    
-  //   for(var prop in this.state.customer){
-  //     if(this.state.customer.hasOwnProperty(prop)){
-  //       if(this.state.customer[prop].length > 0){
-  //         checked = checked + 1;
-  //       } else if(this.state.customer[prop].length === 0 && checked != 0) {
-  //         checked = checked - 1;
-  //       }
-  //     }
-  //   }
-  //   if(checked === 7){
-  //     this.setState({isDisabled: false});
-  //   } else {
-  //     this.setState({isDisabled: true});
-  //   }
-  // },
+  handleGBtnClick: function(e) {
+    e.preventDefault();
+    if (this.state.greenBtnToggle === "greenbutton") {
+      this.setState({greenBtnToggle:"greenButton-clicked"});
+    }
+    else if (this.state.greenBtnToggle === "greenButton-clicked") {
+      this.setState({greenBtnToggle:"greenbutton"});
+    }
+  },
+  handleRBtnClick: function(e) {
+    e.preventDefault();
+    if (this.state.redBtnToggle === "redbutton") {
+      this.setState({redBtnToggle:"redButton-clicked"});
+    }
+    else if (this.state.redBtnToggle === "redButton-clicked") {
+      this.setState({redBtnToggle:"redbutton"});
+    }
+  },
   // updateVote: function() {
   //   //set vote in state
   //   //add pressed class to appropriate button
   // },
-    /*handleState: function (){
-    Hey Alex! if you could do the function that updates the votes to +1 -1 here, and that relates to the switching between pressed and unpressed buttons, that'd be luverlee :)
-  },*/
   render: function() {
     return (
       <div>
@@ -144,21 +137,13 @@ var Bill = React.createClass({
             <img alt="left" src="images/arrowleft.png"></img>
           </div>
                       
-          <div className= "redbutton">
-          </div>
-              
-          {/*<div className= "redbutton" onClick={this.handleButtonClick.bind(this, 1)}>
-          </div>*/}
-              
+          <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+
           <div className= "share">
             <img alt="share" src="images/twitter-logo.jpg"></img>
           </div>
-              
-          <div className= "greenbutton">
-          </div>
-              
-          {/*<div className= "greenbutton" onClick={this.handleButtonClick.bind(this, 1)}>
-          </div>*/}
+
+          <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
 
           <div className="rightarrow">
             <img alt="right" src="images/arrowright.png"></img>
