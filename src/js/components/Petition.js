@@ -136,7 +136,7 @@ sharingMenu: function() {
             <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Neighbour Comments</li>
           </ul>
 
-      		<div className="box-wrap">
+      		<div className="petitions-box-wrap">
         		<div id="box">
         		  <p>{this.state.content}</p>
         		</div>

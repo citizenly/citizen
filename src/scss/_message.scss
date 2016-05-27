@@ -1,8 +1,14 @@
 .top-message {
     color:red;
+    font-size: 0.8em;
+    border-color: red;
+    text-align: center;
+    padding: 5px;
 }
 
 //if the user inputs an invalid postal code, this will change the input form
 input[type=text].alert {
+  font-family: Arimo, sans-serif;
+  font-size: 0.8em;
   border-color: red;
 }

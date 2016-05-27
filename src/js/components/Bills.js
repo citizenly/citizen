@@ -62,32 +62,32 @@ var Bills = React.createClass({
     console.log(this.state.billList);
     return (
       <div>
-        <div className="billInfo">
-          <h3>What would you do?</h3>
-          <h1>Bills</h1>
+      
+          <div className="whatwouldyoudo">
+            What would you do?
+          </div>
           
           <div className="searchbox">
+            <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
+          </div>
+  
+          <div className="billTags">
+              <div><Link activeClassName="active" to="/bills/active">active</Link></div>
+              <div><Link activeClassName="active" to="/bills/passed">passed</Link></div>
+              <div><Link activeClassName="active" to="/bills/failed">failed</Link></div>
+              <div><Link activeClassName="active" to="/bills/proposedbymyrep">rep proposed</Link></div>
+              <div><Link activeClassName="active" to="/bills/votedonbymyrep">rep voted</Link></div>
+              <div><Link activeClassName="active" to="/bills/all">all</Link></div>
           </div>
           
-          <div className="billTags">
-            <ul>
-              <li><Link activeClassName="active" to="/bills/active">active</Link></li>
-              <li><Link activeClassName="active" to="/bills/passed">passed</Link></li>
-              <li><Link activeClassName="active" to="/bills/failed">failed</Link></li>
-              <li><Link activeClassName="active" to="/bills/proposedbymyrep">rep proposed</Link></li>
-              <li><Link activeClassName="active" to="/bills/votedonbymyrep">rep voted</Link></li>
-              <li><Link activeClassName="active" to="/bills/all">all</Link></li>
-            </ul>
+          <div className="billList">
+            {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
+            <div>
+              {this.state.billList !== [] ? this.state.billList.map(this.renderBills) : 'We will have more filters coming soon'}
+            </div>
           </div>
-        </div>
-        
-        <div>
-          {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
-          <ul>
-            {this.state.billList !== [] ? this.state.billList.map(this.renderBills) : 'We will have more filters coming soon'}
-          </ul>
-        </div>
-      </div>
+          
+     </div>
     );
   }
 });
