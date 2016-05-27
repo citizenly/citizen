@@ -73,6 +73,7 @@
 
 
 .postcodeinputandentry {
+    display: flex;
     height: 1.5em;
 }
 
@@ -85,12 +86,11 @@
     font-size: 1rem;
     margin: 0;
     padding: 0;
-    transition: all 0.3s;
     display: inline-block;
 }
 
 input[type=text] {
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 15px 0px 0px 20px;
     height: 100%;
     padding: 0;
     box-shadow: none;
@@ -98,8 +98,14 @@ input[type=text] {
     font-size: 0.8em;
     padding-left: 15px;
     padding-right: 15px;
+    box-shadow: inset 0px 0px 4px rgba(0,0,0,0.3);
 }
 
+button, input, select, textarea {
+    font: inherit;
+    margin: 0;
+    border: 0px;
+}
 
 .postcodebutton {
     background-color: #44A487;
