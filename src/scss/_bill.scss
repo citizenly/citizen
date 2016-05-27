@@ -3,7 +3,7 @@
     font-weight: 400;
     color: white;
     background-color: #B095C4;
-    padding: 10px;
+    padding: 0px;
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
@@ -14,6 +14,7 @@
      display: flex;
      align-items: center;
      justify-content: center;
+     padding-top: 20px;
 }
 
 .myRepsVote {
@@ -103,7 +104,7 @@
     
     .redbutton, .greenbutton, .redButton-clicked, .greenButton-clicked {
         padding: 10px;
-        max-width: 100px;
+        max-width: 80px;
         width: 50%;
         height: 100px;
         background: no-repeat center;
