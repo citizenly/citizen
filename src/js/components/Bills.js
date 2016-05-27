@@ -9,7 +9,7 @@ var Bill = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>{this.props.billId} <span className="result">{this.props.result}</span></h2>
+        <h2>{this.props.billId} {this.props.resultOfVote ? <span className="result">{this.props.resultOfVote}</span> : null}</h2>
         <h4>{this.props.billTitle}</h4>
       </div>
     );
@@ -38,9 +38,9 @@ var Bills = React.createClass({
     var that = this;
     // set filter as url parameter
     var filter = this.props.params.filter;
+    this.setState({loading: true});
     
     // post filter to server and this.setState({billList: response.data})
-    this.setState({loading: true});
     axios.post('/postfilter', {
       filter: filter
     })
@@ -54,12 +54,12 @@ var Bills = React.createClass({
   renderBills: function(bill) {
     return (
       <li key={bill.billId}>
-        <Bill billTitle={bill.billTitle} billId={bill.billId} result={bill.result}/>
+        <Bill billTitle={bill.billTitle} billId={bill.billId} resultOfVote={bill.resultOfVote}/>
       </li>
     );
   },
   render: function() {
-    console.log(this.state.billList);
+    console.log(this.state.billList, 'this.state.billList');
     return (
       <div>
       
