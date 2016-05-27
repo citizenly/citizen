@@ -80,6 +80,11 @@ var Bills = React.createClass({
               <div><Link activeClassName="active" to="/bills/all">all</Link></div>
           </div>
           
+          <div className="infobgcolor">
+              <div>passed/failed/tie</div>
+              <p>indicates most recent vote in parliament</p>
+          </div>
+          
           <div className="billList">
             {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
             <div>
