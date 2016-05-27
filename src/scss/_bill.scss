@@ -102,7 +102,7 @@
     //bottom: 10px; //align it to the bottom and push it up 1px
 
     
-    .redbutton, .greenbutton {
+    .redbutton, .greenbutton, .redButton-clicked, .greenButton-clicked {
         padding: 10px;
         max-width: 100px;
         width: 50%;
@@ -113,19 +113,19 @@
     
     
     .greenbutton {
-        background-image: url("../../images/green button.png");
+        background-image: url("../../images/greenButton.png");
     }
     
     .redbutton {
-        background-image: url("../../images/red button.png");
+        background-image: url("../../images/redButton.png");
     }
     
     .greenButton-clicked {
-        background-image: url("../../images/green button pressed.png");
+        background-image: url("../../images/greenButtonPressed.png");
     }
     
     .redButton-clicked {
-    background-image: url("../../images/red button pressed.png")
+    background-image: url("../../images/redButtonPressed.png")
     }
     
     .share {
