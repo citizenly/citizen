@@ -65,25 +65,21 @@ var Bill = React.createClass({
   handleGBtnClick: function(e) {
     e.preventDefault();
     if (this.state.greenBtnToggle === "greenbutton") {
-      this.setState({greenBtnToggle:"greenButton-clicked"});
+      this.setState({greenBtnToggle:"greenButton-clicked", redBtnToggle:"redbutton", vote: 1});
     }
     else if (this.state.greenBtnToggle === "greenButton-clicked") {
-      this.setState({greenBtnToggle:"greenbutton"});
+      this.setState({greenBtnToggle:"greenbutton", vote: 0});
     }
   },
   handleRBtnClick: function(e) {
     e.preventDefault();
     if (this.state.redBtnToggle === "redbutton") {
-      this.setState({redBtnToggle:"redButton-clicked"});
+      this.setState({redBtnToggle:"redButton-clicked", greenBtnToggle: "greenbutton", vote: -1});
     }
     else if (this.state.redBtnToggle === "redButton-clicked") {
-      this.setState({redBtnToggle:"redbutton"});
+      this.setState({redBtnToggle:"redbutton", vote: 0});
     }
   },
-  // updateVote: function() {
-  //   //set vote in state
-  //   //add pressed class to appropriate button
-  // },
   render: function() {
     return (
       <div>
