@@ -15,7 +15,7 @@
 }
 
 .rep-text {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .rep-stats-container {
@@ -25,34 +25,46 @@
     justify-content: space-around;
     text-align: center;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 50px;
     margin-bottom: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
-    border-top: 0.5px solid black;
-    border-bottom: 0.5px solid black;
 }
 
 .agreement {
     flex-basis: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    border-top: 0.5px dotted black;
 }
 
 .intheirvoting {
     flex-basis: 100%;
     margin-top: 20px;
+    border-bottom: 0.5px dotted black;
 }
 
-.you {
+.you, .neighbours {
+    
+    h1 {
+    font-family: Oswald;
+    font-size: 3.0em;
+    font-weight: 800;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    }
+    
+    h2 {
+    font-family: Oswald;
+    font-size: 1.0em;
+    }
 }
 
-.neighbours {
-}
 
 .bottomMenu-item {
     font-family: Oswald;
     width: 20vw;
     color: white;
+    font-weight: 800;
     margin: 0 auto;
     height: 20vw;
     font-size: 4vw;
@@ -89,3 +101,4 @@
 img {
     max-width: 100%;
 }
+
