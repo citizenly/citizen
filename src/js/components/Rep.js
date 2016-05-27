@@ -55,22 +55,23 @@ var Rep = React.createClass({
       </div>
       
       <div className="rep-stats-container">
+      
           <div className="agreement">
-            <p>In agreement with...</p>
+            <h2>In agreement with...</h2>
           </div>
           
           <div className="neighbours">
             <h2>neighbours</h2>
-            <h1>**34%**</h1>
+            <h1>34%</h1>
           </div>
           
           <div className="you">
             <h2>you</h2>
-            <h1>**?**</h1>
+            <h1>?</h1>
           </div>
           
           <div className="intheirvoting">
-            <p>... in their voting.</p>
+            <h2>... in their voting.</h2>
           </div>
       
       </div>
