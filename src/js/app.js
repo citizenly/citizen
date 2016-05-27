@@ -48,10 +48,10 @@ var routes = (
       <Route path="rep/:repName" component={Rep}/>
       <Route path="compare" component={Compare}/>
       <Route path="petitions" component={Petitions}/>
-      {/*<Route path="petition" component={Petition}/>*/}
+      <Route path="petition" component={Petition}/>
       <Route path="feed" component={Feed}/>
       <Route path="bills/:filter" component={Bills}/>
-      <Route path="bill" component={Bill}/>
+      <Route path="bill/:billId" component={Bill}/>
       <Route path="login" component={Login}/>
       <Route path="*" component={NotFound}/>
     </Route>
