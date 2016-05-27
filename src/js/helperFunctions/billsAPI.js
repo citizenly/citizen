@@ -1,5 +1,3 @@
-
-
 var request = require("request");
 var findBillId = require("./findBillId.js");
 var makeRequest = require("./openAPI.js");
@@ -47,22 +45,22 @@ function getAllVotes(limit, callback) {
 function getListofBillsFromVotes(arrOfVotes, callback) {
   var bills = [];
   arrOfVotes.forEach(function(vote) {
-    var result = vote.result;
-    var date = vote.date;
-    var number = vote.number;
+    var resultOfVote = vote.result;
+    var dateOfVote = vote.date;
+    var voteSessionId = vote.number;
     var billId = findBillId.findBillId(vote.bill_url);
     var billUrl = vote.bill_url;
-    var nay_total = vote.nay_total;
-    var yea_total = vote.yea_total;
+    var noVotesTotal = vote.nay_total;
+    var yesVotesTotal = vote.yea_total;
 
     var bill = {
-      result: result,
-      date: date,
-      number: number,
+      resultOfVote: resultOfVote,
+      dateOfVote: dateOfVote,
+      voteSessionId: voteSessionId,
+      noVotesTotal: noVotesTotal,
+      yesVotesTotal: yesVotesTotal,
       billId: billId,
-      billUrl: billUrl,
-      nay_total: nay_total,
-      yea_total: yea_total
+      billUrl: billUrl
     };
 
     //Not all the votes is about a bill, so if the billId is not null, we want to keep it because it's a bill
@@ -135,8 +133,8 @@ function getUniqueBillsByDate(bills, callback) {
   //var filterdBills = [];
   for (var bill in bin) {
     var latestBill = bin[bill].reduce(function(prev, next) {
-      var x = new Date(prev.date);
-      var y = new Date(next.date);
+      var x = new Date(prev.dateOfVote);
+      var y = new Date(next.dateOfVote);
       if (x < y) {
         return next;
       }
@@ -149,6 +147,35 @@ function getUniqueBillsByDate(bills, callback) {
   callback(allBills);
 }
 
+
+// Filter unique bills by result of Passed, Failed or Tie
+function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote, callback) {
+  var billsPassed = [];
+  var billsFailed = [];
+  var billsTied = [];
+  resultOfVote = resultOfVote.charAt(0).toUpperCase() + resultOfVote.slice(1);
+  
+  listOfUniqueBills.forEach(function(bill) {
+    if (bill.resultOfVote === 'Passed') {
+      billsPassed.push(bill);
+    }
+    else if (bill.resultOfVote === 'Failed') {
+      billsFailed.push(bill);
+    }
+    else {
+      billsTied.push(bill);
+    }
+  });
+  if (resultOfVote === 'Passed') {
+    callback(billsPassed);
+  }
+  else if (resultOfVote === 'Failed') {
+    callback(billsFailed);
+  }
+  else {
+    callback(billsTied);
+  }
+}
 
 /*To know how vote every MP, we need to look at ballots:
 http://api.openparliament.ca/votes/ballots/?format=json
@@ -176,18 +203,18 @@ module.exports = {
   getUniqueBillsByDate: getUniqueBillsByDate,
   fixLimitByPage: fixLimitByPage,
   getListOfBillsWithTitle: getListOfBillsWithTitle,
-  getTitleOfBill: getTitleOfBill
-  
+  getTitleOfBill: getTitleOfBill,
+  filterUniqueBillsByResult: filterUniqueBillsByResult
 };
 
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
-fixLimitByPage(function(limit) {
-  getBallotsByPolitician(limit, "tony-clement", function(balllotsByPolitician){
-    console.log(balllotsByPolitician);
-  });
-});
+// fixLimitByPage(function(limit) {
+//   getBallotsByPolitician(limit, "tony-clement", function(balllotsByPolitician){
+//     console.log(balllotsByPolitician);
+//   });
+// });
 
 
 // function getVoteNumber(bills, billId, callback){
@@ -201,8 +228,10 @@ fixLimitByPage(function(limit) {
 //     getListofBillsFromVotes(arrOfVotes, function(bills) {
 //       getTitleOfBill(function(billsWithTitle){
 //         getListOfBillsWithTitle(bills, billsWithTitle, function(listOfBillsWithTitle){
-//           getUniqueBillsByDate(listOfBillsWithTitle, function (listOfUniqueBills){
-//             console.log(listOfUniqueBills);
+//           getUniqueBillsByDate(listOfBillsWithTitle, function(listOfUniqueBills){
+//             filterUniqueBillsByResult(listOfUniqueBills, 'failed', function(listOfUniqueBillsByResult) {
+//               console.log(listOfUniqueBillsByResult);
+//             });
 //           });
 //         });
 //       });
