@@ -9,8 +9,8 @@ var Bill = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>{this.props.billId}</h2>
-        <h4>{this.props.date}</h4>
+        <h2>{this.props.billId} <span className="result">{this.props.result}</span></h2>
+        <h4>{this.props.billTitle}</h4>
       </div>
     );
   }
@@ -21,6 +21,7 @@ var Bill = React.createClass({
 var Bills = React.createClass({
   getInitialState: function() {
     // set inital state to determine which list of bills is displayed - active by default
+    // ** need to fix my logic because it's always reverting to /active!
     return {
       filter: "active",
       billList: [],
@@ -48,11 +49,12 @@ var Bills = React.createClass({
   renderBills: function(bill) {
     return (
       <li key={bill.billId}>
-        <Bill date={bill.date} billId={bill.billId}/>
+        <Bill billTitle={bill.billTitle} billId={bill.billId} result={bill.result}/>
       </li>
     );
   },
   render: function() {
+    console.log(this.state.billList);
     return (
       <div>
         <div className="billInfo">
@@ -72,8 +74,6 @@ var Bills = React.createClass({
               <li><Link activeClassName="active" to="/bills/all">all</Link></li>
             </ul>
           </div>
-          <h2>bill.id</h2>
-          <h2>My representative voted: repsVote</h2>
         </div>
         
         <div>

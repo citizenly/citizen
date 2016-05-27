@@ -3,6 +3,7 @@ var React = require('react');
 // required for ajax calls
 var axios = require('axios');
 var $ = require('jquery');
+import { withRouter } from 'react-router';
 
 
 var Bill = React.createClass({
@@ -160,4 +161,4 @@ var Bill = React.createClass({
   }
 });
 
-module.exports = Bill;
+module.exports = withRouter(Bill);
