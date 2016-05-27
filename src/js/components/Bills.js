@@ -9,7 +9,6 @@ var Bill = React.createClass({
   render: function() {
     return (
       <div>
-        {this.props==={} ? 'We will have more filters coming soon' : null}
         <h2>{this.props.billId} <span className="result">{this.props.result}</span></h2>
         <h4>{this.props.billTitle}</h4>
       </div>
@@ -41,7 +40,7 @@ var Bills = React.createClass({
     var filter = this.props.params.filter;
     
     // post filter to server and this.setState({billList: response.data})
-    this.setState({loading: true})
+    this.setState({loading: true});
     axios.post('/postfilter', {
       filter: filter
     })
@@ -85,7 +84,7 @@ var Bills = React.createClass({
         <div>
           {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
           <ul>
-            {this.state.billList.map(this.renderBills)}
+            {this.state.billList !== [] ? this.state.billList.map(this.renderBills) : 'We will have more filters coming soon'}
           </ul>
         </div>
       </div>
