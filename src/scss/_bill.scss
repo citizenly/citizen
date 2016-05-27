@@ -3,7 +3,7 @@
     font-weight: 400;
     color: white;
     background-color: #B095C4;
-    padding: 10px, 10px, 10px, 10px;
+    padding: 10px;
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
@@ -28,21 +28,20 @@
      text-transform: uppercase;
 }
 
-
 .billTags {
     display: flex;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
     
-    div {
-            margin: 7px;
-            background-color: rgba(0,0,0,0.6);
-            color: white;
-            font-family: Oswald, sans-serif;
-            font-weight: 400;
-            font-size: 0.9em;
-    }
+        div {
+        margin: 7px;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-family: Oswald, sans-serif;
+        font-weight: 200;
+        font-size: 0.8em;
+        }
 }
 
 .billTabs {
@@ -61,7 +60,7 @@
     
     li {
         font-family: Oswald, sans-serif;
-        font-weight: 400;
+        font-weight: 200;
         text-transform: uppercase;
         background: white;
         padding: 0px 15px;
@@ -127,6 +126,16 @@
     .redButton-clicked {
     background-image: url("../../images/redButtonPressed.png")
     }
+    
+    .leftarrow {
+    background-image: url("../../images/redButtonPressed.png")
+    }
+    
+    
+    .rightarrow {
+    background-image: url("../../images/redButtonPressed.png")
+    }
+    
     
     .share {
         max-width: 50px;

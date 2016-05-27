@@ -130,19 +130,19 @@ var Bill = React.createClass({
           
         <div className="votingButtons">
           <div className="leftarrow">
-            <img alt="left" src="images/arrowleft.png"></img>
+            <img alt="left" src="../../images/arrowleft.png"></img>
           </div>
                       
           <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
 
           <div className= "share">
-            <img alt="share" src="images/twitter-logo.jpg"></img>
+            <img alt="share" src="../../images/twitter-logo.jpg"></img>
           </div>
 
           <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
 
           <div className="rightarrow">
-            <img alt="right" src="images/arrowright.png"></img>
+            <img alt="right" src="../../images/arrowright.png"></img>
           </div>
               
         </div>
