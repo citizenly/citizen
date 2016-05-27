@@ -31,18 +31,18 @@ function getAllBills(limit, callback) {
   var path = `bills/?session=42-1&limit=${limit}`;
   makeRequest(path, function(err, res){
     if(err){
-      callback(new Error("Oops.. we can't find the list of bill of the current session of parliament. Please try again!"));  
+      callback(err);  
     }
     else{
       var arrOfBills = res.objects;
-      callback(arrOfBills);
+      callback(null, arrOfBills);
     }
   });
 }
 
 
 // Reduce the raw bill object to the name, and id
-function allBills(arrOfBills, callback) {
+function allBills(arrOfBills) {
   var allBills = [];
   arrOfBills.forEach(function(bill) {
     var billId = bill.number;
@@ -54,7 +54,7 @@ function allBills(arrOfBills, callback) {
     };
     allBills.push(bill);
   });
-  callback(allBills);
+  return allBills;
 }
  
 
@@ -64,7 +64,7 @@ function getAllVotes(limit, callback) {
   var path = `votes/?date=&session=42-1&limit=${limit}&format=json`;
   makeRequest(path, function(err, res){
     if(err){
-      callback(new Error("Oops.. we can't find the list of votes of the current session of parliament. Please try again!"));  
+      callback(err);  
     }
     else{
       var arrOfVotes = res.objects;
@@ -143,7 +143,6 @@ function getUniqueBillsByDate(bills) {
     bin[obj.billId].push(obj);
   });
   
-  //var filterdBills = [];
   for (var bill in bin) {
     var latestBill = bin[bill].reduce(function(prev, next) {
       var x = new Date(prev.dateOfVote);
@@ -162,7 +161,7 @@ function getUniqueBillsByDate(bills) {
 
 
 // Filter unique bills by result of Passed, Failed or Tie
-function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote, callback) {
+function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote) {
   var billsPassed = [];
   var billsFailed = [];
   var billsTied = [];
@@ -180,13 +179,13 @@ function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote, callback) {
     }
   });
   if (resultOfVote === 'Passed') {
-    callback(billsPassed);
+    return billsPassed;
   }
   else if (resultOfVote === 'Failed') {
-    callback(billsFailed);
+    return billsFailed;
   }
   else {
-    callback(billsTied);
+    return billsTied;
   }
 }
 
@@ -198,12 +197,11 @@ Once I have the the list of ballots for a specific politician, I need its voteNu
 With the voteNumber, I can find the name of the bill the vote was about.
 */
 function getBallotsByPolitician(limit, politician, callback){
-  //votes/ballots/?politician=tony-clement&format=json&limit=63
   var listOfBallots = [];
   var path = `votes/ballots/?politician=${politician}&limit=${limit}`;
   makeRequest(path, function(err, ballots){
     if(err){
-      callback(new Error("Oops..we can't find how your MP voted on this bill. Please try again!"));
+      callback(err);
     }
     else {
       ballots = ballots.objects;
@@ -225,8 +223,7 @@ function getBallotsByPolitician(limit, politician, callback){
   });
 }
 
-function getEverything(billsWithoutTitle, billsWithTitle, ballots) {
-  console.log(billsWithoutTitle[0], billsWithTitle[0], ballots[0]);
+function getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, ballots) {
   return ballots.map(function(ballot) {
     var theBillWithoutTitle = billsWithoutTitle.find(function(bill) {
       return bill.voteSessionId === Number(ballot.voteNumber);
@@ -250,7 +247,7 @@ function getEverything(billsWithoutTitle, billsWithTitle, ballots) {
   })
   .filter(function(ballot) {
     return !!ballot;
-  })
+  });
 }
 
 //In the array of bill objects, add the title of each bill 
@@ -275,22 +272,6 @@ function getListOfBillsWithTitle(bills, billsWithTitle){
     return listOfBillsWithTitle;
 }
 
-//In the listOfBallots (array of ballots objects) add the title of each bill that is in the listOfBillsWithTitle (array of bill objects)
-function getNameOfBillFromItsVoteNumber(billsWithTitle, ballots) {
-  var balllotsWithBillTitle = [];
-  ballots = ballots.map(function(ballot){
-    var voteNumber = ballot.voteNumber;
-    
-    var billTitle = billsWithTitle.find(function(billWithTitle){
-      return billWithTitle.voteSessionId === Number(voteNumber);
-      });
-
-      ballot.billTitle = billTitle.billTitle;
-      balllotsWithBillTitle.push(ballot);
-  });
-  return balllotsWithBillTitle;
-}
-
 
 
 module.exports = {
@@ -302,7 +283,8 @@ module.exports = {
   getTitleOfBill: getTitleOfBill,
   filterUniqueBillsByResult: filterUniqueBillsByResult,
   getAllBills: getAllBills,
-  allBills: allBills
+  allBills: allBills,
+  getBallotsAboutBillWithTitle: getBallotsAboutBillWithTitle
 };
 
 
@@ -333,7 +315,7 @@ fixLimitByPage(function(err, limit) {
           return;
         }
         
-        var finalResult = getEverything(bills, billsWithTitle, listOfBallots);
+        var finalResult = getBallotsAboutBillWithTitle(bills, billsWithTitle, listOfBallots);
         
         console.log(finalResult);
         });
