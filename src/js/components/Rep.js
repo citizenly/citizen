@@ -37,7 +37,7 @@ var Rep = React.createClass({
   },
   render: function() {
     return (
-      <div>
+    <div>
       <div className="rep-container">
 
         <div className="rep-info">
@@ -55,28 +55,35 @@ var Rep = React.createClass({
       </div>
       
       <div className="rep-stats-container">
-      
+        
           <div className="agreement">
             <h2>In agreement with...</h2>
           </div>
           
-          <div className="neighbours">
-            <h2>neighbours</h2>
-            <h1>34%</h1>
+          <div className="repstatsbackgroundcolor">
+              <div className="neighbours">
+                <h2>neighbours</h2>
+                <h1>34%</h1>
+              </div>
+              
+              <div className="you">
+                <h2>you</h2>
+                <h1>?</h1>
+              </div>
           </div>
           
-          <div className="you">
-            <h2>you</h2>
-            <h1>?</h1>
-          </div>
           
           <div className="intheirvoting">
             <h2>... in their voting.</h2>
           </div>
+          <div id="seperator"></div>
+          <div className="down"></div>
       
-      </div>
+          <div className= "twitterlogo">
+            <img alt="share" src="../../images/twitter-logo.jpg"></img>
+          </div>
     </div>
-     <footer>
+      <footer>
           <div className="bottomMenu-item compare">
             <Link to="/compare" activeClassName="active">COMPARE</Link>
           </div>
@@ -91,7 +98,7 @@ var Rep = React.createClass({
           </div>
        </footer>
     </div>
-
+  </div>
     );
   }
 });

@@ -22,7 +22,7 @@ var Home = React.createClass({
     var userPostalCode = formattedPc.validatePC(pc);
     if(userPostalCode === "invalid") {
         this.setState({invalidPostalCode: "alert"});
-        event.emit('show_message', {message:"Please, enter a valid postal code"});
+        event.emit('show_message', {message:"Enter a valid postal code"});
     }
     else {
       axios.post('/repnameget', {
