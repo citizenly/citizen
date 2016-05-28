@@ -99,15 +99,15 @@ app.post('/postfilter', function(req, res) {
       });  
       break;
       
-    case 'all':
-      fixLimitByPage(function(limit) {
-        getAllBills(limit, function(arrOfBills) {
-          allBills(arrOfBills, function(allBills) {
-            res.send(allBills);
-          });
-        });
-      });
-      break;  
+    // case 'all':
+    //   fixLimitByPage(function(limit) {
+    //     getAllBills(limit, function(arrOfBills) {
+    //       allBills(arrOfBills, function(allBills) {
+    //         res.send(allBills);
+    //       });
+    //     });
+    //   });
+    //   break;  
       
     default:
       res.send([]);

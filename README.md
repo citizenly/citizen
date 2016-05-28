@@ -15,6 +15,8 @@ webpack -watch
 
 memchached -d
 
+run-mongo
+
 sass --watch src/scss/app.scss:public/css/main.css
 or
 npm run sass
