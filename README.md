@@ -11,7 +11,7 @@ gem install sass
 
 node server.js
 
-webpack -watch
+webpack --watch
 
 memchached -d
 

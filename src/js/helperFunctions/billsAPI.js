@@ -40,10 +40,9 @@ function getAllBills(limit, callback) {
   });
 }
 
-
 // Reduce the raw bill object to the name, and id
 function allBills(arrOfBills) {
-  var allBills = [];
+  var allBillsClean = [];
   arrOfBills.forEach(function(bill) {
     var billId = bill.number;
     var billTitle = bill.name.en;
@@ -52,9 +51,9 @@ function allBills(arrOfBills) {
       billId: billId,
       billTitle: billTitle
     };
-    allBills.push(bill);
+    allBillsClean.push(bill);
   });
-  return allBills;
+  return allBillsClean;
 }
  
 
@@ -73,10 +72,9 @@ function getAllVotes(limit, callback) {
   });
 }
 
-
 // Store only the bill info we need in the array of bill objects - without the title
-function getListofBillsFromVotes(arrOfVotes) {
-  var bills = [];
+function getListOfBillsFromVotes(arrOfVotes) {
+  var billsWithoutTitle = [];
   arrOfVotes.forEach(function(vote) {
     var resultOfVote = vote.result;
     var dateOfVote = vote.date;
@@ -98,13 +96,13 @@ function getListofBillsFromVotes(arrOfVotes) {
     
     //Not all the votes is about a bill, so if the billId is not null, we want to keep it because it's a bill
     if (bill.billId.length > 0) {
-      bills.push(bill);
+      billsWithoutTitle.push(bill);
     }
  });
-  return bills;
+  return billsWithoutTitle;
 }
 
-
+//// Get array of objects of all bills in current session with its title
 function getTitleOfBill(callback) {
   var billsWithTitle = [];
   var path = "bills/?session=42-1&limit=500";
@@ -130,7 +128,27 @@ function getTitleOfBill(callback) {
   });
 }
 
+//In the array of bill objects, add the title of each bill 
+function getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle){
 
+    var listOfBillsWithTitle = [];
+    var bills = billsWithoutTitle.map(function(bill){
+      var billId = bill.billId;
+      var title = billsWithTitle.find(function(billWithTitle) {
+        return billWithTitle.billId === billId;
+      });
+      
+      if(title){
+        bill.billTitle = title.title;
+        listOfBillsWithTitle.push(bill);
+      }
+      else{
+        bill.billTitle = 'N/A';
+        listOfBillsWithTitle.push(bill);
+      }
+    });
+    return listOfBillsWithTitle;
+}
 
 
 // Reduce the array to only unique bills and only the most recently voted on version of the bill
@@ -193,8 +211,8 @@ function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote) {
 http://api.openparliament.ca/votes/ballots/?format=json
 The balllots can be filter by politician. 
 //http://api.openparliament.ca/votes/ballots/?politician=sherry-romanado&vote=42-1%2F63
-Once I have the the list of ballots for a specific politician, I need its voteNumber.
-With the voteNumber, I can find the name of the bill the vote was about.
+Once we have the the list of ballots for a specific politician, we need its voteNumber.
+With the voteNumber, we can find the name of the bill the vote was about.
 */
 function getBallotsByPolitician(limit, politician, callback){
   var listOfBallots = [];
@@ -223,6 +241,7 @@ function getBallotsByPolitician(limit, politician, callback){
   });
 }
 
+//Filter the ballots of each politician to keep only the one about bills
 function getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, ballots) {
   return ballots.map(function(ballot) {
     var theBillWithoutTitle = billsWithoutTitle.find(function(bill) {
@@ -250,33 +269,13 @@ function getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, ballots
   });
 }
 
-//In the array of bill objects, add the title of each bill 
-function getListOfBillsWithTitle(bills, billsWithTitle){
 
-     var listOfBillsWithTitle = [];
-    bills = bills.map(function(bill){
-      var billId = bill.billId;
-      var title = billsWithTitle.find(function(billWithTitle) {
-        return billWithTitle.billId === billId;
-      });
-      
-      if(title){
-        bill.billTitle = title.title;
-        listOfBillsWithTitle.push(bill);
-      }
-      else{
-        bill.billTitle = 'N/A';
-        listOfBillsWithTitle.push(bill);
-      }
-    });
-    return listOfBillsWithTitle;
-}
 
 
 
 module.exports = {
   getAllVotes: getAllVotes,
-  getListofBillsFromVotes: getListofBillsFromVotes,
+  getListOfBillsFromVotes: getListOfBillsFromVotes,
   getUniqueBillsByDate: getUniqueBillsByDate,
   fixLimitByPage: fixLimitByPage,
   getListOfBillsWithTitle: getListOfBillsWithTitle,
@@ -284,43 +283,44 @@ module.exports = {
   filterUniqueBillsByResult: filterUniqueBillsByResult,
   getAllBills: getAllBills,
   allBills: allBills,
-  getBallotsAboutBillWithTitle: getBallotsAboutBillWithTitle
+  getBallotsAboutBillWithTitle: getBallotsAboutBillWithTitle,
+  getBallotsByPolitician: getBallotsByPolitician
 };
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
-fixLimitByPage(function(err, limit) {
-  if (err) {
-    console.log(err);
-    return;
-  }
+// fixLimitByPage(function(err, limit) {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
   
-  getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
-    if (err) {
-      console.log(err);
-      return;
-    }
+//   getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
     
-    getAllVotes(limit, function(err, arrOfVotes) {
-      if (err) {
-        console.log(err);
-        return;
-      }
+//     getAllVotes(limit, function(err, arrOfVotes) {
+//       if (err) {
+//         console.log(err);
+//         return;
+//       }
       
-      var bills = getListofBillsFromVotes(arrOfVotes);
+//       var bills = getListofBillsFromVotes(arrOfVotes);
       
-      getTitleOfBill(function(err, billsWithTitle) {
-        if (err) {
-          console.log(err);
-          return;
-        }
+//       getTitleOfBill(function(err, billsWithTitle) {
+//         if (err) {
+//           console.log(err);
+//           return;
+//         }
         
-        var finalResult = getBallotsAboutBillWithTitle(bills, billsWithTitle, listOfBallots);
+//         var finalResult = getBallotsAboutBillWithTitle(bills, billsWithTitle, listOfBallots);
         
-        console.log(finalResult);
-        });
-    });
-  });
-});
+//         console.log(finalResult);
+//         });
+//     });
+//   });
+// });
 
 
