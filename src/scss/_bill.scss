@@ -17,19 +17,20 @@
      padding-top: 20px;
 }
 
-.myRepsVote {
+.tagDescriptions {
      font-family: Oswald, sans-serif;
      font-weight: 400;
      font-size: 0.8em;
      display: flex;
      align-items: center;
+     flex-direction: column;
      justify-content: center;
-     padding-top: 20px;
+     padding-top: 5px;
      padding-bottom: 30px;
      text-transform: uppercase;
 }
 
-.repsVote {
+.dynamic {
     color: green;
     font-weight: 600;
 }
@@ -96,7 +97,7 @@
     min-height: 70px; 
     font-family: Arimo;
     background-color: rgba(0,0,0,0.1);
-}
+    font-size: 1.2em;}
     
 
 .votingButtons {
@@ -113,7 +114,7 @@
     
     .redbutton, .greenbutton, .redButton-clicked, .greenButton-clicked {
         padding: 10px;
-        max-width: 80px;
+        max-width: 63px;
         width: 50%;
         height: 100px;
         background: no-repeat center;
