@@ -1,0 +1,103 @@
+.petitions{
+    font-family: Oswald, sans-serif;
+    font-weight: 400;
+    color: white;
+    background-color: #B095C4;
+    padding: 0px;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+
+.petitionTags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 15px;
+        
+         div {
+        margin: 4px;
+        color: black;
+        font-family: Oswald, sans-serif;
+        font-weight: 200;
+        font-size: 0.8em;
+        background: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+        border-radius: 2px;
+        padding: 0px 5px;
+        }
+    
+        a {
+        font-family: Oswald, sans-serif;
+        color: black;
+        font-weight: 200;
+        font-size: 0.9em;
+        border-radius: 2px;
+        text-decoration: none;
+        }
+        
+}
+
+
+
+.searchbox {
+    font-family: Arimo, sans-serif;
+    outline: none;
+    height: 1.5rem;
+    font-size: 1rem;
+    margin-top: 10px;
+    padding: 0;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-around;
+    
+        input[type=text] {
+        border-radius: 15px;
+        text-align: center;
+        width: 300px;
+        height: 100%;
+        padding: 0;
+        box-shadow: none;
+        font-family: Arimo;
+        font-size: 0.8em;
+        padding-left: 15px;
+        padding-right: 15px;
+        box-shadow: inset 0px 0px 4px rgba(0,0,0,0.3);
+        }
+    
+        input, select, textarea {
+        font: inherit;
+        margin: 0;
+        border: 0px;
+        }
+}
+
+
+
+.billList {
+ margin-left: 10px;
+ list-style: none;
+        ul, li {
+        list-style: none;
+        }
+        
+        h4 {
+        font-family: Arimo, sans-serif;
+        font-size: 0.8em;
+        font-weight: 100;
+        margin-bottom: 20px;
+        list-style: none;
+        }
+        
+        h2 {
+        font-family: Oswald, sans-serif;
+        font-size: 0.9em;
+        font-weight: 200;
+        list-style: none;
+        }
+}
