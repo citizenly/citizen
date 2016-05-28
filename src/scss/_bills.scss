@@ -16,20 +16,47 @@
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 15px;
+        
+        div {
+        margin: 4px;
+        }
     
         a {
-        margin: 2px;
+        font-family: Oswald, sans-serif;
+        color: black;
+        font-weight: 200;
+        font-size: 0.9em;
+        border-radius: 2px;
+        text-decoration: none;
+        }
+        
+}
+
+.infobgcolor {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    background: rgba(0,0,0,0.1);
+    border: 10px solid white;
+    padding: 2px 4px 2px 4px;
+     
+    div {
+        font-family: Oswald, sans-serif;
+        color: black;
+        font-weight: 400;
+        font-size: 0.8em;
+        text-transform: uppercase;
+    }
+    
+      p {
         font-family: Oswald, sans-serif;
         color: black;
         font-weight: 200;
         font-size: 0.8em;
-        background: rgba(0, 0, 0, 0.1);
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
-        border-radius: 2px;
-        padding: 0px 5px;
-        text-decoration: none;
-        }
-        
+        text-transform: uppercase;
+    }
 }
 
 
@@ -69,8 +96,9 @@
 
 .billList {
  margin-left: 10px;
+ list-style: none;
         ul, li {
-        text-decoration: none;
+        list-style: none;
         }
         
         h4 {
@@ -78,11 +106,13 @@
         font-size: 0.8em;
         font-weight: 100;
         margin-bottom: 20px;
+        list-style: none;
         }
         
         h2 {
         font-family: Oswald, sans-serif;
         font-size: 0.9em;
         font-weight: 200;
+        list-style: none;
         }
 }

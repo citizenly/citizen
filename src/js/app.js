@@ -16,6 +16,7 @@ var Rep = require('./components/Rep.js');
 var Compare = require('./components/Compare.js');
 var Petitions = require('./components/Petitions.js');
 var Petition = require('./components/Petition.js');
+var PetitionForm = require('./components/PetitionForm.js');
 var Feed = require('./components/Feed.js');
 var Bills = require('./components/Bills.js');
 var Bill = require('./components/Bill.js');
@@ -49,6 +50,7 @@ var routes = (
       <Route path="compare" component={Compare}/>
       <Route path="petitions" component={Petitions}/>
       <Route path="petition" component={Petition}/>
+      <Route path="petitionform" component={PetitionForm}/>
       <Route path="feed" component={Feed}/>
       <Route path="bills/:filter" component={Bills}/>
       <Route path="bill/:billId" component={Bill}/>

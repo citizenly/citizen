@@ -95,15 +95,10 @@ var Bill = React.createClass({
                 <h2>{this.state.bill.id}</h2>
               </div>
                 
-              <div className="billTags">
-                <div>{this.state.bill.status}</div>
-                <div>{this.state.bill.lastVote}</div>
-                <div>{this.state.bill.proposedBy}</div>
-              </div>
-            </div>
-            <div className="myRepsVote">
-              <div>My representative voted:  </div>
-              <div className="repsVote">{this.state.bill.repsVote}</div>
+              <div className="tagDescriptions">
+                <p>Last parliamentary vote <span className="dynamic">{this.state.bill.lastVote}</span></p>
+                <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span></p>
+                <p>My representative voted <span className="dynamic">{this.state.bill.repsVote}</span></p>
             </div>
           </div>
     
@@ -143,6 +138,7 @@ var Bill = React.createClass({
               
         </div>
       </div>
+  </div>
     );
   }
 });
