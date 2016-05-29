@@ -5,6 +5,10 @@ var axios = require('axios');
 var $ = require('jquery');
 import { withRouter } from 'react-router';
 
+var Parse = require('parse');
+
+var Vote = Parse.Object.extend('Vote');
+
 
 var Bill = React.createClass({
   getInitialState: function() {
@@ -55,6 +59,31 @@ var Bill = React.createClass({
     .catch(function(response) {
       console.log(response, 'response');
     });
+
+    this.setState({content: this.state.bill.title});
+    
+    var query = new Parse.Query(Vote);
+    query.equalTo('userId', Parse.User.current().id).equalTo('billId', this.props.params.billId);
+    
+    query.find().then(function(votes) {
+      if (votes.length) {
+        var vote = votes[0];
+        if (vote.get('vote') === 1) {
+          that.setState({
+            greenBtnToggle: "greenButton-clicked",
+            redBtnToggle: "redbutton",
+            vote: 1
+          });
+        }
+        else if (vote.get('vote') === -1) {
+          that.setState({
+            greenBtnToggle: "greenbutton",
+            redBtnToggle: "redButton-clicked",
+            vote: -1
+          });
+        }
+      }
+    });
   },
   handleTabClick: function(data){
     if(data===1) {
@@ -74,21 +103,34 @@ var Bill = React.createClass({
     $("#tab-" + data).addClass("active");
   },
   handleGBtnClick: function(e) {
+    
     e.preventDefault();
+    
+    var vote = {userId: Parse.User.current().id, billId: this.props.params.billId};
+    
     if (this.state.greenBtnToggle === "greenbutton") {
       this.setState({greenBtnToggle:"greenButton-clicked", redBtnToggle:"redbutton", vote: 1});
+      vote.vote = 1;
+      Parse.Cloud.run('handleVote',  vote);
     }
     else if (this.state.greenBtnToggle === "greenButton-clicked") {
       this.setState({greenBtnToggle:"greenbutton", vote: 0});
+      vote.vote = 0;
+      Parse.Cloud.run('handleVote', vote);
     }
   },
   handleRBtnClick: function(e) {
     e.preventDefault();
+    var vote = {userId: Parse.User.current().id, billId: this.props.params.billId};
     if (this.state.redBtnToggle === "redbutton") {
       this.setState({redBtnToggle:"redButton-clicked", greenBtnToggle: "greenbutton", vote: -1});
+      vote.vote = -1;
+      Parse.Cloud.run('handleVote', vote);
     }
     else if (this.state.redBtnToggle === "redButton-clicked") {
       this.setState({redBtnToggle:"redbutton", vote: 0});
+      vote.vote = 0;
+      Parse.Cloud.run('handleVote', vote);
     }
   },
   render: function() {
