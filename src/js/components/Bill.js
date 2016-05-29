@@ -137,7 +137,7 @@ var Bill = React.createClass({
           <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
 
           <div className= "share">
-            <img alt="share" src="../../images/twitter-logo.jpg"></img>
+            <i className="fa fa-share-alt"></i>
           </div>
 
           <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
