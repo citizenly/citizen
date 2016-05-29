@@ -5,12 +5,12 @@ var React = require('react');
 var Dev = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="developerInfo">
         <h2>{this.props.firstName} {this.props.lastName}</h2>
-        <a href={this.props.github} target="_blank"><i className="fa fa-github" aria-hidden="true"></i></a>
-        <a href={this.props.website} target="_blank"><i className="fa fa-code" aria-hidden="true"></i></a>
-        <a href={this.props.linkedin} target="_blank"><i className="fa fa-linkedin" aria-hidden="true"></i></a>
-        <a href={this.props.twitter} target="_blank"><i className="fa fa-twitter" aria-hidden="true"></i></a>
+          <a href={this.props.github} target="_blank"><i className="fa fa-github" aria-hidden="true"></i></a>
+          <a href={this.props.website} target="_blank"><i className="fa fa-code" aria-hidden="true"></i></a>
+          <a href={this.props.linkedin} target="_blank"><i className="fa fa-linkedin" aria-hidden="true"></i></a>
+          <a href={this.props.twitter} target="_blank"><i className="fa fa-twitter" aria-hidden="true"></i></a>
         <p>{this.props.desc}</p>
       </div>
     );
@@ -35,7 +35,7 @@ var About = React.createClass({
         website: '',
         linkedin: 'https://www.linkedin.com/in/%C3%A5sa-isacson-86308934',
         twitter: '',
-        desc: "awesome human being"
+        desc: "'Citizen' concept, design, front-end. Architect by training, meddles in interactive design, communications and programming. Was with the UN in Nairobi for six years, where she worked with online partner engagement, and came up with and ran UN-Habitat's most viewed video series."
       }, {
         firstName: "Alex",
         lastName: "Ruaux",
@@ -50,7 +50,9 @@ var About = React.createClass({
   renderDevs: function(dev) {
     return (
       <li key={dev.lastName}>
-        <Dev firstName={dev.firstName} lastName={dev.lastName} github={dev.github} website={dev.website} linkedin={dev.linkedin} twitter={dev.twitter} desc={dev.desc}/>
+        <Dev firstName={dev.firstName} lastName={dev.lastName} 
+        
+        github={dev.github} website={dev.website} linkedin={dev.linkedin} twitter={dev.twitter} desc={dev.desc}/>
       </li>
     );
   },
