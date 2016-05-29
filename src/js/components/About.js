@@ -35,7 +35,7 @@ var About = React.createClass({
         website: '',
         linkedin: 'https://www.linkedin.com/in/%C3%A5sa-isacson-86308934',
         twitter: '',
-        desc: "'Citizen' concept, design, front-end. Architect by training, meddles in interactive design, communications and programming. Was with the UN in Nairobi for six years, where she worked with online partner engagement, and came up with and ran UN-Habitat's most viewed video outreach program (three seasons, 37 lectures)."
+        desc: "'Citizen' concept, design, front-end. Architect by training, meddles in interactive design, communications and programming. Was with the UN in Nairobi for six years, where she worked with online partner engagement, and came up with and ran UN-Habitat's most viewed video outreach program."
       }, {
         firstName: "Alex",
         lastName: "Ruaux",
