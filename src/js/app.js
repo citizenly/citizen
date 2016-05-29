@@ -3,11 +3,15 @@ var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
-//var Link = ReactRouter.Link;
 var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
 
+// Setup connection to parse server
+var Parse = require('parse');
+Parse.initialize("XYZ");
+Parse.serverURL = 'https://citizen-marie-evegauthier.c9users.io/parse';
 
+window.Parse = Parse;
 
 var App = require('./components/Main.js');
 var Home = require('./components/Home.js');
@@ -21,6 +25,7 @@ var Feed = require('./components/Feed.js');
 var Bills = require('./components/Bills.js');
 var Bill = require('./components/Bill.js');
 var Login = require('./components/Login.js');
+var Signup = require('./components/Signup.js');
 var NotFound = require('./components/404.js');
 
 
@@ -55,6 +60,7 @@ var routes = (
       <Route path="bills/:filter" component={Bills}/>
       <Route path="bill/:billId" component={Bill}/>
       <Route path="login" component={Login}/>
+      <Route path="signup" component={Signup}/>
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>

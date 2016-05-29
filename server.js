@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 var request = require('request');
+var ParseServer = require('parse-server').ParseServer;
 var RepAPI = require('./src/js/helperFunctions/repAPI.js');
 var getRepName = RepAPI.getRepName;
 var getRepInfo = RepAPI.getRepInfo;
@@ -28,6 +29,18 @@ var corsOptionsDelegate = function(req, callback){
   }
   callback(null, corsOptions); // callback expects two parameters: error and options 
 };
+
+var api = new ParseServer({
+  databaseURI: 'mongodb://localhost:27017/dev', // Connection string for your MongoDB database
+  cloud: __dirname + '/cloud.js', // Absolute path to your Cloud Code
+  appId: 'XYZ',
+  masterKey: 'ABC', // Keep this key secret!
+  fileKey: 'file-key-not-sure',
+  serverURL: 'https://citizen-molecularcode.c9users.io/parse' // Don't forget to change to https if needed
+});
+
+// Serve the Parse API on the /parse URL prefix
+app.use('/parse', api);
  
 
 /* this says: serve all the files in the src directory if they match the URL. Eg , if the client requests http://server/css/app.css then the file in src/css/app.css will be served. But if the client requests http://server/step-2 then since there is no file by that name the middleware will call next() */
