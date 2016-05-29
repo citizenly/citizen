@@ -37,7 +37,37 @@
 }
 
 .dynamic {
-    color: green;
+    color: rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+
+.dynamicFailed {
+    color: #8B2530;
+    font-weight: 600;
+}
+
+.dynamicPassed {
+    color: #006729;
+    font-weight: 600;
+}
+
+.dynamicTie {
+    color: rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+
+.dynamicNo {
+    color: #8B2530;
+    font-weight: 600;
+}
+
+.dynamicYe {
+    color: #006729;
+    font-weight: 600;
+}
+
+.dynamicDi {
+    color: rgba(0,0,0,0.5);
     font-weight: 600;
 }
 
