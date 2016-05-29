@@ -152,11 +152,11 @@ function getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle){
 
 
 // Reduce the array to only unique bills and only the most recently voted on version of the bill
-function getUniqueBillsByDate(bills) {
+function getUniqueBillsByDate(listOfBillsWithTitle) {
   var bin = {};
-  var allBills = [];
+  var listOfUniqueBills = [];
   
-  bills.filter(function(obj) {
+  listOfBillsWithTitle.filter(function(obj) {
     bin[obj.billId] = bin[obj.billId] || [];
     bin[obj.billId].push(obj);
   });
@@ -172,9 +172,9 @@ function getUniqueBillsByDate(bills) {
         return prev;
       }
     });
-    allBills.push(latestBill);
+    listOfUniqueBills.push(latestBill);
   }
-  return allBills;
+  return listOfUniqueBills;
 }
 
 
@@ -269,7 +269,38 @@ function getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, ballots
   });
 }
 
+//http://api.openparliament.ca/bills/?session=42-1&limit=500&sponsor_politician=%2Fpolitician%2Fjustin-trudeau%2F
+function getBillBySponsor(politician, callback) {
+  var path = `bills/?session=42-1&limit=500&sponsor_politician=%2Fpolitician%2F${politician}`;
+  var listOfBillsSponsored = [];
+  makeRequest(path, function(err, res) {
+    if (err) {
+      callback(err);
+    }
+    else {
+      if (res.objects.length === 0) {
+        return ("Your MP doesn't sponsor any bill")
+      }
+      else {
+        var billsSponsored = res.objects;
+        billsSponsored.forEach(function(bill) {
+          var name = bill.name.en;
+          var billUrl = bill.url;
+          var billId = bill.number;
 
+          var billSponsored = {
+            name: name,
+            billUrl: billUrl,
+            billId: billId
+          };
+
+          listOfBillsSponsored.push(billSponsored);
+        });
+      }
+      callback(null, listOfBillsSponsored);
+    }
+  });  
+}
 
 
 
@@ -284,43 +315,40 @@ module.exports = {
   getAllBills: getAllBills,
   allBills: allBills,
   getBallotsAboutBillWithTitle: getBallotsAboutBillWithTitle,
-  getBallotsByPolitician: getBallotsByPolitician
+  getBallotsByPolitician: getBallotsByPolitician,
+  getBillBySponsor: getBillBySponsor
 };
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
 // fixLimitByPage(function(err, limit) {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   }
-  
-//   getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
-//     if (err) {
-//       console.log(err);
-//       return;
-//     }
-    
-//     getAllVotes(limit, function(err, arrOfVotes) {
-//       if (err) {
-//         console.log(err);
-//         return;
-//       }
+//                 if (err) {
+//                   console.log(err);
+//                   return;
+//                 }
+//                 getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
+//                   if (err) {
+//                     console.log(err);
+//                     return;
+//                   }
+//                   getAllVotes(limit, function(err, arrOfVotes) {
+//                     if (err) {
+//                       console.log(err);
+//                       return;
+//                     }
       
-//       var bills = getListofBillsFromVotes(arrOfVotes);
+//                   var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
       
-//       getTitleOfBill(function(err, billsWithTitle) {
-//         if (err) {
-//           console.log(err);
-//           return;
-//         }
+//                   getTitleOfBill(function(err, billsWithTitle) {
+//                     if (err) {
+//                       console.log(err);
+//                       return;
+//                     }
         
-//         var finalResult = getBallotsAboutBillWithTitle(bills, billsWithTitle, listOfBallots);
+//                   var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, listOfBallots);
         
-//         console.log(finalResult);
+//         console.log(ballotsOnlyAboutBill);
 //         });
 //     });
 //   });
 // });
-
-

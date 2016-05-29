@@ -19,6 +19,8 @@ var filterUniqueBillsByResult = BillsAPI.filterUniqueBillsByResult;
 var getAllBills = BillsAPI.getAllBills;
 var allBills = BillsAPI.allBills;
 var getBallotsByPolitician = BillsAPI.getBallotsByPolitician;
+var getBallotsAboutBillWithTitle = BillsAPI.getBallotsAboutBillWithTitle
+var getBillBySponsor = BillsAPI.getBillBySponsor;
 
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
 var corsOptionsDelegate = function(req, callback){
@@ -75,149 +77,164 @@ app.post('/repinfoget', function(req, res) {
 
 /* BILLS FUNCTION CALLS ------------------------------------------------------- */
 app.post('/postfilter', function(req, res) {
-      req = req.body.filter;
-      console.log(req, 'req');
-      switch (req) {
-        case 'active':
-          fixLimitByPage(function(err, limit) {
+  req = req.body.filter;
+  console.log(req, 'req');
+  switch (req) {
+    case 'active':
+      fixLimitByPage(function(err, limit) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
             if (err) {
               console.log(err);
               return;
             }
-            getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
+            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
+
+            getUniqueBillsByDate(listOfBillsWithTitle, function(err, listOfUniqueBills) {
               if (err) {
                 console.log(err);
                 return;
               }
-              getAllVotes(limit, function(err, arrOfVotes) {
-                if (err) {
-                  console.log(err);
-                  return;
-                }
-                var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-                getTitleOfBill(function(err, billsWithTitle) {
-                  if (err) {
-                    console.log(err);
-                    return;
-                  }
-                  var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle, listOfBallots);
-                  res.send(listOfBillsWithTitle);
-                });
-              });
+              res.send(listOfUniqueBills);
             });
           });
-        break;
-      
-        case 'passed':
-          fixLimitByPage(function(err, limit) {
+        });
+      });
+      break;
+
+    case 'passed':
+      fixLimitByPage(function(err, limit) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
             if (err) {
               console.log(err);
               return;
             }
-            getAllVotes(limit, function(err, arrOfVotes) {
-              if (err) {
-                console.log(err);
-                return;
-              }
-              var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-              
-              getTitleOfBill(function(err, billsWithTitle){
-                if (err) {
-                console.log(err);
-                return;
-              }
-              var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
-                    
-              var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-                      
-              var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
-              res.send(listOfUniqueBillsByResult);
-              });
-            });
-          });  
-          break;
-      
-          case 'failed':
-            fixLimitByPage(function(err, limit) {
-              if (err) {
-                console.log(err);
-                return;
-              }
-              getAllVotes(limit, function(err, arrOfVotes) {
-                if (err) {
-                  console.log(err);
-                  return;
-                }
-                var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-                
-                getTitleOfBill(function(err, billsWithTitle){
-                  if (err) {
-                  console.log(err);
-                  return;
-                }
-                var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
-                      
-                var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-                        
-                var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
-                res.send(listOfUniqueBillsByResult);
-                });
-              });
-            });  
-            break;
-            
-            case 'all':
-              fixLimitByPage(function(err, limit) {
-                if (err) {
-                  console.log(err);
-                  return;
-                }
-                getAllBills(limit, function(err, arrOfBills) {
-                  if (err) {
-                    console.log(err);
-                    return;
-                  }
-                  var allBillsClean = allBills(arrOfBills);
-                  res.send(allBillsClean);
-                });
-              });
-            break;  
-            
-            case 'proposedbymyrep':
-              fixLimitByPage(function(err, limit) {
-                if (err) {
-                  console.log(err);
-                  return;
-                }
-                getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
-                  if (err) {
-                    console.log(err);
-                    return;
-                  }
-                  getAllVotes(limit, function(err, arrOfVotes) {
-                    if (err) {
-                      console.log(err);
-                      return;
-                    }
-      
-                  var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-      
-                  getTitleOfBill(function(err, billsWithTitle) {
-                    if (err) {
-                      console.log(err);
-                      return;
-                    }
-        
-        var finalResult = getBallotsAboutBillWithTitle(bills, billsWithTitle, listOfBallots);
-        
-        console.log(finalResult);
+            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
+
+            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
+
+            var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
+            res.send(listOfUniqueBillsByResult);
+          });
         });
-    });
-  });
-});
-              
-              
+      });
+      break;
+
+    case 'failed':
+      fixLimitByPage(function(err, limit) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
+
+            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
+
+            var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
+            res.send(listOfUniqueBillsByResult);
+          });
+        });
+      });
+      break;
+
+    case 'all':
+      fixLimitByPage(function(err, limit) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllBills(limit, function(err, arrOfBills) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var allBillsClean = allBills(arrOfBills);
+          res.send(allBillsClean);
+        });
+      });
+      break;
+
+    case 'votedonbymyrep':
+      fixLimitByPage(function(err, limit) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          getAllVotes(limit, function(err, arrOfVotes) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+
+            var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+
+            getTitleOfBill(function(err, billsWithTitle) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+
+              var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, listOfBallots);
+
+              res.send(ballotsOnlyAboutBill);
+            });
+          });
+        });
+      });
+      break;
+    
+    case 'proposedbymyrep':
+      getBillBySponsor("justin-trudeau", function(err, listOfBillsSponsored){
+        if (err) {
+          console.log(err);
+          return;
+        }
+        else{
+          res.send(listOfBillsSponsored);
+        }
       
+      }) 
+
+
+
     default:
       res.send([]);
   }
