@@ -10,13 +10,15 @@ var makeRequest = require("./openAPI.js");
 By default, the limit of results by page is setting at 20 and the order of the result is starting by the highest.  
 As every vote in a session has a sequential number, we set the limit to 
 to the highest vote's number */
+
 // Get number of most recent voting session to use a limit param in url requests
+// Doesn't take any params and callsback a number (limit)
 function fixLimitByPage(callback) {
   var path = 'votes/?session=42-1&limit=1';
   // Make request to api.openparliament.ca and cache
   makeRequest(path, function(err, res){
     if(err){
-      callback(err)
+      callback(err);
     }
     else {
       var numberLastVote = res.objects[0].number;
@@ -27,6 +29,7 @@ function fixLimitByPage(callback) {
 
 
 // Get array of objects of all bills (Commons and Senate) in current session
+// Takes a number (limit) and callsback an array of bill objects (arrOfBills)
 function getAllBills(limit, callback) {
   var path = `bills/?session=42-1&limit=${limit}`;
   makeRequest(path, function(err, res){
@@ -40,9 +43,10 @@ function getAllBills(limit, callback) {
   });
 }
 
-// Reduce the raw bill object to the name, and id
+
+// Takes an array of bill objects (arrOfBills) and returns a modified array of bill objects (allBills)
 function allBills(arrOfBills) {
-  var allBillsClean = [];
+  var allBills = [];
   arrOfBills.forEach(function(bill) {
     var billId = bill.number;
     var billTitle = bill.name.en;
@@ -53,12 +57,33 @@ function allBills(arrOfBills) {
     };
     allBillsClean.push(bill);
   });
-  return allBillsClean;
+  return allBills;
 }
+
+
+// Sort list of all bills alphabetically by separating into C- and S- bills, order by number (e.g. C-14) within C- and S-
+// Takes an array of bill objects (allBills) and returns an ordered array of bill objects (billsSortedAlpha)
+// function sortAllBillsAlpha (allBills) {
+//   var billsC = [];
+//   var billsS = [];
+
+//   allBills.forEach(function(bill) {
+//     console.log(bill.billId, 'bill.billId');
+//     if (bill.billId.charAt(0) === 'C') {
+//       billsC.push(bill);
+//     }
+//     else if (bill.billId.charAt(0) === 'S') {
+//       billsS.push(bill);
+//     }
+//   });
+//   console.log(billsC, 'billsC');
+//   console.log(billsS, 'billsS');
+//   console.log(billsC.concat(billsS), 'concat');
+// }
  
 
-//Calling this function with a callback, we recive an arrry of votes
 // Get array of objects of all bills voted on in current session
+// Takes a number (limit) and returns an array of bills-voted-on objects (arrOfVotes)
 function getAllVotes(limit, callback) {
   var path = `votes/?date=&session=42-1&limit=${limit}&format=json`;
   makeRequest(path, function(err, res){
@@ -72,7 +97,7 @@ function getAllVotes(limit, callback) {
   });
 }
 
-// Store only the bill info we need in the array of bill objects - without the title
+// Takes an array of bills-voted-on objects (arrOfVotes) and returns a modified array of bill objects (bills without the title)
 function getListOfBillsFromVotes(arrOfVotes) {
   var billsWithoutTitle = [];
   arrOfVotes.forEach(function(vote) {
@@ -178,7 +203,7 @@ function getUniqueBillsByDate(listOfBillsWithTitle) {
 }
 
 
-// Filter unique bills by result of Passed, Failed or Tie
+// Takes an array of unique bill objects (listOfUniqueBills) and a 'result' string (resultOfVote) and returns an array of bill objects with the same bill.resultOfVote value
 function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote) {
   var billsPassed = [];
   var billsFailed = [];
@@ -350,5 +375,12 @@ module.exports = {
 //         console.log(ballotsOnlyAboutBill);
 //         });
 //     });
+//   });
+// });
+
+// fixLimitByPage(function(limit) {
+//   getAllBills(limit, function(arrOfBills) {
+//     allBills(arrOfBills);
+//     //sortAllBillsAlpha (allBills);
 //   });
 // });

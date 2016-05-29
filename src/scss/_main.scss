@@ -90,6 +90,10 @@ nav {
     background-color: rgba(0, 0, 0, 0);
     width: 65px;
     
+            .active {
+                font-weight: 600;
+            }
+    
       ul {
       border-left: none;
       border-right: none;
@@ -122,6 +126,6 @@ nav {
   
   
   .slide-down {
-    height: 300px;
+    height: 320px;
   }
 }

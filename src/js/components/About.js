@@ -19,7 +19,6 @@ var Dev = React.createClass({
 
 var About = React.createClass({
   getInitialState: function() {
-    // set inital state to determine which list of bills is displayed - active by default
     return {
       dev: [{
         firstName: "Marie-Eve",

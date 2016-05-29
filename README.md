@@ -13,7 +13,9 @@ node server.js
 
 webpack --watch
 
-memchached -d
+memcached -d
+
+run-mongo
 
 sass --watch src/scss/app.scss:public/css/main.css
 or

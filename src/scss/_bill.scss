@@ -15,21 +15,28 @@
      align-items: center;
      justify-content: center;
      padding-top: 20px;
+     font-weight: 600;
+     
+     span.billnumber {
+        font-weight: 200;
+     }
+     
 }
 
-.myRepsVote {
+.tagDescriptions {
      font-family: Oswald, sans-serif;
      font-weight: 400;
      font-size: 0.8em;
      display: flex;
      align-items: center;
+     flex-direction: column;
      justify-content: center;
-     padding-top: 20px;
+     padding-top: 5px;
      padding-bottom: 30px;
      text-transform: uppercase;
 }
 
-.repsVote {
+.dynamic {
     color: green;
     font-weight: 600;
 }
@@ -39,18 +46,21 @@
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-    
+        
+             .active {
+                font-weight: 600;
+            }
     
         div {
-        margin: 7px;
+        margin: 4px;
         color: black;
         font-family: Oswald, sans-serif;
         font-weight: 200;
-        font-size: 0.8em;
-        background: rgba(0, 0, 0, 0.1);
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
-        border-radius: 2px;
+        font-size: 0.9em;
         padding: 0px 5px;
+        
+        
+        
         }
 }
 
@@ -96,7 +106,7 @@
     min-height: 70px; 
     font-family: Arimo;
     background-color: rgba(0,0,0,0.1);
-}
+    font-size: 1.2em;}
     
 
 .votingButtons {
@@ -113,7 +123,7 @@
     
     .redbutton, .greenbutton, .redButton-clicked, .greenButton-clicked {
         padding: 10px;
-        max-width: 80px;
+        max-width: 63px;
         width: 50%;
         height: 100px;
         background: no-repeat center;
@@ -134,16 +144,16 @@
     }
     
     .redButton-clicked {
-        background-image: url("../../images/redButtonPressed.png")
+        background-image: url("../../images/redButtonPressed.png");
     }
     
     .leftarrow {
-        background-image: url("../../images/redButtonPressed.png")
+        background-image: url("../../images/redButtonPressed.png");
     }
     
     
     .rightarrow {
-        background-image: url("../../images/redButtonPressed.png")
+        background-image: url("../../images/redButtonPressed.png");
     }
     
     
