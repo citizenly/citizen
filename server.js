@@ -54,9 +54,10 @@ app.use(bodyParser());
 /* insert any app.get or app.post you need here. */
 // New AJAX call to the rep name for the url
 app.post('/repnameget', function(req, res) {
-  getRepName(req.body.postalcode, function(nameFormatted) {
-    if(nameFormatted === "Sorry, this is not a valid Canadian postal code") {
-      res.redirect('/');  
+  getRepName(req.body.postalcode, function(err, nameFormatted) {
+    if(err) {
+      console.log(err);
+      return;
     }
     else {
       res.send(nameFormatted);
@@ -66,10 +67,20 @@ app.post('/repnameget', function(req, res) {
 
 //AJAX call to get the Rep object and make it available to the frontend
 app.post('/repinfoget', function(req, res) {
-  getRepInfo(req.body.repName, function(rep) {
-    getPercentageVote(rep.ridingId, function(percentageVote) {
+  getRepInfo(req.body.repName, function(err, rep) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    getPercentageVote(rep.ridingId, function(err, percentageVote) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      else{
       rep.electedVote = percentageVote;
       res.send(rep);
+      }
     });
   });
 });
