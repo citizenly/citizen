@@ -52,13 +52,35 @@
     
       p {
         font-family: Oswald, sans-serif;
-        color: black;
         font-weight: 200;
         font-size: 0.8em;
         text-transform: uppercase;
     }
+    
 }
 
+.color-result{
+    display: flex;
+
+    span {
+    font-size: 1.1em;
+    }
+    
+    .resultFailed {
+    color: #8B2530;
+    font-size: 1.1em;
+    }
+
+    .resultPassed {
+    color: #006729;
+    font-size: 1.1em;
+    }
+
+    .resultTie {
+    color: rgba(0,0,0,0.5);
+    font-size: 1.1em;
+    }
+}
 
 .searchbox {
     font-family: Arimo, sans-serif;
@@ -92,7 +114,17 @@
         }
 }
 
+.resultFailed {
+    color: #8B2530;
+}
 
+.resultPassed {
+    color: #006729;
+}
+
+.resultTie {
+    color: rgba(0,0,0,0.5);
+}
 
 .billList {
  margin-left: 10px;

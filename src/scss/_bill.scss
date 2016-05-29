@@ -15,6 +15,12 @@
      align-items: center;
      justify-content: center;
      padding-top: 20px;
+     font-weight: 600;
+     
+     span.billnumber {
+        font-weight: 200;
+     }
+     
 }
 
 .tagDescriptions {
@@ -40,18 +46,21 @@
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-    
+        
+             .active {
+                font-weight: 600;
+            }
     
         div {
         margin: 4px;
         color: black;
         font-family: Oswald, sans-serif;
         font-weight: 200;
-        font-size: 0.8em;
-        background: rgba(0, 0, 0, 0.1);
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
-        border-radius: 2px;
+        font-size: 0.9em;
         padding: 0px 5px;
+        
+        
+        
         }
 }
 
