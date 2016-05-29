@@ -22,7 +22,13 @@ function makeRequest(path, callback) {
       else {
         mark = "&";
       }
-      request(`${API_URL}${path}${mark}format=json`, function(err, res){
+      var options = {
+        url: `${API_URL}${path}${mark}format=json`,
+        headers: {
+          'User-Agent': 'marie.eve.gauthier@hotmail.com'
+        }
+      };
+      request(options, function(err, res){
         if(err){
           callback(err);
         }

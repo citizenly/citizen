@@ -9,8 +9,8 @@ var Bill = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>{this.props.billId} {this.props.resultOfVote ? <span className="result">{this.props.resultOfVote}</span> : null}</h2>
-        <h4>{this.props.billTitle}</h4>
+        <h2>{this.props.billId} <span className={"result" + this.props.resultOfVote}>{this.props.resultOfVote}</span></h2>
+        <h4><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billTitle}</Link></h4>
       </div>
     );
   }
@@ -23,7 +23,7 @@ var Bills = React.createClass({
     // set inital state to determine which list of bills is displayed - active by default
     // ** need to fix my logic because it's always reverting to /active!
     return {
-      billList: [],
+      billList: []
     };
   },
   componentDidMount: function() {
@@ -82,19 +82,22 @@ var Bills = React.createClass({
               <div><Link activeClassName="active" to="/bills/all">all</Link></div>
           </div>
           
-          <div className="infobgcolor">
-              <div className="color-result">
-                <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
-              </div>
-              <p>indicates most recent vote in parliament</p>
-          </div>
-          
           <div className="billList">
             {/*{this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}*/}
             <div>
               {this.state.billList !== [] ? this.state.billList.map(this.renderBills) : 'We will have more filters coming soon'}
             </div>
           </div>
+          
+          
+          <footer>
+          <div className="infobgcolor">
+              <div className="color-result">
+                <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
+              </div>
+              <p>indicates most recent vote in parliament</p>
+          </div>
+          </footer>
           
      </div>
     );

@@ -9,7 +9,7 @@ gem install sass
 
 //run these commands to get started
 
-node server.js
+nodemon server.js
 
 webpack --watch
 
