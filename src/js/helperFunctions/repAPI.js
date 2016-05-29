@@ -12,31 +12,19 @@ function getRepName (postalCode, callback) {
   //At this point, we have a valid postal code, so we look for the name of the MP
   // this is probably asynchronous, so the handleResult func requires a callback
   var findMPbyPC = `postcodes/${postalCode}/?sets=federal-electoral-districts`;
-  makePcRequest(findMPbyPC, function(err, result){
-    var mpName = result;
-    var name = mpName.representatives_centroid[0].name;
+  makePcRequest(findMPbyPC, function(err, mpInfo){
+    if (err) {
+      callback("Sorry, this is not a valid canadian postal");
+    }
+    else {
+    var name = mpInfo.representatives_centroid[0].name;
     //we have to format the name to be sure that is all lowercase, without accent and with a dash between firstname and lastname
     var nameFormatted = unaccented.unaccented(name); 
     callback(nameFormatted);
+    }
   });
 }  
   
-  
-  
-//   request(findMPbyPC, function(err, result) {
-//     if (err){
-//       return "Sorry, this is not a valid canadian postal";
-//     }
-//     else {
-//       var mpName = JSON.parse(result.body);
-//       var name = mpName.representatives_centroid[0].name;
-//       //we have to format the name to be sure that is all lowercase, without accent and with a dash between firstname and lastname
-//       var nameFormatted = unaccented.unaccented(name); 
-//       callback(nameFormatted);
-//     }
-//   });
-// }
-
 function getRepInfo(nameFormatted, callback) {
   //with the name of MP formatted, we fetch his data
   var findMP = `politicians/${nameFormatted}/`;
