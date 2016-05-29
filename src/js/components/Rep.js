@@ -50,8 +50,9 @@ var Rep = React.createClass({
           <div className="rep-text">
             <p>You are being represented by:</p>
             <h2>{this.state.rep.name}</h2>
-            <p>{this.state.rep.party} MP for {this.state.rep.constituency} ({this.state.rep.province})</p>
+            <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
             <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
+          
           </div>
           
       </div>
@@ -82,7 +83,7 @@ var Rep = React.createClass({
       
           <div className= "sharing-horizontal">
           <a className="fbtn share facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
-          <a className="fbtn share twitter" href="https://twitter.com/intent/tweet?text=YOUR-TEXT&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
+          <a className="fbtn share twitter" href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
           </div>
               
         </div>

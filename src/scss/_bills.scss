@@ -27,7 +27,7 @@
         font-family: Oswald, sans-serif;
         color: black;
         font-weight: 200;
-        font-size: 0.9em;
+        font-size: 0.8em;
         border-radius: 2px;
         text-decoration: none;
         }
@@ -41,6 +41,7 @@
     background: rgba(0,0,0,0.1);
     border: 10px solid white;
     padding: 2px 4px 2px 4px;
+    box-shadow: 1px 20px 50px 1px #888888;
      
     div {
         font-family: Oswald, sans-serif;
@@ -69,16 +70,19 @@
     .resultFailed {
     color: #8B2530;
     font-size: 1.1em;
+    font-weight: 400;
     }
 
     .resultPassed {
     color: #006729;
     font-size: 1.1em;
+    font-weight: 400;
     }
 
     .resultTie {
     color: rgba(0,0,0,0.5);
     font-size: 1.1em;
+    font-weight: 400;
     }
 }
 
@@ -116,14 +120,17 @@
 
 .resultFailed {
     color: #8B2530;
+    font-weight: 400;
 }
 
 .resultPassed {
     color: #006729;
+    font-weight: 400;
 }
 
 .resultTie {
     color: rgba(0,0,0,0.5);
+    font-weight: 400;
 }
 
 .billList {
@@ -151,3 +158,4 @@
             color: rgb(85, 85, 85);
         }
 }
+
