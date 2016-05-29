@@ -55,7 +55,7 @@ function allBills(arrOfBills) {
       billId: billId,
       billTitle: billTitle
     };
-    allBillsClean.push(bill);
+    allBills.push(bill);
   });
   return allBills;
 }
