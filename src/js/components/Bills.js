@@ -10,7 +10,7 @@ var Bill = React.createClass({
     return (
       <div>
         <h2>{this.props.billId} <span className={"result" + this.props.resultOfVote}>{this.props.resultOfVote}</span></h2>
-        <h4>{this.props.billTitle}</h4>
+        <h4><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billTitle}</Link></h4>
       </div>
     );
   }
