@@ -8,6 +8,12 @@ var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
 
 
+// Setup connection to parse server
+var Parse = require('parse');
+Parse.initialize("XYZ");
+Parse.serverURL = 'https://citizen-marie-evegauthier.c9users.io/parse';
+
+window.Parse = Parse;
 
 var App = require('./components/Main.js');
 var Home = require('./components/Home.js');
