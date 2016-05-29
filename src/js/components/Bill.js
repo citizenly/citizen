@@ -6,12 +6,7 @@ var $ = require('jquery');
 import { withRouter } from 'react-router';
 
 var Parse = require('parse');
-
 var Vote = Parse.Object.extend('Vote');
-<<<<<<< HEAD
-=======
-
->>>>>>> citizenly/master
 
 var Bill = React.createClass({
   getInitialState: function() {
@@ -48,13 +43,13 @@ var Bill = React.createClass({
   },
   loadBillData: function() {
     var that = this;
-    // set filter as url parameter
-    var filter = this.props.params.filter;
+    // set billId as url parameter
+    var billId = this.props.params.billId;
     this.setState({loading: true});
     
-    // post filter to server and this.setState({billList: response.data})
+    // post billId to server and this.setState({bill: response.data})
     axios.post('/billinfoget', {
-      filter: filter
+      billId: billId
     })
     .then(function(response) {
       that.setState({bill: response.data, loading: false});

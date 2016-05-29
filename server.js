@@ -33,18 +33,6 @@ var corsOptionsDelegate = function(req, callback){
   }
   callback(null, corsOptions); // callback expects two parameters: error and options 
 };
-
-var api = new ParseServer({
-  databaseURI: 'mongodb://localhost:27017/dev', // Connection string for your MongoDB database
-  cloud: __dirname + '/cloud.js', // Absolute path to your Cloud Code
-  appId: 'XYZ',
-  masterKey: 'ABC', // Keep this key secret!
-  fileKey: 'file-key-not-sure',
-  serverURL: 'https://citizen-molecularcode.c9users.io/parse' // Don't forget to change to https if needed
-});
-
-// Serve the Parse API on the /parse URL prefix
-app.use('/parse', api);
  
 var api = new ParseServer({
   databaseURI: 'mongodb://localhost:27017/dev', // Connection string for your MongoDB database
@@ -52,7 +40,7 @@ var api = new ParseServer({
   appId: 'XYZ',
   masterKey: 'ABC', // Keep this key secret!
   fileKey: 'file-key-not-sure',
-  serverURL: 'https://citizen-marie-evegauthier.c9users.io/parse' // Don't forget to change to https if needed
+  serverURL: 'https://citizen-molecularcode.c9users.io/parse' // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
@@ -249,6 +237,15 @@ app.post('/postfilter', function(req, res) {
   }
 });
 /* -------------------------------------------------------------------------- */
+
+/* BILLS FUNCTION CALLS ------------------------------------------------------- */
+app.post('/billinfoget', function(req, res) {
+  req = req.body.billId;
+  
+  
+}); 
+/* ------------------------------------------------------------------------------ */
+
 
 
 /* This says: for any path NOT served by the middleware above, send the file called index.html instead. Eg, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component */
