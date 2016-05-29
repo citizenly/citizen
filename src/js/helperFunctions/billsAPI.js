@@ -1,5 +1,6 @@
 var request = require("request");
 var findBillId = require("./findBillId.js");
+var getVoteNumber = require("./findVoteNumber.js");
 var makeRequest = require("./openAPI.js");
 
 
@@ -21,7 +22,7 @@ function fixLimitByPage(callback) {
     }
     else {
       var numberLastVote = res.objects[0].number;
-      callback(numberLastVote);
+      callback(null, numberLastVote);
     }
   });
 }
@@ -33,17 +34,16 @@ function getAllBills(limit, callback) {
   var path = `bills/?session=42-1&limit=${limit}`;
   makeRequest(path, function(err, res){
     if(err){
-      callback(new Error("Oops.. we can't find the list of bill of the current session of parliament. Please try again!"));  
+      callback(err);  
     }
     else{
       var arrOfBills = res.objects;
-      callback(arrOfBills);
+      callback(null, arrOfBills);
     }
   });
 }
 
 
-// Reduce the raw bill object to the name, and id
 // Takes an array of bill objects (arrOfBills) and returns a modified array of bill objects (allBills)
 function allBills(arrOfBills) {
   var allBills = [];
@@ -88,25 +88,23 @@ function getAllVotes(limit, callback) {
   var path = `votes/?date=&session=42-1&limit=${limit}&format=json`;
   makeRequest(path, function(err, res){
     if(err){
-      callback(new Error("Oops.. we can't find the list of votes of the current session of parliament. Please try again!"));  
+      callback(err);  
     }
     else{
       var arrOfVotes = res.objects;
-      callback(arrOfVotes);
+      callback(null, arrOfVotes);
     }
   });
 }
 
-
-// Store only the bill info we need in the array of bill objects - without the title
-// Takes an array of bills-voted-on objects (arrOfVotes) and returns a modified array of bill objects (bills)
-function getListofBillsFromVotes(arrOfVotes, callback) {
-  var bills = [];
+// Takes an array of bills-voted-on objects (arrOfVotes) and returns a modified array of bill objects (bills without the title)
+function getListOfBillsFromVotes(arrOfVotes) {
+  var billsWithoutTitle = [];
   arrOfVotes.forEach(function(vote) {
     var resultOfVote = vote.result;
     var dateOfVote = vote.date;
     var voteSessionId = vote.number;
-    var billId = findBillId.findBillId(vote.bill_url);
+    var billId = findBillId(vote.bill_url);   
     var billUrl = vote.bill_url;
     var noVotesTotal = vote.nay_total;
     var yesVotesTotal = vote.yea_total;
@@ -120,22 +118,22 @@ function getListofBillsFromVotes(arrOfVotes, callback) {
       billId: billId,
       billUrl: billUrl
     };
-
+    
     //Not all the votes is about a bill, so if the billId is not null, we want to keep it because it's a bill
     if (bill.billId.length > 0) {
-      bills.push(bill);
+      billsWithoutTitle.push(bill);
     }
-  });
-  callback(bills);
+ });
+  return billsWithoutTitle;
 }
 
-
+//// Get array of objects of all bills in current session with its title
 function getTitleOfBill(callback) {
   var billsWithTitle = [];
   var path = "bills/?session=42-1&limit=500";
   makeRequest(path, function(err, bills){
     if(err){
-      callback(new Error("Oops.. we can't find the bills for the moment. Please try again!"));
+      callback(err);
     }
     else {
       bills = bills.objects;
@@ -150,46 +148,48 @@ function getTitleOfBill(callback) {
       
         billsWithTitle.push(billWithTitle);
       });
-      callback(billsWithTitle); 
+      callback(null, billsWithTitle); 
     }
   });
 }
 
 //In the array of bill objects, add the title of each bill 
-function getListOfBillsWithTitle(bills, billsWithTitle, callback){
-  var listOfBillsWithTitle = [];
-  bills = bills.map(function(bill){
-    var billId = bill.billId;
-    
-    var title = billsWithTitle.find(function(billWithTitle) {
-      return billWithTitle.billId === billId;
+function getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle){
+
+    var listOfBillsWithTitle = [];
+    billsWithoutTitle.map(function(bill){
+      var billId = bill.billId;
+      var title = billsWithTitle.find(function(billWithTitle) {
+        return billWithTitle.billId === billId;
+      });
+      
+      if(title){
+        bill.billTitle = title.title;
+        listOfBillsWithTitle.push(bill);
+      }
+      else{
+        bill.billTitle = 'N/A';
+        listOfBillsWithTitle.push(bill);
+      }
     });
-    
-    if(title){
-      bill.billTitle = title.title;
-      listOfBillsWithTitle.push(bill);
-    }
-    else{
-      bill.billTitle = 'N/A';
-      listOfBillsWithTitle.push(bill);
-    }
-  });
-  callback(listOfBillsWithTitle);
+    return listOfBillsWithTitle;
 }
 
 
 // Reduce the array to only unique bills and only the most recently voted on version of the bill
-function getUniqueBillsByDate(bills, callback) {
-  var bin = {};
-  var allBills = [];
-  
-  bills.filter(function(obj) {
-    bin[obj.billId] = bin[obj.billId] || [];
-    bin[obj.billId].push(obj);
+function getUniqueBillsByDate(listOfBillsWithTitle) {
+  var billsById = {};
+  var listOfUniqueBills = [];
+ 
+ //Create an array for each billId 
+  listOfBillsWithTitle.filter(function(bill) {
+    billsById[bill.billId] = billsById[bill.billId] || [];
+    billsById[bill.billId].push(bill);
   });
   
-  for (var bill in bin) {
-    var latestBill = bin[bill].reduce(function(prev, next) {
+  //In each array we compare the date to keep only the latest one
+  for (var bill in billsById) {
+    var latestBill = billsById[bill].reduce(function(prev, next) {
       var x = new Date(prev.dateOfVote);
       var y = new Date(next.dateOfVote);
       if (x < y) {
@@ -199,15 +199,15 @@ function getUniqueBillsByDate(bills, callback) {
         return prev;
       }
     });
-    allBills.push(latestBill);
+    
+    listOfUniqueBills.push(latestBill);
   }
-  callback(allBills);
+  return listOfUniqueBills;
 }
 
 
-// Filter unique bills by result of Passed, Failed or Tie
 // Takes an array of unique bill objects (listOfUniqueBills) and a 'result' string (resultOfVote) and returns an array of bill objects with the same bill.resultOfVote value
-function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote, callback) {
+function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote) {
   var billsPassed = [];
   var billsFailed = [];
   var billsTied = [];
@@ -225,82 +225,183 @@ function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote, callback) {
     }
   });
   if (resultOfVote === 'Passed') {
-    callback(billsPassed);
+    return billsPassed;
   }
   else if (resultOfVote === 'Failed') {
-    callback(billsFailed);
+    return billsFailed;
   }
   else {
-    callback(billsTied);
+    return billsTied;
   }
 }
 
 /*To know how vote every MP, we need to look at ballots:
 http://api.openparliament.ca/votes/ballots/?format=json
-The balllots can be filter by voteNumber and by politician
+The balllots can be filter by politician. 
 //http://api.openparliament.ca/votes/ballots/?politician=sherry-romanado&vote=42-1%2F63
+Once we have the the list of ballots for a specific politician, we need its voteNumber.
+With the voteNumber, we can find the name of the bill the vote was about.
 */
 function getBallotsByPolitician(limit, politician, callback){
-  //votes/ballots/?politician=tony-clement&format=json&limit=63
+  var listOfBallots = [];
   var path = `votes/ballots/?politician=${politician}&limit=${limit}`;
-  makeRequest(path, function(err, res){
+  makeRequest(path, function(err, ballots){
     if(err){
-      callback(new Error("Oops..we can't find how your MP voted on this bill. Please try again!"));
+      callback(err);
     }
     else {
-      var ballots = res.objects;
-      callback(ballots);
+      ballots = ballots.objects;
+      ballots.forEach(function(ballot){
+        var result = ballot.ballot;
+        var voteUrl = ballot.vote_url;
+        var voteNumber = getVoteNumber(voteUrl);
+        
+        var ballotCleaned = {
+          ballot: result,
+          voteUrl: voteUrl,
+          voteNumber: voteNumber
+        };
+
+        listOfBallots.push(ballotCleaned);
+      });
     }
+    callback(null, listOfBallots);
   });
 }
+
+//Filter the ballots of each politician to keep only the one about bills
+function getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, ballots) {
+  return ballots.map(function(ballot) {
+    var theBillWithoutTitle = billsWithoutTitle.find(function(bill) {
+      return bill.voteSessionId === Number(ballot.voteNumber);
+    });
+
+    if (!theBillWithoutTitle) {
+      return null;
+    }
+
+    var theBillWithTitle = billsWithTitle.find(function(bill) {
+      return bill.billId === theBillWithoutTitle.billId;
+    });
+    
+    if (!theBillWithTitle) {
+      return null;
+    }
+
+    ballot.title = theBillWithTitle.title;
+    ballot.billId = theBillWithTitle.billId;
+    ballot.resultOfVote = theBillWithoutTitle.resultOfVote;
+    ballot.dateOfVote = theBillWithoutTitle.dateOfVote;
+
+    return ballot;
+  })
+  .filter(function(ballot) {
+    return !!ballot;
+  });
+}
+
+//http://api.openparliament.ca/bills/?session=42-1&limit=500&sponsor_politician=%2Fpolitician%2Fjustin-trudeau%2F
+function getBillBySponsor(politician, callback) {
+  var path = `bills/?session=42-1&limit=500&sponsor_politician=%2Fpolitician%2F${politician}`;
+  var listOfBillsSponsored = [];
+  makeRequest(path, function(err, res) {
+    if (err) {
+      callback(err);
+    }
+    else {
+      if (res.objects.length === 0) {
+        listOfBillsSponsored.push({billTitle: "Your MP hasn't proposed any bills", billId: ""});
+      }
+      else {
+        var billsSponsored = res.objects;
+        billsSponsored.forEach(function(bill) {
+          var name = bill.name.en;
+          var billUrl = bill.url;
+          var billId = bill.number;
+
+          var billSponsored = {
+            billTitle: name,
+            billUrl: billUrl,
+            billId: billId
+          };
+          listOfBillsSponsored.push(billSponsored);
+          
+        });
+      }
+      callback(null, listOfBillsSponsored);
+    }
+  }); 
+}
+
+function getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills) {
+  var theUltimateVotedBill = listOfUniqueBills.find(function(bill){
+    return bill.billId === listOfBillsSponsored.billId;
+  });
+  
+  if(!theUltimateVotedBill){
+    listOfBillsSponsored.result = "The current parliament didn't vote about this bill";
+    return listOfBillsSponsored;
+  }
+  else{
+    listOfBillsSponsored.result = theUltimateVotedBill.result;
+    return listOfBillsSponsored;
+  }
+}
+
+
+
 
 
 module.exports = {
   getAllVotes: getAllVotes,
-  getListofBillsFromVotes: getListofBillsFromVotes,
+  getListOfBillsFromVotes: getListOfBillsFromVotes,
   getUniqueBillsByDate: getUniqueBillsByDate,
   fixLimitByPage: fixLimitByPage,
   getListOfBillsWithTitle: getListOfBillsWithTitle,
   getTitleOfBill: getTitleOfBill,
   filterUniqueBillsByResult: filterUniqueBillsByResult,
   getAllBills: getAllBills,
-  allBills: allBills
+  allBills: allBills,
+  getBallotsAboutBillWithTitle: getBallotsAboutBillWithTitle,
+  getBallotsByPolitician: getBallotsByPolitician,
+  getBillBySponsor: getBillBySponsor,
+  getUltimateVotedFromBillId: getUltimateVotedFromBillId
 };
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
-// fixLimitByPage(function(limit) {
-//   getBallotsByPolitician(limit, "tony-clement", function(balllotsByPolitician){
-//     console.log(balllotsByPolitician);
-//   });
-// });
+        
 
+// fixLimitByPage(function(err, limit) {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   getAllVotes(limit, function(err, arrOfVotes) {
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
+//     var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
 
-// function getVoteNumber(bills, billId, callback){
-//   bills.map(function(bill){
-//     })
-// }
+//     getTitleOfBill(function(err, billsWithTitle) {
+//       if (err) {
+//         console.log(err);
+//         return;
+//       }
+//       var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
 
+//       var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
 
-fixLimitByPage(function(limit) {
-  getAllBills(limit, function(arrOfBills) {
-    allBills(arrOfBills);
-    //sortAllBillsAlpha (allBills);
-  });
-});
-
-// fixLimitByPage(function(limit) {
-//   getAllVotes(limit, function(arrOfVotes) {
-//     getListofBillsFromVotes(arrOfVotes, function(bills) {
-//       getTitleOfBill(function(billsWithTitle){
-//         getListOfBillsWithTitle(bills, billsWithTitle, function(listOfBillsWithTitle){
-//           getUniqueBillsByDate(listOfBillsWithTitle, function(listOfUniqueBills){
-//             filterUniqueBillsByResult(listOfUniqueBills, 'failed', function(listOfUniqueBillsByResult) {
-//               console.log(listOfUniqueBillsByResult);
-//             });
-//           });
-//         });
+//       getBillBySponsor("justin-trudeau", function(err, listOfBillsSponsored) {
+//         if (err) {
+//           console.log(err);
+//           return;
+//         }
+//         var ultimateVoteAboutBillSponsored = getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills);
+//         console.log(ultimateVoteAboutBillSponsored, "THIS IS THE ultimateVoteAboutBillSponsored");
 //       });
 //     });
 //   });
 // });
+

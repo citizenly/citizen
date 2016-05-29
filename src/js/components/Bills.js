@@ -17,7 +17,7 @@ var Bill = React.createClass({
 });
 
 
-// Bill constructor
+// Bills constructor
 var Bills = React.createClass({
   getInitialState: function() {
     // set inital state to determine which list of bills is displayed - active by default
@@ -83,7 +83,7 @@ var Bills = React.createClass({
           </div>
           
           <div className="billList">
-            {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
+            {/*{this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}*/}
             <div>
               {this.state.billList !== [] ? this.state.billList.map(this.renderBills) : 'We will have more filters coming soon'}
             </div>
