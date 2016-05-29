@@ -21,6 +21,7 @@ var allBills = BillsAPI.allBills;
 var getBallotsByPolitician = BillsAPI.getBallotsByPolitician;
 var getBallotsAboutBillWithTitle = BillsAPI.getBallotsAboutBillWithTitle
 var getBillBySponsor = BillsAPI.getBillBySponsor;
+var getUltimateVotedFromBillId = BillsAPI.getUltimateVotedFromBillId;
 
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
 var corsOptionsDelegate = function(req, callback){
@@ -103,55 +104,23 @@ app.post('/postfilter', function(req, res) {
             return;
           }
           var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-
+          
           getTitleOfBill(function(err, billsWithTitle) {
             if (err) {
               console.log(err);
               return;
             }
-            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
 
-            getUniqueBillsByDate(listOfBillsWithTitle, function(err, listOfUniqueBills) {
-              if (err) {
-                console.log(err);
-                return;
-              }
+            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
+          
+            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
               res.send(listOfUniqueBills);
             });
           });
         });
-      });
       break;
 
     case 'passed':
-      fixLimitByPage(function(err, limit) {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        getAllVotes(limit, function(err, arrOfVotes) {
-          if (err) {
-            console.log(err);
-            return;
-          }
-          var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-
-          getTitleOfBill(function(err, billsWithTitle) {
-            if (err) {
-              console.log(err);
-              return;
-            }
-            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
-
-            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-
-            var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
-            res.send(listOfUniqueBillsByResult);
-          });
-        });
-      });
-      break;
-
     case 'failed':
       fixLimitByPage(function(err, limit) {
         if (err) {
@@ -204,17 +173,12 @@ app.post('/postfilter', function(req, res) {
           console.log(err);
           return;
         }
-        getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
-          if (err) {
-            console.log(err);
-            return;
-          }
+        getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots){
           getAllVotes(limit, function(err, arrOfVotes) {
             if (err) {
               console.log(err);
               return;
             }
-
             var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
 
             getTitleOfBill(function(err, billsWithTitle) {
@@ -222,10 +186,11 @@ app.post('/postfilter', function(req, res) {
                 console.log(err);
                 return;
               }
-
               var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, listOfBallots);
+            
+              var ballotsByUniqueDate = getUniqueBillsByDate(ballotsOnlyAboutBill);
 
-              res.send(ballotsOnlyAboutBill);
+              res.send(ballotsByUniqueDate);
             });
           });
         });
@@ -233,20 +198,40 @@ app.post('/postfilter', function(req, res) {
       break;
     
     case 'proposedbymyrep':
-      getBillBySponsor("justin-trudeau", function(err, listOfBillsSponsored){
+      fixLimitByPage(function(err, limit) {
         if (err) {
           console.log(err);
           return;
         }
-        else{
-          res.send(listOfBillsSponsored);
-        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
 
-      
-      }); 
+          getTitleOfBill(function(err, billsWithTitle) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
 
+            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
 
-
+            getBillBySponsor("alexandre-boulerice", function(err, listOfBillsSponsored) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              var ultimateVoteAboutBillSponsored = getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills);
+              res.send(ultimateVoteAboutBillSponsored);
+            });
+          });
+        });
+      });
+      break;
+    
     default:
       res.send([]);
   }

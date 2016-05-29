@@ -157,7 +157,7 @@ function getTitleOfBill(callback) {
 function getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle){
 
     var listOfBillsWithTitle = [];
-    var bills = billsWithoutTitle.map(function(bill){
+    billsWithoutTitle.map(function(bill){
       var billId = bill.billId;
       var title = billsWithTitle.find(function(billWithTitle) {
         return billWithTitle.billId === billId;
@@ -178,16 +178,18 @@ function getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle){
 
 // Reduce the array to only unique bills and only the most recently voted on version of the bill
 function getUniqueBillsByDate(listOfBillsWithTitle) {
-  var bin = {};
+  var billsById = {};
   var listOfUniqueBills = [];
-  
-  listOfBillsWithTitle.filter(function(obj) {
-    bin[obj.billId] = bin[obj.billId] || [];
-    bin[obj.billId].push(obj);
+ 
+ //Create an array for each billId 
+  listOfBillsWithTitle.filter(function(bill) {
+    billsById[bill.billId] = billsById[bill.billId] || [];
+    billsById[bill.billId].push(bill);
   });
   
-  for (var bill in bin) {
-    var latestBill = bin[bill].reduce(function(prev, next) {
+  //In each array we compare the date to keep only the latest one
+  for (var bill in billsById) {
+    var latestBill = billsById[bill].reduce(function(prev, next) {
       var x = new Date(prev.dateOfVote);
       var y = new Date(next.dateOfVote);
       if (x < y) {
@@ -197,6 +199,7 @@ function getUniqueBillsByDate(listOfBillsWithTitle) {
         return prev;
       }
     });
+    
     listOfUniqueBills.push(latestBill);
   }
   return listOfUniqueBills;
@@ -272,11 +275,11 @@ function getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, ballots
     var theBillWithoutTitle = billsWithoutTitle.find(function(bill) {
       return bill.voteSessionId === Number(ballot.voteNumber);
     });
-    
+
     if (!theBillWithoutTitle) {
       return null;
     }
-    
+
     var theBillWithTitle = billsWithTitle.find(function(bill) {
       return bill.billId === theBillWithoutTitle.billId;
     });
@@ -284,9 +287,12 @@ function getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, ballots
     if (!theBillWithTitle) {
       return null;
     }
-    
+
     ballot.title = theBillWithTitle.title;
-    
+    ballot.billId = theBillWithTitle.billId;
+    ballot.resultOfVote = theBillWithoutTitle.resultOfVote;
+    ballot.dateOfVote = theBillWithoutTitle.dateOfVote;
+
     return ballot;
   })
   .filter(function(ballot) {
@@ -304,7 +310,7 @@ function getBillBySponsor(politician, callback) {
     }
     else {
       if (res.objects.length === 0) {
-        return ("Your MP doesn't sponsor any bill")
+        listOfBillsSponsored.push({billTitle: "Your MP hasn't proposed any bills", billId: ""});
       }
       else {
         var billsSponsored = res.objects;
@@ -314,18 +320,35 @@ function getBillBySponsor(politician, callback) {
           var billId = bill.number;
 
           var billSponsored = {
-            name: name,
+            billTitle: name,
             billUrl: billUrl,
             billId: billId
           };
-
           listOfBillsSponsored.push(billSponsored);
+          
         });
       }
       callback(null, listOfBillsSponsored);
     }
-  });  
+  }); 
 }
+
+function getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills) {
+  var theUltimateVotedBill = listOfUniqueBills.find(function(bill){
+    return bill.billId === listOfBillsSponsored.billId;
+  });
+  
+  if(!theUltimateVotedBill){
+    listOfBillsSponsored.result = "The current parliament didn't vote about this bill";
+    return listOfBillsSponsored;
+  }
+  else{
+    listOfBillsSponsored.result = theUltimateVotedBill.result;
+    return listOfBillsSponsored;
+  }
+}
+
+
 
 
 
@@ -341,46 +364,44 @@ module.exports = {
   allBills: allBills,
   getBallotsAboutBillWithTitle: getBallotsAboutBillWithTitle,
   getBallotsByPolitician: getBallotsByPolitician,
-  getBillBySponsor: getBillBySponsor
+  getBillBySponsor: getBillBySponsor,
+  getUltimateVotedFromBillId: getUltimateVotedFromBillId
 };
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
+        
+
 // fixLimitByPage(function(err, limit) {
-//                 if (err) {
-//                   console.log(err);
-//                   return;
-//                 }
-//                 getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots) {
-//                   if (err) {
-//                     console.log(err);
-//                     return;
-//                   }
-//                   getAllVotes(limit, function(err, arrOfVotes) {
-//                     if (err) {
-//                       console.log(err);
-//                       return;
-//                     }
-      
-//                   var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-      
-//                   getTitleOfBill(function(err, billsWithTitle) {
-//                     if (err) {
-//                       console.log(err);
-//                       return;
-//                     }
-        
-//                   var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, listOfBallots);
-        
-//         console.log(ballotsOnlyAboutBill);
-//         });
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   getAllVotes(limit, function(err, arrOfVotes) {
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
+//     var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+
+//     getTitleOfBill(function(err, billsWithTitle) {
+//       if (err) {
+//         console.log(err);
+//         return;
+//       }
+//       var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
+
+//       var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
+
+//       getBillBySponsor("justin-trudeau", function(err, listOfBillsSponsored) {
+//         if (err) {
+//           console.log(err);
+//           return;
+//         }
+//         var ultimateVoteAboutBillSponsored = getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills);
+//         console.log(ultimateVoteAboutBillSponsored, "THIS IS THE ultimateVoteAboutBillSponsored");
+//       });
 //     });
 //   });
 // });
 
-// fixLimitByPage(function(limit) {
-//   getAllBills(limit, function(arrOfBills) {
-//     allBills(arrOfBills);
-//     //sortAllBillsAlpha (allBills);
-//   });
-// });
