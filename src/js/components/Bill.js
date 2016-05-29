@@ -96,9 +96,9 @@ var Bill = React.createClass({
               </div>
                 
               <div className="tagDescriptions">
-                <p>Last parliamentary vote <span className="dynamic">{this.state.bill.lastVote}</span></p>
-                <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span></p>
-                <p>My representative voted <span className="dynamic">{this.state.bill.repsVote}</span></p>
+                <p>Last parliamentary vote <span className={"dynamic" + this.state.bill.lastVote}>{this.state.bill.lastVote}</span></p>
+                <p>Proposed by <span className={this.state.bill.repsVote ? "myRepProposed" : "dynamic"}>{this.state.bill.proposedBy}</span></p>
+                <p>My representative voted <span className={"dynamic" + this.state.bill.repsVote}>{this.state.bill.repsVote}</span></p>
             </div>
           </div>
     
