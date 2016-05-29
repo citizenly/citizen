@@ -46,13 +46,9 @@ var Home = React.createClass({
         <img alt="citizen app logo" src="images/citizenlogo.png"></img>
       </div>
       
-      <div className="content">
-        <div>
+      <div className="intro">
           <p>In a democracy, you elect someone to make decisions for you. Check out what they're doing in your name.</p>
-        </div>
-        <div>
           <h1>WHO'S REPRESENTING ME?</h1>
-        </div>
       </div>
        
       <form onSubmit={this.handleSubmit}>

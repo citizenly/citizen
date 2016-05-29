@@ -35,6 +35,8 @@ var Rep = React.createClass({
     .catch(function(response) {
     });
   },
+  
+  
   render: function() {
     return (
     <div>
@@ -72,17 +74,21 @@ var Rep = React.createClass({
               </div>
           </div>
           
-          
           <div className="intheirvoting">
             <h2>... in their voting.</h2>
           </div>
           <div id="seperator"></div>
           <div className="down"></div>
       
-          <div className= "twitterlogo">
-            <img alt="share" src="../../images/twitter-logo.jpg"></img>
+          <div className= "sharing-horizontal">
+          <a className="fbtn share facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+          <a className="fbtn share twitter" href="https://twitter.com/intent/tweet?text=YOUR-TEXT&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
           </div>
-    </div>
+              
+        </div>
+      </div>
+      
+    <div id="content">
       <footer>
           <div className="bottomMenu-item compare">
             <Link to="/compare" activeClassName="active">COMPARE</Link>

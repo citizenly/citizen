@@ -85,7 +85,10 @@ var Petitions = React.createClass({
               <div><Link activeClassName="active" to="/petitions/mine">mine</Link></div>
               <div><Link activeClassName="active" to="/petitions/all">all</Link></div>
           </div>
-       
+          <footer>
+              <a className="addpetition">+</a>
+          </footer>
+
           
         {/*  
         <div className="petitionList">

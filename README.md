@@ -13,7 +13,7 @@ node server.js
 
 webpack -watch
 
-memchached -d
+memcached -d
 
 run-mongo
 

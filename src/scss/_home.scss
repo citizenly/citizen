@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.content {
+.intro {
     flex: 1 1 0;
     max-width: 90%;
     text-align: center;
@@ -15,6 +15,13 @@
     /* flex-grow: 1; */
     /* flex-shrink: 1; */
     /* flex-basis: 0; */
+    p {
+        font-size: 1.0em;
+    }
+    h1 {
+        font-size: 1.6em;
+        font-weight: 400;
+    }
 }
 
 
@@ -108,11 +115,11 @@ button, input, select, textarea {
 }
 
 .postcodebutton {
-    background-color: #44A487;
-    border: 1px solid #44A487;
+    background-color: rgba(0,0,0,0.5);
     color: white;
     font-family: Oswald, sans-serif;
     height: 100%;
     font-size: 0.8em;
+    padding: 3px;
 }
 
