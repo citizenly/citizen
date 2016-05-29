@@ -26,8 +26,8 @@
         font-family: Oswald, sans-serif;
         font-weight: 200;
         font-size: 0.8em;
-        background: rgba(0, 0, 0, 0.1);
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+        background: none;
+        box-shadow: none;
         border-radius: 2px;
         padding: 0px 5px;
         }
@@ -100,4 +100,22 @@
         font-weight: 200;
         list-style: none;
         }
+}
+
+.addpetition {
+    border-radius: 50%;
+    background-color: #44A487;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    width: 50px;
+    height: 50px;
+    font-family: Oswald, sans-serif;
+    font-weight: 400;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    
+    :hover{
+        background-color: rgba(0,0,0,0.5);
+    }
 }

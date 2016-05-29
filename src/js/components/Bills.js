@@ -67,12 +67,14 @@ var Bills = React.createClass({
             What would you do?
           </div>
           
+          <h3>BILLS</h3>
+ 
           <div className="searchbox">
             <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
           </div>
   
           <div className="billTags">
-              <div><Link activeClassName="active" to="/bills/active">active</Link></div>
+              <div><Link activeClassName="active" to="/bills/active">recent votes</Link></div>
               <div><Link activeClassName="active" to="/bills/passed">passed</Link></div>
               <div><Link activeClassName="active" to="/bills/failed">failed</Link></div>
               <div><Link activeClassName="active" to="/bills/proposedbymyrep">rep proposed</Link></div>
@@ -81,7 +83,9 @@ var Bills = React.createClass({
           </div>
           
           <div className="infobgcolor">
-              <div>passed/failed/tie</div>
+              <div className="color-result">
+                <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
+              </div>
               <p>indicates most recent vote in parliament</p>
           </div>
           
