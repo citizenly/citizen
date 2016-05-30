@@ -288,7 +288,7 @@ function getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, ballots
       return null;
     }
 
-    ballot.title = theBillWithTitle.title;
+    ballot.billTitle = theBillWithTitle.title;
     ballot.billId = theBillWithTitle.billId;
     ballot.resultOfVote = theBillWithoutTitle.resultOfVote;
     ballot.dateOfVote = theBillWithoutTitle.dateOfVote;
