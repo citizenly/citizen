@@ -1,3 +1,5 @@
+
+
 var React = require('react');
 var Link = require('react-router').Link;
 // required for ajax calls
@@ -31,6 +33,7 @@ var Rep = React.createClass({
       var updateData = that.state.rep;
       updateData = response.data;
       that.setState({rep: updateData});
+      localStorage.setItem("repFullName", that.state.rep.name);
     })
     .catch(function(response) {
     });
