@@ -9,7 +9,7 @@ var Bill = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>{this.props.billId} <span className={"result" + this.props.resultOfVote}>{this.props.resultOfVote}</span></h2>
+        <h2><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billId} <span className={"result" + this.props.resultOfVote}>{this.props.resultOfVote}</span></Link></h2>
         <h4><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billTitle}</Link></h4>
       </div>
     );
