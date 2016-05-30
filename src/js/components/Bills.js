@@ -1,8 +1,12 @@
+/*global localStorage */
+
 var React = require('react');
 var Link = require('react-router').Link;
 // required for ajax calls
 var axios = require('axios');
 import { withRouter } from 'react-router';
+
+var repFullName = localStorage.getItem('repFullName');
 
 // Bill constructor
 var Bill = React.createClass({
@@ -21,7 +25,7 @@ var Bill = React.createClass({
 var Bills = React.createClass({
   getInitialState: function() {
     // set inital state to determine which list of bills is displayed - active by default
-    // ** need to fix my logic because it's always reverting to /active!
+    
     return {
       billList: []
     };
@@ -74,12 +78,15 @@ var Bills = React.createClass({
           </div>
   
           <div className="billTags">
-              <div><Link activeClassName="active" to="/bills/active">recent votes</Link></div>
-              <div><Link activeClassName="active" to="/bills/passed">passed</Link></div>
-              <div><Link activeClassName="active" to="/bills/failed">failed</Link></div>
-              <div><Link activeClassName="active" to="/bills/proposedbymyrep">rep proposed</Link></div>
-              <div><Link activeClassName="active" to="/bills/votedonbymyrep">rep voted</Link></div>
-              <div><Link activeClassName="active" to="/bills/all">all</Link></div>
+              <div><Link activeClassName="active" to="/bills/active">Currently active</Link></div>
+              {/*<div><Link activeClassName="active" to="/bills/passed">passed</Link></div>
+              <div><Link activeClassName="active" to="/bills/failed">failed</Link></div> */}
+              <div><Link activeClassName="active" to="/bills/proposedbymyrep">Rep proposed</Link></div>
+              <div><Link activeClassName="active" to="/bills/votedonbymyrep">Rep voted</Link></div>
+              <div><Link activeClassName="active" to="/bills/all">All</Link></div>
+          </div>
+          <div className="repName">
+          <p>{this.props.params.filter === "votedonbymyrep"  ? "Your representative, "  + repFullName + ", voted:"  : ""}</p> 
           </div>
           
           <div className="billList">
@@ -89,15 +96,15 @@ var Bills = React.createClass({
             </div>
           </div>
           
-          
-          <footer>
+         
+          <footer> {this.props.params.filter === "votedonbymyrep"   ? 
           <div className="infobgcolor">
               <div className="color-result">
                 <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
               </div>
               <p>indicates most recent vote in parliament</p>
-          </div>
-          </footer>
+          </div> : null}
+          </footer> 
           
      </div>
     );

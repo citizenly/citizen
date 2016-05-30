@@ -13,16 +13,15 @@ var Bill = React.createClass({
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
       bill: {
-        id: '',
-        title: '',
+        id: '' ,
+        title: '' ,
         summary: '',
         status: '',
-        recentVote: '',
+        recentVote: '' ,
         lastVote: '',
-        houseDebate: "**Lots of text**",
         proposedBy: '',
-        repsVote: '',
-        date: ''
+        repsVote: '' ,
+        date: '' 
       },
       content: "",
       vote: 0,
