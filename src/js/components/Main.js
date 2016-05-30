@@ -9,9 +9,14 @@ import { withRouter } from 'react-router';
 var App = React.createClass({
   getInitialState: function () {
     return{
-      menutoggle: ""
+      menutoggle: ''
     };
   },
+  
+  onComponentDidMount: function () {
+   this.setState({menutoggle:''});
+  },
+  
   onClick: function (e) {
     e.preventDefault();
     if (this.state.menutoggle.length === 0) {
@@ -21,40 +26,48 @@ var App = React.createClass({
       this.setState({menutoggle:''});
     }
   },
+  
+  
+    onMenuItemClick: function (e) {
+      this.setState({menutoggle:''});
+  },
+  
   render: function() {
     return (
       <div>
         <header>
           <nav>
+          <div className="hamburgerDiv">
             <a href="#" onClick={this.onClick} className="hamburger">
               <div className="line"></div>
               <div className="line"></div>
               <div className="line"></div>
             </a>
+            </div>
             <ul className={"clearfix menu " + this.state.menutoggle} >
               <li>
-                <IndexLink activeClassName="active" to="/">Home</IndexLink>
+                <IndexLink activeClassName="active" onClick={this.onMenuItemClick} to="/">Home</IndexLink>
               </li>
               <li>
-                <Link activeClassName="active" to="/login">Login</Link>
+                <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
               </li>
               <li>
-                <Link activeClassName="active" to="/about">About</Link>
+                <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
               </li>
               <li>
-                <Link activeClassName="active" to="/rep">Your Representative</Link>
+                <Link activeClassName="active" onClick={this.onMenuItemClick} to="/rep">Your Representative</Link>
               </li>
               <li>
-                <Link activeClassName="active" to="/bills/active">What would you do?</Link>
+                <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>
               </li>
               <li>
-                <Link activeClassName="active" to="/feed">What they're doing</Link>
+                <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to="/feed">What they're doing</Link>
               </li>
               <li>
-                <Link activeClassName="active" to="/petitions">Petitions</Link>
+                <Link activeClassName="active" className="petitionsMenu" onClick={this.onMenuItemClick} to="/petitions">Petitions</Link>
               </li>
               <li>
-                <Link activeClassName="active" to="/compare">Compare</Link>
+                <Link activeClassName="active" className="compareMenu" onClick={this.onMenuItemClick} to="/compare">Compare</Link>
               </li>
             </ul>
           </nav>
