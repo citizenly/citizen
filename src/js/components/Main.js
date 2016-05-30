@@ -36,24 +36,20 @@ var App = React.createClass({
     }
   },
   userLogout: function(what, e) {
-    
     e.preventDefault();
     e.stopPropagation();
     if(what === 'logout'){
       Parse.User.logOut().then(
-      function(user) {
-        var currentUser = Parse.User.current(); // this will now be null
-        console.log('SUCCESSFUL LOGOUT', currentUser);
-      },
-      function(error) {
-        // Show the error message somewhere and let the user try again.
-        alert("Error: " + error.code + " " + error.message);
-      }
-    );
+        function(user) {
+          var currentUser = Parse.User.current(); // this will now be null
+          console.log('SUCCESSFUL LOGOUT', currentUser);
+        },
+        function(error) {
+          // Show the error message somewhere and let the user try again.
+          alert("Error: " + error.code + " " + error.message);
+        }
+      );
     }
-    
-  
-    
   },
   render: function() {
     return (
