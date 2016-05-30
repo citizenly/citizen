@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
+var cheerio = require('cheerio');
+var $ = require('jquery');
 var cors = require('cors');
 var request = require('request');
 var ParseServer = require('parse-server').ParseServer;
@@ -238,12 +241,15 @@ app.post('/postfilter', function(req, res) {
 });
 /* -------------------------------------------------------------------------- */
 
-/* BILLS FUNCTION CALLS ------------------------------------------------------- */
-app.post('/billinfoget', function(req, res) {
-  req = req.body.billId;
-  
-  
-}); 
+
+// /* BILLS FUNCTION CALLS ------------------------------------------------------- */
+// app.post('/billinfoget', function(req, res) {
+// req = req.body.billId;
+ 
+ 
+ 
+ 
+// }); 
 /* ------------------------------------------------------------------------------ */
 
 
