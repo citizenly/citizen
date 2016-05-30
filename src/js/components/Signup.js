@@ -1,3 +1,5 @@
+/* global localStorage */
+
 var React = require('react');
 var Link = require('react-router').Link;
 // required for ajax calls
@@ -32,7 +34,7 @@ var Signup = React.createClass({
     }
     else {
       // signup new user using Parse
-      Parse.User.signUp(username, password).then(
+      Parse.User.signUp(username, password, userPostalCode).then(
         function(user) {
           console.log('SUCCESSFUL SIGNUP', user);
           var repName = localStorage.getItem('repName');
