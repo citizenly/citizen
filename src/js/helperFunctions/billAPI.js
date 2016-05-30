@@ -11,6 +11,8 @@ function getBill(billId, callback) {
     }
     else{
       bill = {
+      status: bill.status.en,
+      isLaw: bill.law,
       id: bill.number,
       title: bill.name.en,
       summaryUrl: bill.text_url,

@@ -13,7 +13,8 @@ var bodyParser = require("body-parser");
 var BillsAPI = require('./src/js/helperFunctions/billsAPI.js');
 var fixLimitByPage = BillsAPI.fixLimitByPage;
 var getAllVotes = BillsAPI.getAllVotes;
-var getListOfBillsFromVotes = BillsAPI.getListOfBillsFromVotes;
+var getListOfBillsFromVotesWithResult = BillsAPI.getListOfBillsFromVotesWithResult;
+var getListOfBillsFromVotesWithoutResult = BillsAPI.getListOfBillsFromVotesWithoutResult;
 var getUniqueBillsByDate = BillsAPI.getUniqueBillsByDate;
 var getTitleOfBill = BillsAPI.getTitleOfBill;
 var getListOfBillsWithTitle = BillsAPI.getListOfBillsWithTitle;
@@ -33,7 +34,7 @@ var getBallot = BillAPI.getBallot;
 
 
 
-var whitelist = ['https://citizen-iblameyourmother.c9users.io/'];
+var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
 var corsOptionsDelegate = function(req, callback){
   var corsOptions;
   if(whitelist.indexOf(req.header('Origin')) !== -1){
@@ -99,66 +100,66 @@ app.post('/repinfoget', function(req, res) {
 
 /* BILLS FUNCTION CALLS ------------------------------------------------------- */
 app.post('/postfilter', function(req, res) {
-  req = req.body.filter;
-  // console.log(req, 'req');
-  switch (req) {
-    case 'active':
-      fixLimitByPage(function(err, limit) {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        getAllVotes(limit, function(err, arrOfVotes) {
-          if (err) {
-            console.log(err);
-            return;
-          }
-          var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-          
-          getTitleOfBill(function(err, billsWithTitle) {
+      req = req.body.filter;
+      // console.log(req, 'req');
+      switch (req) {
+        case 'active':
+          fixLimitByPage(function(err, limit) {
             if (err) {
               console.log(err);
               return;
             }
+            getAllVotes(limit, function(err, arrOfVotes) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              var billsWithoutTitleNorResult = getListOfBillsFromVotesWithoutResult(arrOfVotes);
 
-            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
-          
-            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-              res.send(listOfUniqueBills);
+              getTitleOfBill(function(err, billsWithTitle) {
+                if (err) {
+                  console.log(err);
+                  return;
+                }
+
+                var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitleNorResult, billsWithTitle);
+
+                var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
+                res.send(listOfUniqueBills);
+              });
             });
           });
-        });
-      break;
+          break;
 
-    case 'passed':
-    case 'failed':
-      fixLimitByPage(function(err, limit) {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        getAllVotes(limit, function(err, arrOfVotes) {
-          if (err) {
-            console.log(err);
-            return;
-          }
-          var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+    // case 'passed':
+    // case 'failed':
+    //   fixLimitByPage(function(err, limit) {
+    //     if (err) {
+    //       console.log(err);
+    //       return;
+    //     }
+    //     getAllVotes(limit, function(err, arrOfVotes) {
+    //       if (err) {
+    //         console.log(err);
+    //         return;
+    //       }
+    //       var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
 
-          getTitleOfBill(function(err, billsWithTitle) {
-            if (err) {
-              console.log(err);
-              return;
-            }
-            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
+    //       getTitleOfBill(function(err, billsWithTitle) {
+    //         if (err) {
+    //           console.log(err);
+    //           return;
+    //         }
+    //         var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
 
-            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
+    //         var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
 
-            var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
-            res.send(listOfUniqueBillsByResult);
-          });
-        });
-      });
-      break;
+    //         var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
+    //         res.send(listOfUniqueBillsByResult);
+    //       });
+    //     });
+    //   });
+    //   break;
 
     case 'all':
       fixLimitByPage(function(err, limit) {
@@ -193,16 +194,17 @@ app.post('/postfilter', function(req, res) {
               console.log(err);
               return;
             }
-            var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+            var billsWithoutTitleWithResult = getListOfBillsFromVotesWithResult(arrOfVotes);
 
             getTitleOfBill(function(err, billsWithTitle) {
               if (err) {
                 console.log(err);
                 return;
               }
-              var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitle, billsWithTitle, listOfBallots);
+              var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitleWithResult, billsWithTitle, listOfBallots);
             
               var ballotsByUniqueDate = getUniqueBillsByDate(ballotsOnlyAboutBill);
+              console.log(ballotsByUniqueDate, "*******ballotsByUniqueDate")
               res.send(ballotsByUniqueDate);
             });
           });

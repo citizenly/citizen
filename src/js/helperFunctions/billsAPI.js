@@ -2,6 +2,7 @@ var request = require("request");
 var findBillId = require("./findBillId.js");
 var getVoteNumber = require("./findVoteNumber.js");
 var makeRequest = require("./openAPI.js");
+var getBill = require("./billAPI.js")
 
 
 
@@ -97,9 +98,9 @@ function getAllVotes(limit, callback) {
   });
 }
 
-// Takes an array of bills-voted-on objects (arrOfVotes) and returns a modified array of bill objects (bills without the title)
-function getListOfBillsFromVotes(arrOfVotes) {
-  var billsWithoutTitle = [];
+// Takes an array of bills-voted-on objects (arrOfVotes) and returns a modified array of bill objects (bills without the title and with the result)
+function getListOfBillsFromVotesWithResult(arrOfVotes) {
+  var billsWithoutTitleWithResult = [];
   arrOfVotes.forEach(function(vote) {
     var resultOfVote = vote.result;
     var dateOfVote = vote.date;
@@ -121,10 +122,38 @@ function getListOfBillsFromVotes(arrOfVotes) {
     
     //Not all the votes is about a bill, so if the billId is not null, we want to keep it because it's a bill
     if (bill.billId.length > 0) {
-      billsWithoutTitle.push(bill);
+      billsWithoutTitleWithResult.push(bill);
     }
  });
-  return billsWithoutTitle;
+  return billsWithoutTitleWithResult;
+}
+
+//We need the same object but without result
+function getListOfBillsFromVotesWithoutResult(arrOfVotes) {
+  var billsWithoutTitleNorResult = [];
+  arrOfVotes.forEach(function(vote) {
+    var dateOfVote = vote.date;
+    var voteSessionId = vote.number;
+    var billId = findBillId(vote.bill_url);   
+    var billUrl = vote.bill_url;
+    var noVotesTotal = vote.nay_total;
+    var yesVotesTotal = vote.yea_total;
+
+    var bill = {
+      dateOfVote: dateOfVote,
+      voteSessionId: voteSessionId,
+      noVotesTotal: noVotesTotal,
+      yesVotesTotal: yesVotesTotal,
+      billId: billId,
+      billUrl: billUrl
+    };
+    
+    //Not all the votes is about a bill, so if the billId is not null, we want to keep it because it's a bill
+    if (bill.billId.length > 0) {
+      billsWithoutTitleNorResult.push(bill);
+    }
+ });
+  return billsWithoutTitleNorResult;
 }
 
 //// Get array of objects of all bills in current session with its title
@@ -205,6 +234,13 @@ function getUniqueBillsByDate(listOfBillsWithTitle) {
   return listOfUniqueBills;
 }
 
+/*To know how the rep feels about the final version of the bill, 
+we are looking at the way he voted for the second reading or the third reading
+So, we want to filter to only get the bills that have this status
+*/
+function getFinalStageBills (){
+  
+}
 
 // Takes an array of unique bill objects (listOfUniqueBills) and a 'result' string (resultOfVote) and returns an array of bill objects with the same bill.resultOfVote value
 function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote) {
@@ -235,10 +271,11 @@ function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote) {
   }
 }
 
+
+
 /*To know how vote every MP, we need to look at ballots:
 http://api.openparliament.ca/votes/ballots/?format=json
 The balllots can be filter by politician. 
-//http://api.openparliament.ca/votes/ballots/?politician=sherry-romanado&vote=42-1%2F63
 Once we have the the list of ballots for a specific politician, we need its voteNumber.
 With the voteNumber, we can find the name of the bill the vote was about.
 */
@@ -354,7 +391,8 @@ function getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills) {
 
 module.exports = {
   getAllVotes: getAllVotes,
-  getListOfBillsFromVotes: getListOfBillsFromVotes,
+  getListOfBillsFromVotesWithResult: getListOfBillsFromVotesWithResult,
+  getListOfBillsFromVotesWithoutResult: getListOfBillsFromVotesWithoutResult,
   getUniqueBillsByDate: getUniqueBillsByDate,
   fixLimitByPage: fixLimitByPage,
   getListOfBillsWithTitle: getListOfBillsWithTitle,
