@@ -6,7 +6,7 @@ var Link = require('react-router').Link;
 var axios = require('axios');
 import { withRouter } from 'react-router';
 
-var repFullName = localStorage.getItem('repFullName');
+//var repFullName = localStorage.getItem('repFullName');
 
 // Bill constructor
 var Bill = React.createClass({
@@ -27,11 +27,17 @@ var Bills = React.createClass({
     // set inital state to determine which list of bills is displayed - active by default
     
     return {
-      billList: []
+      billList: [],
+      repFullName: ""
     };
   },
   componentDidMount: function() {
     this.loadData();
+  },
+  componentWillMount: function(){
+    this.setState({
+      repFullName: localStorage.getItem('repFullName')
+    })
   },
   componentDidUpdate: function(prevProps) {
     if(prevProps.params.filter !== this.props.params.filter) {
@@ -85,8 +91,9 @@ var Bills = React.createClass({
               <div><Link activeClassName="active" to="/bills/votedonbymyrep">Rep voted</Link></div>
               <div><Link activeClassName="active" to="/bills/all">All</Link></div>
           </div>
+          
           <div className="repName">
-          <p>{this.props.params.filter === "votedonbymyrep"  ? "Your representative, "  + repFullName + ", voted:"  : ""}</p> 
+          <p>{this.props.params.filter === "votedonbymyrep"  ? "Your representative, "  + this.state.repFullName + ", voted:"  : ""}</p> 
           </div>
           
           <div className="billList">

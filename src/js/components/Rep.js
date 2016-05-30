@@ -1,4 +1,4 @@
-
+/* global localStorage */
 
 var React = require('react');
 var Link = require('react-router').Link;
@@ -32,8 +32,9 @@ var Rep = React.createClass({
     .then(function(response) {
       var updateData = that.state.rep;
       updateData = response.data;
-      that.setState({rep: updateData});
-      localStorage.setItem("repFullName", that.state.rep.name);
+        that.state.rep = updateData
+        localStorage.setItem("repFullName", that.state.rep.name);
+       that.setState({rep: updateData});
     })
     .catch(function(response) {
     });

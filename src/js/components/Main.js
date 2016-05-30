@@ -35,20 +35,26 @@ var App = React.createClass({
       this.setState({menutoggle:''});
     }
   },
-  // userLogout: function(e) {
-  //   e.preventDefault();
-  //   console.log("logout function clicked");
-  //   // Parse.User.logOut().then(
-  //   //   function(user) {
-  //   //     var currentUser = Parse.User.current(); // this will now be null
-  //   //     console.log('SUCCESSFUL LOGOUT', currentUser);
-  //   //   },
-  //   //   function(error) {
-  //   //     // Show the error message somewhere and let the user try again.
-  //   //     alert("Error: " + error.code + " " + error.message);
-  //   //   }
-  //   // );
-  // },
+  userLogout: function(what, e) {
+    
+    e.preventDefault();
+    e.stopPropagation();
+    if(what === 'logout'){
+      Parse.User.logOut().then(
+      function(user) {
+        var currentUser = Parse.User.current(); // this will now be null
+        console.log('SUCCESSFUL LOGOUT', currentUser);
+      },
+      function(error) {
+        // Show the error message somewhere and let the user try again.
+        alert("Error: " + error.code + " " + error.message);
+      }
+    );
+    }
+    
+  
+    
+  },
   render: function() {
     return (
       <div>
@@ -70,7 +76,7 @@ var App = React.createClass({
                 <Link activeClassName="active" to="/signup">Signup</Link>
               </li>
               <li>
-                <a href="">Logout</a>
+                <a onClick={this.userLogout.bind(this, 'logout')}>Logout</a>
               </li>
               <li>
                 <Link activeClassName="active" to="/about">About</Link>
