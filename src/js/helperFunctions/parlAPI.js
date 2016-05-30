@@ -25,8 +25,8 @@ function makeTextRequest(path, callback) {
         }
         else {
           try {
-            var htmlll = $.parseHTML(body);
-            console.log(htmlll, 'htmlll');
+            //var html = $.parseHTML(body);
+            console.log(body, 'body');
     //         $(this).find('div').each(function() {
     //     console.log($(this).text());
     // });

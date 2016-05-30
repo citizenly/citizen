@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
+var cheerio = require('cheerio');
 var cors = require('cors');
 var request = require('request');
 var ParseServer = require('parse-server').ParseServer;
@@ -19,9 +21,17 @@ var filterUniqueBillsByResult = BillsAPI.filterUniqueBillsByResult;
 var getAllBills = BillsAPI.getAllBills;
 var allBills = BillsAPI.allBills;
 var getBallotsByPolitician = BillsAPI.getBallotsByPolitician;
-var getBallotsAboutBillWithTitle = BillsAPI.getBallotsAboutBillWithTitle
+var getBallotsAboutBillWithTitle = BillsAPI.getBallotsAboutBillWithTitle;
 var getBillBySponsor = BillsAPI.getBillBySponsor;
 var getUltimateVotedFromBillId = BillsAPI.getUltimateVotedFromBillId;
+var BillAPI = require('./src/js/helperFunctions/billAPI.js');
+var getBill = BillAPI.getBill;
+var getSponsor = BillAPI.getSponsor;
+var getResultOfLastVote = BillAPI.getResultOfLastVote;
+var getBallot = BillAPI.getBallot;
+
+
+
 
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
 var corsOptionsDelegate = function(req, callback){
@@ -174,6 +184,10 @@ app.post('/postfilter', function(req, res) {
           return;
         }
         getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots){
+          if(err){
+            console.log(err);
+            return;
+          }
           getAllVotes(limit, function(err, arrOfVotes) {
             if (err) {
               console.log(err);
@@ -239,13 +253,42 @@ app.post('/postfilter', function(req, res) {
 
 /* BILLS FUNCTION CALLS ------------------------------------------------------- */
 app.post('/billinfoget', function(req, res) {
- req = req.body.billId;
- 
- 
- 
- 
-}); 
+  req = req.body.billId;
+  getBill(req, function(err, bill) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    getSponsor(bill.proposedByUrl, function(err, proposedBy) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      bill.proposedBy = proposedBy;
+
+      getResultOfLastVote(bill.voteNumber, function(err, voteResult) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        bill.lastVote = voteResult;
+
+        getBallot(bill.proposedByUrl, bill.voteNumber, function(err, ballot) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          bill.repsVote = ballot;
+          res.send(bill);
+        });
+      });
+    });
+  });
+
+
+});
 /* ------------------------------------------------------------------------------ */
+
 
 
 /* This says: for any path NOT served by the middleware above, send the file called index.html instead. Eg, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component */

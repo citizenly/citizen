@@ -23,7 +23,7 @@ function getBillSummary (path, callback) {
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
 
-getBillSummary ("http://www.parl.gc.ca/HousePublications/Publication.aspx?Language=E&Mode=1&DocId=8266110&Col=1", function(err, billSummary) {
-  console.log(err, 'err');
-  console.log(billSummary, 'billSummary');
+getBillSummary ("http://www.parl.gc.ca/HousePublications/Publication.aspx?Language=E&Mode=1&DocId=8266110&Col=1", function(billSummary) {
+  //console.log(err, 'err');
+  //console.log(billSummary, 'billSummary');
 });

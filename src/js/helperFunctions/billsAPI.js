@@ -372,36 +372,36 @@ module.exports = {
 /* TEST FUNCTIONS ----------------------------------------------------------- */
         
 
-fixLimitByPage(function(err, limit) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  getAllVotes(limit, function(err, arrOfVotes) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+// fixLimitByPage(function(err, limit) {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   getAllVotes(limit, function(err, arrOfVotes) {
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
+//     var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
 
-    getTitleOfBill(function(err, billsWithTitle) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
+//     getTitleOfBill(function(err, billsWithTitle) {
+//       if (err) {
+//         console.log(err);
+//         return;
+//       }
+//       var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
 
-      var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
+//       var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
 
-      getBillBySponsor("justin-trudeau", function(err, listOfBillsSponsored) {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        var ultimateVoteAboutBillSponsored = getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills);
-        console.log(ultimateVoteAboutBillSponsored, "THIS IS THE ultimateVoteAboutBillSponsored");
-      });
-    });
-  });
-});
+//       getBillBySponsor("justin-trudeau", function(err, listOfBillsSponsored) {
+//         if (err) {
+//           console.log(err);
+//           return;
+//         }
+//         var ultimateVoteAboutBillSponsored = getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills);
+//         console.log(ultimateVoteAboutBillSponsored, "THIS IS THE ultimateVoteAboutBillSponsored");
+//       });
+//     });
+//   });
+// });
 

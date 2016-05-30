@@ -1,7 +1,7 @@
 var makeRequest = require("./openAPI.js");
 var getVoteNumber = require("./findVoteNumber.js");
 
-//http://api.openparliament.ca/bills/42-1/C-1/?format=json
+
 
 function getBill(billId, callback) {
   var path = `bills/42-1/${billId}`;
@@ -43,36 +43,65 @@ function getResultOfLastVote(voteNumber, callback){
       callback(err);  
     }
     else{
-      var voteResult = vote.objects[0].result;
-      callback(null, voteResult);
+      var lastVote = vote.objects[0].result;
+      callback(null, lastVote);
     }
   });
 }
 
-//https://api.openparliament.ca/votes/?number=38&session=42-1
+function getBallot(proposedByUrl, voteNumber, callback) {
+  var politician = proposedByUrl.substring(-1, proposedByUrl.length - 1).split("/");
+  politician = politician[politician.length - 1];
+  var path = `votes/ballots/?politician=${politician}&vote=42-1%2F${voteNumber}`;
+  makeRequest(path, function(err, ballot) {
+    if (err) {
+      callback(err);
+    }
+    else {
+      ballot = ballot.objects[0].ballot;
+      callback(null, ballot);
+    }
+  });
+}
+
+module.exports = {
+  getBill: getBill,
+  getSponsor: getSponsor,
+  getResultOfLastVote: getResultOfLastVote,
+  getBallot: getBallot
+};
+
+
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
-getBill("C-2", function(err, bill) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  getSponsor(bill.proposedByUrl, function(err, proposedBy) {
-    if (err) {
-      console.log(err, "THIS IS ERROR");
-      return;
-    }
-    bill.proposedBy = proposedBy;
+// getBill("C-2", function(err, bill) {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   getSponsor(bill.proposedByUrl, function(err, proposedBy) {
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
+//     bill.proposedBy = proposedBy;
     
-    getResultOfLastVote(bill.voteNumber, function(err, voteResult){
-      if (err) {
-        console.log(err, "THIS IS ERROR");
-        return;
-      }
-      bill.voteResult = voteResult;
-      console.log(bill, "THIS IS BILL");  
+//     getResultOfLastVote(bill.voteNumber, function(err, voteResult){
+//       if (err) {
+//         console.log(err);
+//         return;
+//       }
+//       bill.voteResult = voteResult;
       
-    })
-  })
-})
+//       getBallot(bill.proposedByUrl, bill.voteNumber, function(err, ballot){
+//         if(err){
+//           console.log(err);
+//           return
+//         }
+//         bill.repsVote = ballot;
+//         res.send(bill)
+//       }) 
+//     })
+//   })
+// })
