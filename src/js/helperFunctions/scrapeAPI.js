@@ -14,7 +14,7 @@ var makeTextRequest = require("./parlAPI.js");
 //       callback(null, billSummary);
 //     }
 //   });
-// }  
+// }
 
 //module.exports = {
 //   getBillSummary: getBillSummary,

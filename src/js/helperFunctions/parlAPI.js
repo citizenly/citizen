@@ -1,5 +1,4 @@
 var request = require("request");
-// cheerio - jQuery required for parsing the html returned
 var $ = require('jquery');
 var memcached = require('memcached');
 var server = new memcached('localhost:11211');
