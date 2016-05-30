@@ -33,7 +33,7 @@ var getBallot = BillAPI.getBallot;
 
 
 
-var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
+var whitelist = ['https://citizen-iblameyourmother.c9users.io/'];
 var corsOptionsDelegate = function(req, callback){
   var corsOptions;
   if(whitelist.indexOf(req.header('Origin')) !== -1){
