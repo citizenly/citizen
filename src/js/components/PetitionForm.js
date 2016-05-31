@@ -1,30 +1,24 @@
 var React = require('react');
-//var Link = require('react-router').Link;
-// required for ajax calls
-var axios = require('axios');
-
+// link to data module that's storing the inputted info
 
 var PetitionForm = React.createClass({
-
   render: function() {
     return (
-    <div> 
-         <div className="petitions-heading">
-         petitions
-         </div> 
-        
-            <div className="petitionEntryFields">
-                <div><input ref="title" type="text" name="title" maxLength="50" placeholder="The title of your petition. Make it something clear and short." /></div>
-                <div><input ref="keywords" className="petitionkeywords" type="text" name="keywords" maxLength="20" placeholder="Enter a couple of keywords that relate to your petition." /></div>
-                <div><input ref="description" className="petitiondescription" type="textarea" name="description" maxLength="250" placeholder="Describe what your petition is about." /></div>
-                <div><input ref="startdate" className="petitionstart" type="date" name="startdate" maxLength="20" placeholder="Day you want your petition to start" /></div>
-                <div><input ref="enddate" className="petitionend" type="date" name="enddate" maxLength="20" placeholder="Day you want your petition to end, max 3 months." /></div>
-                <div><input ref="email" className="petitionauthemail" type="email" name="email" maxLength="20" placeholder="Your email, so we can let you know how the petition goes." /></div>
-            </div>
-    </div> 
+      <div className="petitionPage">
+        <h1 className="pageTitle">Start new</h1>
+        <form className="alignCenter" method="post">
+          <input type="text" name="name" placeholder="name" />
+          <input type="email" name="email" placeholder="email address" />
+          <input type="tel" name="phone" placeholder="phone number" />
+          <input type="text" name="street" placeholder="street address" />
+          <input type="text" name="city" placeholder="city" />
+          <input type="text" name="province" placeholder="province" />
+          <input type="text" name="postalcode" placeholder="postal code" />
+          <button onClick={this.continueOrder} type="button" >Continue order</button>
+        </form>
+      </div>
     );
   }
 });
 
 module.exports = PetitionForm;
-
