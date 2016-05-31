@@ -3,179 +3,198 @@ var React = require('react');
 // required for ajax calls
 var axios = require('axios');
 var $ = require('jquery');
+import { withRouter } from 'react-router';
+
+var Parse = require('parse');
+var Vote = Parse.Object.extend('Vote');
+var DoughnutChart = require("react-chartjs").Doughnut;
+
+
+
+//HULLO :) the 'value' below is to be replaced with the yes/no votes to the petition.).
+var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B2530", value: 50, label: "NO"}]
 
 
 var Petition = React.createClass({
   getInitialState: function() {
-    // set inital state as an empty object, to be populated with petition info on componentDidMount
+    // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
-      show: "title",
       petition: {
-        id: "**ID**",
-        author: "**Jody Wilson-Raybould**",
-        title: "**Better street lighting on Rue Saint Hubert**",
-        description: "**Lorem ipsum dolor sit amet, fuisset similique omittantur vix ex. Eu assum dolore has. Iudico decore est ad, ei vix porro meliore. Eu mel viderer fuisset offendit, te solum atqui deserunt vel. In iudico nonumy assentior pri. Quas semper ponderum an vim. Eam vocent omittantur at, agam omnis cu duo. Posidonium elaboraret duo ad, te vix audire fuisset percipit. Ne ius etiam impedit sapientem, an sea sonet gubergren, vis ei duis malorum denique. Inani convenire persequeris vel an. Tritani nonumes dignissim mei cu, nam vero tantas abhorreant no, quo commodo diceret pericula in. Sit an modo graece invidunt, vis ex liber maluisset. Sit eu viderer facilis, pri cu ipsum primis sadipscing. Vis at ubique tamquam vituperatoribus, corpora ullamcorper comprehensam id vix, est ei sale latine. Et vim laudem vituperatoribus, nec vidisse mediocrem ex, ea qui tale saperet interpretaris. Ad pri euripidis forensibus, his tota eruditi docendi an. Te mel purto reprimique, ornatus detracto adversarium pri no. Ea natum fuisset pro, autem temporibus vis an, an nec errem fastidii. In eos viderer accusamus corrumpit, pro ne alterum consetetur, vel possit diceret ei. Ad eros fuisset eos, eu legimus invidunt qui. Ne nobis scaevola ius, suas graece accusamus an pri. Modus animal usu in.**",
-        neighbourComments: "**Lots of text**",
+        id: '**placeholder**',
+        title: '**placeholder**',
+        summary: '**placeholder**',
+        proposedBy: '**placeholder**',
+        date: '**placeholder**',
         dateOpen: "**2016-05-12**",
-        dateClose: "**2016-05-12**",
-        daysLeft: "**17**"//NUMBER (diff between dateOpen and dateClose)
+        dateClose: "**2016-06-12**",
+        daysLeft: "**17**"/*NUMBER (diff between dateOpen and dateClose)*/,
+        keywords: "**streets, healthcare, youth**",
       },
       content: "",
+      vote: 0,
+      greenGloVetoggle: "greenglovebutton",
+      redGloVetoggle: "redglovebutton",
+      shareButtonToggle: false,
+      facebookButton: "",
+      twitterButton: "",
     };
   },
-
   componentDidMount: function() {
+    this.loadPetitionData();
+    this.setState({content: this.state.petition.title});
+    $(".petitionTabs li").removeClass("active");
+    $("#tab-" + 1).addClass("active");
+  },
+  componentDidUpdate: function(prevProps) {
+    if(prevProps.params.filter !== this.props.params.filter) {
+      this.loadBillData();
+    }
+  },
+  loadPetitionData: function() {
     var that = this;
-    // get petition info using id passed from previous screen
-    var id = this.props.params.id;
+    var petitionId = this.props.params.petitionId;
+    this.setState({loading: true});
+    
     axios.post('/petitioninfoget', {
-      id: id
+      petitionId: petitionId
     })
-    // update this.state with the petition object
     .then(function(response) {
-      var updateData = that.state.petition;
-      updateData = response.data;
-       that.setState({petition: updateData});
+      that.setState({petition: response.data, loading: false});
     })
     .catch(function(response) {
+      console.log(response, 'response');
     });
-    this.setState({content: this.state.petition.title});
+    
+    Parse.Cloud.run('findMyVote', {petitionId: this.props.params.petitionId}).then(function(votePetition) {
+      if (votePetition) {
+        if (votePetition.get('votePetition') === 1) {
+          that.setState({
+            greenGloVetoggle: "greenglovebutton-clicked",
+            redGloVetoggle: "redglovebutton",
+            vote: 1
+          });
+        }
+        else if (votePetition.get('votePetition') === -1) {
+          that.setState({
+            greenGloVetoggle: "greenglovebutton",
+            redGloVetoggle: "redglovebutton-clicked",
+            vote: -1
+          });
+        }
+      }
+    });
   },
   handleTabClick: function(data){
-    
     if(data===1) {
       this.setState({content: this.state.petition.title});
     }
     else if(data===2) {
-      this.setState({content: this.state.petition.description});
+      this.setState({content: this.state.petition.summary});
     }
     else if(data===3) {
-      this.setState({content: this.state.petition.neighbourComments});
+      this.setState({content: this.state.petition.text});
     }
     
     $(".petitionTabs li").removeClass("active");
     $("#tab-" + data).addClass("active");
-    
   },
-
-
-sharingMenu: function() {
-  'use strict';
-  
-  var isOpen  = true;
-  var button  = document.querySelector('#expand-navigation');
-  var wrapper = document.querySelector('.wrapper');
-  var overlay = document.querySelector('.overlay');
-  
-  button.addEventListener('click', navigationHandler);
-  document.addEventListener('click', closeNavigation);
-  
-  function navigationHandler(event) {
-    if (event == null) {
-      event = window.event;
+  handleGGloVeclick: function(e) {
+    e.preventDefault();
+    var votePetition = {petitionId: this.props.params.petitionId};
+    
+    if (this.state.greenGloVetoggle === "greenglovebutton") {
+      this.setState({greenGloVetoggle:"greenglovebutton-clicked", redGloVetoggle:"redglovebutton", votePetition: 1});
+      votePetition.votePetition = 1;
+      Parse.Cloud.run('handleVotePetition',  votePetition);
     }
+    else if (this.state.greenGloVetoggle === "greenglovebutton-clicked") {
+      this.setState({greenGloVetoggle:"greenglovebutton", votePetition: 0});
+      votePetition.votePetition = 0;
+      Parse.Cloud.run('handleVotePetition', votePetition);
+    }
+  },
+  handleRGloVeclick: function(e) {
+    e.preventDefault();
+    var votePetition = {petitionId: this.props.params.petitionId};
+    if (this.state.redGloVetoggle === "redglovebutton") {
+      this.setState({redGloVetoggle:"redglovebutton-clicked", greenGloVetoggle: "greenglovebutton", votePetition: -1});
+      votePetition.votePetition = -1;
+      Parse.Cloud.run('handleVotePetition', votePetition);
+    }
+    else if (this.state.redGloVetoggle === "redglovebutton-clicked") {
+      this.setState({redGloVetoggle:"redglovebutton", votePetition: 0});
+      votePetition.votePetition = 0;
+      Parse.Cloud.run('handleVotePetition', votePetition);
+    }
+  },
+  handleShareButtonClick: function(e) {
+    e.preventDefault();
     
-    event.stopPropagation();
-    
-    !isOpen ? openNavigation() : closeNavigation();
-  }
-  
-  function openNavigation() {
-    isOpen = true;
-    
-    button.innerHTML  = '-';
-    wrapper.className = 'wrapper opened';
-    overlay.className = 'overlay on-overlay';
-  }
+    this.setState({
+      shareButtonToggle: !this.state.shareButtonToggle
+    });
 
-  function closeNavigation() {
-    isOpen = false;
-    
-    button.innerHTML = '+';
-    wrapper.className = 'wrapper';
-    overlay.className = 'overlay';
-  }  
-},
-
-
-
+  },
 
   render: function() {
     return (
- 
- <div>
-    <div>
+      <div>
         <div>
-          <div className="petitionInfo">
-            <div className="petitions-heading">
-            Petitions
+          <div>
+            <div className="petitionInfo">
+              <div className="petitionHeading">
+                Petition
+              </div>
+                
+              <div className="petitionandid">
+                <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
+              </div>
+                
+              <div className="tagDescriptions">
+                <p>Keywords: <span className="dynamic">{this.state.petition.keywords}</span></p>
+                <p> <span className="dynamic">{this.state.petition.daysLeft}</span> Days left</p>
             </div>
-            
-            <div className="petitionandid">
-                <h3>petition</h3>             
-                <h2>{this.state.petition.id}</h2>
+          </div>
+    
+          <div className="petitionTabs">
+            <ul>
+              <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
+              <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
+              <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
+            </ul>
+    
+          	<div className="box-wrap">
+            	<div id="box">
+            	  <p>{this.state.content}</p>
+            	</div>
             </div>
-            
-            <div className="petitionTags">
-                  <div>**new**</div>
-                  <div>**hot**</div>
-                  <div>**author**</div>
-            </div>
+          </div>
+        
+        </div>
+        
+        <div className="chartContainer">
+          <div className="petitionVoteComparison">
+            <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
           </div>
         </div>
         
-        <div className="daysLeftAndNumber">
-            <div>{this.state.petition.daysLeft}</div>
-            <div>Days Left</div>
+        <div className="votingAndSharingActions">
+              
+          <div onClick={this.handleRGloVeclick} className={this.state.redGloVetoggle}></div>
+
+          <div className="share">
+            <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+            <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+            <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
           </div>
 
-        <div className="petitionTabs">
-          <ul>
-            <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
-            <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Description</li>
-            <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Neighbour Comments</li>
-          </ul>
-
-      		<div className="petitions-box-wrap">
-        		<div id="box">
-        		  <p>{this.state.content}</p>
-        		</div>
-        	</div>
-        	
-        </div>
-            
-        <div className="pollCompare">
-          <div><p>**Whole Country**</p></div>
-          <div><p>**Your Neighbours**</p></div>
-        </div>
+          <div onClick={this.handleGGloVeclick} className={this.state.greenGloVetoggle}></div>
 
         </div>
-      
-        <div className="pollingButtons">
-        
-          <div className="leftarrow">
-              <img alt="left" src="images/arrowleft.png"></img>
-          </div>
-                  
-          <div className= "redglove">
-          </div>
-          
-           <div className= "share">
-              <img alt="share" src="images/twitter-logo.jpg"></img>
-          </div>
-          
-          <div className= "greenglove">
-          </div>
-          
-          <div className="rightarrow">
-              <img alt="right" src="images/arrowright.png"></img>
-          </div>
-          
-        </div>
-        
-    </div>
+      </div>
+  </div>
     );
   }
 });
 
-module.exports = Petition;
+module.exports = withRouter(Petition);
