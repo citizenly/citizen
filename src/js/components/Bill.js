@@ -28,6 +28,7 @@ var Bill = React.createClass({
         recentVote: '' ,
         lastVote: '',
         proposedBy: '',
+        partyOfSponsor: '',
         repsVote: '' ,
         date: '' 
       },
@@ -42,7 +43,6 @@ var Bill = React.createClass({
   },
   componentDidMount: function() {
     this.loadBillData();
-    this.setState({content: this.state.bill.title});
     $(".billTabs li").removeClass("active");
     $("#tab-" + 1).addClass("active");
   },
@@ -57,12 +57,17 @@ var Bill = React.createClass({
     var billId = this.props.params.billId;
     this.setState({loading: true});
     
-    // post billId to server and this.setState({bill: response.data})
+    // post billId and repName to server and this.setState({bill: response.data})
+    var repName = localStorage.getItem("repName");
     axios.post('/billinfoget', {
-      billId: billId
+      billId: billId,
+      repName: repName
     })
     .then(function(response) {
       that.setState({bill: response.data, loading: false});
+    })
+    .then(function() {
+      that.setState({content: that.state.bill.title});
     })
     .catch(function(response) {
       console.log(response, 'response');
@@ -155,9 +160,10 @@ var Bill = React.createClass({
               </div>
                 
               <div className="tagDescriptions">
-                <p>Last parliamentary vote <span className={"dynamic" + this.state.bill.lastVote}>{this.state.bill.lastVote}</span></p>
-                <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span></p>
-                <p>My representative voted <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)}>{this.state.bill.repsVote}</span></p>
+                <p>Status: Bills in its <span className="dynamic">{this.state.bill.status}</span></p>
+                <p>My representative last voted <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)}>{this.state.bill.repsVote}</span></p>
+                <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span>
+                <span className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}> - {this.state.bill.partyOfSponsor}</span></p> 
             </div>
           </div>
     
