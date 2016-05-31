@@ -3,6 +3,13 @@ var React = require('react');
 // required for ajax calls
 var axios = require('axios');
 var $ = require('jquery');
+var DoughnutChart = require("react-chartjs").Doughnut;
+
+
+
+//HULLO :) the 'value' below is to be replaced with the yes/no votes of the whole country and the yes/no votes of the 'neighbours' (ie constituency).
+var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B2530", value: 50, label: "NO"}]
+var neighbourData = [{color: "#4EA32A", value: 150, label: "YES"}, {color: "#D56500", value: 120, label: "NO"}]
 
 
 var Petition = React.createClass({
@@ -144,11 +151,10 @@ sharingMenu: function() {
         	
         </div>
             
-        <div className="pollCompare">
-          <div><p>**Whole Country**</p></div>
-          <div><p>**Your Neighbours**</p></div>
+        <div className="countryAndNeighboursComparison">
+          <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
+          <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
         </div>
-
         </div>
       
         <div className="pollingButtons">
