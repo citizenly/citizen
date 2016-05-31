@@ -34,7 +34,7 @@ var Signup = React.createClass({
     }
     else {
       // signup new user using Parse
-      Parse.User.signUp(username, password, userPostalCode).then(
+      Parse.User.signUp(username, password).then(
         function(user) {
           console.log('SUCCESSFUL SIGNUP', user);
           var repName = localStorage.getItem('repName');

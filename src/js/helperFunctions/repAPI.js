@@ -28,28 +28,33 @@ function getRepInfo(nameFormatted, callback) {
   //with the name of MP formatted, we fetch his data
   var findMP = `politicians/${nameFormatted}/`;
   // Make request to api.openparliament.ca and cache
-  makeRequest(findMP, function(err, result){
-    var mp = result;
-    var name = mp.name;
-    var constituency = mp.memberships[0].riding.name.en;
-    var party = mp.memberships[0].party.short_name.en;
-    var image = "https://api.openparliament.ca" + mp.image;
-    var electedOn = mp.memberships[0].start_date.substring(0, 4);
-    var ridingId = mp.memberships[0].riding.id;
-    var favoriteWord = mp.other_info.favourite_word[0];
-    var province = mp.memberships[0].riding.province;
+  makeRequest(findMP, function(err, result) {
+    if (err) {
+      callback(err);
+    }
+    else {
+      var mp = result;
+      var name = mp.name;
+      var constituency = mp.memberships[0].riding.name.en;
+      var party = mp.memberships[0].party.short_name.en;
+      var image = "https://api.openparliament.ca" + mp.image;
+      var electedOn = mp.memberships[0].start_date.substring(0, 4);
+      var ridingId = mp.memberships[0].riding.id;
+      var favoriteWord = mp.other_info.favourite_word[0];
+      var province = mp.memberships[0].riding.province;
 
-    var rep = {
-      name: name,
-      nameFormatted: nameFormatted,
-      constituency: constituency,
-      province: province,
-      party: party,
-      img: image,
-      ridingId: ridingId,
-      electedYear: electedOn,
-    };
-    callback(null, rep);
+      var rep = {
+        name: name,
+        nameFormatted: nameFormatted,
+        constituency: constituency,
+        province: province,
+        party: party,
+        img: image,
+        ridingId: ridingId,
+        electedYear: electedOn,
+      };
+      callback(null, rep);
+    }
   });
 }
 
