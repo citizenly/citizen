@@ -5,10 +5,10 @@ var Link = require('react-router').Link;
 var Compare = React.createClass({
   render: function() {
     return (
-      <div className="main comparePage">
-        <div>
-          <h1>Compare Landing Page</h1>
-        </div>
+      <div className="compareInfo">
+          <div className="compareHeading">
+                Compare
+          </div>
       </div>
     );
   }
