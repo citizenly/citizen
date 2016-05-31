@@ -30,6 +30,8 @@ var getBill = BillAPI.getBill;
 var getSponsor = BillAPI.getSponsor;
 var getResultOfLastVote = BillAPI.getResultOfLastVote;
 var getBallot = BillAPI.getBallot;
+var getFinalStageBills = BillsAPI.getFinalStageBills;
+var getBallotAboutFinalStageBills = BillsAPI.getBallotAboutFinalStageBills;
 
 
 
@@ -51,7 +53,7 @@ var api = new ParseServer({
   appId: 'XYZ',
   masterKey: 'ABC', // Keep this key secret!
   fileKey: 'file-key-not-sure',
-  serverURL: 'https://citizen-molecularcode.c9users.io/parse' // Don't forget to change to https if needed
+  serverURL: 'https://citizen-marie-evegauthier.c9users.io/parse' // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
@@ -69,7 +71,7 @@ app.post('/repnameget', function(req, res) {
   getRepName(req.body.postalcode, function(err, nameFormatted) {
     if(err) {
       console.log(err);
-      return;
+      res.send("invalid");
     }
     else {
       res.send(nameFormatted);
@@ -82,26 +84,25 @@ app.post('/repinfoget', function(req, res) {
   getRepInfo(req.body.repName, function(err, rep) {
     if (err) {
       console.log(err);
-      return;
     }
-    getPercentageVote(rep.ridingId, function(err, percentageVote) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      else{
-      rep.electedVote = percentageVote;
-      res.send(rep);
-      }
-    });
+      getPercentageVote(rep.ridingId, function(err, percentageVote) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        else{
+        rep.electedVote = percentageVote;
+        res.send(rep);
+        }
+      });
   });
 });
 /* -------------------------------------------------------------------------- */
 
 /* BILLS FUNCTION CALLS ------------------------------------------------------- */
 app.post('/postfilter', function(req, res) {
-      req = req.body.filter;
-      // console.log(req, 'req');
+      var repName = req.body.repName;
+      req = req.body.filter; 
       switch (req) {
         case 'active':
           fixLimitByPage(function(err, limit) {
@@ -173,6 +174,7 @@ app.post('/postfilter', function(req, res) {
             return;
           }
           var allBillsClean = allBills(arrOfBills);
+          console.log(allBillsClean);
           res.send(allBillsClean);
         });
       });
@@ -184,8 +186,8 @@ app.post('/postfilter', function(req, res) {
           console.log(err);
           return;
         }
-        getBallotsByPolitician(limit, "tony-clement", function(err, listOfBallots){
-          if(err){
+        getBallotsByPolitician(limit, repName, function(err, listOfBallots) {
+          if (err) {
             console.log(err);
             return;
           }
@@ -201,11 +203,21 @@ app.post('/postfilter', function(req, res) {
                 console.log(err);
                 return;
               }
+
               var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitleWithResult, billsWithTitle, listOfBallots);
-            
+
               var ballotsByUniqueDate = getUniqueBillsByDate(ballotsOnlyAboutBill);
-              console.log(ballotsByUniqueDate, "*******ballotsByUniqueDate")
-              res.send(ballotsByUniqueDate);
+
+              getFinalStageBills(function(err, finalStageBills) {
+                if (err) {
+                  console.log(err);
+                  return;
+                }
+                var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
+
+
+                res.send(ballotsAboutFinaleStageBill);
+              });
             });
           });
         });
@@ -223,18 +235,18 @@ app.post('/postfilter', function(req, res) {
             console.log(err);
             return;
           }
-          var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
+          var billsWithoutTitleWithResult = getListOfBillsFromVotesWithResult(arrOfVotes);
 
           getTitleOfBill(function(err, billsWithTitle) {
             if (err) {
               console.log(err);
               return;
             }
-            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
+            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitleWithResult, billsWithTitle);
 
             var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
 
-            getBillBySponsor("alexandre-boulerice", function(err, listOfBillsSponsored) {
+            getBillBySponsor(repName, function(err, listOfBillsSponsored) {
               if (err) {
                 console.log(err);
                 return;
