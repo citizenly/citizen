@@ -136,6 +136,7 @@
 .billList {
  margin-left: 10px;
  list-style: none;
+ margin-bottom: 60px;
         ul, li {
         list-style: none;
         }
@@ -159,3 +160,8 @@
         }
 }
 
+@media only screen and (max-width: 345px) {
+    .billList {
+        margin-bottom: 70px;
+    }
+}

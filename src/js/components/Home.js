@@ -36,7 +36,7 @@ var Home = React.createClass({
       .then(function(response) {
         if(response.data === "invalid") {
           that.setState({invalidPostalCode: "alert"});
-          event.emit('show_message', {message:"Enter a valid postal code"});  
+          event.emit('show_message', {message:"There is no constituency associated with your postal code."});  
         }
         else {
           var path = '/rep/' + response.data;
