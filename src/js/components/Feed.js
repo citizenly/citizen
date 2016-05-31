@@ -21,7 +21,7 @@ var Feed = React.createClass({
             <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search what your representative is doing" />
           </div>
   
-          <div className="feedTags">
+          <div className="billTags">
               <div>All</div>
               <div>Votes</div>
               <div>Social</div>
