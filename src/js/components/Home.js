@@ -18,7 +18,7 @@ var Home = React.createClass({
     e.preventDefault();
     var that = this;
     
-    // check the postal code is in a valid format
+    // check if the postal code is in a valid format
     var pc = this.refs.postalcode.value;
     var userPostalCode = formattedPc.validatePC(pc);
     
@@ -34,11 +34,17 @@ var Home = React.createClass({
         postalcode: userPostalCode
       })
       .then(function(response) {
-        var path = '/rep/' + response.data;
-        // store 'repName' in the browser cache
-        localStorage.setItem('repName', response.data);
-        // redirect to the path of rep/your-rep-name
-        that.props.router.push(path);
+        if(response.data === "invalid") {
+          that.setState({invalidPostalCode: "alert"});
+          event.emit('show_message', {message:"Enter a valid postal code"});  
+        }
+        else {
+          var path = '/rep/' + response.data;
+          // store 'repName' in the browser cache
+          localStorage.setItem('repName', response.data);
+          // redirect to the path of rep/your-rep-name
+          that.props.router.push(path);
+        }
       })
       .catch(function(response) {
         console.log(response, 'response');

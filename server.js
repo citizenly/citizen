@@ -51,7 +51,7 @@ var api = new ParseServer({
   appId: 'XYZ',
   masterKey: 'ABC', // Keep this key secret!
   fileKey: 'file-key-not-sure',
-  serverURL: 'https://citizen-molecularcode.c9users.io/parse' // Don't forget to change to https if needed
+  serverURL: 'https://citizen-marie-evegauthier.c9users.io/parse' // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
@@ -69,7 +69,7 @@ app.post('/repnameget', function(req, res) {
   getRepName(req.body.postalcode, function(err, nameFormatted) {
     if(err) {
       console.log(err);
-      return;
+      res.send("invalid");
     }
     else {
       res.send(nameFormatted);
@@ -81,19 +81,21 @@ app.post('/repnameget', function(req, res) {
 app.post('/repinfoget', function(req, res) {
   getRepInfo(req.body.repName, function(err, rep) {
     if (err) {
-      console.log(err);
-      return;
+      console.log(err, "fist err");
+      //res.send("invalid");
     }
-    getPercentageVote(rep.ridingId, function(err, percentageVote) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      else{
-      rep.electedVote = percentageVote;
-      res.send(rep);
-      }
-    });
+    //else{
+      getPercentageVote(rep.ridingId, function(err, percentageVote) {
+        if (err) {
+          console.log(err, "sec err");
+          return;
+        }
+        else{
+        rep.electedVote = percentageVote;
+        res.send(rep);
+        }
+      });
+    //}
   });
 });
 /* -------------------------------------------------------------------------- */
