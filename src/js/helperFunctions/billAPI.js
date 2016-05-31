@@ -1,6 +1,6 @@
 var makeRequest = require("./openAPI.js");
 var getVoteNumber = require("./findVoteNumber.js");
-
+var makeTextRequest = require('./parlAPI.js');
 
 
 function getBill(billId, callback) {
@@ -66,11 +66,29 @@ function getBallot(proposedByUrl, voteNumber, callback) {
   });
 }
 
+
+// get the Bill Summary or full Bill text, depending on the 'text' parameter passed
+// text = the type of text we want back, either the sting "summary" or "full"
+// path = the text_url of an individual bill, e.g. http://www.parl.gc.ca/HousePublications/Publication.aspx?Language=E&Mode=1&DocId=8266110
+// callback = callback the result
+function getBillText(text, path, callback) {
+  makeTextRequest(text, path, function(err, html) {
+    if (err) {
+      callback(err);
+    }
+    else {
+      callback(null, html);
+    }
+  });
+}
+  
+
 module.exports = {
   getBill: getBill,
   getSponsor: getSponsor,
   getResultOfLastVote: getResultOfLastVote,
-  getBallot: getBallot
+  getBallot: getBallot,
+  getBillText: getBillText
 };
 
 
@@ -107,3 +125,13 @@ module.exports = {
 //     })
 //   })
 // })
+
+// getBillText ("summary", "http://www.parl.gc.ca/HousePublications/Publication.aspx?Language=E&Mode=1&DocId=8266110", function(err, html) {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   else {
+//     console.log(html, 'html');
+//   }
+// });

@@ -34,10 +34,22 @@ var Signup = React.createClass({
     }
     else {
       // signup new user using Parse
-      Parse.User.signUp(username, password, userPostalCode).then(
-        function(user) {
+      var user = new Parse.User();
+      user.set("username", username);
+      user.set("password", password);
+      user.set("postalcode", userPostalCode);
+
+      user.signUp(null,{
+        success:function(user){
           console.log('SUCCESSFUL SIGNUP', user);
           var repName = localStorage.getItem('repName');
+          var query = new Parse.Query(user);
+            query.equalTo("username", username);
+            query.find({
+              success: function(me) {
+                console.log(me[0].username, 'me');
+              }
+            });
           if (repName) {
             that.props.router.push('/rep/' + repName);
           }
@@ -45,11 +57,11 @@ var Signup = React.createClass({
             that.props.router.push('/');
           }
         },
-        function(error) {
+        error:function(user,error){
           // Show the error message somewhere and let the user try again.
           alert("Error: " + error.code + " " + error.message);
         }
-      );
+      });
     }
   },
   render: function() {

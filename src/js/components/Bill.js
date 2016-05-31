@@ -16,6 +16,7 @@ var Bill = React.createClass({
         id: '' ,
         title: '' ,
         summary: '',
+        text: '',
         status: '',
         recentVote: '' ,
         lastVote: '',
@@ -32,6 +33,7 @@ var Bill = React.createClass({
   componentDidMount: function() {
     this.loadBillData();
     this.setState({content: this.state.bill.title});
+    console.log(this.state.bill, 'this.state.bill');
     $(".billTabs li").removeClass("active");
     $("#tab-" + 1).addClass("active");
   },
@@ -87,10 +89,7 @@ var Bill = React.createClass({
     else if(data===3) {
       this.setState({content: this.state.bill.text});
     }
-    else if(data===4) {
-      this.setState({content: this.state.bill.houseDebate});
-    }
-    
+
     $(".billTabs li").removeClass("active");
     $("#tab-" + data).addClass("active");
   },
@@ -141,46 +140,37 @@ var Bill = React.createClass({
                 <p>Last parliamentary vote <span className={"dynamic" + this.state.bill.lastVote}>{this.state.bill.lastVote}</span></p>
                 <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span></p>
                 <p>My representative voted <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)}>{this.state.bill.repsVote}</span></p>
+              </div>
+            </div>
+    
+            <div className="billTabs">
+             <ul>
+                <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
+                <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
+                <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
+              </ul>
+    
+            	<div className="box-wrap">
+              	<div id="box">
+              	  <p>{this.state.content}</p>
+               	</div>
+              </div>
             </div>
           </div>
-    
-          <div className="billTabs">
-            <ul>
-              <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
-              <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
-              <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
-              <li id="tab-4" onClick={this.handleTabClick.bind(this, 4)}>House Debate</li>
-            </ul>
-    
-          	<div className="box-wrap">
-            	<div id="box">
-            	  <p>{this.state.content}</p>
-            	</div>
-            </div>
-          </div>
-        
-        </div>
           
-        <div className="votingButtons">
-          <div className="leftarrow">
-            <img alt="left" src="../../images/arrowleft.png"></img>
-          </div>
-                      
-          <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+          <div className="votingButtons">
+            <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}>
+            </div>
 
-          <div className= "share">
-            <i className="fa fa-share-alt"></i>
-          </div>
+            <div className= "share">
+              <i className="fa fa-share-alt"></i>
+            </div>
 
-          <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
-
-          <div className="rightarrow">
-            <img alt="right" src="../../images/arrowright.png"></img>
+            <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>
+            </div>
           </div>
-              
         </div>
       </div>
-  </div>
     );
   }
 });
