@@ -111,7 +111,6 @@ sharingMenu: function() {
     return (
  
  <div>
-    <div>
         <div>
           <div className="petitionInfo">
             <div className="petitions-heading">
@@ -134,7 +133,7 @@ sharingMenu: function() {
         <div className="daysLeftAndNumber">
             <div>{this.state.petition.daysLeft}</div>
             <div>Days Left</div>
-          </div>
+        </div>
 
         <div className="petitionTabs">
           <ul>
@@ -151,10 +150,11 @@ sharingMenu: function() {
         	
         </div>
             
-        <div className="countryAndNeighboursComparison">
-          <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
-          <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
-        </div>
+        <div className="chartContainer">
+          <div className="petitionVotesComparison">
+            <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
+            <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
+          </div>
         </div>
       
         <div className="pollingButtons">
