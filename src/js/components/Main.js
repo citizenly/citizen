@@ -66,47 +66,56 @@ var App = React.createClass({
     return (
       <div>
         <header>
-          <nav>
-          <div className="hamburgerDiv">
-            <a href="#" onClick={this.onClick} className="hamburger">
-              <div className="line"></div>
-              <div className="line"></div>
-              <div className="line"></div>
-            </a>
+        
+          <div className="backArrow">
+            <div className="backityArrow"></div>
           </div>
-            <ul className={"clearfix menu " + this.state.menutoggle} >
-              <li>
-                <IndexLink activeClassName="active" onClick={this.onMenuItemClick} to="/">Home</IndexLink>
-              </li>
-              <li>
-                <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
-              </li>
-              <li>
-                <Link activeClassName="active" to="/signup">Signup</Link>
-              </li>
-              <li>
-                <a onClick={this.userLogout.bind(this, 'logout')}>Logout</a>
-              </li>
-              <li>
-                <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
-              </li>
-              <li>
-                <Link activeClassName="active" to="/rep/" onClick={this.onRepClick} /*{this.onMenuItemClick}*/>Your Representative</Link>
-              </li>
-              <li>
-                <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>
-              </li>
-              <li>
-                <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to="/feed">What they're doing</Link>
-              </li>
-              <li>
-                <Link activeClassName="active" className="petitionsMenu" onClick={this.onMenuItemClick} to="/petitions">Petitions</Link>
-              </li>
-              <li>
-                <Link activeClassName="active" className="compareMenu" onClick={this.onMenuItemClick} to="/compare">Compare</Link>
-              </li>
-            </ul>
+          
+          <nav>
+          
+            <div className="hamburgerDiv">
+              <a href="#" onClick={this.onClick} className="hamburger">
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+              </a>
+            </div>
+            
+              <ul className={"clearfix menu " + this.state.menutoggle} >
+                <li>
+                  <IndexLink activeClassName="active" onClick={this.onMenuItemClick} to="/">Home</IndexLink>
+                </li>
+                <li>
+                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link activeClassName="active" to="/signup">Signup</Link>
+                </li>
+                <li>
+                  <a onClick={this.userLogout.bind(this, 'logout')}>Logout</a>
+                </li>
+                <li>
+                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
+                </li>
+                <li>
+                  <Link activeClassName="active" to="/rep/" onClick={this.onRepClick} /*{this.onMenuItemClick}*/>Your Representative</Link>
+                </li>
+                <li>
+                  <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>
+                </li>
+                <li>
+                  <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to="/feed">What they're doing</Link>
+                </li>
+                <li>
+                  <Link activeClassName="active" className="petitionsMenu" onClick={this.onMenuItemClick} to="/petitions">Petitions</Link>
+                </li>
+                <li>
+                  <Link activeClassName="active" className="compareMenu" onClick={this.onMenuItemClick} to="/compare">Compare</Link>
+                </li>
+              </ul>
+              
           </nav>
+          
         </header>
 
         <div className="site-wrap">
