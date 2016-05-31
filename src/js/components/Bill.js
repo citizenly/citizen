@@ -181,8 +181,8 @@ var Bill = React.createClass({
         </div>
         
         <div className="countryAndNeighboursComparison">
-          <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true}} width="200" height= "200" />
-          <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true}} width="100" height= "100" />
+          <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
+          <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
         </div>
         
         <div className="votingAndSharingActions">
