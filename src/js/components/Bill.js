@@ -34,7 +34,10 @@ var Bill = React.createClass({
       content: "",
       vote: 0,
       greenBtnToggle: "greenbutton",
-      redBtnToggle: "redbutton"
+      redBtnToggle: "redbutton",
+      shareButtonToggle: false,
+      facebookButton: "",
+      twitterButton: "",
     };
   },
   componentDidMount: function() {
@@ -95,9 +98,6 @@ var Bill = React.createClass({
     else if(data===3) {
       this.setState({content: this.state.bill.text});
     }
-    else if(data===4) {
-      this.setState({content: this.state.bill.houseDebate});
-    }
     
     $(".billTabs li").removeClass("active");
     $("#tab-" + data).addClass("active");
@@ -131,6 +131,14 @@ var Bill = React.createClass({
       Parse.Cloud.run('handleVote', vote);
     }
   },
+  handleShareButtonClick: function(e) {
+    e.preventDefault();
+    
+    this.setState({
+      shareButtonToggle: !this.state.shareButtonToggle
+    });
+
+  },
 
   render: function() {
     return (
@@ -158,7 +166,6 @@ var Bill = React.createClass({
               <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
               <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
               <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
-              <li id="tab-4" onClick={this.handleTabClick.bind(this, 4)}>House Debate</li>
             </ul>
     
           	<div className="box-wrap">
@@ -179,8 +186,10 @@ var Bill = React.createClass({
               
           <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
 
-          <div className= "share">
-            <i className="fa fa-share-alt"></i>
+          <div className="share">
+            <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+            <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+            <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
           </div>
 
           <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>

@@ -20,6 +20,9 @@ var Rep = React.createClass({
         electedYear: "",
         electedVote: ""
       },
+      shareButtonToggle: false,
+      facebookButton: "",
+      twitterButton: "",
     };
   },
   componentDidMount: function() {
@@ -41,6 +44,14 @@ var Rep = React.createClass({
     });
   },
   
+    handleShareButtonClick: function(e) {
+    e.preventDefault();
+    
+    this.setState({
+      shareButtonToggle: !this.state.shareButtonToggle
+    });
+
+  },
   
   render: function() {
     return (
@@ -86,9 +97,10 @@ var Rep = React.createClass({
           <div id="seperator"></div>
           <div className="down"></div>
       
-          <div className= "sharing-horizontal">
-              <a className="fbtn share facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
-              <a className="fbtn share twitter" href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
+          <div className="share">
+            <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+            <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+            <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
           </div>
               
         </div>

@@ -142,6 +142,7 @@
 
 .countryAndNeighboursComparison {
     margin-top: 30px;
+    width: 50%;
 }
 
 canvas.bigD {
@@ -208,6 +209,9 @@ canvas.littleD {
     }
 }
 
+.shareButtonClicked {
+    opacity: 0.5;
+}
 
 .countryYes {
 background-color: #006729
@@ -224,5 +228,6 @@ background-color: #4EA32A
 .neighboursNo { 
 background-color: #D56500
 }
+
 
 
