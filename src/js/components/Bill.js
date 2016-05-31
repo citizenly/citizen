@@ -8,6 +8,14 @@ import { withRouter } from 'react-router';
 var Parse = require('parse');
 
 var Vote = Parse.Object.extend('Vote');
+var DoughnutChart = require("react-chartjs").Doughnut;
+
+
+
+//HULLO :) the 'value' below is to be replaced with the yes/no votes of the whole country and the yes/no votes of the 'neighbours' (ie constituency).
+var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B2530", value: 50, label: "NO"}]
+var neighbourData = [{color: "#4EA32A", value: 150, label: "YES"}, {color: "#D56500", value: 120, label: "NO"}]
+
 
 
 var Bill = React.createClass({
@@ -133,6 +141,7 @@ var Bill = React.createClass({
       Parse.Cloud.run('handleVote', vote);
     }
   },
+
   render: function() {
     return (
       <div>
@@ -170,12 +179,14 @@ var Bill = React.createClass({
           </div>
         
         </div>
-          
-        <div className="votingButtons">
-          <div className="leftarrow">
-            <img alt="left" src="../../images/arrowleft.png"></img>
-          </div>
-                      
+        
+        <div className="countryAndNeighboursComparison">
+          <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true}} width="200" height= "200" />
+          <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true}} width="100" height= "100" />
+        </div>
+        
+        <div className="votingAndSharingActions">
+              
           <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
 
           <div className= "share">
@@ -184,9 +195,6 @@ var Bill = React.createClass({
 
           <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
 
-          <div className="rightarrow">
-            <img alt="right" src="../../images/arrowright.png"></img>
-          </div>
               
         </div>
       </div>

@@ -43,7 +43,7 @@ var App = React.createClass({
               <div className="line"></div>
               <div className="line"></div>
             </a>
-            </div>
+          </div>
             <ul className={"clearfix menu " + this.state.menutoggle} >
               <li>
                 <IndexLink activeClassName="active" onClick={this.onMenuItemClick} to="/">Home</IndexLink>

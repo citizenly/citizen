@@ -136,10 +136,31 @@
     min-height: 70px; 
     font-family: Arimo;
     background-color: rgba(0,0,0,0.1);
-    font-size: 1.2em;}
+    font-size: 1.2em;
+}
     
 
-.votingButtons {
+.countryAndNeighboursComparison {
+    margin-top: 30px;
+}
+
+canvas.bigD {
+   width: 50% !important;
+    height: 50% !important;
+    display: block;
+    margin: 0 auto;
+}
+
+canvas.littleD {
+    height: 25% !important;
+    width: 25% !important;
+    display: block;
+    margin: 0 auto;
+    margin-top: -37.5%;
+}
+
+
+.votingAndSharingActions {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -160,40 +181,44 @@
         background-size: contain;
     }
     
-    
-    .greenbutton {
-        background-image: url("../../images/greenButton.png");
-    }
-    
     .redbutton {
         background-image: url("../../images/redButton.png");
-    }
-    
-    .greenButton-clicked {
-        background-image: url("../../images/greenButtonPressed.png");
     }
     
     .redButton-clicked {
         background-image: url("../../images/redButtonPressed.png");
     }
     
-    .leftarrow {
-        background-image: url("../../images/redButtonPressed.png");
-    }
-    
-    
-    .rightarrow {
-        background-image: url("../../images/redButtonPressed.png");
-    }
-    
-    
     .share {
+        display: flex;
+        justify-content: center;
         //margin: 0px 20px; //top and bottom 0px, left and right 20px
     }
     
-    .leftarrow, .rightarrow {
-        max-width: 20px;
+    .greenbutton {
+        background-image: url("../../images/greenButton.png");
     }
+    
+    .greenButton-clicked {
+        background-image: url("../../images/greenButtonPressed.png");
+    }
+}
+
+
+.countryYes {
+background-color: #006729
+}
+
+.countryNo {
+background-color: #8B2530
+}
+
+.neighboursYes {
+background-color: #4EA32A
+}
+
+.neighboursNo { 
+background-color: #D56500
 }
 
 

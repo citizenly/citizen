@@ -90,15 +90,6 @@ var Bills = React.createClass({
           </div>
           
           
-          <footer>
-          <div className="infobgcolor">
-              <div className="color-result">
-                <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
-              </div>
-              <p>indicates most recent vote in parliament</p>
-          </div>
-          </footer>
-          
      </div>
     );
   }

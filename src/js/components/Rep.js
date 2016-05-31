@@ -4,6 +4,7 @@ var Link = require('react-router').Link;
 var axios = require('axios');
 
 
+
 var Rep = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with rep info on componentDidMount
@@ -82,8 +83,8 @@ var Rep = React.createClass({
           <div className="down"></div>
       
           <div className= "sharing-horizontal">
-          <a className="fbtn share facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
-          <a className="fbtn share twitter" href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
+              <a className="fbtn share facebook" href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+              <a className="fbtn share twitter" href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
           </div>
               
         </div>
