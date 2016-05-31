@@ -1,8 +1,9 @@
-.whatwouldyoudo{
+
+.whatTheyreDoingHeading {
     font-family: Oswald, sans-serif;
     font-weight: 400;
     color: white;
-    background-color: #B095C4;
+    background-color: #8675B3;
     padding: 0px;
     text-transform: uppercase;
     align-items: center;
@@ -11,55 +12,7 @@
 }
 
 
-.billTags {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    margin-top: 15px;
-    margin-bottom: 15px;
-        
-        div {
-        margin: 4px;
-        }
-    
-        a {
-        font-family: Oswald, sans-serif;
-        color: black;
-        font-weight: 200;
-        font-size: 0.8em;
-        border-radius: 2px;
-        text-decoration: none;
-        }
-        
-}
 
-
-.color-result{
-    display: flex;
-
-    span {
-    font-size: 1.1em;
-    }
-    
-    .resultFailed {
-    color: #8B2530;
-    font-size: 1.1em;
-    font-weight: 400;
-    }
-
-    .resultPassed {
-    color: #006729;
-    font-size: 1.1em;
-    font-weight: 400;
-    }
-
-    .resultTie {
-    color: rgba(0,0,0,0.5);
-    font-size: 1.1em;
-    font-weight: 400;
-    }
-}
 
 .searchbox {
     font-family: Arimo, sans-serif;
@@ -93,25 +46,10 @@
         }
 }
 
-.resultFailed {
-    color: #8B2530;
-    font-weight: 400;
-}
 
-.resultPassed {
-    color: #006729;
-    font-weight: 400;
-}
-
-.resultTie {
-    color: rgba(0,0,0,0.5);
-    font-weight: 400;
-}
-
-.billList {
+.feedList {
  margin-left: 10px;
  list-style: none;
- margin-bottom: 60px;
         ul, li {
         list-style: none;
         }
@@ -135,8 +73,3 @@
         }
 }
 
-@media only screen and (max-width: 345px) {
-    .billList {
-        margin-bottom: 70px;
-    }
-}
