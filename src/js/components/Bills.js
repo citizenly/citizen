@@ -1,15 +1,19 @@
+/*global localStorage */
+
 var React = require('react');
 var Link = require('react-router').Link;
 // required for ajax calls
 var axios = require('axios');
 import { withRouter } from 'react-router';
 
+//var repFullName = localStorage.getItem('repFullName');
+
 // Bill constructor
 var Bill = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>{this.props.billId} <span className={"result" + this.props.resultOfVote}>{this.props.resultOfVote}</span></h2>
+        <h2><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billId} <span className={"result" + this.props.resultOfVote}>{this.props.resultOfVote}</span></Link></h2>
         <h4><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billTitle}</Link></h4>
       </div>
     );
@@ -21,13 +25,19 @@ var Bill = React.createClass({
 var Bills = React.createClass({
   getInitialState: function() {
     // set inital state to determine which list of bills is displayed - active by default
-    // ** need to fix my logic because it's always reverting to /active!
+    
     return {
-      billList: []
+      billList: [],
+      repFullName: ""
     };
   },
   componentDidMount: function() {
     this.loadData();
+  },
+  componentWillMount: function(){
+    this.setState({
+      repFullName: localStorage.getItem('repFullName')
+    })
   },
   componentDidUpdate: function(prevProps) {
     if(prevProps.params.filter !== this.props.params.filter) {
@@ -82,6 +92,10 @@ var Bills = React.createClass({
               <div><Link activeClassName="active" to="/bills/all">All</Link></div>
           </div>
           
+          <div className="repName">
+          <p>{this.props.params.filter === "votedonbymyrep"  ? "Your representative, "  + this.state.repFullName + ", voted:"  : ""}</p> 
+          </div>
+          
           <div className="billList">
             {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
             <div>
@@ -89,6 +103,15 @@ var Bills = React.createClass({
             </div>
           </div>
           
+         
+          <footer> {this.props.params.filter === "votedonbymyrep"   ? 
+          <div className="infobgcolor">
+              <div className="color-result">
+                <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
+              </div>
+              <p>indicates most recent vote in parliament</p>
+          </div> : null}
+          </footer> 
           
      </div>
     );

@@ -172,7 +172,7 @@ canvas.littleD {
     //bottom: 10px; //align it to the bottom and push it up 1px
 
     
-    .redbutton, .greenbutton, .redButton-clicked, .greenButton-clicked {
+    .redbutton, .greenbutton, .redbutton-clicked, .greenbutton-clicked {
         padding: 10px;
         max-width: 63px;
         width: 50%;
@@ -185,7 +185,11 @@ canvas.littleD {
         background-image: url("../../images/redButton.png");
     }
     
-    .redButton-clicked {
+    .greenbutton-clicked {
+        background-image: url("../../images/greenButtonPressed.png");
+    }
+    
+    .redbutton-clicked {
         background-image: url("../../images/redButtonPressed.png");
     }
     
