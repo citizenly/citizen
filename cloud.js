@@ -1,3 +1,5 @@
+/*global Parse */
+
 /* Handle Bill Votes -------------------------------------------------------- */
 var Vote = Parse.Object.extend('Vote');
 

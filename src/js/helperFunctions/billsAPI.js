@@ -145,7 +145,8 @@ function getListOfBillsFromVotesWithoutResult(arrOfVotes) {
       noVotesTotal: noVotesTotal,
       yesVotesTotal: yesVotesTotal,
       billId: billId,
-      billUrl: billUrl
+      billUrl: billUrl,
+      resultOfVote: ""
     };
     
     //Not all the votes is about a bill, so if the billId is not null, we want to keep it because it's a bill
@@ -235,12 +236,45 @@ function getUniqueBillsByDate(listOfBillsWithTitle) {
 }
 
 /*To know how the rep feels about the final version of the bill, 
-we are looking at the way he voted for the second reading or the third reading
-So, we want to filter to only get the bills that have this status
+we are looking at the way he voted for the second reading or the third reading.
+We can fetch the list of all votes for the current parliament:
+http://api.openparliament.ca/votes/?session=42-1&limit=500
+There, there is the description of each vote. 
+If the description is (description.en): "That the Bill  be now read a second time " 
+or "That the Bill be now read a third time and do pass.", we can have an idea as is thinking our rep. 
+
 */
-function getFinalStageBills (){
-  
+function getFinalStageBills(callback){
+  var path = "votes/?session=42-1&limit=500";
+  var finalStageBills = [];
+  makeRequest(path, function(err, votes){
+    if(err){
+      callback(err);
+    }
+    else{
+      votes = votes.objects;
+      votes.forEach(function(vote){
+        if(vote.description.en.indexOf("be now read a second time") > -1 || vote.description.en === "That the Bill be now read a third time and do pass."){
+          finalStageBills.push(vote);
+        }
+      });
+      callback(null, finalStageBills); 
+    }
+  });
 }
+
+function getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate) {
+  var ballotsForFinalStageBills = [];
+  ballotsByUniqueDate.forEach(function(ballot){
+    finalStageBills.forEach(function(bill){
+      if (bill.number === Number(ballot.voteNumber)){
+        ballotsForFinalStageBills.push(ballot);
+      }
+    });
+  });
+  return ballotsForFinalStageBills; 
+}
+  
 
 // Takes an array of unique bill objects (listOfUniqueBills) and a 'result' string (resultOfVote) and returns an array of bill objects with the same bill.resultOfVote value
 function filterUniqueBillsByResult(listOfUniqueBills, resultOfVote) {
@@ -403,7 +437,9 @@ module.exports = {
   getBallotsAboutBillWithTitle: getBallotsAboutBillWithTitle,
   getBallotsByPolitician: getBallotsByPolitician,
   getBillBySponsor: getBillBySponsor,
-  getUltimateVotedFromBillId: getUltimateVotedFromBillId
+  getUltimateVotedFromBillId: getUltimateVotedFromBillId,
+  getFinalStageBills: getFinalStageBills,
+  getBallotAboutFinalStageBills: getBallotAboutFinalStageBills
 };
 
 

@@ -6,14 +6,24 @@ var Link = require('react-router').Link;
 var axios = require('axios');
 import { withRouter } from 'react-router';
 
-//var repFullName = localStorage.getItem('repFullName');
-
 // Bill constructor
+//Only show the result of last vote and how my MP voted about that when the //filter is "votedonbymyrep"
 var Bill = React.createClass({
+
   render: function() {
+      var result = this.props.resultOfVote || "";
+      var resultClass = "result"+result || "";
+      var ballot = this.props.ballot || "";
+      var ballotClass = "dynamic" + (ballot.substring(0, 2)); 
+      
     return (
       <div>
-        <h2><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billId} <span className={"result" + this.props.resultOfVote}>{this.props.resultOfVote}</span></Link></h2>
+        <h2>
+          <Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billId}  
+          { ( this.props.params.filter === "votedonbymyrep" ) ? <span className={resultClass}> ({result})</span> : "" }
+          { (this.props.params.filter === "votedonbymyrep" ) ?  <div><span>my representative voted  -</span>  <span className={ballotClass}> {ballot} </span> </div> : "" } 
+          </Link>
+        </h2>
         <h4><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billTitle}</Link></h4>
       </div>
     );
@@ -37,7 +47,7 @@ var Bills = React.createClass({
   componentWillMount: function(){
     this.setState({
       repFullName: localStorage.getItem('repFullName')
-    })
+    });
   },
   componentDidUpdate: function(prevProps) {
     if(prevProps.params.filter !== this.props.params.filter) {
@@ -50,9 +60,12 @@ var Bills = React.createClass({
     var filter = this.props.params.filter;
     this.setState({loading: true});
     
+    
     // post filter to server and this.setState({billList: response.data})
+    var repName = localStorage.getItem("repName");
     axios.post('/postfilter', {
-      filter: filter
+      filter: filter,
+      repName: repName
     })
     .then(function(response) {
       that.setState({billList: response.data, loading: false});
@@ -64,7 +77,7 @@ var Bills = React.createClass({
   renderBills: function(bill) {
     return (
       <li key={bill.billId}>
-        <Bill billTitle={bill.billTitle} billId={bill.billId} resultOfVote={bill.resultOfVote}/>
+        <Bill billTitle={bill.billTitle} billId={bill.billId} resultOfVote={bill.resultOfVote} params={{filter: this.props.params.filter}} ballot={bill.ballot}/>
       </li>
     );
   },
@@ -89,13 +102,13 @@ var Bills = React.createClass({
         </div>
           
         <div className="repName">
-          <p>{this.props.params.filter === "votedonbymyrep"  ? "Your representative, "  + this.state.repFullName + ", voted:"  : ""}</p> 
+          <p>{this.props.params.filter === "votedonbymyrep"  ? "Your representative, "  + this.state.repFullName + ", voted on:"  : ""}</p> 
         </div>
           
         <div className="billList">
           {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
           <div>
-            {this.state.billList !== [] ? this.state.billList.map(this.renderBills) : 'We will have more filters coming soon'}
+            {this.state.billList.length === 0 ? 'We will have more filters coming soon' : this.state.billList.map(this.renderBills)}
           </div>
         </div>
 

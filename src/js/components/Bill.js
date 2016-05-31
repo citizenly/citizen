@@ -7,6 +7,14 @@ import { withRouter } from 'react-router';
 
 var Parse = require('parse');
 var Vote = Parse.Object.extend('Vote');
+var DoughnutChart = require("react-chartjs").Doughnut;
+
+
+
+//HULLO :) the 'value' below is to be replaced with the yes/no votes of the whole country and the yes/no votes of the 'neighbours' (ie constituency).
+var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B2530", value: 50, label: "NO"}]
+var neighbourData = [{color: "#4EA32A", value: 150, label: "YES"}, {color: "#D56500", value: 120, label: "NO"}]
+
 
 var Bill = React.createClass({
   getInitialState: function() {
@@ -27,7 +35,10 @@ var Bill = React.createClass({
       content: "",
       vote: 0,
       greenBtnToggle: "greenbutton",
-      redBtnToggle: "redbutton"
+      redBtnToggle: "redbutton",
+      shareButtonToggle: false,
+      facebookButton: "",
+      twitterButton: "",
     };
   },
   componentDidMount: function() {
@@ -122,6 +133,14 @@ var Bill = React.createClass({
       Parse.Cloud.run('handleVote', vote);
     }
   },
+  handleShareButtonClick: function(e) {
+    e.preventDefault();
+    
+    this.setState({
+      shareButtonToggle: !this.state.shareButtonToggle
+    });
+
+  },
   render: function() {
     return (
       <div>
@@ -142,14 +161,14 @@ var Bill = React.createClass({
                 <p>My representative voted <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)}>{this.state.bill.repsVote}</span></p>
               </div>
             </div>
-    
+
             <div className="billTabs">
              <ul>
                 <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
                 <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
                 <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
               </ul>
-    
+
             	<div className="box-wrap">
               	<div id="box">
               	  <p>{this.state.content}</p>
@@ -157,18 +176,32 @@ var Bill = React.createClass({
               </div>
             </div>
           </div>
-          
-          <div className="votingButtons">
-            <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}>
-            </div>
 
-            <div className= "share">
-              <i className="fa fa-share-alt"></i>
-            </div>
+        </div>
 
-            <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>
-            </div>
+        <div className="chartContainer">
+          <div className="countryAndNeighboursComparison">
+            <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
+            <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
           </div>
+        </div>
+        
+        <div className="votingAndSharingActions">
+              
+          <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+
+          <div className="share">
+            <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+            <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+            <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
+          </div>
+
+          <div className= "share">
+            <i className="fa fa-share-alt"></i>
+          </div>
+
+          <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>
+            </div>
         </div>
       </div>
     );
