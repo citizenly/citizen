@@ -56,6 +56,7 @@ var Bill = React.createClass({
     var that = this;
     // set billId as url parameter
     var billId = this.props.params.billId;
+    // msg whilst data loads
     this.setState({loading: true});
     
     // post billId and repName to server and this.setState({bill: response.data})
@@ -164,6 +165,8 @@ var Bill = React.createClass({
                 <span className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}> - {this.state.bill.partyOfSponsor}</span>
               </p> 
             </div>
+
+            {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
 
             <div className="billTabs">
               <ul>

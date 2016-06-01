@@ -35,7 +35,6 @@ var Bill = React.createClass({
 var Bills = React.createClass({
   getInitialState: function() {
     // set inital state to determine which list of bills is displayed - active by default
-    
     return {
       billList: [],
       repFullName: ""
@@ -59,8 +58,7 @@ var Bills = React.createClass({
     // set filter as url parameter
     var filter = this.props.params.filter;
     this.setState({loading: true});
-    
-    
+
     // post filter to server and this.setState({billList: response.data})
     var repName = localStorage.getItem("repName");
     axios.post('/postfilter', {

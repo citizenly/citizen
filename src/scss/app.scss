@@ -13,14 +13,10 @@
 @import 'forms';
 @import 'compare';
 @import 'petitionform';
-
-
-
+@import 'loadingspinner';
 
 
 /* Global --------------------------------------------------------------- */
-
-
 body {
     margin: 0;
 }
@@ -41,7 +37,6 @@ h2 {
     text-transform: uppercase;
 }
 
-
 h3 {
     font-family: Oswald, sans-serif;
     font-weight: 800;
@@ -50,7 +45,6 @@ h3 {
     color: black;
     text-transform: uppercase;
 }
-
 
 h4 {
     font-family: Arimo, sans-serif;
@@ -69,8 +63,6 @@ p {
   font-size: 0.9em;
   line-height: 1.4;
 }
-
-
 
 footer {
   position: fixed;
