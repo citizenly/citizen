@@ -34,10 +34,8 @@ function getSponsor(proposedByUrl, callback) {
       callback(err);  
     }
     else{
-      
       var proposedBy = politician.name;
       var partyOfSponsor = politician.memberships[0].party.short_name.en;
-      
       callback(null, proposedBy, partyOfSponsor);
     }
   });
