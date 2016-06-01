@@ -34,10 +34,10 @@ function makeRequest(path, callback) {
         else {
           try {
             res = JSON.parse(res.body);
-            server.set(path, JSON.stringify(res), 12*60*60, function(){
+            server.set(path, JSON.stringify(res), function(){
               console.log("data received from the web");
               callback(null, res);
-            });
+            }, 12*60*60);
           } catch(err) {
             callback(err);
           }
