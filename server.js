@@ -30,10 +30,9 @@ var getBill = BillAPI.getBill;
 var getSponsor = BillAPI.getSponsor;
 var getResultOfLastVote = BillAPI.getResultOfLastVote;
 var getBallot = BillAPI.getBallot;
+var getBillText = BillAPI.getBillText;
 var getFinalStageBills = BillsAPI.getFinalStageBills;
 var getBallotAboutFinalStageBills = BillsAPI.getBallotAboutFinalStageBills;
-
-
 
 
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
@@ -63,6 +62,7 @@ app.use('/parse', api);
 /* this says: serve all the files in the src directory if they match the URL. Eg , if the client requests http://server/css/app.css then the file in src/css/app.css will be served. But if the client requests http://server/step-2 then since there is no file by that name the middleware will call next() */
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
+
 
 /* REP FUNCTION CALLS ------------------------------------------------------- */
 /* insert any app.get or app.post you need here. */
@@ -295,26 +295,30 @@ app.post('/billinfoget', function(req, res) {
             return;
           }
           bill.repsVote = ballot;
-          res.send(bill);
+          
+          getBillText ("summary", bill.textUrl, function(err, summaryHtml) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            else {
+              bill.summary = summaryHtml;
+            }
+            
+            getBillText ("full", bill.textUrl, function(err, fullTextHtml) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              bill.text = fullTextHtml;
+              res.send(bill);
+            });
+          });
         });
       });
     });
   });
-
-
 });
-/* ------------------------------------------------------------------------------ */
-
-
-
-// /* BILLS FUNCTION CALLS ------------------------------------------------------- */
-// app.post('/billinfoget', function(req, res) {
-// req = req.body.billId;
- 
- 
- 
- 
-// }); 
 /* ------------------------------------------------------------------------------ */
 
 

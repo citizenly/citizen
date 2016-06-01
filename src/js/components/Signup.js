@@ -34,10 +34,22 @@ var Signup = React.createClass({
     }
     else {
       // signup new user using Parse
-      Parse.User.signUp(username, password).then(
-        function(user) {
+      var user = new Parse.User();
+      user.set("username", username);
+      user.set("password", password);
+      user.set("postalcode", userPostalCode);
+
+      user.signUp(null,{
+        success:function(user){
           console.log('SUCCESSFUL SIGNUP', user);
           var repName = localStorage.getItem('repName');
+          var query = new Parse.Query(user);
+            query.equalTo("username", username);
+            query.find({
+              success: function(me) {
+                console.log(me[0].username, 'me');
+              }
+            });
           if (repName) {
             that.props.router.push('/rep/' + repName);
           }
@@ -45,29 +57,29 @@ var Signup = React.createClass({
             that.props.router.push('/');
           }
         },
-        function(error) {
+        error:function(user,error){
           // Show the error message somewhere and let the user try again.
           alert("Error: " + error.code + " " + error.message);
         }
-      );
+      });
     }
   },
   render: function() {
     return (
-      <div>
-        <h1>Signup</h1>
-        
-        <form onSubmit={this.handleSignup}>
-        <div className="username">
-          <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="please enter your username" />
-          <input ref="password" className="password" type="password" name="password" maxLength="50" placeholder="please enter your password" />
-          <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
-          <button className="loginButton" type="submit">SIGNUP</button>
-          <Message/>
-          
-          <p>Already have an account? <Link to="/login">Login</Link></p>
-        </div>
-      </form>
+      <div className="formPage">
+        <h1 className="formTitle">Signup</h1>
+        <p>Already have an account? <Link to="/login">Login</Link></p>
+        <form className="formEntryFields" method="post" onSubmit={this.handleSignup}>
+            <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="please enter your username" />
+            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="please enter your password" />
+            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
+            <p> In order for you to be able to create valid petitions, we also need the following information (as defined by the Government of Canada): </p>
+            <input ref="city" className="city" type="text" name="city" maxLength="15" placeholder="your city" />
+            <input ref="country" className="country" type="text" name="country" maxLength="15" placeholder="your country (probably Canada)" />
+            <input ref="phone" className="phone" type="text" name="phone" maxLength="25" placeholder="your phonenumber" />
+            <button className="formButton" type="submit">Sign up</button>
+            <Message/>
+        </form>
       </div>
     );
   }

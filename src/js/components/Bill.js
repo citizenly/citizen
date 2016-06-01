@@ -1,10 +1,8 @@
 var React = require('react');
-//var Link = require('react-router').Link;
 // required for ajax calls
 var axios = require('axios');
 var $ = require('jquery');
 import { withRouter } from 'react-router';
-
 var Parse = require('parse');
 var Vote = Parse.Object.extend('Vote');
 var DoughnutChart = require("react-chartjs").Doughnut;
@@ -22,8 +20,9 @@ var Bill = React.createClass({
     return {
       bill: {
         id: '' ,
-        title: '' ,
+        title: '',
         summary: '',
+        text: '',
         status: '',
         recentVote: '' ,
         lastVote: '',
@@ -43,6 +42,8 @@ var Bill = React.createClass({
   },
   componentDidMount: function() {
     this.loadBillData();
+    this.setState({content: this.state.bill.title});
+    console.log(this.state.bill, 'this.state.bill');
     $(".billTabs li").removeClass("active");
     $("#tab-" + 1).addClass("active");
   },
@@ -103,7 +104,7 @@ var Bill = React.createClass({
     else if(data===3) {
       this.setState({content: this.state.bill.text});
     }
-    
+
     $(".billTabs li").removeClass("active");
     $("#tab-" + data).addClass("active");
   },
@@ -142,71 +143,71 @@ var Bill = React.createClass({
     this.setState({
       shareButtonToggle: !this.state.shareButtonToggle
     });
-
   },
-
   render: function() {
     return (
       <div>
         <div>
-          <div>
-            <div className="billInfo">
-              <div className="whatwouldyoudo">
-                What would you do?
-              </div>
-                
-              <div className="billandid">
-                <h3>BILL  <span className="billnumber">{this.state.bill.id}</span></h3>
-              </div>
-                
-              <div className="tagDescriptions">
-                <p>Status: Bills in its <span className="dynamic">{this.state.bill.status}</span></p>
-                <p>My representative last voted <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)}>{this.state.bill.repsVote}</span></p>
-                <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span>
-                <span className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}> - {this.state.bill.partyOfSponsor}</span></p> 
+          <div className="billInfo">
+            <div className="whatwouldyoudo">
+              What would you do?
             </div>
-          </div>
-    
-          <div className="billTabs">
-            <ul>
-              <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
-              <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
-              <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
-            </ul>
-    
-          	<div className="box-wrap">
-            	<div id="box">
-            	  <p>{this.state.content}</p>
-            	</div>
-            </div>
-          </div>
-        
-        </div>
-        
-        <div className="chartContainer">
-          <div className="countryAndNeighboursComparison">
-            <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
-            <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
-          </div>
-        </div>
-        
-        <div className="votingAndSharingActions">
               
-          <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+            <div className="billandid">
+              <h3>BILL <span className="billnumber">{this.state.bill.id}</span></h3>
+            </div>
 
-          <div className="share">
-            <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
-            <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-            <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
+            <div className="tagDescriptions">
+              <p>Status: Bills in its <span className="dynamic">{this.state.bill.status}</span></p>
+              <p>My representative last voted <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)}>{this.state.bill.repsVote}</span></p>
+              <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span>
+                <span className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}> - {this.state.bill.partyOfSponsor}</span>
+              </p> 
+            </div>
+
+            <div className="billTabs">
+              <ul>
+                <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
+                <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
+                <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
+              </ul>
+
+              <div className="box-wrap">
+                <div id="box">
+                  <table><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
+                </div>
+              </div>
+            </div>
           </div>
+      </div>
 
-          <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
-
+      <div className="chartContainer">
+        <div className="countryAndNeighboursComparison">
+          <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
+          <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
         </div>
       </div>
-  </div>
-    );
-  }
+
+      <div className="votingAndSharingActions">
+
+        <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+
+        <div className="share">
+          <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+          <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+          <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
+        </div>
+
+        <div className= "share">
+          <i className="fa fa-share-alt"></i>
+        </div>
+
+        <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>
+        </div>
+      </div>
+    </div>
+  );
+}
 });
 
 module.exports = withRouter(Bill);
