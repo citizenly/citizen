@@ -52,7 +52,7 @@ var Rep = React.createClass({
     });
 
   },
-  
+ /* For now, we put the date of the last election to be in 2015 because for some of the MPs, the openparliament API gives us the date of the first time he/she was elected instead of the date of the last election. That is the way to refer to the date get from the openparliament API :{this.state.rep.electedYear} */
   render: function() {
     return (
     <div>
@@ -67,7 +67,7 @@ var Rep = React.createClass({
             <p>You are being represented by:</p>
             <h2>{this.state.rep.name}</h2>
             <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
-            <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
+            <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
           
           </div>
           
