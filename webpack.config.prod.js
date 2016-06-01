@@ -1,4 +1,6 @@
 var webpack = require('webpack');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: __dirname +'/src/js/app.js',
@@ -17,6 +19,12 @@ module.exports = {
         loaders: ["style", "css", "sass"],
       }
     ]
+  },
+  postcss: function() {
+    return [
+      precss,
+      autoprefixer
+    ];
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin(),
