@@ -85,7 +85,7 @@ var App = React.createClass({
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
                 </li>
                 <li>
-                  <Link activeClassName="active" to="/signup">Signup</Link>
+                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/signup">Signup</Link>
                 </li>
                 <li>
                   <a onClick={this.userLogout.bind(this, 'logout')}>Logout</a>
