@@ -8,13 +8,15 @@
 
 .rep-info {
     display: flex;
-}
-
-.rep-pic {
-    max-width: 25%;
+    
+    img {
+    max-width: 50%;
     margin-left: 10px;
     margin-right: 10px;
 }
+}
+
+
 
 .rep-text {
     margin-left: 5px;
