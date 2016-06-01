@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 var Parse = require('parse');
 /* global localStorage */
 
-var repName = '';
 // The main application layout
 // this.props.children will be set by React Router depending on the current route
 var App = React.createClass({
@@ -14,7 +13,6 @@ var App = React.createClass({
       menutoggle: ''
     };
   },
-  
   onComponentDidMount: function () {
    this.setState({menutoggle:''});
   },
@@ -27,10 +25,8 @@ var App = React.createClass({
       this.setState({menutoggle:''});
     }
   },
-  
-  
-    onMenuItemClick: function (e) {
-      this.setState({menutoggle:''});
+  onMenuItemClick: function (e) {
+    this.setState({menutoggle:''});
   },
   
   userLogout: function(what, e) {
@@ -47,6 +43,14 @@ var App = React.createClass({
           alert("Error: " + error.code + " " + error.message);
         }
       );
+      this.setState({menutoggle:''});
+      var repName = localStorage.getItem('repName');
+      if (repName) {
+        this.props.router.push('/rep/' + repName);
+      }
+      else {
+        this.props.router.push('/');
+      }
     }
   },
   render: function() {
@@ -80,10 +84,10 @@ var App = React.createClass({
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
                 </li>
                 <li>
-                  <Link activeClassName="active" to="/signup">Signup</Link>
+                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/signup">Signup</Link>
                 </li>
                 <li>
-                  <a onClick={this.userLogout.bind(this, 'logout')}>Logout</a>
+                  <a onClick={this.userLogout.bind(this, 'logout')} href="/">Logout</a>
                 </li>
                 <li>
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
