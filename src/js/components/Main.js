@@ -98,7 +98,7 @@ var App = React.createClass({
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
                 </li>
                 <li>
-                  <Link activeClassName="active" to="/rep/" onClick={this.onRepClick} /*{this.onMenuItemClick}*/>Your Representative</Link>
+                  <Link activeClassName="active" to="/rep/" onClick={this.onRepClick + this.onMenuItemClick}>Your Representative</Link>
                 </li>
                 <li>
                   <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>

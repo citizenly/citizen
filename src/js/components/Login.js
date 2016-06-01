@@ -32,18 +32,14 @@ var Login = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <h1>Login</h1>
-        
-        <form onSubmit={this.handleSignup}>
-        <div className="username">
-          <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="please enter your username" />
-          <input ref="password" className="password" type="password" name="password" maxLength="50" placeholder="please enter your password" />
-          <button className="loginButton" type="submit">LOGIN</button>
-          
-          <p>Don't have an account? <Link to="/signup">Signup for one</Link></p>
-        </div>
-      </form>
+      <div className="formPage">
+        <h1 className="formTitle">Login</h1>
+        <p>Don't have an account? <Link to="/signup">Signup</Link></p>
+        <form className="formEntryFields" method="post" onSubmit={this.handleSignup}>
+            <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="please enter your username" />
+            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="please enter your password" />
+            <button className="formButton" type="submit">LOGIN</button>
+        </form>
       </div>
     );
   }
