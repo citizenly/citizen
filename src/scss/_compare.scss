@@ -1,5 +1,7 @@
-.compareInfo {
-    
+.comparePage {
+    p {
+        margin: 15px;
+    }
 }
 
 
@@ -14,3 +16,39 @@
     justify-content: center;
     text-align: center;
 }
+
+
+
+
+.compareTags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 15px;
+        
+         div {
+        margin: 4px;
+        color: black;
+        font-family: Oswald, sans-serif;
+        font-weight: 200;
+        font-size: 0.8em;
+        background: none;
+        box-shadow: none;
+        border-radius: 2px;
+        padding: 0px 5px;
+        }
+    
+        a {
+        font-family: Oswald, sans-serif;
+        color: black;
+        font-weight: 200;
+        font-size: 0.9em;
+        border-radius: 2px;
+        text-decoration: none;
+        }
+        
+}
+
+

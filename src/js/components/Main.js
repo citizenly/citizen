@@ -61,11 +61,7 @@ var App = React.createClass({
     return (
       <div>
         <header>
-        
-          <div className="backArrow">
-            <div className="backityArrow"></div>
-          </div>
-          
+       
           <nav>
           
             <div className="hamburgerDiv">
@@ -123,3 +119,10 @@ var App = React.createClass({
 
 
 module.exports = withRouter(App);
+
+
+/////BACKARROW, IF WE WANT IT IN THE FUTURE/////
+          /*
+          <div className="backArrow">
+            <div className="backityArrow"></div>
+          </div>*/

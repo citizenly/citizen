@@ -138,7 +138,30 @@
     background-color: rgba(0,0,0,0.1);
     font-size: 1.2em;
 }
-  
+
+
+
+
+/////PETITION DOUGHNUT////
+
+.countryYes {
+background-color: #006729
+}
+
+.countryNo {
+background-color: #8B2530
+}
+
+.neighboursYes {
+background-color: #4EA32A
+}
+
+.neighboursNo { 
+background-color: #D56500
+}
+
+
+ 
 .chartContainer {
     width: 100%;
     display: flex;
@@ -160,6 +183,9 @@ canvas.bigD {
 }
 
 
+
+
+/////////PETITION VOTING BUTTONS////////
 
 .votingAndSharingActions {
     display: flex;
@@ -215,23 +241,3 @@ canvas.bigD {
     }
     
 }
-
-
-.countryYes {
-background-color: #006729
-}
-
-.countryNo {
-background-color: #8B2530
-}
-
-.neighboursYes {
-background-color: #4EA32A
-}
-
-.neighboursNo { 
-background-color: #D56500
-}
-
-
-
