@@ -2,7 +2,7 @@ var makeRequest = require("./openAPI.js");
 var getVoteNumber = require("./findVoteNumber.js");
 var makeTextRequest = require('./parlAPI.js');
 
-
+// Get an object about a specific bill voted on this current session
 function getBill(billId, callback) {
   var path = `bills/42-1/${billId}`;
   makeRequest(path, function(err, bill){
@@ -25,6 +25,8 @@ function getBill(billId, callback) {
   });
 }
 
+//The bill received calling getBill only gives us the url of its sponsor.  
+// We want his/her name and party
 function getSponsor(proposedByUrl, callback) {
   var path = proposedByUrl.slice(0, -1);
   makeRequest(path, function(err, politician){
@@ -32,12 +34,17 @@ function getSponsor(proposedByUrl, callback) {
       callback(err);  
     }
     else{
+      
       var proposedBy = politician.name;
-      callback(null, proposedBy);
+      var partyOfSponsor = politician.memberships[0].party.short_name.en;
+      
+      callback(null, proposedBy, partyOfSponsor);
     }
   });
 }
 
+//The bill received calling getBill gives us the voteNumber of its last vote.  
+// We want the result
 function getResultOfLastVote(voteNumber, callback){
   var path = `votes/?number=${voteNumber}&session=42-1`;
   makeRequest(path, function(err, vote){
@@ -51,9 +58,8 @@ function getResultOfLastVote(voteNumber, callback){
   });
 }
 
-function getBallot(proposedByUrl, voteNumber, callback) {
-  var politician = proposedByUrl.substring(-1, proposedByUrl.length - 1).split("/");
-  politician = politician[politician.length - 1];
+//We want to know how our MP voted on the last vote about this bill
+function getBallot(politician, voteNumber, callback) {
   var path = `votes/ballots/?politician=${politician}&vote=42-1%2F${voteNumber}`;
   makeRequest(path, function(err, ballot) {
     if (err) {

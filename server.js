@@ -267,18 +267,20 @@ app.post('/postfilter', function(req, res) {
 
 /* BILL FUNCTION CALLS ------------------------------------------------------- */
 app.post('/billinfoget', function(req, res) {
+  var repName = req.body.repName
   req = req.body.billId;
   getBill(req, function(err, bill) {
     if (err) {
       console.log(err);
       return;
     }
-    getSponsor(bill.proposedByUrl, function(err, proposedBy) {
+    getSponsor(bill.proposedByUrl, function(err, proposedBy, partyOfSponsor) {
       if (err) {
         console.log(err);
         return;
       }
       bill.proposedBy = proposedBy;
+      bill.partyOfSponsor = partyOfSponsor; 
 
       getResultOfLastVote(bill.voteNumber, function(err, voteResult) {
         if (err) {
@@ -287,7 +289,7 @@ app.post('/billinfoget', function(req, res) {
         }
         bill.lastVote = voteResult;
 
-        getBallot(bill.proposedByUrl, bill.voteNumber, function(err, ballot) {
+        getBallot(repName, bill.voteNumber, function(err, ballot) {
           if (err) {
             console.log(err);
             return;
