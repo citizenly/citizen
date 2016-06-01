@@ -25,7 +25,13 @@ npm run sass
 webpack --config webpack.config.prod.js
 
 
-// Heroku
+// Heroku - deploy to prod
+heroku git:remote citizenly
+git push heroku bills:master
+http://citizenly.herokuapp.com/
+
+
+
 
 install Heroku toolbelt
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh

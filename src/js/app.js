@@ -5,7 +5,7 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
-// require('../scss/app.scss');
+require('../scss/app.scss');
 
 // Setup connection to parse server
 var Parse = require('parse');
