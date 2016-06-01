@@ -10,7 +10,7 @@ require('../scss/app.scss');
 // Setup connection to parse server
 var Parse = require('parse');
 Parse.initialize("XYZ");
-Parse.serverURL = 'https://citizen-marie-evegauthier.c9users.io/parse';
+Parse.serverURL = '/parse';
 
 window.Parse = Parse;
 
