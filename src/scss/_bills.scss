@@ -34,9 +34,21 @@
         
 }
 
+.infoFooter {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    border-top: 1px solid #ccc;
+    
+}
 
 .color-result{
     display: flex;
+    text-transform: uppercase;
 
     span {
     font-size: 1.1em;
