@@ -18,19 +18,6 @@ var App = React.createClass({
   onComponentDidMount: function () {
    this.setState({menutoggle:''});
   },
-  
-  onRepClick: function(e) {
-  // Get repName from localStorage if possible, to be used in the url of the rep, otherwise redirect to the homepage
-    e.preventDefault();
-    repName = localStorage.getItem('repName');
-    console.log(repName, 'repName');
-    if (repName) {
-      this.props.router.push('/rep/' + repName);
-    }
-    else {
-      this.props.router.push('/');
-    }
-  },
   onClick: function (e) {
     e.preventDefault();
     if (this.state.menutoggle.length === 0) {
@@ -63,6 +50,14 @@ var App = React.createClass({
     }
   },
   render: function() {
+    var repLink;
+    var repName = localStorage.getItem('repName');
+    if (repName) {
+      repLink = '/rep/'+repName;
+    }
+    else {
+      repLink = '/';
+    }
     return (
       <div>
         <header>
@@ -98,7 +93,7 @@ var App = React.createClass({
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
                 </li>
                 <li>
-                  <Link activeClassName="active" to="/rep/" onClick={this.onRepClick + this.onMenuItemClick}>Your Representative</Link>
+                  <Link activeClassName="active" to={repLink} onClick={this.onMenuItemClick}>Your Representative</Link>
                 </li>
                 <li>
                   <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>

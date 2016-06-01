@@ -21,6 +21,9 @@ sass --watch src/scss/app.scss:public/css/main.css
 or
 npm run sass
 
+// Run webpack for Prod
+webpack --config webpack.config.prod.js
+
 
 // Heroku
 

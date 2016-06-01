@@ -1,16 +1,14 @@
 var request = require("request");
 var $ = require('jquery');
-var memcached = require('memcached');
-var server = new memcached('localhost:11211');
+var server = require('../memcached.js');
 var cheerio = require('cheerio');
-//var util = require("util");
 
 
 function makeTextRequest(text, path, callback) {
   server.get(path, function(err, data){
     if(data) {
       try {
-        console.log("bill text received from memcached ");
+        console.log("bill text received from memcached");
         callback(null, data);
       } catch(err) {
         callback(err);
@@ -37,11 +35,9 @@ function makeTextRequest(text, path, callback) {
               callback(null, summaryText);
             }
             else if (text === "full") {
-              //var fullContent = $("#publicationContent div:last-child[lang!='fr']");
               var fullContent = $("#publicationContent").children("div").eq(5).children("div").find("td[lang!='fr']");
               var fullContentText = $.html(fullContent);
               console.log("bill text received from the web");
-              //console.log(fullContentText);
               callback(null, fullContentText);
             }
           } catch(err) {

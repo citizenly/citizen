@@ -1,10 +1,8 @@
 /* global localStorage */
-
 var React = require('react');
 var Link = require('react-router').Link;
 // required for ajax calls
 var axios = require('axios');
-
 
 
 var Rep = React.createClass({
@@ -29,6 +27,7 @@ var Rep = React.createClass({
     var that = this;
     // get rep info using nameFormatted in url
     var nameFormatted = this.props.params.repName;
+    
     axios.post('/repinfoget', {
       repName: nameFormatted
     })

@@ -183,13 +183,13 @@ canvas.bigD {
     }
     
     .redglovebutton {
-        background-image: url("../../images/redGlovePressed.png");
+        background-image: url("/images/redGlovePressed.png");
         position: relative;
         top: 10px;
     }
     
     .redglovebutton-clicked {
-        background-image: url("../../images/redGlovePressed.png");
+        background-image: url("/images/redGlovePressed.png");
         position: relative;
         top: 10px;
         opacity: 0.5;
@@ -202,13 +202,13 @@ canvas.bigD {
     }
     
     .greenglovebutton {
-        background-image: url("../../images/greenGlovePressed.png");
+        background-image: url("/images/greenGlovePressed.png");
         position: relative;
         top: -10px;
     }
     
         .greenglovebutton-clicked {
-        background-image: url("../../images/greenGlovePressed.png");
+        background-image: url("/images/greenGlovePressed.png");
         position: relative;
         top: -10px;
         opacity: 0.5;
