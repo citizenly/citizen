@@ -36,23 +36,19 @@ var Rep = React.createClass({
     .then(function(response) {
       var updateData = that.state.rep;
       updateData = response.data;
-        that.state.rep = updateData
+        that.state.rep = updateData;
         localStorage.setItem("repFullName", that.state.rep.name);
        that.setState({rep: updateData});
     })
     .catch(function(response) {
     });
   },
-  
-    handleShareButtonClick: function(e) {
+  handleShareButtonClick: function(e) {
     e.preventDefault();
-    
     this.setState({
       shareButtonToggle: !this.state.shareButtonToggle
     });
-
   },
-  
   render: function() {
     return (
     <div>

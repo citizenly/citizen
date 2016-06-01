@@ -24,8 +24,8 @@ var Home = React.createClass({
     
     // show an error message if the user has not entered a postal code in a valid format
     if(userPostalCode === "invalid") {
-        this.setState({invalidPostalCode: "alert"});
-        event.emit('show_message', {message:"Enter a valid postal code"});
+      this.setState({invalidPostalCode: "alert"});
+      event.emit('show_message', {message:"Enter a valid postal code"});
     }
     
     // send the server a valid postal code and fetch the appropriate formatted MP name
