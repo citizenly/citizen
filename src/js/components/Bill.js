@@ -22,7 +22,7 @@ var Bill = React.createClass({
     return {
       bill: {
         id: '' ,
-        title: '' ,
+        title: '',
         summary: '',
         text: '',
         status: '',
@@ -139,7 +139,6 @@ var Bill = React.createClass({
     this.setState({
       shareButtonToggle: !this.state.shareButtonToggle
     });
-
   },
   render: function() {
     return (
@@ -171,7 +170,7 @@ var Bill = React.createClass({
 
             	<div className="box-wrap">
               	<div id="box">
-              	  <p>{this.state.content}</p>
+              	  <table><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
                	</div>
               </div>
             </div>

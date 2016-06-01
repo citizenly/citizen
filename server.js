@@ -299,16 +299,17 @@ app.post('/billinfoget', function(req, res) {
               console.log(err);
               return;
             }
-            bill.summary = summaryHtml;
-              
+            else {
+              bill.summary = summaryHtml;
+            }
+            
             getBillText ("full", bill.textUrl, function(err, fullTextHtml) {
               if (err) {
                 console.log(err);
                 return;
               }
               bill.text = fullTextHtml;
-              console.log(bill);
-              //res.send(bill);
+              res.send(bill);
             });
           });
         });

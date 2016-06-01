@@ -77,7 +77,7 @@ function getBillText(text, path, callback) {
       callback(err);
     }
     else {
-      callback(null, html);
+     callback(null, html);
     }
   });
 }
