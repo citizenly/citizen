@@ -52,7 +52,7 @@ var api = new ParseServer({
   appId: 'XYZ',
   masterKey: 'ABC', // Keep this key secret!
   fileKey: 'file-key-not-sure',
-  serverURL: 'https://citizen-marie-evegauthier.c9users.io/parse' // Don't forget to change to https if needed
+  serverURL: process.env.PARSE_URL || 'https://citizen-marie-evegauthier.c9users.io/parse' // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
