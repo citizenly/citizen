@@ -7,10 +7,10 @@ var Dev = React.createClass({
     return (
       <div>
         <h2>{this.props.firstName} {this.props.lastName}</h2>
-          <a href={this.props.github} target="_blank"><i className="fa fa-github" aria-hidden="true"></i></a>
-          <a href={this.props.website} target="_blank"><i className="fa fa-code" aria-hidden="true"></i></a>
+         {this.props.github.length > 0 ? <a href={this.props.github} target="_blank"><i className="fa fa-github" aria-hidden="true"></i></a> : ""}
+          {this.props.website.length > 0 ? <a href={this.props.website} target="_blank"><i className="fa fa-code" aria-hidden="true"></i></a> : ""}
           <a href={this.props.linkedin} target="_blank"><i className="fa fa-linkedin" aria-hidden="true"></i></a>
-          <a href={this.props.twitter} target="_blank"><i className="fa fa-twitter" aria-hidden="true"></i></a>
+          {this.props.twitter.length > 0 ? <a href={this.props.twitter} target="_blank"><i className="fa fa-twitter" aria-hidden="true"></i></a> : ""}
         <p>{this.props.desc}</p>
       </div>
     );
@@ -27,7 +27,7 @@ var About = React.createClass({
         website: '',
         linkedin: 'https://www.linkedin.com/in/marie-eve-gauthier-8467a0106/en',
         twitter: '',
-        desc: "awesome human being"
+        desc: "Back-end developer of citizen, full-stack developer in training. Was previously a French teacher in Spain. Loves digging into languages (from ancient Greek to javascript)"
       }, {
         firstName: "Osa",
         lastName: "Isacson",
@@ -51,7 +51,6 @@ var About = React.createClass({
     return (
       <div key={dev.lastName}>
         <Dev firstName={dev.firstName} lastName={dev.lastName} 
-        
         github={dev.github} website={dev.website} linkedin={dev.linkedin} twitter={dev.twitter} desc={dev.desc}/>
       </div>
     );
