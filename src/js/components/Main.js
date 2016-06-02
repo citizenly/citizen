@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 var Parse = require('parse');
 /* global localStorage */
 
-var repName = '';
 // The main application layout
 // this.props.children will be set by React Router depending on the current route
 var App = React.createClass({
@@ -14,22 +13,8 @@ var App = React.createClass({
       menutoggle: ''
     };
   },
-  
   onComponentDidMount: function () {
    this.setState({menutoggle:''});
-  },
-  
-  onRepClick: function(e) {
-  // Get repName from localStorage if possible, to be used in the url of the rep, otherwise redirect to the homepage
-    e.preventDefault();
-    repName = localStorage.getItem('repName');
-    console.log(repName, 'repName');
-    if (repName) {
-      this.props.router.push('/rep/' + repName);
-    }
-    else {
-      this.props.router.push('/');
-    }
   },
   onClick: function (e) {
     e.preventDefault();
@@ -40,10 +25,8 @@ var App = React.createClass({
       this.setState({menutoggle:''});
     }
   },
-  
-  
-    onMenuItemClick: function (e) {
-      this.setState({menutoggle:''});
+  onMenuItemClick: function (e) {
+    this.setState({menutoggle:''});
   },
   
   userLogout: function(what, e) {
@@ -60,9 +43,25 @@ var App = React.createClass({
           alert("Error: " + error.code + " " + error.message);
         }
       );
+      this.setState({menutoggle:''});
+      var repName = localStorage.getItem('repName');
+      if (repName) {
+        this.props.router.push('/rep/' + repName);
+      }
+      else {
+        this.props.router.push('/');
+      }
     }
   },
   render: function() {
+    var repLink;
+    var repName = localStorage.getItem('repName');
+    if (repName) {
+      repLink = '/rep/'+repName;
+    }
+    else {
+      repLink = '/';
+    }
     return (
       <div>
         <header>
@@ -85,16 +84,16 @@ var App = React.createClass({
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
                 </li>
                 <li>
-                  <Link activeClassName="active" to="/signup">Signup</Link>
+                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/signup">Signup</Link>
                 </li>
                 <li>
-                  <a onClick={this.userLogout.bind(this, 'logout')}>Logout</a>
+                  <a onClick={this.userLogout.bind(this, 'logout')} href="/">Logout</a>
                 </li>
                 <li>
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
                 </li>
                 <li>
-                  <Link activeClassName="active" to="/rep/" onClick={this.onRepClick + this.onMenuItemClick}>Your Representative</Link>
+                  <Link activeClassName="active" to={repLink} onClick={this.onMenuItemClick}>Your Representative</Link>
                 </li>
                 <li>
                   <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>

@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 
@@ -15,7 +16,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "postcss", "sass"],
+        loaders: ["style", "css", "sass"],
       }
     ]
   },
@@ -25,12 +26,20 @@ module.exports = {
       autoprefixer
     ];
   },
-   resolve: {
-        root: __dirname,
-        alias: {
-            RepAPI: 'src/js/helper-function/index.js'
-        },
-        extensions:['', '.js', '.jsx']
-   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    })
+  ],
+  resolve: {
+    root: __dirname,
+    alias: {
+      RepAPI: 'src/js/helper-function/index.js'
+    },
+  extensions:['', '.js', '.jsx']
+  },
   devtool: 'sourcemap'
 };

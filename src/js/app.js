@@ -5,11 +5,12 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
+require('../scss/app.scss');
 
 // Setup connection to parse server
 var Parse = require('parse');
 Parse.initialize("XYZ");
-Parse.serverURL = 'https://citizen-marie-evegauthier.c9users.io/parse';
+Parse.serverURL = '/parse';
 
 window.Parse = Parse;
 
@@ -27,13 +28,6 @@ var Bill = require('./components/Bill.js');
 var Login = require('./components/Login.js');
 var Signup = require('./components/Signup.js');
 var NotFound = require('./components/404.js');
-
-
-// -----------------------------------------------------------------------------
-// Middleware
-// -----------------------------------------------------------------------------
-
-
 
 // -----------------------------------------------------------------------------
 // The routes
