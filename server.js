@@ -35,6 +35,7 @@ var getFinalStageBills = BillsAPI.getFinalStageBills;
 var getBallotAboutFinalStageBills = BillsAPI.getBallotAboutFinalStageBills;
 var FeedAPI = require('./src/js/helperFunctions/feedAPI.js');
 var getOneSpeechInTheHouseByDayAndRep = FeedAPI.getOneSpeechInTheHouseByDayAndRep;
+var filterFeedByMoment = FeedAPI.filterFeedByMoment
 
 
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
@@ -176,7 +177,6 @@ app.post('/postfilter', function(req, res) {
             return;
           }
           var allBillsClean = allBills(arrOfBills);
-          console.log(allBillsClean);
           res.send(allBillsClean);
         });
       });
@@ -326,29 +326,57 @@ app.post('/billinfoget', function(req, res) {
 /* FEED FUNCTION CALLS ------------------------------------------------------- */
 app.post('/feedinfoget', function(req, res) {
   var repName = req.body.repName;
-  req = req.body.source; 
-  console.log(req, "THIS IS REQ")
-  switch (req) {
-    case 'speeches':
-      getOneSpeechInTheHouseByDayAndRep(repName, function(err, listOfFirstSpeechByDate){
-        if(err){
+  getOneSpeechInTheHouseByDayAndRep(repName, function(err, listOfFirstSpeechByDate) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    fixLimitByPage(function(err, limit) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      getBallotsByPolitician(limit, repName, function(err, listOfBallots) {
+        if (err) {
           console.log(err);
           return;
-        }else{
-          console.log(repName, "THIS IS REPNAME")
-          console.log(listOfFirstSpeechByDate, "*************listOfFirstSpeechByDate")
-          res.send(listOfFirstSpeechByDate);
-          
         }
-      });
-      break;
-    
-    default:
-      res.send([]);
-  
-  }
-});
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitleWithResult = getListOfBillsFromVotesWithResult(arrOfVotes);
 
+          getTitleOfBill(function(err, billsWithTitle) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+
+            var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitleWithResult, billsWithTitle, listOfBallots);
+
+            var ballotsByUniqueDate = getUniqueBillsByDate(ballotsOnlyAboutBill);
+
+            getFinalStageBills(function(err, finalStageBills) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
+              var feeds = filterFeedByMoment(listOfFirstSpeechByDate, ballotsAboutFinaleStageBill);
+              res.send(feeds);
+            });
+          });
+        });
+      });
+    });
+
+  });
+
+
+
+});
 
 
 

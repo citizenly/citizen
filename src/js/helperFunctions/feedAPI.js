@@ -15,7 +15,9 @@ content: english content (maybe only the first 200 characters)
 date: date and time (to keep only one by day)
 */
 function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
-  var path = `speeches/?politician=${rep}&limit=40`;
+  
+  console.log(rep, "REP")
+  var path = `speeches/?politician=${rep}&limit=100`;
   // Make request to api.openparliament.ca and cache
   makeRequest(path, function(err, res){
     if(err){
@@ -34,11 +36,12 @@ function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
         var theHouse = speech.h1;
         var theSpeech = {};
         if(theHouse){
+          theSpeech.type = "speech"
           theSpeech.where = "in the House";
           theSpeech.on = speech.h2.en;
           theSpeech.content = withoutHtml(speech.content.en.substring(0, 250));
           theSpeech.contentUrl = `https://openparliament.ca${speech.url}`;
-          theSpeech.date = speech.time;
+          theSpeech.date = speech.time.split(" ")[0];
           speechesInTheHouse.push(theSpeech);
         }
         else{
@@ -55,6 +58,7 @@ function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
         speechesByDate[speech.date].push(speech);
       });
       
+      
       /*In the new object, each propriety name is the date of the speech 
       and its value is an array of all the speeches of this particular day.
       We compare their date to keep only the first speech.
@@ -63,14 +67,16 @@ function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
         var firstSpeech = speechesByDate[date].reduce(function(prev, next) {
           var x = new Date(prev.date);
           var y = new Date(next.date);
+          
           if (x > y) {
-            return next;
+            return prev;
           }
           else {
-            return prev;
+            return next;
           }
         });
         listOfFirstSpeechByDate.push(firstSpeech);
+       
       }
       callback(null, listOfFirstSpeechByDate);
     }
@@ -80,30 +86,68 @@ function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
 //We display the feed by date : yesterday, two days ago, this week, last week
 //We create an object where its propriety names are the time ago and their value the object of the speech for this day
 
-function when(listOfFirstSpeechByDate) {
-  var when = {};
+function filterFeedByMoment(listOfFirstSpeechByDate, ballotsAboutFinaleStageBill) {
+  var today = moment().format("YYYY-MM-DD");
+  var yesterday = moment().subtract(1, 'days').format("YYYY-MM-DD");
+  var twoDaysAgo = moment().subtract(2, 'days').format("YYYY-MM-DD"); 
+  var startThisWeek = moment().startOf('week').format("YYYY-MM-DD");
+  //this two variable can be true or false
+  var isThisWeek = function(date,startThisWeek, twoDaysAgo){
+    return moment(date).isBetween(startThisWeek, twoDaysAgo);
+  };
+  var isLastWeek = function(date, startThisWeek){
+    var startLastWeek = moment(startThisWeek).subtract(8, 'days').format("YYYY-MM-DD");
+    return moment(date).isBetween(startLastWeek, startThisWeek);
+  };
+  var feeds = {yesterday: [], twoDaysAgo: [], thisWeek: [], lastWeek: []};
   
   listOfFirstSpeechByDate.forEach(function(speech){
-    var date = speech.date.split(" ")[0];
-    var difference = moment(date).fromNow();
+    var date = speech.date;
     
-    when[difference.replace(/\s/g, '')] = when[difference.replace(/\s/g, '')] || [];
-    when[difference.replace(/\s/g, '')].push(speech);
+    if(date === yesterday){
+      feeds.yesterday.push(speech);
+      return;
+    }
+    if(date === twoDaysAgo){
+      feeds.twoDaysAgo.push(speech);
+      return;
+    }
+    if(isThisWeek(date, startThisWeek, twoDaysAgo)){
+      feeds.thisWeek.push(speech);
+      return;
+    }
+    if(isLastWeek(date, startThisWeek)){
+    feeds.lastWeek.push(speech);
+    return;
+    }
   });
-  //console.log(when['3daysago'])
-  return when;
+  
+  ballotsAboutFinaleStageBill.forEach(function(ballot){
+    var date = ballot.dateOfVote;
+    
+    if(date === yesterday){
+      feeds.yesterday.push(ballot);
+      return;
+    }
+    if(date === twoDaysAgo){
+      feeds.twoDaysAgo.push(ballot);
+      return;
+    }
+    if(isThisWeek(date, startThisWeek, twoDaysAgo)){
+      feeds.thisWeek.push(ballot);
+      return;
+    }
+    if(isLastWeek(date, startThisWeek)){
+    feeds.lastWeek.push(ballot);
+    return;
+    }
+  });
+  return feeds;
 }
-
+   
+  
 module.exports = {
   getOneSpeechInTheHouseByDayAndRep: getOneSpeechInTheHouseByDayAndRep,
-  when: when
+  filterFeedByMoment: filterFeedByMoment
 };
 
-
-// getOneSpeechInTheHouseByDayAndRep("marc-garneau", function(err, listOfFirstSpeechByDate){
-//   if(err) {
-//     console.log(err);
-//     return;
-//   }
-//   when(listOfFirstSpeechByDate);
-// })

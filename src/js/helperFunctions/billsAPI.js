@@ -333,7 +333,8 @@ function getBallotsByPolitician(limit, politician, callback){
         var ballotCleaned = {
           ballot: result,
           voteUrl: voteUrl,
-          voteNumber: voteNumber
+          voteNumber: voteNumber,
+          type: "ballot"
         };
 
         listOfBallots.push(ballotCleaned);

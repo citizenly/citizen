@@ -63,7 +63,18 @@ var App = React.createClass({
     }
   },
   render: function() {
-    return (
+  var repLink;
+  var feedLink;
+  var repName = localStorage.getItem('repName');
+  if (repName) {
+    repLink = '/rep/'+repName;
+    feedLink = '/rep/'+repName+'/feed';
+  }
+  else {
+    repLink = '/';
+    feedLink = '/';
+  }
+  return (
       <div>
         <header>
         
@@ -98,13 +109,13 @@ var App = React.createClass({
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
                 </li>
                 <li>
-                  <Link activeClassName="active" to="/rep/" onClick={this.onRepClick + this.onMenuItemClick}>Your Representative</Link>
+                  <Link activeClassName="active" to="/rep/" onClick={this.onRepClick, this.onMenuItemClick}>Your Representative</Link>
                 </li>
                 <li>
                   <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>
                 </li>
                 <li>
-                  <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to="/feed/speeches">What they're doing</Link>
+                  <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to={feedLink}>What's my rep doing</Link>
                 </li>
                 <li>
                   <Link activeClassName="active" className="petitionsMenu" onClick={this.onMenuItemClick} to="/petitions">Petitions</Link>
