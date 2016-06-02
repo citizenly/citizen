@@ -21,19 +21,6 @@ var Rep = React.createClass({
         electedYear: "",
         electedVote: ""
       },
-      repVotes: [],
-      myVotes: [
-        {billId: 'C-14', vote: -1},
-        {billId: 'C-7', vote: 1},
-        {billId: 'C-10', vote: 1},
-        {billId: 'C-6', vote: 1},
-        {billId: 'C-15', vote: 1},
-        {billId: 'C-2', vote: 1},
-        {billId: 'C-9', vote: 1},
-        {billId: 'C-8', vote: 1},
-        {billId: 'C-4', vote: 1},
-        {billId: 'C-3', vote: 1},
-      ],
       coherence: 0,
       shareButtonToggle: false,
       facebookButton: "",
@@ -59,63 +46,59 @@ var Rep = React.createClass({
     .catch(function(response) {
     });
 
-
-
-    // rep object //
-    // array of data from rep object
-    // query DB for user info => array
-    //math
-    
-    
     // Get array of repVote objects - billId and ballot
-    axios.post('/repvoteinfo', {
+    var repVotes = axios.post('/repvoteinfo', {
       repName: nameFormatted
-    })
-    .then (function(res) {
-      var voteArray = [];
-      var repVote = {};
-      res.data.forEach(function(vote){
-        repVote = {
-          ballot: vote.ballot,
-          billId: vote.billId
-        };
-        voteArray.push(repVote);
-      });
-      that.setState({repVotes:voteArray});
-    })
-    .catch(function(res) {
-      console.log(res, 'repVoteObj error');
-    });
-  },
-  componentDidUpdate: function() {
-    // Get array of myVotes objects - billId and vote
-    //Parse.Cloud.run('myVoteInfo').then(function(votes) {
-    // SETSTATE ON THE ARRAY 
-    //});
+    }).then(
+      function(res) {
+        var voteArray = res.data.map(function(vote){
+          return {
+            ballot: vote.ballot,
+            billId: vote.billId
+          };
+        });
+        
+        return voteArray;
+      }
+    );
     
-    // Compare Rep and User array of votes and create a single array, with 1 = agreement and 0 = disagreement
-    var myVotes = this.state.myVotes;
-    var repVotes = this.state.repVotes;
-    var voteCompare = [];
+    var myVotes = Parse.Cloud.run('myVoteInfo');
     
-    myVotes.forEach(function(user) {
-      repVotes.forEach(function(rep) {
-        if ((user.billId === rep.billId) && (rep.ballot !== "Didn't Vote")) {
-          if ((user.vote === 1 && rep.ballot === "Yes") || (user.vote === -1 && rep.ballot === "No")) {
-            return voteCompare.push(1);
-          }
-          else {
-            return voteCompare.push(0);
-          }
+    var that = this;
+    Promise.all([repVotes, myVotes]).then(
+      function(results) {
+        var repVotes = results[0];
+        var myVotes = results[1];
+        
+        // Compare Rep and User array of votes and create a single array, with 1 = agreement and 0 = disagreement
+        var voteCompare = [];
+        
+        myVotes.forEach(function(userVote) {
+          repVotes.forEach(function(repVote) {
+            if ((userVote.get('billId') === repVote.billId) && (repVote.ballot !== "Didn't Vote")) {
+              if ((userVote.get('vote') === 1 && repVote.ballot === "Yes") || (userVote.get('vote') === -1 && repVote.ballot === "No")) {
+                return voteCompare.push(1);
+              }
+              else {
+                return voteCompare.push(0);
+              }
+            }
+          });
+        });
+    
+        var total = voteCompare.length;
+        if (total > 0) {
+          var sum = voteCompare.reduce(function(cur, next){return cur+next;});
+          var coherence = ((sum/total)*100).toFixed(1);
+      
+          that.setState({coherence: coherence + '%'});
         }
-      });
+      }
+    )
+    .catch(
+      function(err) {
+        console.log(err);
     });
-
-    var total = voteCompare.length;
-    var sum = voteCompare.reduce(function(cur, next){return cur+next;});
-    var coherence = ((sum/total)*100).toFixed(1);
-
-    this.setState({coherence: coherence});
   },
   handleShareButtonClick: function(e) {
     e.preventDefault();
@@ -124,13 +107,9 @@ var Rep = React.createClass({
     });
   },
   render: function() {
-    // console.log(this.state.myVotes, 'myVotes');
-    // console.log(this.state.repVotes, 'repVotes');
-    // console.log(this.state.voteCompare, 'voteCompare');
     return (
     <div>
       <div className="rep-container">
-
         <div className="rep-info">
           <div className="rep-pic">
             <img src={this.state.rep.img} />
@@ -141,9 +120,7 @@ var Rep = React.createClass({
             <h2>{this.state.rep.name}</h2>
             <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
             <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
-          
           </div>
-          
       </div>
       
       <div className="rep-stats-container">
@@ -160,7 +137,7 @@ var Rep = React.createClass({
               
               <div className="you">
                 <h2>you</h2>
-                <h1>{this.state.coherence}%</h1>
+                <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
               </div>
           </div>
           

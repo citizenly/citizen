@@ -42,8 +42,9 @@ var Signup = React.createClass({
       user.signUp(null,{
         success:function(user){
           console.log('SUCCESSFUL SIGNUP', user);
-          var repName = localStorage.getItem('repName');
+          event.emit('loggedIn');
           
+          var repName = localStorage.getItem('repName');
           if (repName) {
             that.props.router.push('/rep/' + repName);
           }

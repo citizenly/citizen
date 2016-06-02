@@ -1,3 +1,4 @@
+/*global localStorage*/
 var React = require('react');
 // required for ajax calls
 var axios = require('axios');
@@ -43,7 +44,6 @@ var Bill = React.createClass({
   componentDidMount: function() {
     this.loadBillData();
     this.setState({content: this.state.bill.title});
-    console.log(this.state.bill, 'this.state.bill');
     $(".billTabs li").removeClass("active");
     $("#tab-" + 1).addClass("active");
   },
