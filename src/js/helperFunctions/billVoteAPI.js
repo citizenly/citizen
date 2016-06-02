@@ -211,16 +211,13 @@ function getUniqueBillsByDate(listOfBillsWithTitle) {
   var billsById = {};
   var listOfUniqueBills = [];
  
- //In the billsById object, create a propriety by billId  and that propriety receive as value an array of objects(each bill with this id) 
+ //Create an array for each billId 
   listOfBillsWithTitle.filter(function(bill) {
     billsById[bill.billId] = billsById[bill.billId] || [];
     billsById[bill.billId].push(bill);
   });
   
-  /*In the object, each propriety name is the billId and 
-  its value is an array of all the votes about this bill. 
-  We compare their date to keep only the latest vote.
-  */
+  //In each array we compare the date to keep only the latest one
   for (var bill in billsById) {
     var latestBill = billsById[bill].reduce(function(prev, next) {
       var x = new Date(prev.dateOfVote);
@@ -331,8 +328,7 @@ function getBallotsByPolitician(limit, politician, callback){
         var ballotCleaned = {
           ballot: result,
           voteUrl: voteUrl,
-          voteNumber: voteNumber,
-          type: "ballot"
+          voteNumber: voteNumber
         };
 
         listOfBallots.push(ballotCleaned);

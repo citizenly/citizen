@@ -1,10 +1,9 @@
 /* global localStorage */
 
-var React = require('react');
 var Link = require('react-router').Link;
+var React = require('react');
 // required for ajax calls
 var axios = require('axios');
-
 
 
 var Compare = React.createClass({
@@ -63,6 +62,25 @@ var Compare = React.createClass({
     });
   },
   render: function() {
+    console.log(this.state.rep.repName, 'this.state.rep.repName');
+    if(!!this.state.rep.repName) {
+      var myRep =
+        <div>
+          <h1>34%</h1>
+          <img src={this.state.rep.img}></img>
+          <h2>{this.state.rep.name}</h2>
+          <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
+        </div>;
+    }
+    else {
+      myRep = 
+      <div>
+        <h1>?</h1>
+        <img src="images/silhouette.jpg" style={{border: "1px solid #ccc"}}></img>
+        <h2>unknown</h2>
+        <p>please <Link to="/">enter your postal code</Link> to find your representative</p>
+      </div>;
+    }
     return (
       <div className="comparePage">
       
@@ -84,12 +102,7 @@ var Compare = React.createClass({
                   <p><span className={"party" + this.state.repLowest.party.substring(0, 3)}>{this.state.repLowest.party}</span> MP for {this.state.repLowest.constituency} {this.state.repLowest.province}</p>
                 </div>
           
-                <div>
-                  <h1>34%</h1>
-                  <img src={this.state.rep.img} />
-                  <h2>{this.state.rep.name}</h2>
-                  <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
-                </div>
+                {myRep}
             
                 <div>
                   <h1>65%</h1>

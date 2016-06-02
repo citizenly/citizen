@@ -1,20 +1,23 @@
+/* global localStorage */
 var React = require('react');
 var Link = require('react-router').Link;
 var IndexLink = require("react-router").IndexLink;
 import { withRouter } from 'react-router';
 var Parse = require('parse');
-/* global localStorage */
+var event = require('../events.js');
 
 // The main application layout
 // this.props.children will be set by React Router depending on the current route
 var App = React.createClass({
   getInitialState: function () {
     return{
-      menutoggle: ''
+      menutoggle: '',
+      loggedIn: !!Parse.User.current()
     };
   },
-  onComponentDidMount: function () {
+  componentDidMount: function () {
    this.setState({menutoggle:''});
+   event.on('loggedIn', this.handleLoginEvent);
   },
   onClick: function (e) {
     e.preventDefault();
@@ -28,8 +31,13 @@ var App = React.createClass({
   onMenuItemClick: function (e) {
     this.setState({menutoggle:''});
   },
-  
+  handleLoginEvent: function(event) {
+    this.setState({
+      loggedIn: true
+    });
+  },
   userLogout: function(what, e) {
+    var that = this;
     e.preventDefault();
     e.stopPropagation();
     if(what === 'logout'){
@@ -37,6 +45,7 @@ var App = React.createClass({
         function(user) {
           var currentUser = Parse.User.current(); // this will now be null
           console.log('SUCCESSFUL LOGOUT', currentUser);
+          that.setState({loggedIn: false});
         },
         function(error) {
           // Show the error message somewhere and let the user try again.
@@ -54,20 +63,40 @@ var App = React.createClass({
     }
   },
   render: function() {
+    
+    // Login / Signup /Logout Links
+    if (this.state.loggedIn) {
+      loginSignup = <li>
+        <a onClick={this.userLogout.bind(this, 'logout')} href="/">Logout</a>
+      </li>;
+      
+    } else {
+      var loginSignup = <div>
+        <li>
+          <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
+        </li>
+        <li>
+        <Link activeClassName="active" onClick={this.onMenuItemClick} to="/signup">Signup</Link>
+        </li>
+      </div>;
+    }
+    
+    // Representative Link
     var repLink;
+    var feedLink;
     var repName = localStorage.getItem('repName');
     if (repName) {
       repLink = '/rep/'+repName;
+      feedLink = '/rep/'+repName+'/feed';
     }
     else {
       repLink = '/';
+      feedLink = '/';
     }
     return (
       <div>
         <header>
-       
           <nav>
-          
             <div className="hamburgerDiv">
               <a href="#" onClick={this.onClick} className="hamburger">
                 <div className="line"></div>
@@ -80,15 +109,7 @@ var App = React.createClass({
                 <li>
                   <IndexLink activeClassName="active" onClick={this.onMenuItemClick} to="/">Home</IndexLink>
                 </li>
-                <li>
-                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
-                </li>
-                <li>
-                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/signup">Signup</Link>
-                </li>
-                <li>
-                  <a onClick={this.userLogout.bind(this, 'logout')} href="/">Logout</a>
-                </li>
+                {loginSignup}
                 <li>
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
                 </li>
@@ -99,7 +120,7 @@ var App = React.createClass({
                   <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>
                 </li>
                 <li>
-                  <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to="/feed">What they're doing</Link>
+                  <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to={feedLink}>What's my rep doing</Link>
                 </li>
                 <li>
                   <Link activeClassName="active" className="petitionsMenu" onClick={this.onMenuItemClick} to="/petitions">Petitions</Link>
@@ -125,8 +146,3 @@ var App = React.createClass({
 module.exports = withRouter(App);
 
 
-/////BACKARROW, IF WE WANT IT IN THE FUTURE/////
-          /*
-          <div className="backArrow">
-            <div className="backityArrow"></div>
-          </div>*/

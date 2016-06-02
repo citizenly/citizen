@@ -34,14 +34,6 @@ var Signup = require('./components/Signup.js');
 var NotFound = require('./components/404.js');
 
 
-
-// -----------------------------------------------------------------------------
-// Middleware
-// -----------------------------------------------------------------------------
-
-
-
-
 // -----------------------------------------------------------------------------
 // The routes
 // -----------------------------------------------------------------------------
@@ -67,7 +59,7 @@ var routes = (
       <Route path="petition4" component={Petition4}/>
       <Route path="petition5" component={Petition5}/>
       <Route path="petitionform" component={PetitionForm}/>
-      <Route path="feed" component={Feed}/>
+      <Route path="rep/:repName/feed" component={Feed}/>
       <Route path="bills/:filter" component={Bills}/>
       <Route path="bill/:billId" component={Bill}/>
       <Route path="login" component={Login}/>

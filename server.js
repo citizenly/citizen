@@ -33,9 +33,12 @@ var getBallot = BillAPI.getBallot;
 var getBillText = BillAPI.getBillText;
 var getFinalStageBills = BillsAPI.getFinalStageBills;
 var getBallotAboutFinalStageBills = BillsAPI.getBallotAboutFinalStageBills;
+var FeedAPI = require('./src/js/helperFunctions/feedAPI.js');
+var getOneSpeechInTheHouseByDayAndRep = FeedAPI.getOneSpeechInTheHouseByDayAndRep;
+var filterFeedByMoment = FeedAPI.filterFeedByMoment
 
 
-var whitelist = ['https://citizen-iblamemymother.c9users.io/parse'];
+var whitelist = ['https://citizen-molecularcode.c9users.io'];
 var corsOptionsDelegate = function(req, callback){
   var corsOptions;
   if(whitelist.indexOf(req.header('Origin')) !== -1){
@@ -52,7 +55,7 @@ var api = new ParseServer({
   appId: 'XYZ',
   masterKey: 'ABC', // Keep this key secret!
   fileKey: 'file-key-not-sure',
-  serverURL: process.env.PARSE_URL || 'https://citizen-iblamemymother.c9users.io/parse' // Don't forget to change to https if needed
+  serverURL: process.env.PARSE_URL || 'https://citizen-molecularcode.c9users.io/parse' // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
@@ -144,7 +147,6 @@ app.post('/postfilter', function(req, res) {
             return;
           }
           var allBillsClean = allBills(arrOfBills);
-          console.log(allBillsClean);
           res.send(allBillsClean);
         });
       });
@@ -234,9 +236,9 @@ app.post('/postfilter', function(req, res) {
 });
 /* -------------------------------------------------------------------------- */
 
-/* BILL FUNCTION CALLS ------------------------------------------------------- */
+/* BILL FUNCTION CALLS ------------------------------------------------------ */
 app.post('/billinfoget', function(req, res) {
-  var repName = req.body.repName
+  var repName = req.body.repName;
   req = req.body.billId;
   getBill(req, function(err, bill) {
     if (err) {
@@ -288,9 +290,119 @@ app.post('/billinfoget', function(req, res) {
     });
   });
 });
+/* -------------------------------------------------------------------------- */
+
+/* VOTE STATS FUNCTION CALLS ------------------------------------------------ */
+app.post('/repvoteinfo', function(req, res) {
+  var repName = req.body.repName;
+  req = req.body.filter; 
+    fixLimitByPage(function(err, limit) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      getBallotsByPolitician(limit, repName, function(err, listOfBallots) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitleWithResult = getListOfBillsFromVotesWithResult(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+
+            var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitleWithResult, billsWithTitle, listOfBallots);
+
+            var ballotsByUniqueDate = getUniqueBillsByDate(ballotsOnlyAboutBill);
+
+            getFinalStageBills(function(err, finalStageBills) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
+
+              res.send(ballotsAboutFinaleStageBill);
+            });
+          });
+        });
+      });
+    });
+});
+
+
+
+/* -------------------------------------------------------------------------- */
+
+/* FEED FUNCTION CALLS ------------------------------------------------------- */
+app.post('/feedinfoget', function(req, res) {
+  var repName = req.body.repName;
+  getOneSpeechInTheHouseByDayAndRep(repName, function(err, listOfFirstSpeechByDate) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    fixLimitByPage(function(err, limit) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      getBallotsByPolitician(limit, repName, function(err, listOfBallots) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitleWithResult = getListOfBillsFromVotesWithResult(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+
+            var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitleWithResult, billsWithTitle, listOfBallots);
+
+            var ballotsByUniqueDate = getUniqueBillsByDate(ballotsOnlyAboutBill);
+
+            getFinalStageBills(function(err, finalStageBills) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
+              var feeds = filterFeedByMoment(listOfFirstSpeechByDate, ballotsAboutFinaleStageBill);
+              res.send(feeds);
+            });
+          });
+        });
+      });
+    });
+
+  });
+
+
+
+});
+
+
+
+
+
+
 /* ------------------------------------------------------------------------------ */
-
-
 
 /* This says: for any path NOT served by the middleware above, send the file called index.html instead. Eg, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component */
 app.get('/*', cors(corsOptionsDelegate),  function(request, response, next) {
