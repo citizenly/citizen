@@ -5,11 +5,12 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var browserHistory = ReactRouter.browserHistory;
+require('../scss/app.scss');
 
 // Setup connection to parse server
 var Parse = require('parse');
 Parse.initialize("XYZ");
-Parse.serverURL = 'https://citizen-iblamemymother.c9users.io/parse';
+Parse.serverURL = '/parse';
 
 window.Parse = Parse;
 
@@ -37,6 +38,7 @@ var NotFound = require('./components/404.js');
 // -----------------------------------------------------------------------------
 // Middleware
 // -----------------------------------------------------------------------------
+
 
 
 

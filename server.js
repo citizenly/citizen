@@ -47,12 +47,12 @@ var corsOptionsDelegate = function(req, callback){
 };
  
 var api = new ParseServer({
-  databaseURI: 'mongodb://localhost:27017/dev', // Connection string for your MongoDB database
+  databaseURI: process.env.MONGODB_URI || 'mongodb://localhost:27017/dev', // Connection string for your MongoDB database (Heroku then c9)
   cloud: __dirname + '/cloud.js', // Absolute path to your Cloud Code
   appId: 'XYZ',
   masterKey: 'ABC', // Keep this key secret!
   fileKey: 'file-key-not-sure',
-  serverURL: 'https://citizen-iblamemymother.c9users.io/parse' // Don't forget to change to https if needed
+  serverURL: process.env.PARSE_URL || 'https://citizen-iblamemymother.c9users.io/parse' // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
@@ -101,66 +101,36 @@ app.post('/repinfoget', function(req, res) {
 
 /* BILLS FUNCTION CALLS ------------------------------------------------------- */
 app.post('/postfilter', function(req, res) {
-      var repName = req.body.repName;
-      req = req.body.filter; 
-      switch (req) {
-        case 'active':
-          fixLimitByPage(function(err, limit) {
+  var repName = req.body.repName;
+  req = req.body.filter; 
+  switch (req) {
+    case 'active':
+      fixLimitByPage(function(err, limit) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitleNorResult = getListOfBillsFromVotesWithoutResult(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
             if (err) {
               console.log(err);
               return;
             }
-            getAllVotes(limit, function(err, arrOfVotes) {
-              if (err) {
-                console.log(err);
-                return;
-              }
-              var billsWithoutTitleNorResult = getListOfBillsFromVotesWithoutResult(arrOfVotes);
 
-              getTitleOfBill(function(err, billsWithTitle) {
-                if (err) {
-                  console.log(err);
-                  return;
-                }
+            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitleNorResult, billsWithTitle);
 
-                var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitleNorResult, billsWithTitle);
-
-                var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-                res.send(listOfUniqueBills);
-              });
-            });
+            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
+            res.send(listOfUniqueBills);
           });
-          break;
-
-    // case 'passed':
-    // case 'failed':
-    //   fixLimitByPage(function(err, limit) {
-    //     if (err) {
-    //       console.log(err);
-    //       return;
-    //     }
-    //     getAllVotes(limit, function(err, arrOfVotes) {
-    //       if (err) {
-    //         console.log(err);
-    //         return;
-    //       }
-    //       var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-
-    //       getTitleOfBill(function(err, billsWithTitle) {
-    //         if (err) {
-    //           console.log(err);
-    //           return;
-    //         }
-    //         var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
-
-    //         var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-
-    //         var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
-    //         res.send(listOfUniqueBillsByResult);
-    //       });
-    //     });
-    //   });
-    //   break;
+        });
+      });
+      break;
 
     case 'all':
       fixLimitByPage(function(err, limit) {
@@ -214,7 +184,6 @@ app.post('/postfilter', function(req, res) {
                   return;
                 }
                 var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
-
 
                 res.send(ballotsAboutFinaleStageBill);
               });

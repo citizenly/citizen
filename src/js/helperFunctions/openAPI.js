@@ -1,6 +1,5 @@
 var request = require("request");
-var memcached = require('memcached');
-var server = new memcached('localhost:11211');
+var server = require('../memcached.js');
 var API_URL = "https://api.openparliament.ca/";
 
 function makeRequest(path, callback) {
@@ -8,7 +7,7 @@ function makeRequest(path, callback) {
     if(data){
       try {
         data = JSON.parse(data);
-        console.log("data received from memcached ");
+        console.log("data received from memcached");
         callback(null, data);
       } catch(err){
         callback(err);
@@ -35,10 +34,10 @@ function makeRequest(path, callback) {
         else {
           try {
             res = JSON.parse(res.body);
-            server.set(path, JSON.stringify(res), 12*60*60, function(){
+            server.set(path, JSON.stringify(res), function(){
               console.log("data received from the web");
               callback(null, res);
-            });
+            }, 12*60*60);
           } catch(err) {
             callback(err);
           }
@@ -46,19 +45,6 @@ function makeRequest(path, callback) {
       });
     }
   });
-
 }
-
-//WHERE WE HAVE TO ADD THAT?
-//var options = {
-//     uri: add,
-//     // qs: {
-//     //     access_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
-//     // },
-//     headers: {
-//         'User-Agent': 'marie.eve.gauthier@hotmail.com'
-//     },
-//     json: true // Automatically parses the JSON string in the response
-// };
 
 module.exports = makeRequest;

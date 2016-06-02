@@ -22,22 +22,22 @@
     
     /////BILL VOTE BUTTONS//////
     .redbutton {
-        background-image: url("../../images/redButton.png");
+        background-image: url("/images/redButton.png");
         margin-left: 10px;
     }
     
     .redbutton-clicked {
-        background-image: url("../../images/redButtonPressed.png");
+        background-image: url("/images/redButtonPressed.png");
         margin-left: 10px;
     }
     
     .greenbutton {
-        background-image: url("../../images/greenButton.png");
+        background-image: url("/images/greenButton.png");
         margin-right: 10px;
     }
     
     .greenbutton-clicked {
-        background-image: url("../../images/greenButtonPressed.png");
+        background-image: url("/images/greenButtonPressed.png");
         margin-right: 10px;
     }
     
@@ -54,7 +54,7 @@
     
     ///////PETITION VOTE BUTTONS///////
     .redglovebutton {
-        background-image: url("../../images/redGlovePressed.png");
+        background-image: url("/images/redGlovePressed.png");
         position: relative;
         top: 10px;
         margin-left: 10px;
@@ -62,14 +62,14 @@
     }
     
     .redglovebutton-clicked {
-        background-image: url("../../images/redGlovePressed.png");
+        background-image: url("/images/redGlovePressed.png");
         position: relative;
         top: 10px;
         margin-left: 10px;
     }
     
     .greenglovebutton {
-        background-image: url("../../images/greenGlovePressed.png");
+        background-image: url("/images/greenGlovePressed.png");
         position: relative;
         top: -10px;
         margin-right: 10px;
@@ -77,7 +77,7 @@
     }
     
     .greenglovebutton-clicked {
-        background-image: url("../../images/greenGlovePressed.png");
+        background-image: url("/images/greenGlovePressed.png");
         position: relative;
         top: -10px;
         margin-right: 10px;

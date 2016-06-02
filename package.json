@@ -4,10 +4,10 @@
   "description": "CITIZEN project for DecodeMTL bootcamp",
   "main": "server.js",
   "scripts": {
-    "start":  "node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js -e js",
-    "sass": "sass --watch src/scss/app.scss:public/css/main.css"
+    "postinstall": "webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "author": "Marie Eve Gauthier, Osa Isacson, Alex Ruaux",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer": "^6.3.6",
     "axios": "^0.11.1",
     "babel": "^6.5.2",
     "babel-core": "^6.6.0",
@@ -35,11 +36,13 @@
     "express": "^4.13.4",
     "fs": "0.0.2",
     "jquery": "^2.2.4",
-    "memcached": "^2.2.2",
+    "memjs": "^0.10.0",
     "node-sass": "^3.7.0",
     "nodemon": "^1.9.2",
     "parse": "^1.8.5",
     "parse-server": "^2.2.10",
+    "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
     "react": "^0.14.7",
     "react-chartjs": "^0.7.3",
     "react-dom": "^0.14.7",
