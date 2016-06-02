@@ -3,6 +3,9 @@ var React = require('react');
 var Link = require('react-router').Link;
 // required for ajax calls
 var axios = require('axios');
+var Parse = require('parse');
+var $ = require('jquery');
+//var Vote = Parse.Object.extend('Vote');
 
 
 var Rep = React.createClass({
@@ -18,6 +21,7 @@ var Rep = React.createClass({
         electedYear: "",
         electedVote: ""
       },
+      coherence: 0,
       shareButtonToggle: false,
       facebookButton: "",
       twitterButton: "",
@@ -25,9 +29,9 @@ var Rep = React.createClass({
   },
   componentDidMount: function() {
     var that = this;
-    // get rep info using nameFormatted in url
     var nameFormatted = this.props.params.repName;
     
+    // get rep info using nameFormatted in url
     axios.post('/repinfoget', {
       repName: nameFormatted
     })
@@ -35,11 +39,65 @@ var Rep = React.createClass({
     .then(function(response) {
       var updateData = that.state.rep;
       updateData = response.data;
-        that.state.rep = updateData;
-        localStorage.setItem("repFullName", that.state.rep.name);
-       that.setState({rep: updateData});
+      that.state.rep = updateData;
+      localStorage.setItem("repFullName", that.state.rep.name);
+      that.setState({rep: updateData});
     })
     .catch(function(response) {
+    });
+
+    // Get array of repVote objects - billId and ballot
+    var repVotes = axios.post('/repvoteinfo', {
+      repName: nameFormatted
+    }).then(
+      function(res) {
+        var voteArray = res.data.map(function(vote){
+          return {
+            ballot: vote.ballot,
+            billId: vote.billId
+          };
+        });
+        
+        return voteArray;
+      }
+    );
+    
+    var myVotes = Parse.Cloud.run('myVoteInfo');
+    
+    var that = this;
+    Promise.all([repVotes, myVotes]).then(
+      function(results) {
+        var repVotes = results[0];
+        var myVotes = results[1];
+        
+        // Compare Rep and User array of votes and create a single array, with 1 = agreement and 0 = disagreement
+        var voteCompare = [];
+        
+        myVotes.forEach(function(userVote) {
+          repVotes.forEach(function(repVote) {
+            if ((userVote.get('billId') === repVote.billId) && (repVote.ballot !== "Didn't Vote")) {
+              if ((userVote.get('vote') === 1 && repVote.ballot === "Yes") || (userVote.get('vote') === -1 && repVote.ballot === "No")) {
+                return voteCompare.push(1);
+              }
+              else {
+                return voteCompare.push(0);
+              }
+            }
+          });
+        });
+    
+        var total = voteCompare.length;
+        if (total > 0) {
+          var sum = voteCompare.reduce(function(cur, next){return cur+next;});
+          var coherence = ((sum/total)*100).toFixed(1);
+      
+          that.setState({coherence: coherence + '%'});
+        }
+      }
+    )
+    .catch(
+      function(err) {
+        console.log(err);
     });
   },
   handleShareButtonClick: function(e) {
@@ -52,7 +110,6 @@ var Rep = React.createClass({
     return (
     <div>
       <div className="rep-container">
-
         <div className="repInfo">
           <div className="repPic">
             <img src={this.state.rep.img} />
@@ -63,9 +120,7 @@ var Rep = React.createClass({
             <h2>{this.state.rep.name}</h2>
             <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
             <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
-          
           </div>
-          
       </div>
       
       <div className="rep-stats-container">
@@ -82,7 +137,7 @@ var Rep = React.createClass({
               
               <div className="you">
                 <h2>you</h2>
-                <h1>?</h1>
+                <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
               </div>
           </div>
           

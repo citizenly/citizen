@@ -1,3 +1,4 @@
+/* global localStorage */
 var React = require('react');
 var Link = require('react-router').Link;
 // required for ajax calls
@@ -5,6 +6,7 @@ var Link = require('react-router').Link;
 import { withRouter } from 'react-router';
 //var event = require('../events');
 var Parse = require('parse');
+var event = require('../events.js');
 
 var Login = React.createClass({
   handleSignup: function(e) {
@@ -16,6 +18,8 @@ var Login = React.createClass({
       Parse.User.logIn(username, password).then(
         function(user) {
           console.log('SUCCESSFUL LOGIN', user);
+          event.emit('loggedIn');
+          
           var repName = localStorage.getItem('repName');
           if (repName) {
             that.props.router.push('/rep/' + repName);
