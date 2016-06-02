@@ -5,7 +5,7 @@ var React = require('react');
 var Dev = React.createClass({
   render: function() {
     return (
-      <div className="developerInfo">
+      <div>
         <h2>{this.props.firstName} {this.props.lastName}</h2>
           <a href={this.props.github} target="_blank"><i className="fa fa-github" aria-hidden="true"></i></a>
           <a href={this.props.website} target="_blank"><i className="fa fa-code" aria-hidden="true"></i></a>
@@ -49,25 +49,22 @@ var About = React.createClass({
   },
   renderDevs: function(dev) {
     return (
-      <li key={dev.lastName}>
+      <div key={dev.lastName}>
         <Dev firstName={dev.firstName} lastName={dev.lastName} 
         
         github={dev.github} website={dev.website} linkedin={dev.linkedin} twitter={dev.twitter} desc={dev.desc}/>
-      </li>
+      </div>
     );
   },
   render: function() {
     return (
 
-      <div>
+      <div className="aboutPage">
         <h1>About</h1>
         <p>An awesome political accountability app, designed and developed as part of <a href="https://www.decodemtl.com/" target="_blank">DecodeMTL</a> by:</p>
-        
-        <ul>
           {this.state.dev.map(this.renderDevs)}
-        </ul>
-        
-        And a very special thank you to Michael Mulley, who built the API and website <a href="https://api.openparliament.ca/" target="_blank">openparliament.ca</a>, without which this project would have been 100x more difficult.
+
+        <p>And a very special thank you to Michael Mulley, who built the API and website <a href="https://api.openparliament.ca/" target="_blank">openparliament.ca</a>, without which this project would have been 100x more difficult.</p>
         
       </div>
     );

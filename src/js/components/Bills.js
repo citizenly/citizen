@@ -100,7 +100,8 @@ var Bills = React.createClass({
         </div>
           
         <div className="repName">
-          <p>{this.props.params.filter === "votedonbymyrep"  ? "Your representative, "  + this.state.repFullName + ", voted on:"  : ""}</p> 
+        
+          <p>{this.props.params.filter === "votedonbymyrep"  ? "The below shows the bills your representative "  + this.state.repFullName + " has voted on. PASSED/FAILED/TIE indicates the bill's latest status in parliament"  : ""}</p> 
         </div>
           
         <div className="billList">
@@ -110,17 +111,23 @@ var Bills = React.createClass({
           </div>
         </div>
 
-        <footer> {this.props.params.filter === "votedonbymyrep"   ? 
-          <div className="infobgcolor">
-            <div className="color-result">
-              <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
-            </div>
-            <p>indicates most recent vote in parliament</p>
-          </div> : null}
-        </footer> 
+
      </div>
     );
   }
 });
 
 module.exports = withRouter(Bills);
+
+
+
+////FOOTER, IF WE NEED IT///////
+/*
+        <div className="infoFooter"> {this.props.params.filter === "votedonbymyrep"   ? 
+          <div className="infobgcolor">
+            <div className="color-result">
+              <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
+            </div>
+            <p>indicates most recent vote in parliament</p>
+          </div> : null}
+        </div> */
