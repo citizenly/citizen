@@ -1,3 +1,6 @@
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
+
 module.exports = {
   entry: __dirname +'/src/js/app.js',
   output: {
@@ -12,9 +15,15 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"],
+        loaders: ["style", "css", "postcss", "sass"],
       }
     ]
+  },
+  postcss: function() {
+    return [
+      precss,
+      autoprefixer
+    ];
   },
    resolve: {
         root: __dirname,

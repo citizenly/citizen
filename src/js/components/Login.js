@@ -1,3 +1,4 @@
+/* global localStorage */
 var React = require('react');
 var Link = require('react-router').Link;
 // required for ajax calls
@@ -5,6 +6,7 @@ var Link = require('react-router').Link;
 import { withRouter } from 'react-router';
 //var event = require('../events');
 var Parse = require('parse');
+var event = require('../events.js');
 
 var Login = React.createClass({
   handleSignup: function(e) {
@@ -16,6 +18,8 @@ var Login = React.createClass({
       Parse.User.logIn(username, password).then(
         function(user) {
           console.log('SUCCESSFUL LOGIN', user);
+          event.emit('loggedIn');
+          
           var repName = localStorage.getItem('repName');
           if (repName) {
             that.props.router.push('/rep/' + repName);
@@ -36,8 +40,8 @@ var Login = React.createClass({
         <h1 className="formTitle">Login</h1>
         <p>Don't have an account? <Link to="/signup">Signup</Link></p>
         <form className="formEntryFields" method="post" onSubmit={this.handleSignup}>
-            <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="please enter your username" />
-            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="please enter your password" />
+            <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="username" />
+            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="password" />
             <button className="formButton" type="submit">LOGIN</button>
         </form>
       </div>

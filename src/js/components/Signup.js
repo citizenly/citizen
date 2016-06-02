@@ -42,14 +42,9 @@ var Signup = React.createClass({
       user.signUp(null,{
         success:function(user){
           console.log('SUCCESSFUL SIGNUP', user);
+          event.emit('loggedIn');
+          
           var repName = localStorage.getItem('repName');
-          var query = new Parse.Query(user);
-            query.equalTo("username", username);
-            query.find({
-              success: function(me) {
-                console.log(me[0].username, 'me');
-              }
-            });
           if (repName) {
             that.props.router.push('/rep/' + repName);
           }
@@ -70,13 +65,13 @@ var Signup = React.createClass({
         <h1 className="formTitle">Signup</h1>
         <p>Already have an account? <Link to="/login">Login</Link></p>
         <form className="formEntryFields" method="post" onSubmit={this.handleSignup}>
-            <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="please enter your username" />
-            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="please enter your password" />
-            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
-            <p> In order for you to be able to create valid petitions, we also need the following information (as defined by the Government of Canada): </p>
-            <input ref="city" className="city" type="text" name="city" maxLength="15" placeholder="your city" />
-            <input ref="country" className="country" type="text" name="country" maxLength="15" placeholder="your country (probably Canada)" />
-            <input ref="phone" className="phone" type="text" name="phone" maxLength="25" placeholder="your phonenumber" />
+            <input ref="firstname" className="firstname" type="text" name="firstname" maxLength="50" placeholder="first name" />
+            <input ref="lastname" className="lastname" type="text" name="lastname" maxLength="50" placeholder="last name" />
+            <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="username" />
+            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="password" />
+            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="postal code" />
+            <input ref="phone" className="phone" type="text" name="phone" maxLength="25" placeholder="phonenumber" />
+            <div className= "disclaimerText">Please note that if you create or vote on a petition in 'Citizen' your name, city, country, postal code, and telephone number will be automatically added to that specific petition (this is required by the Government of Canada for valid petitions). By signing up to Citizen you're saying you agree to this.</div>
             <button className="formButton" type="submit">Sign up</button>
             <Message/>
         </form>

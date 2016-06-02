@@ -35,7 +35,6 @@ var Bill = React.createClass({
 var Bills = React.createClass({
   getInitialState: function() {
     // set inital state to determine which list of bills is displayed - active by default
-    
     return {
       billList: [],
       repFullName: ""
@@ -59,8 +58,7 @@ var Bills = React.createClass({
     // set filter as url parameter
     var filter = this.props.params.filter;
     this.setState({loading: true});
-    
-    
+
     // post filter to server and this.setState({billList: response.data})
     var repName = localStorage.getItem("repName");
     axios.post('/postfilter', {
@@ -102,7 +100,8 @@ var Bills = React.createClass({
         </div>
           
         <div className="repName">
-          <p>{this.props.params.filter === "votedonbymyrep"  ? "Your representative, "  + this.state.repFullName + ", voted on:"  : ""}</p> 
+        
+          <p>{this.props.params.filter === "votedonbymyrep"  ? "The below shows the bills your representative "  + this.state.repFullName + " has voted on. PASSED/FAILED/TIE indicates the bill's latest status in parliament"  : ""}</p> 
         </div>
           
         <div className="billList">
@@ -111,18 +110,22 @@ var Bills = React.createClass({
             {this.state.billList.length === 0 ? 'We will have more filters coming soon' : this.state.billList.map(this.renderBills)}
           </div>
         </div>
-
-        <footer> {this.props.params.filter === "votedonbymyrep"   ? 
-          <div className="infobgcolor">
-            <div className="color-result">
-              <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
-            </div>
-            <p>indicates most recent vote in parliament</p>
-          </div> : null}
-        </footer> 
      </div>
     );
   }
 });
 
 module.exports = withRouter(Bills);
+
+
+
+////FOOTER, IF WE NEED IT///////
+/*
+        <div className="infoFooter"> {this.props.params.filter === "votedonbymyrep"   ? 
+          <div className="infobgcolor">
+            <div className="color-result">
+              <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
+            </div>
+            <p>indicates most recent vote in parliament</p>
+          </div> : null}
+        </div> */

@@ -244,9 +244,7 @@ We can fetch the list of all votes for the current parliament:
 http://api.openparliament.ca/votes/?session=42-1&limit=500
 There, there is the description of each vote. 
 If the description is (description.en): "That the Bill  be now read a second time " 
-or "That the Bill be now read a third time and do pass.", we can have an idea as is thinking our rep. 
-
-*/
+or "That the Bill be now read a third time and do pass.", we can have an idea as is thinking our rep. */
 function getFinalStageBills(callback){
   var path = "votes/?session=42-1&limit=500";
   var finalStageBills = [];
@@ -424,9 +422,6 @@ function getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills) {
 }
 
 
-
-
-
 module.exports = {
   getAllVotes: getAllVotes,
   getListOfBillsFromVotesWithResult: getListOfBillsFromVotesWithResult,
@@ -448,38 +443,4 @@ module.exports = {
 
 
 /* TEST FUNCTIONS ----------------------------------------------------------- */
-        
-
-// fixLimitByPage(function(err, limit) {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   }
-//   getAllVotes(limit, function(err, arrOfVotes) {
-//     if (err) {
-//       console.log(err);
-//       return;
-//     }
-//     var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-
-//     getTitleOfBill(function(err, billsWithTitle) {
-//       if (err) {
-//         console.log(err);
-//         return;
-//       }
-//       var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
-
-//       var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-
-//       getBillBySponsor("justin-trudeau", function(err, listOfBillsSponsored) {
-//         if (err) {
-//           console.log(err);
-//           return;
-//         }
-//         var ultimateVoteAboutBillSponsored = getUltimateVotedFromBillId(listOfBillsSponsored, listOfUniqueBills);
-//         console.log(ultimateVoteAboutBillSponsored, "THIS IS THE ultimateVoteAboutBillSponsored");
-//       });
-//     });
-//   });
-// });
-
+ 

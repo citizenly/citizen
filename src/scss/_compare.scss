@@ -1,5 +1,12 @@
-.compareInfo {
+.comparePage {
+    p {
+        margin: 0px 15px 15px 15px;
+        text-align: center;
+    }
     
+    h2 {
+        text-align: center;
+    }
 }
 
 
@@ -13,4 +20,31 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.compareMatch {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    
+
+        img {
+            width: 75px;
+        }
+        
+        div {
+            text-align: -webkit-center;
+            flex: 1;
+            padding: 0px 15px;
+        }
+        
+        h2 {
+            font-size: 0.9em;
+        }
+        
+        p {
+            font-size: 0.8em;
+            margin: 0px;
+        }
 }

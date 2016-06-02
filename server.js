@@ -38,7 +38,7 @@ var getOneSpeechInTheHouseByDayAndRep = FeedAPI.getOneSpeechInTheHouseByDayAndRe
 var filterFeedByMoment = FeedAPI.filterFeedByMoment
 
 
-var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
+var whitelist = ['https://citizen-molecularcode.c9users.io'];
 var corsOptionsDelegate = function(req, callback){
   var corsOptions;
   if(whitelist.indexOf(req.header('Origin')) !== -1){
@@ -50,12 +50,12 @@ var corsOptionsDelegate = function(req, callback){
 };
  
 var api = new ParseServer({
-  databaseURI: 'mongodb://localhost:27017/dev', // Connection string for your MongoDB database
+  databaseURI: process.env.MONGODB_URI || 'mongodb://localhost:27017/dev', // Connection string for your MongoDB database (Heroku then c9)
   cloud: __dirname + '/cloud.js', // Absolute path to your Cloud Code
   appId: 'XYZ',
   masterKey: 'ABC', // Keep this key secret!
   fileKey: 'file-key-not-sure',
-  serverURL: 'https://citizen-marie-evegauthier.c9users.io/parse' // Don't forget to change to https if needed
+  serverURL: process.env.PARSE_URL || 'https://citizen-molecularcode.c9users.io/parse' // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
@@ -104,66 +104,36 @@ app.post('/repinfoget', function(req, res) {
 
 /* BILLS FUNCTION CALLS ------------------------------------------------------- */
 app.post('/postfilter', function(req, res) {
-      var repName = req.body.repName;
-      req = req.body.filter; 
-      switch (req) {
-        case 'active':
-          fixLimitByPage(function(err, limit) {
+  var repName = req.body.repName;
+  req = req.body.filter; 
+  switch (req) {
+    case 'active':
+      fixLimitByPage(function(err, limit) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitleNorResult = getListOfBillsFromVotesWithoutResult(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
             if (err) {
               console.log(err);
               return;
             }
-            getAllVotes(limit, function(err, arrOfVotes) {
-              if (err) {
-                console.log(err);
-                return;
-              }
-              var billsWithoutTitleNorResult = getListOfBillsFromVotesWithoutResult(arrOfVotes);
 
-              getTitleOfBill(function(err, billsWithTitle) {
-                if (err) {
-                  console.log(err);
-                  return;
-                }
+            var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitleNorResult, billsWithTitle);
 
-                var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitleNorResult, billsWithTitle);
-
-                var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-                res.send(listOfUniqueBills);
-              });
-            });
+            var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
+            res.send(listOfUniqueBills);
           });
-          break;
-
-    // case 'passed':
-    // case 'failed':
-    //   fixLimitByPage(function(err, limit) {
-    //     if (err) {
-    //       console.log(err);
-    //       return;
-    //     }
-    //     getAllVotes(limit, function(err, arrOfVotes) {
-    //       if (err) {
-    //         console.log(err);
-    //         return;
-    //       }
-    //       var billsWithoutTitle = getListOfBillsFromVotes(arrOfVotes);
-
-    //       getTitleOfBill(function(err, billsWithTitle) {
-    //         if (err) {
-    //           console.log(err);
-    //           return;
-    //         }
-    //         var listOfBillsWithTitle = getListOfBillsWithTitle(billsWithoutTitle, billsWithTitle);
-
-    //         var listOfUniqueBills = getUniqueBillsByDate(listOfBillsWithTitle);
-
-    //         var listOfUniqueBillsByResult = filterUniqueBillsByResult(listOfUniqueBills, req);
-    //         res.send(listOfUniqueBillsByResult);
-    //       });
-    //     });
-    //   });
-    //   break;
+        });
+      });
+      break;
 
     case 'all':
       fixLimitByPage(function(err, limit) {
@@ -217,7 +187,6 @@ app.post('/postfilter', function(req, res) {
                 }
                 var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
 
-
                 res.send(ballotsAboutFinaleStageBill);
               });
             });
@@ -267,9 +236,9 @@ app.post('/postfilter', function(req, res) {
 });
 /* -------------------------------------------------------------------------- */
 
-/* BILL FUNCTION CALLS ------------------------------------------------------- */
+/* BILL FUNCTION CALLS ------------------------------------------------------ */
 app.post('/billinfoget', function(req, res) {
-  var repName = req.body.repName
+  var repName = req.body.repName;
   req = req.body.billId;
   getBill(req, function(err, bill) {
     if (err) {
@@ -321,7 +290,57 @@ app.post('/billinfoget', function(req, res) {
     });
   });
 });
-/* ------------------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
+
+/* VOTE STATS FUNCTION CALLS ------------------------------------------------ */
+app.post('/repvoteinfo', function(req, res) {
+  var repName = req.body.repName;
+  req = req.body.filter; 
+    fixLimitByPage(function(err, limit) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      getBallotsByPolitician(limit, repName, function(err, listOfBallots) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitleWithResult = getListOfBillsFromVotesWithResult(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+
+            var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitleWithResult, billsWithTitle, listOfBallots);
+
+            var ballotsByUniqueDate = getUniqueBillsByDate(ballotsOnlyAboutBill);
+
+            getFinalStageBills(function(err, finalStageBills) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
+
+              res.send(ballotsAboutFinaleStageBill);
+            });
+          });
+        });
+      });
+    });
+});
+
+
+
+/* -------------------------------------------------------------------------- */
 
 /* FEED FUNCTION CALLS ------------------------------------------------------- */
 app.post('/feedinfoget', function(req, res) {

@@ -1,3 +1,4 @@
+/*global localStorage*/
 var React = require('react');
 // required for ajax calls
 var axios = require('axios');
@@ -43,7 +44,6 @@ var Bill = React.createClass({
   componentDidMount: function() {
     this.loadBillData();
     this.setState({content: this.state.bill.title});
-    console.log(this.state.bill, 'this.state.bill');
     $(".billTabs li").removeClass("active");
     $("#tab-" + 1).addClass("active");
   },
@@ -56,6 +56,7 @@ var Bill = React.createClass({
     var that = this;
     // set billId as url parameter
     var billId = this.props.params.billId;
+    // msg whilst data loads
     this.setState({loading: true});
     
     // post billId and repName to server and this.setState({bill: response.data})
@@ -165,6 +166,8 @@ var Bill = React.createClass({
               </p> 
             </div>
 
+            {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
+
             <div className="billTabs">
               <ul>
                 <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
@@ -174,19 +177,28 @@ var Bill = React.createClass({
 
               <div className="box-wrap">
                 <div id="box">
-                  <table><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
+                  <table id="billText"><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
                 </div>
               </div>
             </div>
           </div>
       </div>
 
-      <div className="chartContainer">
+      <div className="billChartContainer">
         <div className="countryAndNeighboursComparison">
           <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
           <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
         </div>
       </div>
+      
+      <div className="legends">
+          <h3 className="cNo">coun</h3>
+          <h3 className="cYes">try</h3>
+          <h3> & </h3>
+          <h3 className="nNo">neigh</h3>
+          <h3 className="nYes">bours</h3>
+      </div>
+
 
       <div className="votingAndSharingActions">
 
@@ -195,11 +207,7 @@ var Bill = React.createClass({
         <div className="share">
           <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
           <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-          <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=test stuff&url=YOUR-URL&via=TWITTER-HANDLER"><i className="fa fa-twitter"></i></a>
-        </div>
-
-        <div className= "share">
-          <i className="fa fa-share-alt"></i>
+          <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=YOUR-URL&via=CITIZEN"><i className="fa fa-twitter"></i></a>
         </div>
 
         <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>
@@ -211,3 +219,15 @@ var Bill = React.createClass({
 });
 
 module.exports = withRouter(Bill);
+
+
+
+/*      <div className="legends">
+          <h3>What your </h3> <h3>  </h3>
+          <h3 className="cNo">coun</h3>
+          <h3 className="cYes">try</h3>
+          <h3> and </h3>
+          <h3 className="nNo">neigh</h3>
+          <h3 className="cYes">bours</h3>
+          <h3> think</h3>
+      </div>*/
