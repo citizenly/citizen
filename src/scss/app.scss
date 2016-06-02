@@ -2,6 +2,7 @@
 @import 'reset';
 //import styles from 
 @import 'home';
+@import 'about';
 @import 'bills';
 @import 'bill';
 @import 'petitions';
@@ -76,16 +77,6 @@ footer {
   background-color: white;
 }
 
-.simpleShareFooter {
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  background-color: white;
-}
 
 
 .navigation {
@@ -105,9 +96,12 @@ a {
   text-decoration: none;
 }
 
+.onlyFbTwShare a {
+  visibility: visible;
+}
 
 .hidden {
-  visibility: hidden;
+  /*visibility: hidden;*/
   opacity: 0;
 }
 
