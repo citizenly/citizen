@@ -33,6 +33,7 @@ var getBallot = BillAPI.getBallot;
 var getBillText = BillAPI.getBillText;
 var getFinalStageBills = BillsAPI.getFinalStageBills;
 var getBallotAboutFinalStageBills = BillsAPI.getBallotAboutFinalStageBills;
+var getOneSpeechInTheHouseByDayAndRep = require('./src/js/helperFunctions/feedAPI.js');
 
 
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
@@ -321,7 +322,36 @@ app.post('/billinfoget', function(req, res) {
 });
 /* ------------------------------------------------------------------------------ */
 
+/* FEED FUNCTION CALLS ------------------------------------------------------- */
+app.post('/feedinfoget', function(req, res) {
+  var repName = req.body.repName;
+  req = req.body.source; 
+  switch (req) {
+    case 'speeches':
+      getOneSpeechInTheHouseByDayAndRep(repName, function(err, listOfFirstSpeechByDate){
+        if(err){
+          console.log(err);
+          return;
+        }else{
+          console.log(listOfFirstSpeechByDate, "*******listOfFirstSpeechByDate, line 335");
+          res.send(listOfFirstSpeechByDate);
+        }
+      });
+      break;
+    
+    default:
+      res.send([]);
+  
+  }
+});
 
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------ */
 
 /* This says: for any path NOT served by the middleware above, send the file called index.html instead. Eg, if the client requests http://server/step-2 the server will send the file index.html. Then on the browser, React Router will load the appropriate component */
 app.get('/*', cors(corsOptionsDelegate),  function(request, response, next) {
