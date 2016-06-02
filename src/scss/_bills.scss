@@ -10,6 +10,17 @@
     text-align: center;
 }
 
+.repName {
+    p {
+    margin: 10px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    line-height: normal;
+    font-size: 0.9em;
+    }
+}
+
+
 
 .billTags {
     display: flex;

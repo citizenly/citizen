@@ -54,8 +54,8 @@ var Rep = React.createClass({
     <div>
       <div className="rep-container">
 
-        <div className="rep-info">
-          <div className="rep-pic">
+        <div className="repInfo">
+          <div className="repPic">
             <img src={this.state.rep.img} />
           </div>
       
@@ -72,12 +72,12 @@ var Rep = React.createClass({
       <div className="rep-stats-container">
         
           <div className="agreement">
-            <h2>In agreement with...</h2>
+            <p>Percentage of how often they would vote the same as...</p>
           </div>
           
           <div className="repstatsbackgroundcolor">
               <div className="neighbours">
-                <h2>neighbours</h2>
+                <h2>Your neighbours</h2>
                 <h1>34%</h1>
               </div>
               
@@ -87,16 +87,14 @@ var Rep = React.createClass({
               </div>
           </div>
           
-          <div className="intheirvoting">
-            <h2>... in their voting.</h2>
-          </div>
+      
           <div id="seperator"></div>
           <div className="down"></div>
       
-          <div className="share">
-            <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+          <div className="shareRep">
+            <a className={this.state.shareButtonToggle ? "facebookButtonRep fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
             <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-            <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=YOUR-URL&via=CITIZEN"><i className="fa fa-twitter"></i></a>
+            <a className={this.state.shareButtonToggle ? "twitterButtonRep fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=YOUR-URL&via=CITIZEN"><i className="fa fa-twitter"></i></a>
           </div>
               
         </div>

@@ -1,8 +1,13 @@
-.developerInfo {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 15px;
+
+.aboutPage {
+    margin: 15px; 
+
     
+    p {
+    font-family: Arimo, sans-serif;
+    font-size: 0.9em;
+    line-height: 1.4;
+    }
 }
+
+

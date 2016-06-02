@@ -181,12 +181,21 @@ var Bill = React.createClass({
           </div>
       </div>
 
-      <div className="chartContainer">
+      <div className="billChartContainer">
         <div className="countryAndNeighboursComparison">
           <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
           <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
         </div>
       </div>
+      
+      <div className="legends">
+          <h3 className="cNo">coun</h3>
+          <h3 className="cYes">try</h3>
+          <h3> & </h3>
+          <h3 className="nNo">neigh</h3>
+          <h3 className="nYes">bours</h3>
+      </div>
+
 
       <div className="votingAndSharingActions">
 
@@ -207,3 +216,15 @@ var Bill = React.createClass({
 });
 
 module.exports = withRouter(Bill);
+
+
+
+/*      <div className="legends">
+          <h3>What your </h3> <h3>  </h3>
+          <h3 className="cNo">coun</h3>
+          <h3 className="cYes">try</h3>
+          <h3> and </h3>
+          <h3 className="nNo">neigh</h3>
+          <h3 className="cYes">bours</h3>
+          <h3> think</h3>
+      </div>*/

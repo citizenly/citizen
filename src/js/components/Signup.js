@@ -70,12 +70,12 @@ var Signup = React.createClass({
         <h1 className="formTitle">Signup</h1>
         <p>Already have an account? <Link to="/login">Login</Link></p>
         <form className="formEntryFields" method="post" onSubmit={this.handleSignup}>
-            <input ref="firstname" className="firstname" type="text" name="firstname" maxLength="50" placeholder="your first name" />
-            <input ref="lastname" className="lastname" type="text" name="lastname" maxLength="50" placeholder="your last name" />
-            <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="enter a username" />
-            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="enter a password" />
-            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
-            <input ref="phone" className="phone" type="text" name="phone" maxLength="25" placeholder="your phonenumber" />
+            <input ref="firstname" className="firstname" type="text" name="firstname" maxLength="50" placeholder="first name" />
+            <input ref="lastname" className="lastname" type="text" name="lastname" maxLength="50" placeholder="last name" />
+            <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="username" />
+            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="password" />
+            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="postal code" />
+            <input ref="phone" className="phone" type="text" name="phone" maxLength="25" placeholder="phonenumber" />
             <div className= "disclaimerText">Please note that if you create or vote on a petition in 'Citizen' your name, city, country, postal code, and telephone number will be automatically added to that specific petition (this is required by the Government of Canada for valid petitions). By signing up to Citizen you're saying you agree to this.</div>
             <button className="formButton" type="submit">Sign up</button>
             <Message/>

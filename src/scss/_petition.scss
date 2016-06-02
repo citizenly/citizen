@@ -23,7 +23,7 @@
      
 }
 
-.tagDescriptions {
+.petitionTagDescriptions {
      font-family: Oswald, sans-serif;
      font-weight: 400;
      font-size: 0.8em;
@@ -32,8 +32,9 @@
      flex-direction: column;
      justify-content: center;
      padding-top: 5px;
-     padding-bottom: 30px;
+     padding-bottom: 10px;
      text-transform: uppercase;
+     text-align: center;
 }
 
 .dynamic {
@@ -76,6 +77,8 @@
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
+        
+ 
         
              .active {
                 font-weight: 600;
@@ -144,38 +147,32 @@
 
 /////PETITION DOUGHNUT////
 
-.countryYes {
-background-color: #006729
+.petitionYes {
+color: #006729
 }
 
-.countryNo {
-background-color: #8B2530
+.petitionNo {
+color: #8B2530
 }
 
-.neighboursYes {
-background-color: #4EA32A
+.petitionGrey {
+color: rgba(0,0,0,0.5)
 }
-
-.neighboursNo { 
-background-color: #D56500
-}
-
 
  
-.chartContainer {
-    width: 100%;
+.petitionChartContainer {
     display: flex;
-    height: 25vh;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 10px;
 }  
 
 .petitionVoteComparison {
     width: 50%;
 }
 
-canvas.bigD {
+canvas.petitionDoughnut {
     width: 50% !important;
     height: 50% !important;
     display: block;
@@ -185,59 +182,5 @@ canvas.bigD {
 
 
 
-/////////PETITION VOTING BUTTONS////////
 
-.votingAndSharingActions {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: white;
-    width: 100%;
-    position: fixed;
-    cursor: pointer;
-    bottom: 0; //align it to the bottom and dont push it up
-    //bottom: 10px; //align it to the bottom and push it up 1px
 
-    
-    .redglovebutton, .greenglovebutton, .redglovebutton-clicked, .greenglovebutton-clicked {
-        padding: 10px;
-        max-width: 63px;
-        width: 50%;
-        height: 100px;
-        background: no-repeat center;
-        background-size: contain;
-    }
-    
-    .redglovebutton {
-        background-image: url("../../images/redGlovePressed.png");
-        position: relative;
-        top: 10px;
-    }
-    
-    .redglovebutton-clicked {
-        background-image: url("../../images/redGlovePressed.png");
-        position: relative;
-        top: 10px;
-        opacity: 0.5;
-    }
-    
-    .share {
-        display: flex;
-        justify-content: center;
-        //margin: 0px 20px; //top and bottom 0px, left and right 20px
-    }
-    
-    .greenglovebutton {
-        background-image: url("../../images/greenGlovePressed.png");
-        position: relative;
-        top: -10px;
-    }
-    
-        .greenglovebutton-clicked {
-        background-image: url("../../images/greenGlovePressed.png");
-        position: relative;
-        top: -10px;
-        opacity: 0.5;
-    }
-    
-}

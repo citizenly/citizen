@@ -12,7 +12,7 @@ var DoughnutChart = require("react-chartjs").Doughnut;
 
 
 //HULLO :) the 'value' below is to be replaced with the yes/no votes to the petition.).
-var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B2530", value: 50, label: "NO"}]
+var countryData = [{color: "#006729", value: 150, label: "AGREE"}, {color: "#8B2530", value: 10, label: "DISAGREE"}, {color: "rgba(0,0,0,0.5)", value: 200, label: "REMAINING"}]
 
 
 var Petition = React.createClass({
@@ -20,15 +20,16 @@ var Petition = React.createClass({
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
       petition: {
-        id: '**placeholder**',
-        title: '**placeholder**',
-        summary: '**placeholder**',
-        proposedBy: '**placeholder**',
-        date: '**placeholder**',
-        dateOpen: "**2016-05-12**",
-        dateClose: "**2016-06-12**",
-        daysLeft: "**17**"/*NUMBER (diff between dateOpen and dateClose)*/,
-        keywords: "**streets, healthcare, youth**",
+        id: 'e-119',
+        title: 'Canadian citizenship',
+        summary: 'Whereas: Changes to citizenship regulations have created a two-tiered citizenship system in Canada for adopted children that discriminates against children who have been granted citizenship through the direct route by not allowing them to pass on citizenship to their birth children if born outside of Canada. We, the undersigned, citizens of Canada, call upon the House of Commons to: 1. Amend the citizenship regulations for children who are adopted outside of Canada to ensure that they are treated equally regardless of whether they are granted citizenship through the direct route or the naturalization process; and 2. Request that amendments are made to protect adopted children so other governments in the future cannot strip adopted children of their inalienable rights as Canadian citizens.',
+        proposedBy: 'Graeme Ball',
+        sponsor: 'Nathaniel Erskine-Smith', //For a petition to be valid it needs to have a sponsor (for example your MP). Future functionality: Feed the proposed petitions to your MP, who can choose which ones to sponsor. If they click they'll sponsor it, it becomes active on the petitions page. ALTERNATIVELY adding the 'sponsor' could be in the very final stage, where the petition receives 100 supporters and gets sent to the MP, who gets the choice of sponsoring it. If he/she doesnt, despite the fact that 100 of their constituents would like them to, then we could make this fact visible in a list under 'petitions' (petitions sent to MP (sponsored, not sponsored).
+        dateOpen: "2015-06-11",
+        dateClose: "2016-06-11",
+        daysLeft: "34"/*NUMBER (diff between dateOpen and dateClose)*/,
+        keywords: "Citizenship, Immigration, International adoption",
+        comments: "Start the discussion"
       },
       content: "",
       vote: 0,
@@ -91,9 +92,11 @@ var Petition = React.createClass({
     else if(data===2) {
       this.setState({content: this.state.petition.summary});
     }
+    
     else if(data===3) {
-      this.setState({content: this.state.petition.text});
+      this.setState({content: this.state.petition.comments});
     }
+
     
     $(".petitionTabs li").removeClass("active");
     $("#tab-" + data).addClass("active");
@@ -150,17 +153,19 @@ var Petition = React.createClass({
                 <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
               </div>
                 
-              <div className="tagDescriptions">
+              <div className="petitionTagDescriptions">
                 <p>Keywords: <span className="dynamic">{this.state.petition.keywords}</span></p>
+              </div>
+              <div className="petitionTagDescriptions">
                 <p> <span className="dynamic">{this.state.petition.daysLeft}</span> Days left</p>
-            </div>
+              </div>
           </div>
     
           <div className="petitionTabs">
             <ul>
               <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
               <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
-              <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
+              <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Neighbour comments</li>
             </ul>
     
           	<div className="box-wrap">
@@ -172,11 +177,17 @@ var Petition = React.createClass({
         
         </div>
         
-        <div className="chartContainer">
+        <div className="petitionChartContainer">
           <div className="petitionVoteComparison">
-            <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
+            <DoughnutChart className="petitionDoughnut" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
           </div>
         </div>
+        
+      <div className="legends">
+          <h3 className="petitionNo">Disagree</h3>
+          <h3 className="petitionGrey">Remaining</h3>
+          <h3 className="petitionYes">Agree</h3>
+      </div>
         
         <div className="votingAndSharingActions">
               

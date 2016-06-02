@@ -64,14 +64,16 @@ var Compare = React.createClass({
   },
   render: function() {
     return (
-     <div className="comparePage">
+      <div className="comparePage">
+      
           <div className="compareHeading">
             Compare
           </div>
-          <p>Find how your representative's statistics compare against other representatives across the whole country.</p>
+          
+          <p><b>Find how your representative's statistics compare against other representatives across the country.</b></p>
           
           <h2>MATCH</h2>
-          <p>Match in % between how they voted, and how the people they represent would have voted.</p>
+          <p>Shows the match in % between how the below voted, and how the people they represent would have voted.</p>
 
           <div className="compareMatch">
           
@@ -95,20 +97,18 @@ var Compare = React.createClass({
                   <h2>{this.state.repHighest.name}</h2>
                   <p><span className={"party" + this.state.repHighest.party.substring(0, 3)}>{this.state.repHighest.party}</span> MP for {this.state.repHighest.constituency} {this.state.repHighest.province}</p>
                 </div>
-            
           
           </div>
 
-    <div id="content">
-      <footer>
-          <div className="share">
-            <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
-            <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-            <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=YOUR-URL&via=CITIZEN"><i className="fa fa-twitter"></i></a>
+          <div className="simpleShareFooter">
+            <div className="share">
+              <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+              <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+              <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=YOUR-URL&via=CITIZEN"><i className="fa fa-twitter"></i></a>
+            </div>
           </div>
-       </footer>
-    </div>
-  </div>
+          
+      </div>
 
     );
   }

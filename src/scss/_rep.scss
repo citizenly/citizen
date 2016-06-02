@@ -6,11 +6,11 @@
   width: 100%;
 }
 
-.rep-info {
+.repInfo {
     display: flex;
     
-    img {
-    max-width: 50%;
+    .repPic {
+    max-width: 60%;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -18,8 +18,8 @@
 
 
 
-.rep-text {
-    margin-left: 5px;
+.repText {
+    margin-left: 0px;
      h2 {
          font-weight: 200;
      }
@@ -101,7 +101,7 @@
     border-right: 20px solid white;
 
     h2 {
-        font-size: 1.0em;
+        font-size: 0.9em;
         font-weight: 400;
     }
 }
@@ -140,7 +140,7 @@
     justify-content: space-around;
     flex-grow: 1;
     background: rgba(0,0,0,0.1);
-    padding: 17px;
+    padding: 10px;
     border-left: 20px solid white;
     border-right: 20px solid white;
 }
@@ -259,3 +259,20 @@ img {
 }
 
 
+///////SHARING/////
+
+    .shareRep {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        //margin: 0px 20px; //top and bottom 0px, left and right 20px
+    }
+    
+    
+    .facebookButtonRep {
+        margin-right: 30px;
+    }
+    
+    .twitterButtonRep {
+        margin-left: 30px;
+    }
