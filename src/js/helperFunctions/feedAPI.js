@@ -84,22 +84,20 @@ function when(listOfFirstSpeechByDate) {
   var when = {};
   
   listOfFirstSpeechByDate.forEach(function(speech){
-    var date = speech.date.split(" ")[0]
-    //moment.(date)subtract(1, 'days');
-    var difference = moment(date).fromNow()
+    var date = speech.date.split(" ")[0];
+    var difference = moment(date).fromNow();
     
     when[difference.replace(/\s/g, '')] = when[difference.replace(/\s/g, '')] || [];
-    when[difference.replace(/\s/g, '')].push(speech)
-    
-    
-  })
-  console.log(when['3daysago'])
+    when[difference.replace(/\s/g, '')].push(speech);
+  });
+  //console.log(when['3daysago'])
+  return when;
 }
 
 module.exports = {
   getOneSpeechInTheHouseByDayAndRep: getOneSpeechInTheHouseByDayAndRep,
   when: when
-}
+};
 
 
 // getOneSpeechInTheHouseByDayAndRep("marc-garneau", function(err, listOfFirstSpeechByDate){

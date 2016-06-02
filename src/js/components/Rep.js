@@ -112,7 +112,7 @@ var Rep = React.createClass({
             <Link to="/petitions" activeClassName="active">PETITIONS</Link>
           </div>
           <div className="bottomMenu-item feed">
-            <Link to="/feed" activeClassName="active">WHAT THEY'RE DOING</Link>
+            <Link to="/feed/speeches" activeClassName="active">WHAT THEY'RE DOING</Link>
           </div>
           <div className="bottomMenu-item bills">
             <Link to="/bills/active" activeClassName="active">WHAT WOULD YOU DO?</Link>

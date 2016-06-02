@@ -29,7 +29,7 @@ var Feed = React.createClass({
   },
   loadData: function() {
     var that = this;
-    // set filter as url parameter
+    // set source as url parameter
     var source = this.props.params.source;
     this.setState({loading: true});
   
@@ -41,6 +41,7 @@ var Feed = React.createClass({
     })
     .then(function(response) {
       that.setState({feedList: response.data, loading: false});
+      console.log(response.data, "RESPONSE_DATA")
     })
     .catch(function(response) {
       console.log(response, 'response');
@@ -70,7 +71,12 @@ var Feed = React.createClass({
           
           <div className="feedList">
             <div>
-              {/* This is where the feed is to go */}
+              <h2>Yesterday</h2>
+                <p></p>
+              <h2>Two days ago</h2>
+              <h2>This week</h2>
+              <h2>Last week</h2>
+              
             </div>
           </div>
           

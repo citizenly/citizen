@@ -104,7 +104,7 @@ var App = React.createClass({
                   <Link className="whatWouldYouDoMenu" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/active">What would you do?</Link>
                 </li>
                 <li>
-                  <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to="/feed">What they're doing</Link>
+                  <Link className="whatTheyreDoingMenu" activeClassName="active" onClick={this.onMenuItemClick} to="/feed/speeches">What they're doing</Link>
                 </li>
                 <li>
                   <Link activeClassName="active" className="petitionsMenu" onClick={this.onMenuItemClick} to="/petitions">Petitions</Link>

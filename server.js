@@ -33,7 +33,8 @@ var getBallot = BillAPI.getBallot;
 var getBillText = BillAPI.getBillText;
 var getFinalStageBills = BillsAPI.getFinalStageBills;
 var getBallotAboutFinalStageBills = BillsAPI.getBallotAboutFinalStageBills;
-var getOneSpeechInTheHouseByDayAndRep = require('./src/js/helperFunctions/feedAPI.js');
+var FeedAPI = require('./src/js/helperFunctions/feedAPI.js');
+var getOneSpeechInTheHouseByDayAndRep = FeedAPI.getOneSpeechInTheHouseByDayAndRep;
 
 
 var whitelist = ['https://citizen-marie-evegauthier.c9users.io/'];
@@ -326,6 +327,7 @@ app.post('/billinfoget', function(req, res) {
 app.post('/feedinfoget', function(req, res) {
   var repName = req.body.repName;
   req = req.body.source; 
+  console.log(req, "THIS IS REQ")
   switch (req) {
     case 'speeches':
       getOneSpeechInTheHouseByDayAndRep(repName, function(err, listOfFirstSpeechByDate){
@@ -333,8 +335,10 @@ app.post('/feedinfoget', function(req, res) {
           console.log(err);
           return;
         }else{
-          console.log(listOfFirstSpeechByDate, "*******listOfFirstSpeechByDate, line 335");
+          console.log(repName, "THIS IS REPNAME")
+          console.log(listOfFirstSpeechByDate, "*************listOfFirstSpeechByDate")
           res.send(listOfFirstSpeechByDate);
+          
         }
       });
       break;
