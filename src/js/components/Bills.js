@@ -110,8 +110,6 @@ var Bills = React.createClass({
             {this.state.billList.length === 0 ? 'We will have more filters coming soon' : this.state.billList.map(this.renderBills)}
           </div>
         </div>
-
-
      </div>
     );
   }

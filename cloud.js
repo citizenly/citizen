@@ -49,8 +49,7 @@ Parse.Cloud.define('findMyVote', function(request, response) {
   });
 });
 
-// NEED TO WRITE
-// QUERY CURRENT USER AND GET BACK AN ARRAY OF VOTES AND BILLIDS
+// Get user vote array
 Parse.Cloud.define('myVoteInfo', function(request, response) {
   if (!request.user) {
     response.error("You have to be logged in");
