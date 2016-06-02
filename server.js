@@ -234,9 +234,9 @@ app.post('/postfilter', function(req, res) {
 });
 /* -------------------------------------------------------------------------- */
 
-/* BILL FUNCTION CALLS ------------------------------------------------------- */
+/* BILL FUNCTION CALLS ------------------------------------------------------ */
 app.post('/billinfoget', function(req, res) {
-  var repName = req.body.repName
+  var repName = req.body.repName;
   req = req.body.billId;
   getBill(req, function(err, bill) {
     if (err) {
@@ -288,7 +288,57 @@ app.post('/billinfoget', function(req, res) {
     });
   });
 });
-/* ------------------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
+
+/* VOTE STATS FUNCTION CALLS ------------------------------------------------ */
+app.post('/repvoteinfo', function(req, res) {
+  var repName = req.body.repName;
+  req = req.body.filter; 
+    fixLimitByPage(function(err, limit) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      getBallotsByPolitician(limit, repName, function(err, listOfBallots) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        getAllVotes(limit, function(err, arrOfVotes) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          var billsWithoutTitleWithResult = getListOfBillsFromVotesWithResult(arrOfVotes);
+
+          getTitleOfBill(function(err, billsWithTitle) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+
+            var ballotsOnlyAboutBill = getBallotsAboutBillWithTitle(billsWithoutTitleWithResult, billsWithTitle, listOfBallots);
+
+            var ballotsByUniqueDate = getUniqueBillsByDate(ballotsOnlyAboutBill);
+
+            getFinalStageBills(function(err, finalStageBills) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+              var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
+
+              res.send(ballotsAboutFinaleStageBill);
+            });
+          });
+        });
+      });
+    });
+});
+
+
+
+/* -------------------------------------------------------------------------- */
 
 
 

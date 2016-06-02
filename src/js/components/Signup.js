@@ -43,13 +43,7 @@ var Signup = React.createClass({
         success:function(user){
           console.log('SUCCESSFUL SIGNUP', user);
           var repName = localStorage.getItem('repName');
-          var query = new Parse.Query(user);
-            query.equalTo("username", username);
-            query.find({
-              success: function(me) {
-                console.log(me[0].username, 'me');
-              }
-            });
+          
           if (repName) {
             that.props.router.push('/rep/' + repName);
           }
