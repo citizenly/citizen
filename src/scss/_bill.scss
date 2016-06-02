@@ -1,6 +1,4 @@
-#tab-3 {
-    margin-top: 0px;
-}
+
 
 .whatwouldyoudo{
     font-family: Oswald, sans-serif;
@@ -27,6 +25,7 @@
      
 }
 
+////////TAGS/////////////
 .tagDescriptions {
      font-family: Oswald, sans-serif;
      font-weight: 400;
@@ -95,6 +94,8 @@
     }
 }
 
+/////////////TABS/////////////
+
 .billTabs {
 
     .active {
@@ -126,17 +127,21 @@
     }
 
     table {
-        padding: 20px 10px;
+        padding: 10px 10px;
+        font-size: 0.7em;
+        font-family: Arimo;
     }
     
     table td div {
         text-align: left !important;
-        font-size: 14px;
+        font-size: 0.7em;
+        font-family: Arimo;
+        margin-top: 10px;
     }
     
     td {
         display: block;
-        padding: 0 10px;
+        
     }
     
     td:first-child, td:nth-child(2), td:nth-child(3), .change_bar_begin {
@@ -154,20 +159,19 @@
     min-height: 70px; 
     font-family: Arimo;
     background-color: rgba(0,0,0,0.1);
-    font-size: 1.2em;
 }
   
-.chartContainer {
-    width: 100%;
+.billChartContainer {
     display: flex;
-    height: 25vh;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 10px;
 }  
 
 .countryAndNeighboursComparison {
     width: 50%;
+
 }
 
 canvas.bigD {
@@ -185,54 +189,6 @@ canvas.littleD {
     margin-top: -37.5%;
 }
 
-
-.votingAndSharingActions {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: white;
-    width: 100%;
-    position: fixed;
-    cursor: pointer;
-    bottom: 0; //align it to the bottom and dont push it up
-    //bottom: 10px; //align it to the bottom and push it up 1px
-
-    
-    .redbutton, .greenbutton, .redbutton-clicked, .greenbutton-clicked {
-        padding: 10px;
-        max-width: 63px;
-        width: 50%;
-        height: 100px;
-        background: no-repeat center;
-        background-size: contain;
-    }
-    
-    .redbutton {
-        background-image: url("/images/redButton.png");
-    }
-    
-    .greenbutton-clicked {
-        background-image: url("/images/greenButtonPressed.png");
-    }
-    
-    .redbutton-clicked {
-        background-image: url("/images/redButtonPressed.png");
-    }
-    
-    .share {
-        display: flex;
-        justify-content: center;
-        //margin: 0px 20px; //top and bottom 0px, left and right 20px
-    }
-    
-    .greenbutton {
-        background-image: url("/images/greenButton.png");
-    }
-    
-    .greenButton-clicked {
-        background-image: url("/images/greenButtonPressed.png");
-    }
-}
 
 
 .countryYes {
@@ -255,6 +211,31 @@ background-color: #D56500
     color: #3b5998;
 }
 
-.fa.fa-twitter {
-    color: #55acee;
+/////////LEGENDS/////////
+.legends {
+    font-family: Oswald;
+    font-size: 0.4em;
+    font-weight: 200;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 5vh;
+    
+    
+    .cYes {
+    color: #006729
+    }
+    
+    .cNo {
+    color: #8B2530
+    }
+    
+    .nYes {
+    color: #4EA32A
+    }
+    
+    .nNo { 
+    color: #D56500
+    }
 }

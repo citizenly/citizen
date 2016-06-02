@@ -12,7 +12,7 @@ var DoughnutChart = require("react-chartjs").Doughnut;
 
 
 //HULLO :) the 'value' below is to be replaced with the yes/no votes to the petition.).
-var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B2530", value: 50, label: "NO"}]
+var countryData = [{color: "#006729", value: 250, label: "AGREE"}, {color: "#8B2530", value: 10, label: "DISAGREE"}, {color: "rgba(0,0,0,0.5)", value: 50, label: "REMAINING"}]
 
 
 var Petition = React.createClass({
@@ -20,15 +20,16 @@ var Petition = React.createClass({
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
       petition: {
-        id: '**placeholder**',
-        title: '**placeholder**',
-        summary: '**placeholder**',
-        proposedBy: '**placeholder**',
-        date: '**placeholder**',
-        dateOpen: "**2016-05-12**",
-        dateClose: "**2016-06-12**",
-        daysLeft: "**17**"/*NUMBER (diff between dateOpen and dateClose)*/,
-        keywords: "**streets, healthcare, youth**",
+        id: 'e-337',
+        title: 'Bank of Canada',
+        summary: 'Whereas: Since 1974 Canadians have been paying billions in needless interest to international financiers called the Bank of International Settlements; Before this, the publicly-owned Bank of Canada had a mandate and practice of lending interest-free money to federal, provincial, and municipal governments for infrastructure and healthcare spending; Since this switch Canadian taxpayers have been needlessly paying anywhere from $20 billion to $60 billion a year in compounded interest; and This is money that could have been used to better the lives of every single Canadian, and instead we have been needlessly paying large sums of money with no gain and massive losses for Canada. We, the undersigned, citizens of Canada, call upon the Government of Canada to restore the use of the Bank of Canada to its original purpose, by exercising its public statutory duty and responsibility. That purpose includes making interest free loans to the municipal, provincial, and federal governments for ‘human capital’ expenditures (education, health, other social services) and/or infrastructure expenditures.',
+        proposedBy: 'Trevor Millar',
+        sponsor: 'Elizabeth May', //For a petition to be valid it needs to have a sponsor (for example your MP). Future functionality: Feed the proposed petitions to your MP, who can choose which ones to sponsor. If they click they'll sponsor it, it becomes active on the petitions page. ALTERNATIVELY adding the 'sponsor' could be in the very final stage, where the petition receives 100 supporters and gets sent to the MP, who gets the choice of sponsoring it. If he/she doesnt, despite the fact that 100 of their constituents would like them to, then we could make this fact visible in a list under 'petitions' (petitions sent to MP (sponsored, not sponsored).
+        dateOpen: "2015-06-11",
+        dateClose: "2016-06-11",
+        daysLeft: "23"/*NUMBER (diff between dateOpen and dateClose)*/,
+        keywords: "Bank of Canada, Government borrowing, Interest rates",
+        comments: "Start the discussion"
       },
       content: "",
       vote: 0,
@@ -91,9 +92,11 @@ var Petition = React.createClass({
     else if(data===2) {
       this.setState({content: this.state.petition.summary});
     }
+    
     else if(data===3) {
-      this.setState({content: this.state.petition.text});
+      this.setState({content: this.state.petition.comments});
     }
+
     
     $(".petitionTabs li").removeClass("active");
     $("#tab-" + data).addClass("active");
@@ -150,17 +153,19 @@ var Petition = React.createClass({
                 <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
               </div>
                 
-              <div className="tagDescriptions">
+              <div className="petitionTagDescriptions">
                 <p>Keywords: <span className="dynamic">{this.state.petition.keywords}</span></p>
+              </div>
+              <div className="petitionTagDescriptions">
                 <p> <span className="dynamic">{this.state.petition.daysLeft}</span> Days left</p>
-            </div>
+              </div>
           </div>
     
           <div className="petitionTabs">
             <ul>
-              <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
+              <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Topic</li>
               <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
-              <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
+              <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Neighbour comments</li>
             </ul>
     
           	<div className="box-wrap">
@@ -172,11 +177,17 @@ var Petition = React.createClass({
         
         </div>
         
-        <div className="chartContainer">
+        <div className="petitionChartContainer">
           <div className="petitionVoteComparison">
-            <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
+            <DoughnutChart className="petitionDoughnut" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
           </div>
         </div>
+        
+      <div className="legends">
+          <h3 className="petitionNo">Disagree</h3>
+          <h3 className="petitionGrey">Remaining</h3>
+          <h3 className="petitionYes">Agree</h3>
+      </div>
         
         <div className="votingAndSharingActions">
               
@@ -198,3 +209,45 @@ var Petition = React.createClass({
 });
 
 module.exports = withRouter(Petition);
+
+
+
+
+//////TEXT TO BE ADDED TO INFO BUTTONS///////////
+
+/*
+
+ADDRESSEE
+
+The petition must be addressed to one of the following:
+
+“the House of Commons” or “the House of Commons in Parliament assembled”;
+“the Government of Canada”;
+a Minister of the Crown; or
+a Member of the House of Commons.
+Text
+
+When creating a new petition, you will need to compose a text of no more than 250 words that identifies whom it is that you are addressing, and the specific request you are making of them, also called a “prayer,” to take or to avoid some concrete action in order to remedy a grievance.
+
+The petition may also include a more detailed description of the grievance or a statement of opinion, but these alone cannot be received as a petition; a concrete, specific request must be included. The request must be clear and to the point, and phrased as a request and not as a demand.
+
+The text of your e-petition may not include a URL, any other link or web-based reference. Any petition that includes such links will be rejected.
+
+
+
+LANGUAGE
+
+The petition must be respectful, use temperate language, and not contain improper or unparliamentary language. In particular, it should not contain disrespectful or offensive language with respect to the Crown, Parliament, or the courts. It may not include charges made against the character or conduct of Parliament, the courts, or any other duly-constituted authority. The e-petition must be written in either English or French.
+
+
+
+SUBJECT OF THE PETITION
+
+Federal jurisdiction
+The petition must concern a subject that is within the authority of the Parliament of Canada, the House of Commons, or the Government of Canada. A petition must not concern a purely provincial or municipal matter.
+
+Sub judice
+The petition may not concern a matter that is sub judice, i.e. a matter that is the subject of legal proceedings or currently before the courts.
+
+Similar petitions
+Two e-petitions that are substantially the same may not be open for signature at the same time. An e-petitioner whose e-petition is substantially the same as another may wait for the first e-petition to close, or may amend his or her e-petition so as to make it distinctive. A search function is available on the website in order to identify exisiting e-petitions.*/
