@@ -147,6 +147,10 @@
     td:first-child, td:nth-child(2), td:nth-child(3), .change_bar_begin {
         display: none;
     }
+    
+    #billText {
+        font-size: 20px;
+    }
 }
 
 .billTabs p, .voteCompare p {
@@ -171,7 +175,6 @@
 
 .countryAndNeighboursComparison {
     width: 50%;
-
 }
 
 canvas.bigD {
@@ -188,8 +191,6 @@ canvas.littleD {
     margin: 0 auto;
     margin-top: -37.5%;
 }
-
-
 
 .countryYes {
 background-color: #006729
@@ -220,7 +221,7 @@ background-color: #D56500
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 5vh;
+    margin: 5vh 0px 100px;
     
     
     .cYes {

@@ -177,7 +177,7 @@ var Bill = React.createClass({
 
               <div className="box-wrap">
                 <div id="box">
-                  <table><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
+                  <table id="billText"><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
                 </div>
               </div>
             </div>

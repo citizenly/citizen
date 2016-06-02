@@ -21,7 +21,7 @@ var Rep = React.createClass({
         electedYear: "",
         electedVote: ""
       },
-      coherence: 0,
+      coherence: '',
       shareButtonToggle: false,
       facebookButton: "",
       twitterButton: "",
@@ -57,22 +57,24 @@ var Rep = React.createClass({
             billId: vote.billId
           };
         });
-        
+        console.log(voteArray);
         return voteArray;
       }
     );
     
-    var myVotes = Parse.Cloud.run('myVoteInfo');
+    // Get array of myVote objects - billId and vote
+    var myVotes = Parse.Cloud.run('myVoteInfo').then(console.log(myVotes));
     
-    var that = this;
+    //var that = this;
     Promise.all([repVotes, myVotes]).then(
+      
       function(results) {
         var repVotes = results[0];
         var myVotes = results[1];
-        
+
         // Compare Rep and User array of votes and create a single array, with 1 = agreement and 0 = disagreement
         var voteCompare = [];
-        
+
         myVotes.forEach(function(userVote) {
           repVotes.forEach(function(repVote) {
             if ((userVote.get('billId') === repVote.billId) && (repVote.ballot !== "Didn't Vote")) {
@@ -85,12 +87,12 @@ var Rep = React.createClass({
             }
           });
         });
-    
+
         var total = voteCompare.length;
         if (total > 0) {
           var sum = voteCompare.reduce(function(cur, next){return cur+next;});
           var coherence = ((sum/total)*100).toFixed(1);
-      
+
           that.setState({coherence: coherence + '%'});
         }
       }
@@ -114,7 +116,7 @@ var Rep = React.createClass({
           <div className="repPic">
             <img src={this.state.rep.img} />
           </div>
-      
+
           <div className="rep-text">
             <p>You are being represented by:</p>
             <h2>{this.state.rep.name}</h2>
@@ -122,38 +124,37 @@ var Rep = React.createClass({
             <p>Won in {this.state.rep.electedYear} with {this.state.rep.electedVote}% of the vote</p>
           </div>
       </div>
-      
+
       <div className="rep-stats-container">
-        
+
           <div className="agreement">
             <p>Percentage of how often they would vote the same as...</p>
           </div>
-          
+
           <div className="repstatsbackgroundcolor">
               <div className="neighbours">
                 <h2>Your neighbours</h2>
                 <h1>34%</h1>
               </div>
-              
+
               <div className="you">
                 <h2>you</h2>
                 <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
               </div>
           </div>
-          
-      
+
           <div id="seperator"></div>
           <div className="down"></div>
-      
+
           <div className="shareRep">
             <a className={this.state.shareButtonToggle ? "facebookButtonRep fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
             <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
             <a className={this.state.shareButtonToggle ? "twitterButtonRep fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=YOUR-URL&via=CITIZEN"><i className="fa fa-twitter"></i></a>
           </div>
-              
+
         </div>
       </div>
-      
+
     <div id="content">
       <footer>
           <div className="bottomMenu-item compare">
