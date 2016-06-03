@@ -48,8 +48,9 @@
 
 
 .feedList {
- margin-left: 10px;
+ margin: 10px;
  list-style: none;
+ 
         ul, li {
         list-style: none;
         }
@@ -67,9 +68,14 @@
         font-size: 0.9em;
         font-weight: 200;
         list-style: none;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 15px;
         }
-        a {
-            color: rgb(85, 85, 85);
+     
+        
+        p {
+            margin-bottom: 10px;
         }
 }
 
