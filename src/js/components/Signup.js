@@ -68,7 +68,7 @@ var Signup = React.createClass({
             <input ref="firstname" className="firstname" type="text" name="firstname" maxLength="50" placeholder="first name" />
             <input ref="lastname" className="lastname" type="text" name="lastname" maxLength="50" placeholder="last name" />
             <input ref="username" className="username" type="text" name="username" maxLength="50" placeholder="username" />
-            <input ref="password" className="password" type="text" name="password" maxLength="50" placeholder="password" />
+            <input ref="password" className="password" type="password" name="password" maxLength="50" placeholder="password" />
             <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="postal code" />
             <input ref="phone" className="phone" type="text" name="phone" maxLength="25" placeholder="phonenumber" />
             <div className= "disclaimerText">Please note that if you create or vote on a petition in 'Citizen' your name, city, country, postal code, and telephone number will be automatically added to that specific petition (this is required by the Government of Canada for valid petitions). By signing up to Citizen you're saying you agree to this.</div>
