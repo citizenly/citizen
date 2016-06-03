@@ -41,6 +41,7 @@ var Rep = React.createClass({
       updateData = response.data;
       that.state.rep = updateData;
       localStorage.setItem("repFullName", that.state.rep.name);
+      localStorage.setItem("repName", that.props.params.repName);
       that.setState({rep: updateData});
     })
     .catch(function(response) {
