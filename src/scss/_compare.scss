@@ -30,7 +30,10 @@
     
 
         img {
-            width: 75px;
+            width: 100px;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
         }
         
         div {
@@ -47,4 +50,8 @@
             font-size: 0.8em;
             margin: 0px;
         }
+}
+
+.share {
+    display: flex;
 }
