@@ -40,6 +40,7 @@ var Compare = React.createClass({
     var that = this;
     // get rep info using nameFormatted in url
     var nameFormatted = localStorage.getItem('repName');
+    console.log(nameFormatted, 'nameFormatted');
     axios.post('/repinfoget', {
       repName: nameFormatted
     })
@@ -48,6 +49,7 @@ var Compare = React.createClass({
     .then(function(response) {
       var updateData = that.state.rep;
       updateData = response.data;
+      console.log(updateData, 'updateData');
         that.state.rep = updateData;
         localStorage.setItem("repFullName", that.state.rep.name);
        that.setState({rep: updateData});
@@ -63,7 +65,7 @@ var Compare = React.createClass({
   },
   render: function() {
     console.log(this.state.rep.repName, 'this.state.rep.repName');
-    if(!!this.state.rep.repName) {
+    if(!!this.state.rep.name) {
       var myRep =
         <div>
           <h1>34%</h1>

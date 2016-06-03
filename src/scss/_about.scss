@@ -1,13 +1,35 @@
-
 .aboutPage {
-    margin: 15px; 
+    max-width: 600px;
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
 
-    
     p {
-    font-family: Arimo, sans-serif;
-    font-size: 0.9em;
-    line-height: 1.4;
+        font-family: Arimo, sans-serif;
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+    a, .fa {
+        color: #2D81CF;
     }
 }
-
-
+p.aboutIntro {
+    font-size: 1.4em;
+    line-height: 1.2em;
+    margin-bottom: 30px;
+}
+.dev .fa {
+    font-size: 1.5em;
+    margin: 0 4px;
+}
+.dev {
+    margin: 20px 0px;
+}
+p.thankYou {
+    text-align: center;
+    padding: 20px;
+    background-color: #eee;
+    a {
+      color: #2D81CF;
+    }
+}

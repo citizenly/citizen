@@ -1,7 +1,7 @@
 ////GENERAL SETTINGS FOR FONT AWESOME BUTTONS///////
 
 .fa {
- color: black !important;
+ color: black;
 }
 
 
@@ -13,7 +13,9 @@
     opacity: 1;
 }
 
-
+.shareButton {
+  cursor: pointer;
+}
 
 //////REP & COMPARE SHARE///////
 
