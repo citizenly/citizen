@@ -13,8 +13,17 @@
     opacity: 1;
 }
 
+
+
+//////GENERAL////
 .shareButton {
   cursor: pointer;
+}
+
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 //////REP & COMPARE SHARE///////
@@ -33,6 +42,10 @@
         .twitterButton {
             margin-left: 30px;
             -webkit-transform: translateZ(0);
+        }
+        
+        a {
+        visibility: visible;
         }
     }
     
@@ -301,6 +314,7 @@
   -webkit-animation-name: bounceInRight;
   animation-name: bounceInRight;
 }
+
 
 
 
