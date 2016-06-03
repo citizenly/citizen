@@ -97,12 +97,10 @@ a {
 }
 
 .onlyFbTwShare a {
-  visibility: visible;
+  display: flex;
 }
 
-.hidden {
+a.hidden {
   /*visibility: hidden;*/
-  opacity: 0;
+  display: none;
 }
-
-
