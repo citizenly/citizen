@@ -34,8 +34,8 @@ var getBillText = BillAPI.getBillText;
 var getFinalStageBills = BillsAPI.getFinalStageBills;
 var getBallotAboutFinalStageBills = BillsAPI.getBallotAboutFinalStageBills;
 var FeedAPI = require('./src/js/helperFunctions/feedAPI.js');
-var getOneSpeechInTheHouseByDayAndRep = FeedAPI.getOneSpeechInTheHouseByDayAndRep;
-var filterFeedByMoment = FeedAPI.filterFeedByMoment
+var getSpeechInTheHouseBySubAndDayAndRep = FeedAPI.getSpeechInTheHouseBySubAndDayAndRep;
+var filterFeedByMoment = FeedAPI.filterFeedByMoment;
 
 
 var whitelist = ['https://citizen-molecularcode.c9users.io'];
@@ -345,7 +345,7 @@ app.post('/repvoteinfo', function(req, res) {
 /* FEED FUNCTION CALLS ------------------------------------------------------- */
 app.post('/feedinfoget', function(req, res) {
   var repName = req.body.repName;
-  getOneSpeechInTheHouseByDayAndRep(repName, function(err, listOfFirstSpeechByDate) {
+  getSpeechInTheHouseBySubAndDayAndRep(repName, function(err, listOfOneSpeechBySubjByDate) {
     if (err) {
       console.log(err);
       return;
@@ -383,7 +383,7 @@ app.post('/feedinfoget', function(req, res) {
                 return;
               }
               var ballotsAboutFinaleStageBill = getBallotAboutFinalStageBills(finalStageBills, ballotsByUniqueDate);
-              var feeds = filterFeedByMoment(listOfFirstSpeechByDate, ballotsAboutFinaleStageBill);
+              var feeds = filterFeedByMoment(listOfOneSpeechBySubjByDate, ballotsAboutFinaleStageBill);
               res.send(feeds);
             });
           });
