@@ -146,6 +146,13 @@ var Bill = React.createClass({
     });
   },
   render: function() {
+    if (this.state.bill.repsVote) {
+      var repVoted = <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)} >{this.state.bill.repsVote}</span>;
+    }
+    else {
+      repVoted = <span>?</span>;
+    }
+    
     return (
       <div>
         <div>
@@ -160,7 +167,7 @@ var Bill = React.createClass({
 
             <div className="tagDescriptions">
               <p>Status: Bills in its <span className="dynamic">{this.state.bill.status}</span></p>
-              <p>My representative last voted <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)}>{this.state.bill.repsVote}</span></p>
+              <p>My representative last voted {repVoted}</p>
               <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span>
                 <span className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}> - {this.state.bill.partyOfSponsor}</span>
               </p> 
