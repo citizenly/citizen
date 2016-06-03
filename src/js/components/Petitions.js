@@ -89,24 +89,24 @@ var Petitions = React.createClass({
           <div className="petitionList">
 
          <Link to="/petition1"><h4> e-119 Canadian citizenship </h4>
-         <h5><b>keywords: Citizenship, Immigration, Adoption</b></h5>
+         <h5><b>keywords:</b> Citizenship, Immigration, Adoption</h5>
          </Link>
          
          <Link to="/petition2"><h4> e-270 Aquaculture </h4>
-         <h5><b>keywords: Atlantic salmon, Retaining ponds, Water quality</b></h5>
+         <h5><b>keywords:</b> Atlantic salmon, Retaining ponds, Water quality</h5>
          </Link>
          
          
          <Link to="/petition3"><h4> e-263 Assisted Suicide </h4>
-         <h5><b>keywords: Freedom, Hospitals, Medical assistance in dying, Mental health, Young people</b></h5>
+         <h5><b>keywords:</b> Freedom, Hospitals, Medical assistance in dying, Mental health, Young people</h5>
          </Link>
          
          <Link to="/petition4"><h4> e-337 Bank of Canada </h4>
-         <h5><b>keywords: Bank of Canada, Government borrowing, Interest rates</b></h5>
+         <h5><b>keywords:</b> Bank of Canada, Government borrowing, Interest rates</h5>
          </Link>
          
          <Link to="/petition5"><h4> e-18 Cannabis </h4>
-         <h5><b>keywords: Decriminalization, Marijuana, Possession of a controlled substance</b></h5>
+         <h5><b>keywords:</b> Decriminalization, Marijuana, Possession of a controlled substance</h5>
          </Link>
 
          
