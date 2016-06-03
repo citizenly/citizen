@@ -41,6 +41,7 @@ var Rep = React.createClass({
       updateData = response.data;
       that.state.rep = updateData;
       localStorage.setItem("repFullName", that.state.rep.name);
+      localStorage.setItem("repName", that.props.params.repName);
       that.setState({rep: updateData});
     })
     .catch(function(response) {
@@ -110,6 +111,7 @@ var Rep = React.createClass({
   },
  /* For now, we put the date of the last election to be in 2015 because for some of the MPs, the openparliament API gives us the date of the first time he/she was elected instead of the date of the last election. That is the way to refer to the date get from the openparliament API :{this.state.rep.electedYear} */
   render: function() {
+    console.log(this.props.params.repName, 'this.props.params.repName')
     return (
     <div>
       <div className="rep-container">

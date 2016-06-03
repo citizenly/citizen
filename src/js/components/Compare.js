@@ -78,7 +78,7 @@ var Compare = React.createClass({
         <h1>?</h1>
         <img src="images/silhouette.jpg" style={{border: "1px solid #ccc"}}></img>
         <h2>unknown</h2>
-        <p>please <Link to="/">enter your postal code</Link> to find your representative</p>
+        <p>please <Link to="/">enter your postal code</Link> or <Link to="/login">log in</Link> to find your representative</p>
       </div>;
     }
     return (
