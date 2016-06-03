@@ -14,9 +14,7 @@ on: subject
 content: english content (maybe only the first 200 characters)
 date: date and time (to keep only one by day)
 */
-function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
-  
-  console.log(rep, "REP")
+function getSpeechInTheHouseBySubAndDayAndRep(rep, callback) {
   var path = `speeches/?politician=${rep}&limit=100`;
   // Make request to api.openparliament.ca and cache
   makeRequest(path, function(err, res){
@@ -25,7 +23,7 @@ function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
     }
     else {
       //speeches is an aray of all the speeches as object
-      //Only the speeches in the House have an h1 propriety(so, as where value, they will recive "in the House") 
+      //Only the speeches in the House have an h1 propriety(so, as value, they will recive "in the House") 
       //and h2 propriety(that means the subject)
       //For the moment, we keep only the speeches in the House as an array
     
@@ -52,33 +50,37 @@ function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
       
     //We filter our array of speeches to classify each speech by its date
       var speechesByDate = {};
-      var listOfFirstSpeechByDate = [];
+      // var filteredSpeechesByDate = {};
+      // var listOfFirstSpeechByDate = [];
       speechesInTheHouse.filter(function(speech){
         speechesByDate[speech.date] = speechesByDate[speech.date] || [];
         speechesByDate[speech.date].push(speech);
       });
       
-      
+     
       /*In the new object, each propriety name is the date of the speech 
       and its value is an array of all the speeches of this particular day.
-      We compare their date to keep only the first speech.
+      By date, we compare the subject of each speech to keep only on speech by subject
       */
-      for (var date in speechesByDate) {
-        var firstSpeech = speechesByDate[date].reduce(function(prev, next) {
-          var x = new Date(prev.date);
-          var y = new Date(next.date);
-          
-          if (x > y) {
-            return prev;
-          }
-          else {
-            return next;
+      
+      var listOfOneSpeechBySubjByDate = [];
+      Object.keys(speechesByDate).map(function(speechByDate){
+        speechesByDate[speechByDate].forEach(function(speech){
+          if(listOfOneSpeechBySubjByDate.length === 0){
+            listOfOneSpeechBySubjByDate.push(speech);
+          } else {
+            var found = listOfOneSpeechBySubjByDate.findIndex(function(i){
+              if(i.on === speech.on){
+                return i;
+              }
+            });
+            if(found === -1){
+              listOfOneSpeechBySubjByDate.push(speech);
+            }
           }
         });
-        listOfFirstSpeechByDate.push(firstSpeech);
-       
-      }
-      callback(null, listOfFirstSpeechByDate);
+      });
+      callback(null, listOfOneSpeechBySubjByDate);
     }
   });
 }
@@ -86,7 +88,7 @@ function getOneSpeechInTheHouseByDayAndRep(rep, callback) {
 //We display the feed by date : yesterday, two days ago, this week, last week
 //We create an object where its propriety names are the time ago and their value the object of the speech for this day
 
-function filterFeedByMoment(listOfFirstSpeechByDate, ballotsAboutFinaleStageBill) {
+function filterFeedByMoment(listOfOneSpeechBySubjByDate, ballotsAboutFinaleStageBill) {
   var today = moment().format("YYYY-MM-DD");
   var yesterday = moment().subtract(1, 'days').format("YYYY-MM-DD");
   var twoDaysAgo = moment().subtract(2, 'days').format("YYYY-MM-DD"); 
@@ -101,7 +103,7 @@ function filterFeedByMoment(listOfFirstSpeechByDate, ballotsAboutFinaleStageBill
   };
   var feeds = {yesterday: [], twoDaysAgo: [], thisWeek: [], lastWeek: []};
   
-  listOfFirstSpeechByDate.forEach(function(speech){
+  listOfOneSpeechBySubjByDate.forEach(function(speech){
     var date = speech.date;
     
     if(date === yesterday){
@@ -147,7 +149,7 @@ function filterFeedByMoment(listOfFirstSpeechByDate, ballotsAboutFinaleStageBill
    
   
 module.exports = {
-  getOneSpeechInTheHouseByDayAndRep: getOneSpeechInTheHouseByDayAndRep,
+  getSpeechInTheHouseBySubAndDayAndRep: getSpeechInTheHouseBySubAndDayAndRep,
   filterFeedByMoment: filterFeedByMoment
 };
 

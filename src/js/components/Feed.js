@@ -88,7 +88,6 @@ var Feed = React.createClass({
     },
     
   render: function() {
-    console.log(this.state.feedList.yesterday[0])
     return (
       <div>
       
