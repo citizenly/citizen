@@ -17,7 +17,7 @@ var Declaration = React.createClass({
     
     if(type === "speech") {
       var dec = <div>
-      <p className="noBottomPadding">Spoke: {where} on {on}</p>
+      <p className="noBottomPadding">Spoke {where} on {on}</p>
       <p>"{content}..." <a href={contentUrl}>read more</a></p>
       </div>;
     } 
