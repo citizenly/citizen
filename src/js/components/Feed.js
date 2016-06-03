@@ -17,13 +17,13 @@ var Declaration = React.createClass({
     
     if(type === "speech") {
       var dec = <div>
-      <p>Spoke {where} on {on}</p>
-      <p>{content}</p> <p><a href={contentUrl}>read more</a></p>
+      <p className="noBottomPadding">Spoke: {where} on {on}</p>
+      <p>"{content}..." <a href={contentUrl}>read more</a></p>
       </div>;
     } 
     else{
       dec = <div>
-      <p>Voted {ballot} on {billId} {billTitle}</p>
+      <p className="noBottomPadding">Voted <span className={"dynamic" + ballot.substring(0, 2) }>{ballot}</span> on bill <Link to={"/bill/"+ billId}>{billId}</Link></p><p><Link to={"/bill/"+ billId}>{billTitle}</Link></p>
       </div>;
     }
     return (
@@ -98,7 +98,7 @@ var Feed = React.createClass({
           <h3>FEED</h3>
  
           <div className="searchbox">
-            <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search what your representative is doing" />
+            <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search what your representative is saying" />
           </div>
   
           <div className="billTags">

@@ -1,9 +1,7 @@
 ////GENERAL SETTINGS FOR FONT AWESOME BUTTONS///////
-
 .fa {
- color: black !important;
+ color: black;
 }
-
 
 .fa-share-alt {
     opacity: 0.5;
@@ -13,10 +11,11 @@
     opacity: 1;
 }
 
-
+.shareButton {
+  cursor: pointer;
+}
 
 //////REP & COMPARE SHARE///////
-
     .onlyFbTwShare {
         display: flex;
         width: 100%;
@@ -24,7 +23,8 @@
         //margin: 0px 20px; //top and bottom 0px, left and right 20px
         
         .facebookButton {
-            margin-right: 30px;
+            margin-right: 29px;
+            margin-left: 11px;
             -webkit-transform: translateZ(0);
         }
         
@@ -33,9 +33,7 @@
             -webkit-transform: translateZ(0);
         }
     }
-    
-    
-    
+
 .shareFooter {
   position: fixed;
   bottom: 0;
@@ -47,10 +45,7 @@
   padding: 15px;
 }
 
-
-
 ////////BILLS + PETITIONS - SHARING & VOTING//////
-
 .votingAndSharingActions {
     display: flex;
     justify-content: space-around;
@@ -62,7 +57,6 @@
     bottom: 0; //align it to the bottom and dont push it up
     //bottom: 10px; //align it to the bottom and push it up 1px
 
-    
     .redbutton, .greenbutton, .redbutton-clicked, .greenbutton-clicked, .redglovebutton, .greenglovebutton, .redglovebutton-clicked, .greenglovebutton-clicked {
         padding: 10px;
         max-width: 63px;
@@ -71,7 +65,6 @@
         background: no-repeat center;
         background-size: contain;
     }
-    
     
     /////BILL VOTE BUTTONS//////
     .redbutton {

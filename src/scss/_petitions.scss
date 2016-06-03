@@ -23,7 +23,7 @@
     margin-top: 15px;
     margin-bottom: 15px;
         
-         div {
+     div {
         margin: 4px;
         color: black;
         font-family: Oswald, sans-serif;
@@ -33,36 +33,46 @@
         box-shadow: none;
         border-radius: 2px;
         padding: 0px 5px;
-        }
+    }
     
-        a {
+    a {
         font-family: Oswald, sans-serif;
         color: black;
         font-weight: 200;
         font-size: 0.9em;
         border-radius: 2px;
         text-decoration: none;
-        }
-        
+    }
 }
 
 .petitionList {
-margin-left: 10px;
-margin-bottom: 10px;
-font-size: 0.9em;
-text-transform: uppercase;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    
+    a {
+        color: #2D81CF;
+    }
  
-        h4 {
-        font-weight: 400;
+    h4 {
+        font-weight: 100;
         font-family: Oswald, sans-serif;
-        }
+        text-transform: uppercase;
+        font-size: 14.5px;
+    }
         
-        h5 {
+    h5 {
         font-weight: 100;
         margin-bottom: 20px;
-        font-family: Oswald, sans-serif;
-        }
+        font-size: 13px;
+        font-family: Arimo, sans-serif;
+        color: rgb(85, 85, 85);
         
+        b {
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    }
 }
 
 .searchbox {

@@ -40,6 +40,7 @@ var Compare = React.createClass({
     var that = this;
     // get rep info using nameFormatted in url
     var nameFormatted = localStorage.getItem('repName');
+    console.log(nameFormatted, 'nameFormatted');
     axios.post('/repinfoget', {
       repName: nameFormatted
     })
@@ -48,6 +49,7 @@ var Compare = React.createClass({
     .then(function(response) {
       var updateData = that.state.rep;
       updateData = response.data;
+      console.log(updateData, 'updateData');
         that.state.rep = updateData;
         localStorage.setItem("repFullName", that.state.rep.name);
        that.setState({rep: updateData});
@@ -63,7 +65,7 @@ var Compare = React.createClass({
   },
   render: function() {
     console.log(this.state.rep.repName, 'this.state.rep.repName');
-    if(!!this.state.rep.repName) {
+    if(!!this.state.rep.name) {
       var myRep =
         <div>
           <h1>34%</h1>
@@ -78,7 +80,7 @@ var Compare = React.createClass({
         <h1>?</h1>
         <img src="images/silhouette.jpg" style={{border: "1px solid #ccc"}}></img>
         <h2>unknown</h2>
-        <p>please <Link to="/">enter your postal code</Link> to find your representative</p>
+        <p>please <Link to="/">enter your postal code</Link> or <Link to="/login">log in</Link> to find your representative</p>
       </div>;
     }
     return (
@@ -115,9 +117,9 @@ var Compare = React.createClass({
           <div className="shareFooter">
             <div className="onlyFbTwShare">
               <div className="share">
-                <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=https://citizen-iblameyourmother.c9users.io/rep/helene-laverdiere"><i className="fa fa-facebook"></i></a>
+                <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
                 <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-                <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=YOUR-URL&via=CITIZEN"><i className="fa fa-twitter"></i></a>
+                <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
               </div>
             </div>
           </div>

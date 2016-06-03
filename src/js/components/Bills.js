@@ -20,8 +20,8 @@ var Bill = React.createClass({
       <div>
         <h2>
           <Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billId}  
-          { ( this.props.params.filter === "votedonbymyrep" ) ? <span className={resultClass}> ({result})</span> : "" }
-          { (this.props.params.filter === "votedonbymyrep" ) ?  <div><span>my representative voted  -</span>  <span className={ballotClass}> {ballot} </span> </div> : "" } 
+          { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <span className={resultClass}> ({result})</span> : "" }
+          { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <div><span>my representative voted  -</span>  <span className={ballotClass}> {ballot} </span> </div> : "" } 
           </Link>
         </h2>
         <h4><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billTitle}</Link></h4>
@@ -85,23 +85,22 @@ var Bills = React.createClass({
         <div className="whatwouldyoudo">
           What would you do?
         </div>
-          
+
         <h3>BILLS</h3>
  
         <div className="searchbox">
           <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
         </div>
-  
+
         <div className="billTags">
           <div><Link activeClassName="active" to="/bills/active">Currently active</Link></div>
           <div><Link activeClassName="active" to="/bills/proposedbymyrep">Rep proposed</Link></div>
           <div><Link activeClassName="active" to="/bills/votedonbymyrep">Rep voted</Link></div>
           <div><Link activeClassName="active" to="/bills/all">All</Link></div>
         </div>
-          
+
         <div className="repName">
-        
-          <p>{this.props.params.filter === "votedonbymyrep"  ? "The below shows the bills your representative "  + this.state.repFullName + " has voted on. PASSED/FAILED/TIE indicates the bill's latest status in parliament"  : ""}</p> 
+          {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills your representative, {this.state.repFullName}, has voted on. <span className="dynamicYe">PASSED</span>/<span className="dynamicNo">FAILED</span>/<span className="dynamicDi">TIE</span> indicates the bill's latest status in parliament</p>  : ""} 
         </div>
           
         <div className="billList">
