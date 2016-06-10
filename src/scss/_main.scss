@@ -1,23 +1,4 @@
-.backArrow {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    padding-left: 10px;
-    padding-top: 15px;
-}
 
-.backityArrow {
-    position: fixed;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 11px 25px 11px 0;
-    border-color: transparent rgba(0,0,0,0.2) transparent;
-}
-
-.backityArrow:onClick {
-    border-color: transparent rgba(0,0,0,0.9) transparent;
-}
 //FOR HAMBURGER MENU
 
 *, *:before, *:after {
@@ -54,13 +35,13 @@ nav {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: #f5f5f5;
-  
+  width: 100%;
+
     ul {
     font-family: Oswald, sans-serif;
     font-weight: 400;
     text-transform: uppercase;
     list-style: none;
-    max-width: 600px;
     margin: 0 auto;
     position: relative;
     }
@@ -81,7 +62,6 @@ nav {
   
     li {
     float: left;
-    width: 20%;
     border-right: 1px solid #ddd;
     }
   

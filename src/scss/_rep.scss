@@ -2,6 +2,7 @@
 .rep-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-around;
   overflow: hidden;
 }
@@ -30,63 +31,12 @@
      }
 }
 
-//COLORS FOR THE PARTY OF THE REP
-.partyLib {
-    color: #EE262E;
-    font-weight: 600;
-}
-
-.partyCon{
-    color: #0C499C;
-    font-weight: 600;
-}
-
-.partyNDP {
-    color: #F6821F;
-    font-weight: 600;
-}
-
-.partyBlo {
-    color: #00AEEF;
-    font-weight: 600;
-}
-
-.partyGre{
-    color: #75C321;
-    font-weight: 600;
-}
-
-/*.partyPro {
-    color: rgba(0,0,0,0.5);
-    font-weight: 600;
-}
-
-.partyRef {
-    color: rgba(0,0,0,0.5);
-    font-weight: 600;
-}
-
-.partyCan {
-    color: rgba(0,0,0,0.5);
-    font-weight: 600;
-}
-
-.partyInd {
-    color: rgba(0,0,0,0.5);
-    font-weight: 600;
-}
-*/
-////////
-
-
-
 .rep-stats-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     text-align: center;
-    width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
     padding-top: 5px;
@@ -98,12 +48,10 @@
     }
 }
 
+
 .agreement {
     flex-basis: 100%;
     padding-top: 5px;
-    background-color: rgba(0,0,0,0.1);
-    border-left: 10px solid white;
-    border-right: 10px solid white;
     
     p {
        font-size: 0.8em; 
@@ -153,62 +101,13 @@
     border-right: 10px solid white;
 }
 
-
-.sharing-horizontal {
-    display: flex;
-    left: 0;
-    top: 200px;
-    z-index: 9999;
-    
-        .fbtn {
-        width: 40px;
-        height: 40px;
-        margin: 10px;
-        display: block;
-        color: #fff;
-        text-align: center;
-        
-            i {
-            font-size: 25px;
-            line-height: 45px;
-            }
-            
-        }
-
-        .btnz {
-        float: left;
-        padding: 10px 15px;
-        border: none;
-        background-color: #ececec;
-        text-decoration: none;
-        font-size: 16px;
-        color: #FFF;
-        }
-        
-        .fbtn:hover .fbtn:focus {
-        color: black;
-        }
-     
-         .facebook {
-        background-color: #3b5998;
-        border-radius: 50%;
-        }
-    
-        .twitter {
-        background-color: #55acee;
-        border-radius: 50%;
-        }
-}
-
-
 .bottomMenu-item {
     font-family: Oswald;
-    width: 22vw;
+    width: 20%;
     color: white;
     font-weight: 400;
     margin: 0 auto;
-    height: 24vw;
-    font-size: 4vw;
+    font-size: 15;
     text-align: left;
     padding: 6px;
     border-bottom: 6px solid white;
@@ -266,3 +165,51 @@ img {
    border-top: 20px solid rgba(0,0,0,0.1);
 }
 
+
+//COLORS FOR THE PARTY OF THE REP
+.partyLib {
+    color: #EE262E;
+    font-weight: 600;
+}
+
+.partyCon{
+    color: #0C499C;
+    font-weight: 600;
+}
+
+.partyNDP {
+    color: #F6821F;
+    font-weight: 600;
+}
+
+.partyBlo {
+    color: #00AEEF;
+    font-weight: 600;
+}
+
+.partyGre{
+    color: #75C321;
+    font-weight: 600;
+}
+
+/*.partyPro {
+    color: rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+
+.partyRef {
+    color: rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+
+.partyCan {
+    color: rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+
+.partyInd {
+    color: rgba(0,0,0,0.5);
+    font-weight: 600;
+}
+*/
+////////

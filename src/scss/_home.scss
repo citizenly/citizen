@@ -26,17 +26,18 @@
 
 
 .canadamap {
-    max-width: 90%;
+    max-width: 80%;
     height: auto;
-    margin-top: 20px;
+    margin-top: 1em;
 }
 
 .citizenlogo {
     position: relative;
-    max-width: 30%;
+    max-width: 20%;
     height: auto;
-    margin-bottom: 20px;
-    
+    margin-bottom: 1em;
+    margin-top: 1em;
+
     -moz-animation-name: dropHeader;
     -moz-animation-iteration-count: 1;
     -moz-animation-timing-function: ease-out;
@@ -86,7 +87,6 @@
 
 
 .postcodeinput {
-    border-radius: 20px 0px 0px 20px;
     font-family: Arimo;
     outline: none;
     height: 2rem;
@@ -96,8 +96,7 @@
     display: inline-block;
 }
 
-input[type=text] {
-    border-radius: 15px 0px 0px 20px;
+input[type=text], input[type=password] {
     height: 100%;
     padding: 0;
     box-shadow: none;
@@ -105,7 +104,6 @@ input[type=text] {
     font-size: 0.8em;
     padding-left: 15px;
     padding-right: 15px;
-    box-shadow: inset 0px 0px 4px rgba(0,0,0,0.3);
 }
 
 button, input, select, textarea {
