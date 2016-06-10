@@ -383,7 +383,7 @@ function getBillBySponsor(politician, callback) {
     }
     else {
       if (res.objects.length === 0) {
-        listOfBillsSponsored.push({billTitle: "Your MP hasn't proposed any bills", billId: ""});
+        listOfBillsSponsored.push({billTitle: "Your representative hasn't proposed any bills", billId: ""});
       }
       else {
         var billsSponsored = res.objects;

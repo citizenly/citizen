@@ -19,6 +19,7 @@
 
 
 
+
 /* Global --------------------------------------------------------------- */
 body {
     margin: 0;
@@ -97,3 +98,13 @@ a {
 }
 
 
+///////IF TW/FB NOT LOOKING GOOD, REMOVE THE BELOW//////
+.onlyFbTwShare a {
+  display: flex;
+}
+
+a.hidden {
+  /*visibility: hidden;*/
+  display: none;
+}
+/////////

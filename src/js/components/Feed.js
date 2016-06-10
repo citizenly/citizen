@@ -17,13 +17,13 @@ var Declaration = React.createClass({
     
     if(type === "speech") {
       var dec = <div>
-      <p>Spoke: {where} on {on}</p>
-      <p>{content}</p> <p><a href={contentUrl}>read more</a></p>
+      <p className="noBottomPadding">Spoke: {where} on {on}</p>
+      <p>"{content}..." <a href={contentUrl}>read more</a></p>
       </div>;
     } 
     else{
       dec = <div>
-      <p>Voted <span className={"dynamic" + ballot.substring(0, 2) }>{ballot}</span> on bill <Link to={"/bill/"+ billId} >{billId} {billTitle}</Link></p>
+      <p className="noBottomPadding">Voted <span className={"dynamic" + ballot.substring(0, 2) }>{ballot}</span> on bill <Link to={"/bill/"+ billId}>{billId}</Link></p><p><Link to={"/bill/"+ billId}>{billTitle}</Link></p>
       </div>;
     }
     return (
@@ -88,7 +88,6 @@ var Feed = React.createClass({
     },
     
   render: function() {
-    console.log(this.state.feedList.yesterday[0])
     return (
       <div>
       
