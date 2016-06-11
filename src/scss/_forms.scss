@@ -33,8 +33,10 @@
         .disclaimerText {
         font-family: Arimo;
         font-size: 0.9em;
-        margin: 15px;
+        margin: 0.5em;
         line-height: 1.2em;
+        max-width: 70%;
+        min-width: 70%;
         }
 }
 
@@ -45,13 +47,16 @@
     font-family: Arimo;
     outline: none;
     font-size: 1rem;
+    align-items: center;
 
     input[type=text], input[type=password] {
         border-radius: 10px 10px 10px 10px;
-        margin: 15px;
+        margin: 0.5em;
+        max-width: 60%;
+        min-width: 50%;
         box-shadow: none;
         font-size: 0.8em;
-        padding: 10px;
+        padding: 0.5em;
         box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3);
         border: 1px solid #ccc;
         text-align: -webkit-center;
@@ -77,6 +82,7 @@
     color: white;
     font-family: Oswald, sans-serif;
     height: 100%;
+    width: 100%;
     font-size: 1.4em;
     padding: 3px;
     text-transform: uppercase;

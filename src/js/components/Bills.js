@@ -93,9 +93,10 @@ var Bills = React.createClass({
         </div>
 
         <div className="billTags">
-          <div><Link activeClassName="active" to="/bills/active">Currently active</Link></div>
-          <div><Link activeClassName="active" to="/bills/proposedbymyrep">Rep proposed</Link></div>
-          <div><Link activeClassName="active" to="/bills/votedonbymyrep">Rep voted</Link></div>
+          <div><Link activeClassName="active" to="/bills/votedonbymyrep">Rep votes</Link></div>
+          <div><Link activeClassName="active" to="/bills/">My votes</Link></div>
+          <div><Link activeClassName="active" to="/bills/proposedbymyrep">Rep proposals</Link></div>
+          <div><Link activeClassName="active" to="/bills/active">Active</Link></div>
           <div><Link activeClassName="active" to="/bills/all">All</Link></div>
         </div>
 

@@ -97,6 +97,8 @@ a {
   text-decoration: none;
 }
 
+
+///////IF TW/FB NOT LOOKING GOOD, REMOVE THE BELOW//////
 .onlyFbTwShare a {
   display: flex;
 }
@@ -105,3 +107,4 @@ a.hidden {
   /*visibility: hidden;*/
   display: none;
 }
+/////////
