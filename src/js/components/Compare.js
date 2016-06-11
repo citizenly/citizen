@@ -18,16 +18,16 @@ var Compare = React.createClass({
         img: "",
       },
       repLowest: {
-        name: "Joël Godin",
-        constituency: "Portneuf—Jacques-Cartier",
-        province: "Québec",
+        name: "Stephen Harper",
+        constituency: "Calgary Heritage",
+        province: "AB",
         party: "Conservative",
-        img: "https://openparliament.ca/media/polpics/_thumbs/GodinJoel_CPC_jpg_142x230_autocrop_q85.jpg",
+        img: "https://api.openparliament.ca/media/polpics/132_1.jpg",
       },
       repHighest: {
         name: "Julie Dabrusin",
         constituency: "Toronto—Danforth",
-        province: "Ontario",
+        province: "ON",
         party: "Liberal",
         img: "https://openparliament.ca/media/polpics/_thumbs/julie-dabrusin_jpg_142x230_autocrop_q85.jpg",
       },
@@ -98,7 +98,7 @@ var Compare = React.createClass({
           <div className="compareMatch">
           
                 <div>
-                  <h1>19%</h1>
+                  <h1 className="dynamicNo">19%</h1>
                   <img src={this.state.repLowest.img} />
                   <h2>{this.state.repLowest.name}</h2>
                   <p><span className={"party" + this.state.repLowest.party.substring(0, 3)}>{this.state.repLowest.party}</span> MP for {this.state.repLowest.constituency} {this.state.repLowest.province}</p>
@@ -107,7 +107,7 @@ var Compare = React.createClass({
                 {myRep}
             
                 <div>
-                  <h1>65%</h1>
+                  <h1 className="dynamicYe">65%</h1>
                   <img src={this.state.repHighest.img} />
                   <h2>{this.state.repHighest.name}</h2>
                   <p><span className={"party" + this.state.repHighest.party.substring(0, 3)}>{this.state.repHighest.party}</span> MP for {this.state.repHighest.constituency} {this.state.repHighest.province}</p>
