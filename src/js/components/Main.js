@@ -75,9 +75,6 @@ var App = React.createClass({
         <li>
           <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
         </li>
-        <li>
-        <Link activeClassName="active" onClick={this.onMenuItemClick} to="/signup">Signup</Link>
-        </li>
       </div>;
     }
     

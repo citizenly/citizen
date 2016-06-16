@@ -21,6 +21,10 @@ var Rep = React.createClass({
         electedYear: "",
         electedVote: ""
       },
+       user: {   //placeholder, to be connected to our internal user database.
+        firstName: "*userFirstName*", 
+        lastName: "*userLastName*",
+      },
       coherence: '',
       shareButtonToggle: false,
       facebookButton: "",
@@ -121,6 +125,7 @@ var Rep = React.createClass({
           </div>
 
           <div className="rep-text">
+            <p>Welcome {this.state.user.firstName} {this.state.user.lastName}.</p>
             <p>You are being represented by:</p>
             <h2>{this.state.rep.name}</h2>
             <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
