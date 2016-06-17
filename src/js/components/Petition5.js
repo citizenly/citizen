@@ -145,7 +145,7 @@ var Petition = React.createClass({
         <div>
           <div>
             <div className="petitionInfo">
-              <div className="petitionHeading">
+              <div className="pageHeading petitionHeading">
                 Petition
               </div>
                 
@@ -153,10 +153,10 @@ var Petition = React.createClass({
                 <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
               </div>
                 
-              <div className="petitionTagDescriptions">
+              <div className="tagDescriptions">
                 <p>Keywords: <span className="dynamic">{this.state.petition.keywords}</span></p>
               </div>
-              <div className="petitionTagDescriptions">
+              <div className="tagDescriptions">
                 <p> <span className="dynamic">{this.state.petition.daysLeft}</span> Days left</p>
               </div>
           </div>
@@ -177,17 +177,17 @@ var Petition = React.createClass({
         
         </div>
         
+        <div className="legends">
+          <h3 className="petitionNo">Disagree</h3>
+          <h3 className="petitionGrey">Remaining</h3>
+          <h3 className="petitionYes">Agree</h3>
+        </div>
+      
         <div className="petitionChartContainer">
           <div className="petitionVoteComparison">
             <DoughnutChart className="petitionDoughnut" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
           </div>
         </div>
-        
-      <div className="legends">
-          <h3 className="petitionNo">Disagree</h3>
-          <h3 className="petitionGrey">Remaining</h3>
-          <h3 className="petitionYes">Agree</h3>
-      </div>
         
         <div className="votingAndSharingActions">
               
@@ -209,45 +209,3 @@ var Petition = React.createClass({
 });
 
 module.exports = withRouter(Petition);
-
-
-
-
-//////TEXT TO BE ADDED TO INFO BUTTONS///////////
-
-/*
-
-ADDRESSEE
-
-The petition must be addressed to one of the following:
-
-“the House of Commons” or “the House of Commons in Parliament assembled”;
-“the Government of Canada”;
-a Minister of the Crown; or
-a Member of the House of Commons.
-Text
-
-When creating a new petition, you will need to compose a text of no more than 250 words that identifies whom it is that you are addressing, and the specific request you are making of them, also called a “prayer,” to take or to avoid some concrete action in order to remedy a grievance.
-
-The petition may also include a more detailed description of the grievance or a statement of opinion, but these alone cannot be received as a petition; a concrete, specific request must be included. The request must be clear and to the point, and phrased as a request and not as a demand.
-
-The text of your e-petition may not include a URL, any other link or web-based reference. Any petition that includes such links will be rejected.
-
-
-
-LANGUAGE
-
-The petition must be respectful, use temperate language, and not contain improper or unparliamentary language. In particular, it should not contain disrespectful or offensive language with respect to the Crown, Parliament, or the courts. It may not include charges made against the character or conduct of Parliament, the courts, or any other duly-constituted authority. The e-petition must be written in either English or French.
-
-
-
-SUBJECT OF THE PETITION
-
-Federal jurisdiction
-The petition must concern a subject that is within the authority of the Parliament of Canada, the House of Commons, or the Government of Canada. A petition must not concern a purely provincial or municipal matter.
-
-Sub judice
-The petition may not concern a matter that is sub judice, i.e. a matter that is the subject of legal proceedings or currently before the courts.
-
-Similar petitions
-Two e-petitions that are substantially the same may not be open for signature at the same time. An e-petitioner whose e-petition is substantially the same as another may wait for the first e-petition to close, or may amend his or her e-petition so as to make it distinctive. A search function is available on the website in order to identify exisiting e-petitions.*/

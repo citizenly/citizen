@@ -157,7 +157,7 @@ var Bill = React.createClass({
       <div>
         <div>
           <div className="billInfo">
-            <div className="whatwouldyoudo">
+            <div className="billsHeading">
               What would you do?
             </div>
               
@@ -166,9 +166,9 @@ var Bill = React.createClass({
             </div>
 
             <div className="tagDescriptions">
-              <p>Status: Bills in its <span className="dynamic">{this.state.bill.status}</span></p>
-              <p>My representative last voted {repVoted}</p>
-              <p>Proposed by <span className="dynamic">{this.state.bill.proposedBy}</span>
+              <p>Bill status: <span className="dynamic">{this.state.bill.status}</span></p>
+              <p>My representative voted: {repVoted}</p>
+              <p>Proposed by: <span className="dynamic">{this.state.bill.proposedBy}</span>
                 <span className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}> - {this.state.bill.partyOfSponsor}</span>
               </p> 
             </div>
@@ -191,6 +191,16 @@ var Bill = React.createClass({
           </div>
       </div>
 
+      <div className="legends">
+          <h3>what my -</h3>
+          <h3 className="cNo">coun</h3>
+          <h3 className="cYes">try</h3>
+          <h3> & </h3>
+          <h3 className="nNo">neigh</h3>
+          <h3 className="nYes">bours</h3>
+          <h3>- think</h3>
+      </div>
+      
       <div className="billChartContainer">
         <div className="countryAndNeighboursComparison">
           <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
@@ -198,15 +208,6 @@ var Bill = React.createClass({
         </div>
       </div>
       
-      <div className="legends">
-          <h3 className="cNo">coun</h3>
-          <h3 className="cYes">try</h3>
-          <h3> & </h3>
-          <h3 className="nNo">neigh</h3>
-          <h3 className="nYes">bours</h3>
-      </div>
-
-
       <div className="votingAndSharingActions">
 
         <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
