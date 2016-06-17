@@ -67,7 +67,7 @@ var App = React.createClass({
     // Logout Link
     if (this.state.loggedIn) {
       var loginSignup = <li>
-        <a onClick={this.userLogout.bind(this, 'logout')} href="/">Logout</a>
+        <a onClick={this.userLogout.bind(this, 'logout')} href="/home">Logout</a>
       </li>;
       
     } else {
@@ -101,9 +101,6 @@ var App = React.createClass({
             </div>
             
               <ul className={"clearfix menu " + this.state.menutoggle} >
-                <li>
-                  <IndexLink activeClassName="active" onClick={this.onMenuItemClick} to="/">Home</IndexLink>
-                </li>
                 {loginSignup}
                 <li>
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
