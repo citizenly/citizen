@@ -351,7 +351,7 @@ input {
 
 .postcodeinputandentry {
   display: flex;
-  height: 1.5em;
+  height: 2.5em;
 }
 
 .postcodebutton {
@@ -707,22 +707,22 @@ p.thankYou {
   /////BILL VOTE BUTTONS//////
   .redbutton {
     background-image: url("/images/redButton.png");
-    margin-left: 10px;
+    margin-left: 2.2em;
   }
   
   .redbutton-clicked {
     background-image: url("/images/redButtonPressed.png");
-    margin-left: 10px;
+    margin-left: 2.2em;
   }
   
   .greenbutton {
     background-image: url("/images/greenButton.png");
-    margin-right: 10px;
+    margin-right: 2.2em;
   }
   
   .greenbutton-clicked {
     background-image: url("/images/greenButtonPressed.png");
-    margin-right: 10px;
+    margin-right: 2.2em;
   }
   
   
@@ -738,23 +738,23 @@ p.thankYou {
   .redglovebutton-clicked {
     background-image: url("/images/redGlovePressed.png");
     position: relative;
-    top: 10px;
-    margin-left: 10px;
+    top: 2.2em;
+    margin-left: 2.2em;
   }
   
   .greenglovebutton {
     background-image: url("/images/greenGlovePressed.png");
     position: relative;
-    top: -10px;
-    margin-right: 10px;
+    top: -2.2em;
+    margin-right: 2.2em;
     opacity: 0.5;
   }
   
   .greenglovebutton-clicked {
     background-image: url("/images/greenGlovePressed.png");
     position: relative;
-    top: -10px;
-    margin-right: 10px;
+    top: -2.2em;
+    margin-right: 2.2em;
   }
   
 }

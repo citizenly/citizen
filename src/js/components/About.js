@@ -35,7 +35,7 @@ var About = React.createClass({
         website: '',
         linkedin: 'https://www.linkedin.com/in/%C3%A5sa-isacson-86308934',
         twitter: '',
-        desc: "'Citizen' concept, design, front-end. Was with the UN in Nairobi for six years - 'Citizen' results from experience within this context. Last years been working on how the agency can develop the online potential and use the power of its many worldwide partner networks. Architect by training, dabbles in UX/UI design and big ideas."
+        desc: "'Citizen' concept, design, front-end. Was with the UN in Nairobi for six years - 'Citizen' results from experience within this context. Last years been working on how the agency can develop the online potential of its worldwide partner networks. Architect by training, dabbles in UX/UI design and big ideas."
       }, {
         firstName: "Alex",
         lastName: "Ruaux",

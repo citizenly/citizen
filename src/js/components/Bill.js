@@ -157,7 +157,7 @@ var Bill = React.createClass({
       <div>
         <div>
           <div className="billInfo">
-            <div className="billsHeading">
+            <div className="pageHeading billsHeading">
               What would you do?
             </div>
               
