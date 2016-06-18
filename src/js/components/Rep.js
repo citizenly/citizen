@@ -160,24 +160,8 @@ var Rep = React.createClass({
             <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
             <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
           </div>
-
         </div>
       </div>
-      
-      <footer>
-          <div className="bottomMenu-item compare">
-            <Link to="/compare" activeClassName="active">COMPARE</Link>
-          </div>
-          <div className="bottomMenu-item petitions">
-            <Link to="/petitions" activeClassName="active">PETITIONS</Link>
-          </div>
-          <div className="bottomMenu-item feed">
-            <Link to={`/rep/${this.props.params.repName}/feed`} activeClassName="active">WHAT THEY'RE DOING</Link>
-          </div>
-          <div className="bottomMenu-item bills">
-            <Link to="/bills/active" activeClassName="active">WHAT WOULD YOU DO?</Link>
-          </div>
-       </footer>
   </div>
     );
   }

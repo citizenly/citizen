@@ -91,7 +91,26 @@ var App = React.createClass({
     return (
       <div>
         <header>
-          <nav>
+            <Link className="navbutton rep" activeClassName="active" onClick={this.onMenuItemClick} to={repLink}>My MP</Link>
+            <Link className="navbutton bills" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/votedonbymyrep">Bills</Link>
+            <Link className="navbutton feed" activeClassName="active" onClick={this.onMenuItemClick} to={feedLink}>Feed</Link>
+            <Link className="navbutton petitions" activeClassName="active" onClick={this.onMenuItemClick} to ="/petitions">Petitions</Link>
+            <Link className="navbutton compare" activeClassName="active" onClick={this.onMenuItemClick} to ="/compare">Compare</Link>
+        </header>
+
+        <div className="site-wrap">
+          <main>{this.props.children}</main>
+        </div>
+      </div>
+    );
+  }
+});
+
+
+module.exports = withRouter(App);
+
+
+/*          <nav>
             <div className="hamburgerDiv">
               <a href="#" onClick={this.onClick} className="hamburger">
                 <div className="line"></div>
@@ -122,19 +141,4 @@ var App = React.createClass({
                 </li>
               </ul>
               
-          </nav>
-          
-        </header>
-
-        <div className="site-wrap">
-          <main>{this.props.children}</main>
-        </div>
-      </div>
-    );
-  }
-});
-
-
-module.exports = withRouter(App);
-
-
+          </nav>*/
