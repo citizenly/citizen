@@ -90,13 +90,10 @@ var Feed = React.createClass({
   render: function() {
     return (
       <div>
-      
-          <div className="pageHeading whatTheyreDoingHeading">
-            What They're Doing
-          </div>
           
-          <h3>FEED</h3>
- 
+          <h1>FEED</h1>
+          <h3>What they're up to</h3>
+
           <div className="searchbox">
             <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search what your representative is saying" />
           </div>

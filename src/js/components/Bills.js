@@ -17,14 +17,13 @@ var Bill = React.createClass({
       var ballotClass = "dynamic" + (ballot.substring(0, 2)); 
       
     return (
-      <div>
-        <h2>
-          <Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billId}  
-          { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <span className={resultClass}> ({result})</span> : "" }
-          { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <div><span>my representative voted  -</span>  <span className={ballotClass}> {ballot} </span> </div> : "" } 
-          </Link>
-        </h2>
-        <h4><Link className="billTitle" to={"/bill/" + this.props.billId}>{this.props.billTitle}</Link></h4>
+      <div className="listedItem">
+          <Link to={"/bill/" + this.props.billId}><h4>{this.props.billId}  
+          { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <h4>status: <span className={resultClass}>{result}</span></h4> : "" }
+          { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <h4><span>my representative voted  -</span>  <span className={ballotClass}> {ballot} </span> </h4> : "" } 
+        </h4>
+        <h5>{this.props.billTitle}</h5>
+        </Link>
       </div>
     );
   }
@@ -82,14 +81,16 @@ var Bills = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="pageHeading billsHeading">
-          What would you do?
-        </div>
 
-        <h3>BILLS</h3>
+        <h1>BILLS</h1>
+        <h3>What would you do?</h3>
  
         <div className="searchbox">
-          <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
+          <input ref="search" className="searchinput" type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
+        </div>
+        
+        <div className="repName">
+          {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills your representative, {this.state.repFullName}, has voted on. <span className="dynamicYe">PASSED</span>/<span className="dynamicNo">FAILED</span>/<span className="dynamicDi">TIE</span> indicates the bill's latest status in parliament</p>  : ""} 
         </div>
 
         <div className="billTags">
@@ -99,15 +100,11 @@ var Bills = React.createClass({
           <div><Link activeClassName="active" to="/bills/active">Active</Link></div>
           <div><Link activeClassName="active" to="/bills/all">All</Link></div>
         </div>
-
-        <div className="repName">
-          {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills your representative, {this.state.repFullName}, has voted on. <span className="dynamicYe">PASSED</span>/<span className="dynamicNo">FAILED</span>/<span className="dynamicDi">TIE</span> indicates the bill's latest status in parliament</p>  : ""} 
-        </div>
           
         <div className="billList">
           {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
           <div>
-            {this.state.billList.length === 0 ? 'We will have more filters coming soon' : this.state.billList.map(this.renderBills)}
+            {this.state.billList.length === 0 ? <p>'We will have more filters coming soon'</p> : this.state.billList.map(this.renderBills)}
           </div>
         </div>
      </div>

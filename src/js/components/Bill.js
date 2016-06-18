@@ -157,12 +157,10 @@ var Bill = React.createClass({
       <div>
         <div>
           <div className="billInfo">
-            <div className="pageHeading billsHeading">
-              What would you do?
-            </div>
-              
+          <h3>Choose how you would have voted</h3>
+
             <div className="billandid">
-              <h3>BILL <span className="billnumber">{this.state.bill.id}</span></h3>
+              <h1>BILL <span className="billnumber">{this.state.bill.id}</span></h1>
             </div>
 
             <div className="tagDescriptions">

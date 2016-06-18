@@ -8,56 +8,59 @@ html {
 
 body {
   margin: 0;
-  margin-top: 10%;
+  margin-top: 15%;
   height: 100%;
-  font: 1em 'Roboto', sans-serif;
+  font: 1em 'Oswald', sans-serif;
   color: #555;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+//Main headings (Bills, Feed, Petitions, Compare)//
 h1 {
-  font-family: Oswald, sans-serif;
-  font-weight: 400;
-  font-size: 1.7em;
-  text-align: center;
-  margin-top: 25px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-h2 {
-  font-family: Oswald, sans-serif;
-  font-weight: 200;
-  text-transform: uppercase;
-}
-
-h3 {
-  font-family: Oswald, sans-serif;
   font-weight: 800;
-  font-size: 1.7em;
+  font-size: 1.4em;
   text-align: center;
   color: black;
   text-transform: uppercase;
+  margin: 0px;
 }
 
-h4 {
+//Second level headings//
+h2 {
+  font-weight: 200;
+  font-size: 1.3em;
+  text-align: left;
+  text-transform: uppercase;
+  color: black;
+}
+
+//Descriptions under the headings for each page//
+h3 {
   font-family: Arimo, sans-serif;
-  font-size: 0.9em;
+  font-size: 80%;
+  text-align: center;
 }
 
+//list titles//
+h4 {
+  font-weight: 200;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+//list descriptions, blue///
 h5 {
   font-family: Arimo, sans-serif;
+  font-weight: 400;
   font-size: 0.8em;
-  color: black;
-  
+  color: #2D81CF;
 }
 
 p {
   font-family: Arimo, sans-serif;
   font-size: 0.9em;
-  line-height: 1.4;
 }
 
 
@@ -71,11 +74,18 @@ ul {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 img {
   max-width: 100%;
 }
+
+span {
+  font-family: Arimo, sans-serif;
+}
+
+////NAVBAR////
 
 header {
   position: fixed;
@@ -83,28 +93,29 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: flex-start;
   width: 100%;
   background-color: white;
 }
 
-
 .navbutton {
-    width: 20%;
+    width: 100%;
     font-weight: 200;
     font-family: Oswald, sans-serif;
     text-transform: uppercase;
-    padding: 0.2em 0.4em 0.2em 0.4em;
+    padding: 0.8em 0.4em 0.8em 0.4em;
     text-align: center;
     color: white;
     font-size: smaller;
-      a {
-      
-      }
 }
 
-      .rep {
-      background-color: rgba(0,0,0,0.5);
-      }
+a.navbutton.active {
+    font-weight: 600;
+}
+
+.rep {
+background-color: #778899;
+}
 
       .compare {
       background-color: #2D81CF;
@@ -114,14 +125,18 @@ header {
       background-color: #44A487;
       }
     
-      .feed {
+      .bills {
       background-color: #B095C4;
       }
     
-      .bills {
+      .feed {
       background-color: #8675B3;
       }
 
+.dot {
+    font-size: 2em;
+    color: #778899;
+}
 /*
 nav {
   border-top: 1px solid #ddd;
@@ -163,11 +178,6 @@ nav {
   
 }*/
 
-.navigation {
-  list-style: none;
-  text-decoration: none;
-}
-
 
 input {
   display: inline-block;
@@ -189,6 +199,11 @@ input {
 
 ////HAMBURGER MENU////
 
+  .hamburger {
+    display: block;
+    flex-direction: row;
+  }
+
 *, *:before, *:after {
   margin: 0;
   padding: 0;
@@ -201,45 +216,11 @@ input {
   clear: both;
 }
 
-.yourRepresentativeMenu {
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-}
-
-.whatWouldYouDoMenu {
-  background-color: #B095C4;
-  color: white;
-}
-
-.whatTheyreDoingMenu {
-  background-color: #8675B3;
-  color: white;
-}
-
-.petitionsMenu {
-  background-color: #44A487;
-  color: white;
-}
-
-.compareMenu {
-  background-color: #2D81CF;
-  color: white;
-}
-
-.home:active {
-  color: black;
-}
 
 @media only screen and (max-width: 767px) {
   
   .hamburger {
-    padding: 15px;
     display: block;
-  }
-  
-  .hamburgerDiv {
-    display: flex;
-    justify-content: flex-end;
   }
   
   nav {
@@ -248,6 +229,29 @@ input {
     width: 100%;
     background-color: white;
     
+      a {
+    display: block;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 200;
+    text-align: right;
+    color: #aaa;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  a:hover, a:focus {
+  }
+  
+  li {
+    float: left;
+    border-right: 1px solid #ddd;
+  }
+  
+  li:last-child {
+    border-right: none;
+  }
+  
     .active {
       font-weight: 600;
     }
@@ -255,23 +259,18 @@ input {
     ul {
       border-left: none;
       border-right: none;
+      font-family: Oswald, sans-serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      list-style: none;
+      margin: 0 auto;
+      position: relative;
     }
     
     li {
       width: 100%;
       border-right: none;
     }
-  }
-  
-  
-  .line {
-    border-bottom: 3px solid #bbb;
-    width: 30px;
-    margin-bottom: 5px;
-  }
-  
-  .line:last-child {
-    margin-bottom: 0;
   }
   
   
@@ -306,17 +305,6 @@ input {
   flex: 1 1 0;
   max-width: 90%;
   text-align: center;
-  /* Should be equivalent to: */
-  /* flex-grow: 1; */
-  /* flex-shrink: 1; */
-  /* flex-basis: 0; */
-  p {
-    font-size: 1.0em;
-  }
-  h1 {
-    font-size: 1.6em;
-    font-weight: 400;
-  }
 }
 
 .square {
@@ -324,7 +312,7 @@ input {
   top: 0;
   right: 0;
   width: 100%;
-  height: 11%;
+  height: 15%;
   background: white;
 }
 
@@ -387,7 +375,7 @@ input {
 }
 
 .postcodebutton {
-  background-color: rgba(0,0,0,0.5);
+  background-color: #778899;
   color: white;
   font-family: Oswald, sans-serif;
   width: 100%;
@@ -400,6 +388,14 @@ input {
 
 
 ////REP////
+
+.repPage {
+  h3 {
+    text-align: left;
+    margin-left: 3%;
+  }
+}
+
 .rep-container {
   display: flex;
   flex-direction: column;
@@ -410,24 +406,12 @@ input {
 
 .repInfo {
   display: flex;
-  
+  margin: 0% 3% 6% 3%;
+  border-top: 1px solid #ccc;
   .repPic {
-    margin-left: 10px;
-    
     img {
       max-width: 80%;
     }
-  }
-}
-
-.repText {
-  margin-left: 0px;
-  margin-right: 10px;
-  h2 {
-    font-weight: 200;
-  }
-  p {
-    margin-right: 10px;
   }
 }
 
@@ -437,8 +421,6 @@ input {
   flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
   
@@ -448,31 +430,8 @@ input {
   }
 }
 
-
-.agreement {
-  flex-basis: 100%;
-  padding-top: 5px;
-  
-  p {
-    font-size: 0.8em;
-  }
-  h2 {
-    font-size: 0.9em;
-    font-weight: 400;
-  }
-}
-
-.intheirvoting {
-  flex-basis: 100%;
-  padding-bottom: 5px;
-  background-color: rgba(0,0,0,0.1);
-  border-left: 10px solid white;
-  border-right: 10px solid white;
-  
-  h2 {
-    font-size: 1.0em;
-    font-weight: 400;
-  }
+.borderForRepStats {
+    border-top: 1px solid #ccc;
 }
 
 .you, .neighbours {
@@ -551,22 +510,22 @@ input {
 }
 
 /*.partyPro {
-color: rgba(0,0,0,0.5);
+color: #778899;
 font-weight: 600;
 }
 
 .partyRef {
-color: rgba(0,0,0,0.5);
+color: #778899;
 font-weight: 600;
 }
 
 .partyCan {
-color: rgba(0,0,0,0.5);
+color: #778899;
 font-weight: 600;
 }
 
 .partyInd {
-color: rgba(0,0,0,0.5);
+color: #778899;
 font-weight: 600;
 }
 */
@@ -583,7 +542,6 @@ font-weight: 600;
   p {
     font-family: Arimo, sans-serif;
     font-size: 0.9em;
-    line-height: 1.4;
   }
   a, .fa {
     color: #2D81CF;
@@ -921,7 +879,7 @@ p.thankYou {
 ////SINGLE BILL & PETITION////
 
 .dynamic {
-  color: rgba(0,0,0,0.5);
+  color: #778899;
   font-weight: 600;
 }
 
@@ -936,7 +894,7 @@ p.thankYou {
 }
 
 .dynamicTie {
-  color: rgba(0,0,0,0.5);
+  color: #778899;
   font-weight: 600;
 }
 
@@ -951,7 +909,7 @@ p.thankYou {
 }
 
 .dynamicDi {
-  color: rgba(0,0,0,0.5);
+  color: #778899;
   font-weight: 600;
 }
 
@@ -1178,7 +1136,7 @@ canvas.littleD {
 }
 
 .petitionGrey {
-  color: rgba(0,0,0,0.5)
+  color: #778899
 }
 
 .legends {
@@ -1212,6 +1170,10 @@ canvas.littleD {
 
 ////BILLS, PETITIONS, FEED, COMPARISON////
 
+
+.listedItem {
+  margin-bottom: 1em;
+}
 .searchbox {
   font-family: Arimo, sans-serif;
   outline: none;
@@ -1245,18 +1207,25 @@ canvas.littleD {
 }
 
 .pageHeading {
-  margin-top: 5%;
-  font-family: Oswald, sans-serif;
-  font-weight: 400;
+  position: fixed;
+  top: 6.5%;
+  width: 100%;
+  font-family: Arimo, sans-serif;
+  font-weight: 200;
+  font-size: 0.8em;
   color: white;
   background-color: #B095C4;
-  padding: 0px;
-  text-transform: uppercase;
+  padding: 0.2em 0.2em 0.2em 0.8em;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: left;
+  text-align: left;
 }
 
+.repHeading {
+  background-color: #778899;
+  text-transform: none;
+}
+ 
 .billsHeading {
   background-color: #B095C4;
 }
@@ -1333,19 +1302,18 @@ canvas.littleD {
   margin-bottom: 20px;
   
   :hover{
-    background-color: rgba(0,0,0,0.5);
+    background-color: #778899;
   }
 }
 
 .repName {
   p {
-    margin: 10px;
+    margin: 0.9em;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    line-height: normal;
     font-size: 0.9em;
     padding: 6px 0px;
-    text-align: center;
+    text-align: left;
   }
 }
 
@@ -1360,7 +1328,7 @@ canvas.littleD {
 }
 
 .resultTie {
-  color: rgba(0,0,0,0.5);
+  color: #778899;
   font-weight: 400;
 }
 
@@ -1385,7 +1353,7 @@ canvas.littleD {
   }
   
   .resultTie {
-    color: rgba(0,0,0,0.5);
+    color: #778899;
     font-size: 1.1em;
     font-weight: 400;
   }
@@ -1397,24 +1365,6 @@ canvas.littleD {
   margin-bottom: 60px;
   ul, li {
     list-style: none;
-  }
-  
-  h4 {
-    font-family: Arimo, sans-serif;
-    font-size: 0.8em;
-    font-weight: 100;
-    margin-bottom: 20px;
-    list-style: none;
-  }
-  
-  h2 {
-    font-family: Oswald, sans-serif;
-    font-size: 0.9em;
-    font-weight: 200;
-    list-style: none;
-  }
-  a {
-    color: rgb(85, 85, 85);
   }
 }
 
@@ -1525,7 +1475,6 @@ canvas.littleD {
     font-family: Arimo;
     font-size: 0.9em;
     margin: 0.5em;
-    line-height: 1.2em;
     max-width: 70%;
     min-width: 70%;
   }
@@ -1568,7 +1517,7 @@ canvas.littleD {
 }
 
 .formButton {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #778899;
   color: white;
   font-family: Oswald, sans-serif;
   height: 100%;
@@ -1593,7 +1542,6 @@ canvas.littleD {
     color: #fff;
     text-align: center;
     font-size: 1.3em;
-    line-height: 1.2em;
   }
 }
 

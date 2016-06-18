@@ -84,14 +84,10 @@ var Compare = React.createClass({
       </div>;
     }
     return (
-      <div className="comparePage">
       
-          <div className="pageHeading compareHeading">
-            Compare
-          </div>
-          
-          <p><b>Find how your representative's statistics compare against other representatives across the country.</b></p>
-          
+      <div className="comparePage">
+          <h1>COMPARE</h1>
+          <h3>See how your representative compares against other representatives across the country.</h3>
           <h2>MATCH</h2>
           <p>Shows the match in % between how the below voted, and how the people they represent would have voted.</p>
 

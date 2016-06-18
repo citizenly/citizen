@@ -91,13 +91,12 @@ var App = React.createClass({
     return (
       <div>
         <header>
-            <Link className="navbutton rep" activeClassName="active" onClick={this.onMenuItemClick} to={repLink}>My MP</Link>
+            <Link className="navbutton rep" activeClassName="active" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
             <Link className="navbutton bills" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/votedonbymyrep">Bills</Link>
             <Link className="navbutton feed" activeClassName="active" onClick={this.onMenuItemClick} to={feedLink}>Feed</Link>
             <Link className="navbutton petitions" activeClassName="active" onClick={this.onMenuItemClick} to ="/petitions">Petitions</Link>
             <Link className="navbutton compare" activeClassName="active" onClick={this.onMenuItemClick} to ="/compare">Compare</Link>
         </header>
-
         <div className="site-wrap">
           <main>{this.props.children}</main>
         </div>
@@ -138,6 +137,23 @@ module.exports = withRouter(App);
                 </li>
                 <li>
                   <Link activeClassName="active" className="compareMenu" onClick={this.onMenuItemClick} to="/compare">Compare</Link>
+                </li>
+              </ul>
+              
+              
+              
+              
+              
+              
+                          <div className="hamburgerDiv">
+              <a href="#" onClick={this.onClick} className="hamburger">
+                <div className="dot">...</div>
+              </a>
+            </div>
+              <ul className={"clearfix menu " + this.state.menutoggle} >
+                {loginSignup}
+                <li>
+                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
                 </li>
               </ul>
               

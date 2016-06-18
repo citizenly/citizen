@@ -22,8 +22,8 @@ var Rep = React.createClass({
         electedVote: ""
       },
        user: {   //placeholder, to be connected to our internal user database.
-        firstName: "*userFirstName*", 
-        lastName: "*userLastName*",
+        firstName: "*userFN*", 
+        lastName: "*userLN*",
       },
       coherence: '',
       shareButtonToggle: false,
@@ -117,44 +117,35 @@ var Rep = React.createClass({
   render: function() {
     console.log(this.props.params.repName, 'this.props.params.repName')
     return (
-    <div>
+    <div className="repPage">
+    <h3>Welcome {this.state.user.firstName}, you are being represented by:</h3>
       <div className="rep-container">
         <div className="repInfo">
           <div className="repPic">
             <img src={this.state.rep.img} />
           </div>
-
           <div className="repText">
-            <p>Welcome {this.state.user.firstName}</p>
-            <p>You are being represented by:</p>
             <h2>{this.state.rep.name}</h2>
             <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
             <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
-          
           </div>
-      </div>
-
-      <div className="rep-stats-container">
-
-          <div className="agreement">
-            <p>Percentage of how often they would vote the same as...</p>
-          </div>
-
+        </div>
+        <div className="borderForRepStats">
+        <h3>Percentage of how often they vote the same as...</h3>
+        <div className="rep-stats-container">
           <div className="repstatsbackgroundcolor">
-              <div className="neighbours">
-                <h2>Your neighbours</h2>
-                <h1>34%</h1>
-              </div>
-
-              <div className="you">
-                <h2>you</h2>
-                <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
-              </div>
+            <div className="neighbours">
+              <h2>Your neighbours</h2>
+              <h1>34%</h1>
+            </div>
+            <div className="you">
+              <h2>you</h2>
+              <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
+            </div>
           </div>
-
           <div id="seperator"></div>
           <div className="down"></div>
-      
+          </div>
           <div className="onlyFbTwShare">
             <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
             <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
@@ -162,7 +153,7 @@ var Rep = React.createClass({
           </div>
         </div>
       </div>
-  </div>
+    </div>
     );
   }
 });

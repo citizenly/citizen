@@ -68,15 +68,11 @@ var Petitions = React.createClass({
   render: function() {
     return (
       <div>
-      
-          <div className="pageHeading petitionsHeading">
-            Petitions
-          </div>
-          
+          <h1>PETITIONS</h1>
+          <h3>Something on your mind?</h3>
           <div className="searchbox">
             <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for petition by word, eg daycare, streets..." />
           </div>
-  
           <div className="petitionTags">
               <div><Link activeClassName="active" to="/petitions/active">new</Link></div>
               <div><Link activeClassName="active" to="/petitions/hot">hot</Link></div>
