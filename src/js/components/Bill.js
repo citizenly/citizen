@@ -156,8 +156,6 @@ var Bill = React.createClass({
     return (
       <div>
           <div className="billInfo">
-          <h3>Choose how you would have voted</h3>
-
             <div className="billandid">
               <h1>BILL <span className="billnumber">{this.state.bill.id}</span></h1>
             </div>
@@ -203,11 +201,11 @@ var Bill = React.createClass({
           <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
         </div>
       </div>
-      
       <div className="votingAndSharingActions">
-
+      <div className="footerExplanation">
+        <h3>Choose how you would have voted</h3>
+      </div>
         <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
-
         <div className="share">
           <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
           <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>

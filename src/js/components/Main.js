@@ -92,8 +92,8 @@ var App = React.createClass({
       <div>
         <header>
             <Link className="navbutton rep" activeClassName="active" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
-            <Link className="navbutton bills" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/votedonbymyrep">Bills</Link>
             <Link className="navbutton feed" activeClassName="active" onClick={this.onMenuItemClick} to={feedLink}>Feed</Link>
+            <Link className="navbutton bills" activeClassName="active" onClick={this.onMenuItemClick} to ="/bills/votedonbymyrep">Votes</Link>
             <Link className="navbutton petitions" activeClassName="active" onClick={this.onMenuItemClick} to ="/petitions">Petitions</Link>
             <Link className="navbutton compare" activeClassName="active" onClick={this.onMenuItemClick} to ="/compare">Compare</Link>
         </header>

@@ -93,9 +93,7 @@ var Bills = React.createClass({
               <input ref="search" className="searchinput" type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
             </div>*/} 
             
-        <p>
           {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills your representative, {this.state.repFullName}, has voted on. <span className="dynamicYe">PASSED</span>/<span className="dynamicNo">FAILED</span>/<span className="dynamicDi">TIE</span> indicates the bill's latest status in parliament</p>  : ""} 
-        </p>
         <div className="billTags">
           <div><Link activeClassName="active" to="/bills/votedonbymyrep">Rep votes</Link></div>
           <div><Link activeClassName="active" to="/bills/">My votes</Link></div>
