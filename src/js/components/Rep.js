@@ -124,7 +124,7 @@ var Rep = React.createClass({
     return (
     <div className="repPage">
     <h1>Your Representative</h1>
-    <h3>Welcome {this.state.user.firstName}, you are being represented by:</h3>
+    <h3>Hello {this.state.user.firstName}, you are being represented by:</h3>
       <div className="rep-container">
         <div className="repInfo">
           <div className="repPic">
