@@ -8,13 +8,17 @@ html {
 
 body {
   margin: 0;
-  margin-top: 15%;
+  margin-top: 19%;
   height: 100%;
-  font: 1em 'Oswald', sans-serif;
+  font-family: Oswald, sans-serif;
   color: #555;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.site-wrap {
+  margin: 4%;
 }
 
 //Main headings (Bills, Feed, Petitions, Compare)//
@@ -32,6 +36,7 @@ h2 {
   font-weight: 200;
   font-size: 1.3em;
   text-align: left;
+  margin-top: 4%;
   text-transform: uppercase;
   color: black;
 }
@@ -45,6 +50,7 @@ h3 {
 
 //list titles//
 h4 {
+  font-family: Oswald, sans-serif;
   font-weight: 200;
   font-size: 0.8em;
   text-transform: uppercase;
@@ -54,7 +60,7 @@ h4 {
 h5 {
   font-family: Arimo, sans-serif;
   font-weight: 400;
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #2D81CF;
 }
 
@@ -81,9 +87,6 @@ img {
   max-width: 100%;
 }
 
-span {
-  font-family: Arimo, sans-serif;
-}
 
 ////NAVBAR////
 
@@ -295,6 +298,7 @@ input {
 
 .main {
   height: 100%;
+  margin-top: -15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -313,12 +317,12 @@ input {
 }
 
 .square {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 15%;
-  background: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 8%;
+    background: white;
 }
 
 .canadamap {
@@ -395,9 +399,8 @@ input {
 ////REP////
 
 .repPage {
-  h3 {
-    text-align: left;
-    margin-left: 3%;
+  h1 {
+    margin-bottom: 4%;
   }
 }
 
@@ -407,6 +410,10 @@ input {
   align-items: center;
   justify-content: space-around;
   overflow: hidden;
+  text-align: left;
+   h3 {
+     text-align: left;
+   }
 }
 
 .repInfo {
@@ -437,6 +444,9 @@ input {
 
 .borderForRepStats {
     border-top: 1px solid #ccc;
+    h3 {
+      text-align: left;
+    }
 }
 
 .you, .neighbours {
@@ -447,6 +457,7 @@ input {
     font-weight: 800;
     margin-top: -4px;
     margin-bottom: 5px;
+    cursor: pointer;
   }
   
   h2 {
@@ -461,8 +472,6 @@ input {
   flex-grow: 1;
   background: rgba(0,0,0,0.1);
   padding: 10px;
-  border-left: 10px solid white;
-  border-right: 10px solid white;
 }
 
 
@@ -535,14 +544,29 @@ font-weight: 600;
 }
 */
 
+.aboutAndLogout {
+  display: flex;
+  justify-content: space around;
+  flex-direction: row;
+  position: fixed;
+  bottom: 0;
+  margin-left: -4%;
+   
+   a{
+     padding: 10px;
+     color: white;
+     background-color: #778899;
+     text-transform: uppercase;
+     border-radius: 20px 0px 0px 0px;
+   }
+}
 
 ////ABOUT////
 
 .aboutPage {
   max-width: 600px;
-  padding: 20px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
   
   p {
     font-family: Arimo, sans-serif;
@@ -962,38 +986,36 @@ p.thankYou {
 .billTags, .petitionTags {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   text-transform: uppercase;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  border-top: 1px solid #ccc;
+  margin-bottom: 9%;
   
   .active {
     font-weight: 600;
   }
   
   a {
-    font-family: Oswald, sans-serif;
-    color: black;
     font-weight: 200;
     font-size: 0.8em;
-    border-radius: 2px;
     text-decoration: none;
   }
   
   div {
-    margin: 4px;
-    color: black;
-    font-family: Oswald, sans-serif;
-    font-weight: 200;
-    font-size: 0.9em;
     padding: 0px 5px;
+    font-weight: 200;
   }
 }
 
+.oneLineBillInfo {
+  display: flex;
+   span {
+     font-weight: 600;
+   }
+}
 
 
 .billTabs, .petitionTabs {
-  
   p {
     color: black;
     text-align: left;
@@ -1030,20 +1052,22 @@ p.thankYou {
   
   table {
     padding: 10px 10px;
-    font-size: 0.7em;
     font-family: Arimo;
+    font-size: 0.9em;
   }
   
   table td div {
     text-align: left !important;
-    font-size: 0.7em;
     font-family: Arimo;
-    margin-top: 10px;
+    font-size: 0.9em;
+  }
+  
+  tr {
+    font-size: 0.9em;
   }
   
   td {
     display: block;
-    
   }
   
   td:first-child, td:nth-child(2), td:nth-child(3), .change_bar_begin {
@@ -1051,7 +1075,7 @@ p.thankYou {
   }
   
   #billText {
-    font-size: 20px;
+    font-size: 0.9em;
   }
   
 }
@@ -1145,8 +1169,6 @@ canvas.littleD {
 }
 
 .legends {
-  font-family: Oswald, sans-serif;
-  font-size: 0.6em;
   font-weight: 200;
   text-transform: uppercase;
   display: flex;
@@ -1175,6 +1197,11 @@ canvas.littleD {
 
 ////BILLS, PETITIONS, FEED, COMPARISON////
 
+.billsPage {
+  p {
+    margin-top: 4%;
+  }
+}
 
 .listedItem {
   margin-bottom: 1em;
@@ -1248,17 +1275,6 @@ canvas.littleD {
 }
 
 
-.comparePage {
-  p {
-    margin: 0px 15px 15px 15px;
-    text-align: center;
-  }
-  
-  h2 {
-    text-align: center;
-  }
-}
-
 .compareMatch {
   display: flex;
   justify-content: space-around;
@@ -1311,61 +1327,37 @@ canvas.littleD {
   }
 }
 
-.repName {
-  p {
-    margin: 0.9em;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    font-size: 0.9em;
-    padding: 6px 0px;
-    text-align: left;
-  }
-}
-
 .resultFailed {
   color: #8B2530;
-  font-weight: 400;
 }
 
 .resultPassed {
   color: #006729;
-  font-weight: 400;
 }
 
 .resultTie {
   color: #778899;
-  font-weight: 400;
 }
 
 .color-result{
   display: flex;
   text-transform: uppercase;
   
-  span {
-    font-size: 1.1em;
-  }
   
   .resultFailed {
     color: #8B2530;
-    font-size: 1.1em;
-    font-weight: 400;
   }
   
   .resultPassed {
     color: #006729;
-    font-size: 1.1em;
-    font-weight: 400;
   }
   
   .resultTie {
     color: #778899;
-    font-size: 1.1em;
-    font-weight: 400;
   }
 }
 
 .billList {
-  margin-left: 10px;
   list-style: none;
   margin-bottom: 60px;
   ul, li {
@@ -1457,23 +1449,8 @@ canvas.littleD {
   flex-direction: column;
   
   p {
-    margin-left: 15px;
-    margin-right: 15px;
-    text-align: -webkit-center;
-    -moz-animation-name: dropHeader;
-    -moz-animation-iteration-count: 0.3;
-    -moz-animation-timing-function: ease-out;
-    -moz-animation-duration: 0.2s;
-    
-    -webkit-animation-name: dropHeader;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-out;
-    -webkit-animation-duration: 0.2s;
-    
-    animation-name: dropHeader;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-out;
-    animation-duration: 0.2s;
+    margin-top: 4%;
+    margin-bottom: 4%;
   }
   
   .disclaimerText {

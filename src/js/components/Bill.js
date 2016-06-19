@@ -155,7 +155,6 @@ var Bill = React.createClass({
     
     return (
       <div>
-        <div>
           <div className="billInfo">
           <h3>Choose how you would have voted</h3>
 
@@ -187,7 +186,6 @@ var Bill = React.createClass({
               </div>
             </div>
           </div>
-      </div>
 
       <div className="legends">
           <h3>what my -</h3>

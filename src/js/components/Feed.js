@@ -42,6 +42,15 @@ var Feed = React.createClass({
     // set inital state to determine which list of feed is displayed - all by default
     
     return {
+      rep: {
+        name: "",
+        constituency: "",
+        province: "",
+        party: "",
+        img: "",
+        electedYear: "",
+        electedVote: ""
+      },
       feedList: {"yesterday":[], "twoDaysAgo":[], "thisWeek":[], "lastWeek": [] },
       repFullName: ""
     };
@@ -90,13 +99,12 @@ var Feed = React.createClass({
   render: function() {
     return (
       <div>
-          
           <h1>FEED</h1>
-          <h3>What they're up to</h3>
+          <h3>What your representative is currently up to.</h3>
 
-          <div className="searchbox">
+          {/*<div className="searchbox">
             <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search what your representative is saying" />
-          </div>
+            </div>*/} 
   
           <div className="billTags">
               <div>All</div>
@@ -108,13 +116,13 @@ var Feed = React.createClass({
           <div className="feedList">
             <div>
               <h2>Yesterday</h2>
-              {this.state.feedList.yesterday[0] ? this.state.feedList.yesterday.map(this.renderDeclaration) : "Your representative had nothing to say"}
+              {this.state.feedList.yesterday[0] ? this.state.feedList.yesterday.map(this.renderDeclaration) : <p>Your representative had nothing to say</p>}
               <h2>Two days ago</h2>
-              {this.state.feedList.twoDaysAgo[0] ? this.state.feedList.twoDaysAgo.map(this.renderDeclaration) : "Your representative had nothing to say"}
+              {this.state.feedList.twoDaysAgo[0] ? this.state.feedList.twoDaysAgo.map(this.renderDeclaration) : <p>Your representative had nothing to say</p>}
               <h2>This week</h2>
-              {this.state.feedList.thisWeek[0] ? this.state.feedList.thisWeek.map(this.renderDeclaration) : "Your representative had nothing to say"}
+              {this.state.feedList.thisWeek[0] ? this.state.feedList.thisWeek.map(this.renderDeclaration) : <p>Your representative had nothing to say</p>}
               <h2>Last week</h2>
-              {this.state.feedList.lastWeek[0] ? this.state.feedList.lastWeek.map(this.renderDeclaration) : "Your representative had nothing to say"}
+              {this.state.feedList.lastWeek[0] ? this.state.feedList.lastWeek.map(this.renderDeclaration) : <p>Your representative had nothing to say</p>}
               
             </div>
           </div>

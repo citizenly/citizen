@@ -18,11 +18,16 @@ var Bill = React.createClass({
       
     return (
       <div className="listedItem">
-          <Link to={"/bill/" + this.props.billId}><h4>{this.props.billId}  
-          { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <h4>status: <span className={resultClass}>{result}</span></h4> : "" }
-          { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <h4><span>my representative voted  -</span>  <span className={ballotClass}> {ballot} </span> </h4> : "" } 
-        </h4>
-        <h5>{this.props.billTitle}</h5>
+        <Link to={"/bill/" + this.props.billId}>
+          <div className="oneLineBillInfo">
+          <h4>{this.props.billId} -</h4>
+          { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <h4 className={resultClass}>- {result}</h4> : "" }
+          </div>
+          <div className="oneLineBillInfo">
+          <h4>My representative's action - </h4>
+          { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <h4 className={ballotClass}>- {ballot}</h4> : "" } 
+          </div>
+          <h5>{this.props.billTitle}</h5>
         </Link>
       </div>
     );
@@ -33,7 +38,7 @@ var Bill = React.createClass({
 // Bills constructor
 var Bills = React.createClass({
   getInitialState: function() {
-    // set inital state to determine which list of bills is displayed - active by default
+    // set inital state to determine which list of bills is displayed - 'rep voted' by default
     return {
       billList: [],
       repFullName: ""
@@ -80,19 +85,17 @@ var Bills = React.createClass({
   },
   render: function() {
     return (
-      <div>
-
+      <div className="billsPage">
         <h1>BILLS</h1>
-        <h3>What would you do?</h3>
- 
-        <div className="searchbox">
-          <input ref="search" className="searchinput" type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
-        </div>
+        <h3>What would you have done?</h3>
         
-        <div className="repName">
+        {/* <div className="searchbox">
+              <input ref="search" className="searchinput" type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
+            </div>*/} 
+            
+        <p>
           {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills your representative, {this.state.repFullName}, has voted on. <span className="dynamicYe">PASSED</span>/<span className="dynamicNo">FAILED</span>/<span className="dynamicDi">TIE</span> indicates the bill's latest status in parliament</p>  : ""} 
-        </div>
-
+        </p>
         <div className="billTags">
           <div><Link activeClassName="active" to="/bills/votedonbymyrep">Rep votes</Link></div>
           <div><Link activeClassName="active" to="/bills/">My votes</Link></div>
@@ -100,7 +103,6 @@ var Bills = React.createClass({
           <div><Link activeClassName="active" to="/bills/active">Active</Link></div>
           <div><Link activeClassName="active" to="/bills/all">All</Link></div>
         </div>
-          
         <div className="billList">
           {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
           <div>

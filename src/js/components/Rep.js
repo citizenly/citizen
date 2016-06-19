@@ -5,13 +5,18 @@ var Link = require('react-router').Link;
 var axios = require('axios');
 var Parse = require('parse');
 var $ = require('jquery');
+var IndexLink = require("react-router").IndexLink;
+import { withRouter } from 'react-router';
+var event = require('../events.js');
 //var Vote = Parse.Object.extend('Vote');
+
 
 
 var Rep = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with rep info on componentDidMount
     return {
+      loggedIn: !!Parse.User.current(),
       rep: {
         name: "",
         constituency: "",
@@ -22,8 +27,8 @@ var Rep = React.createClass({
         electedVote: ""
       },
        user: {   //placeholder, to be connected to our internal user database.
-        firstName: "*userFN*", 
-        lastName: "*userLN*",
+        firstName: "*John*", 
+        lastName: "*Bain*",
       },
       coherence: '',
       shareButtonToggle: false,
@@ -118,6 +123,7 @@ var Rep = React.createClass({
     console.log(this.props.params.repName, 'this.props.params.repName')
     return (
     <div className="repPage">
+    <h1>Your Representative</h1>
     <h3>Welcome {this.state.user.firstName}, you are being represented by:</h3>
       <div className="rep-container">
         <div className="repInfo">
@@ -139,8 +145,10 @@ var Rep = React.createClass({
               <h1>34%</h1>
             </div>
             <div className="you">
-              <h2>you</h2>
-              <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
+            <Link className="you" activeClassName="active" to ="/bills/votedonbymyrep">
+            <h2>you</h2>
+            <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
+            </Link>
             </div>
           </div>
           <div id="seperator"></div>
@@ -151,6 +159,10 @@ var Rep = React.createClass({
             <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
             <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
           </div>
+        </div>
+        <div className="aboutAndLogout">
+          <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
+          <Link activeClassName="active" onClick={this.onMenuItemClick} to="/">Logout</Link>
         </div>
       </div>
     </div>
