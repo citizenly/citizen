@@ -94,10 +94,11 @@ var Bills = React.createClass({
             </div>*/} 
             
           {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills {this.state.repFullName} has voted on. <span className="dynamicYe">PASSED</span>/<span className="dynamicNo">FAILED</span>/<span className="dynamicDi">TIE</span> indicates the bill's latest status in parliament</p>  : ""} 
+          {this.props.params.filter === "proposedbymyrep"  ? <p>The below shows bills your representative {this.state.repFullName} has proposed.</p>  : ""} 
         <div className="billTags">
-          <div><Link activeClassName="active" to="/bills/votedonbymyrep">Rep votes</Link></div>
+          <div><Link activeClassName="active" to="/bills/votedonbymyrep">New votes</Link></div>
           <div><Link activeClassName="active" to="/bills/">My votes</Link></div>
-          <div><Link activeClassName="active" to="/bills/proposedbymyrep">Rep proposals</Link></div>
+          <div><Link activeClassName="active" to="/bills/proposedbymyrep">Proposed</Link></div>
           <div><Link activeClassName="active" to="/bills/active">Active</Link></div>
           <div><Link activeClassName="active" to="/bills/all">All</Link></div>
         </div>

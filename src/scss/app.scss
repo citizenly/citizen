@@ -95,7 +95,7 @@ img {
   }
 }
 
-////COLORS////(will compact these soon)
+////COLORS////(will sass these soon)
 
 .rep, .resultTie {
   background-color: #778899;
@@ -117,12 +117,19 @@ img {
   background-color: #2D81CF;
 }
 
-.resultFailed {
+.resultFailed, .dynamicFailed, .dynamicNo {
   color: #8B2530;
+  font-weight: 600;
 }
 
-.resultPassed {
+.resultPassed, .dynamicPassed, .dynamicYe {
   color: #006729;
+  font-weight: 600;
+}
+
+.dynamic, .dynamicTie, .dynamicDi {
+  color: #778899;
+  font-weight: 600;
 }
 
 .partyLib {
@@ -151,40 +158,7 @@ img {
 }
 
 
-.dynamic {
-  color: #778899;
-  font-weight: 600;
-}
 
-.dynamicFailed {
-  color: #8B2530;
-  font-weight: 600;
-}
-
-.dynamicPassed {
-  color: #006729;
-  font-weight: 600;
-}
-
-.dynamicTie {
-  color: #778899;
-  font-weight: 600;
-}
-
-.dynamicNo {
-  color: #8B2530;
-  font-weight: 600;
-}
-
-.dynamicYe {
-  color: #006729;
-  font-weight: 600;
-}
-
-.dynamicDi {
-  color: #778899;
-  font-weight: 600;
-}
 
 ////NAVBAR////
 
