@@ -99,7 +99,6 @@ var Feed = React.createClass({
   render: function() {
     return (
       <div>
-          <h1>FEED</h1>
           <h3>What your representative is currently up to.</h3>
 
           {/*<div className="searchbox">

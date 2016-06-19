@@ -18,7 +18,7 @@ var App = require('./components/Main.js');
 var Home = require('./components/Home.js');
 var About = require('./components/About.js');
 var Rep = require('./components/Rep.js');
-var Compare = require('./components/Compare.js');
+var Stats = require('./components/Stats.js');
 var Petitions = require('./components/Petitions.js');
 var Petition1 = require('./components/Petition1.js');
 var Petition2 = require('./components/Petition2.js');
@@ -27,7 +27,7 @@ var Petition4 = require('./components/Petition4.js');
 var Petition5 = require('./components/Petition5.js');
 var PetitionForm = require('./components/PetitionForm.js');
 var Feed = require('./components/Feed.js');
-var Bills = require('./components/Bills.js');
+var Compare = require('./components/Compare.js');
 var Bill = require('./components/Bill.js');
 var Login = require('./components/Login.js');
 var Signup = require('./components/Signup.js');
@@ -51,7 +51,7 @@ var routes = (
       <IndexRoute component={Home}/>
       <Route path="about" component={About}/>
       <Route path="rep/:repName" component={Rep}/>
-      <Route path="compare" component={Compare}/>
+      <Route path="stats" component={Stats}/>
       <Route path="petitions" component={Petitions}/>
       <Route path="petition1" component={Petition1}/>
       <Route path="petition2" component={Petition2}/>
@@ -60,7 +60,7 @@ var routes = (
       <Route path="petition5" component={Petition5}/>
       <Route path="petitionform" component={PetitionForm}/>
       <Route path="rep/:repName/feed" component={Feed}/>
-      <Route path="bills/:filter" component={Bills}/>
+      <Route path="compare/:filter" component={Compare}/>
       <Route path="bill/:billId" component={Bill}/>
       <Route path="login" component={Login}/>
       <Route path="signup" component={Signup}/>

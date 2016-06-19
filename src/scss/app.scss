@@ -8,7 +8,7 @@ html {
 
 body {
   margin: 0;
-  margin-top: 19%;
+  margin-top: 22%;
   height: 100%;
   font-family: Oswald, sans-serif;
   color: #555;
@@ -21,10 +21,10 @@ body {
   margin: 4%;
 }
 
-//Main headings (Bills, Feed, Petitions, Compare)//
+//Main headings ('About', 'Bill', 'Petition', 'Start New Petition')//
 h1 {
   font-weight: 800;
-  font-size: 1.4em;
+  font-size: 1.3em;
   text-align: center;
   color: black;
   text-transform: uppercase;
@@ -105,7 +105,7 @@ img {
   background-color: #8675B3;
 }
 
-.bills {
+.compare {
   background-color: #B095C4;
 }
 
@@ -113,7 +113,7 @@ img {
   background-color: #44A487;
 }
 
-.compare {
+.stats {
   background-color: #2D81CF;
 }
 
@@ -656,7 +656,7 @@ p.thankYou {
 
 
 
-////////BILLS + PETITIONS - SHARING & VOTING//////
+////////COMPARE + PETITIONS - SHARING & VOTING//////
 .votingAndSharingActions {
   display: flex;
   justify-content: space-around;
@@ -913,7 +913,6 @@ p.thankYou {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 20px;
   font-weight: 600;
   
   span.billnumber, span.petitionnumber {
@@ -1148,9 +1147,9 @@ canvas.littleD {
 }
 
 
-////BILLS, PETITIONS, FEED, COMPARISON////
+////COMPARE, PETITIONS, FEED, STATS////
 
-.billsPage, .petitionsPage {
+.comparePage, .petitionsPage {
   p {
     margin-top: 5%;
   }
@@ -1191,7 +1190,7 @@ canvas.littleD {
   }
 }
 
-.compareMatch {
+.statsMatch {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
@@ -1243,7 +1242,7 @@ canvas.littleD {
     a {
     color: white;
     border-radius: 0px 20px 0px 0px;
-    padding: 13px 15px 13px 13px;
+    padding: 10px 15px 8px 13px;
     border-right: 1px solid white;
     font-size: 0.9em;
     }

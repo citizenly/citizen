@@ -68,7 +68,6 @@ var Petitions = React.createClass({
   render: function() {
     return (
       <div className="petitionsPage">
-          <h1>PETITIONS</h1>
           <h3>Below are petitions proposed by the public.</h3>
           <p>You can agree/disagree, or <Link activeClassName="active" to ="/petitionform">create your own petition</Link>. Once a petition has 100 people agreeing with it, it gets sent to your representative.</p>
           
