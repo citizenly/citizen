@@ -144,7 +144,7 @@ var Rep = React.createClass({
               <h1>34%</h1>
             </div>
             <div className="you">
-            <Link className="you" activeClassName="active" to ="/bills/votedonbymyrep">
+            <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
             <h2>you</h2>
             <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
             </Link>

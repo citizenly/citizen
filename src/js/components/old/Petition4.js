@@ -12,7 +12,7 @@ var DoughnutChart = require("react-chartjs").Doughnut;
 
 
 //HULLO :) the 'value' below is to be replaced with the yes/no votes to the petition.).
-var countryData = [{color: "#006729", value: 97, label: "AGREE"}, {color: "#8B2530", value: 50, label: "DISAGREE"}, {color: "rgba(0,0,0,0.5)", value: 100, label: "REMAINING"}]
+var countryData = [{color: "#006729", value: 250, label: "AGREE"}, {color: "#8B2530", value: 10, label: "DISAGREE"}, {color: "rgba(0,0,0,0.5)", value: 50, label: "REMAINING"}]
 
 
 var Petition = React.createClass({
@@ -20,15 +20,15 @@ var Petition = React.createClass({
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
       petition: {
-        id: 'e-18',
-        title: 'Cannabis',
-        summary: "Whereas: Cannabis prohibition began with no scientific, medical or social justification, and was initiated as an effort to harass, punish and deport racial minorities; The prohibition of cannabis has caused many social and economic harms, criminalized millions of Canadians for no benefit, and financed organized crime; Cannabis has the potential to provide food, medicine, fibre, fuel and building materials; and Cannabis medicines are safe and effective for treating a wide variety of ailments, yet are not readily available to all who require them. We, the undersigned, Citizens or residents of Canada, call upon the Government of Canada to immediately: 1. Repeal the prohibition on possession and personal cultivation of cannabis; 2. Repeal Section 462.2 of the Criminal Code, which bans literature and harm reduction devices like waterpipes and vaporizers; 3. Permit patients or their designated grower to provide medical cannabis as recommended by a physician; and 4. End police raids against community medical cannabis dispensaries, and enable their municipal regulation, as per the position of the Union of BC Municipalities; and within one year: 5. Allow farmers to harvest and sell the cannabinoid-rich resin from their plants, as per the recent resolution of the Canadian Hemp Trade Alliance; 6. Completely end the prohibition of cannabis, by removing it entirely from the CDSA (Controlled Drugs and Substances Act); 7. For those convicted for a cannabis offence under the CDSA, on a case-by-case basis: Grant a full pardon and amnesty for past offences, expunge criminal records and release all prisoners currently serving time; and 8. Permit Provinces, Territories and First Nations to decide how they want to tax, regulate and distribute cannabis as needed.",
-        proposedBy: 'Sam Vekemans',
+        id: 'e-337',
+        title: 'Bank of Canada',
+        summary: 'Whereas: Since 1974 Canadians have been paying billions in needless interest to international financiers called the Bank of International Settlements; Before this, the publicly-owned Bank of Canada had a mandate and practice of lending interest-free money to federal, provincial, and municipal governments for infrastructure and healthcare spending; Since this switch Canadian taxpayers have been needlessly paying anywhere from $20 billion to $60 billion a year in compounded interest; and This is money that could have been used to better the lives of every single Canadian, and instead we have been needlessly paying large sums of money with no gain and massive losses for Canada. We, the undersigned, citizens of Canada, call upon the Government of Canada to restore the use of the Bank of Canada to its original purpose, by exercising its public statutory duty and responsibility. That purpose includes making interest free loans to the municipal, provincial, and federal governments for ‘human capital’ expenditures (education, health, other social services) and/or infrastructure expenditures.',
+        proposedBy: 'Trevor Millar',
         sponsor: 'Elizabeth May', //For a petition to be valid it needs to have a sponsor (for example your MP). Future functionality: Feed the proposed petitions to your MP, who can choose which ones to sponsor. If they click they'll sponsor it, it becomes active on the petitions page. ALTERNATIVELY adding the 'sponsor' could be in the very final stage, where the petition receives 100 supporters and gets sent to the MP, who gets the choice of sponsoring it. If he/she doesnt, despite the fact that 100 of their constituents would like them to, then we could make this fact visible in a list under 'petitions' (petitions sent to MP (sponsored, not sponsored).
         dateOpen: "2015-06-11",
         dateClose: "2016-06-11",
-        daysLeft: "28"/*NUMBER (diff between dateOpen and dateClose)*/,
-        keywords: "Decriminalization, Marijuana, Possession of a controlled substance",
+        daysLeft: "23"/*NUMBER (diff between dateOpen and dateClose)*/,
+        keywords: "Bank of Canada, Government borrowing, Interest rates",
         comments: "Start the discussion"
       },
       content: "",
@@ -146,7 +146,7 @@ var Petition = React.createClass({
           <div>
             <div className="petitionInfo">
               <div className="petitionandid">
-                <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
+                <h1>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h1>
               </div>
               <div className="tagDescriptions">
                 <p>Keywords: <span className="dynamic">{this.state.petition.keywords}</span></p>
@@ -173,7 +173,7 @@ var Petition = React.createClass({
           <h3 className="petitionGrey">Remaining</h3>
           <h3 className="petitionYes">Agree</h3>
         </div>
-      
+        
         <div className="petitionChartContainer">
           <div className="petitionVoteComparison">
             <DoughnutChart className="petitionDoughnut" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />

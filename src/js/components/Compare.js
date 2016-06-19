@@ -94,14 +94,14 @@ var Compare = React.createClass({
             
           {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills {this.state.repFullName} has voted on. <span className="dynamicYe">PASSED</span>/<span className="dynamicNo">FAILED</span>/<span className="dynamicDi">TIE</span> indicates the bill's latest status in parliament</p>  : ""} 
           {this.props.params.filter === "proposedbymyrep"  ? <p>The below shows bills your representative {this.state.repFullName} has proposed.</p>  : ""} 
-        <div className="billTags">
+        <div className="filters">
           <div><Link activeClassName="active" to="/compare/votedonbymyrep">New votes</Link></div>
           <div><Link activeClassName="active" to="/compare/">My votes</Link></div>
           <div><Link activeClassName="active" to="/compare/proposedbymyrep">Proposed</Link></div>
           <div><Link activeClassName="active" to="/compare/active">Active</Link></div>
           <div><Link activeClassName="active" to="/compare/all">All</Link></div>
         </div>
-        <div className="billList">
+        <div className="list">
           {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
           <div>
             {this.state.billList.length === 0 ? <p>More filters coming soon</p> : this.state.billList.map(this.renderBills)}

@@ -75,7 +75,7 @@ var Petitions = React.createClass({
             <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for petition by word, eg daycare, streets..." />
             </div>*/} 
           
-          <div className="petitionTags">
+          <div className="filters">
               <div><Link activeClassName="active" to="/petitions/active">new</Link></div>
               <div><Link activeClassName="active" to="/petitions/hot">hot</Link></div>
               <div><Link activeClassName="active" to="/petitions/passed">sent</Link></div>
@@ -84,9 +84,9 @@ var Petitions = React.createClass({
               <div><Link activeClassName="active" to="/petitions/all">all</Link></div>
           </div>
           
-          <div className="petitionList">
+          <div className="list">
           <div className="listedItem">
-         <Link to="/petition1">
+         <Link to="/petition">
          <h4><b>e-119</b></h4>
           <h4>keywords: Citizenship, Immigration, Adoption</h4>
          <h5>Canadian citizenship</h5>

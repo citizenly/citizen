@@ -146,7 +146,7 @@ var Petition = React.createClass({
           <div>
             <div className="petitionPage">
               <div className="petitionandid">
-                <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
+                <h1>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h1>
               </div>
               <div className="tagDescriptions">
                 <p>Keywords: <span className="dynamic">{this.state.petition.keywords}</span></p>

@@ -67,7 +67,7 @@ var App = React.createClass({
     // Logout Link
     if (this.state.loggedIn) {
       var loginSignup = <li>
-        <a onClick={this.userLogout.bind(this, 'logout')} href="/home">Logout</a>
+        <a onClick={this.userLogout.bind(this, 'logout')} href="/login">Logout</a>
       </li>;
       
     } else {

@@ -87,11 +87,11 @@ var Stats = React.createClass({
       
       <div className="statsPage">
           <h3>See how your representative measures up against others across the country.</h3>
-          <h2>MATCH</h2>
           <p>Shows the match in % between how the below voted, and how the people they represent would have voted.</p>
-
+          <div className="filters">
+              <div>Match</div>
+          </div>
           <div className="statsMatch">
-          
                 <div>
                   <h1 className="dynamicNo">19%</h1>
                   <img src={this.state.repLowest.img} />

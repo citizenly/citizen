@@ -935,7 +935,7 @@ p.thankYou {
 }
 
 
-.billTags, .petitionTags {
+.filters {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -1149,15 +1149,12 @@ canvas.littleD {
 
 ////COMPARE, PETITIONS, FEED, STATS////
 
-.comparePage, .petitionsPage {
+.comparePage, .petitionsPage, .statsPage {
   p {
     margin-top: 5%;
   }
 }
 
-.listedItem {
-  margin-bottom: 1em;
-}
 .searchbox {
   font-family: Arimo, sans-serif;
   outline: none;
@@ -1255,17 +1252,15 @@ canvas.littleD {
   text-transform: uppercase;
 }
 
-.billList {
+.list {
   list-style: none;
   margin-bottom: 60px;
-  ul, li {
-    list-style: none;
-  }
-}
-
-.petitionList {
-
-    b {
+      
+      ul, li {
+      list-style: none;
+      }
+      
+      b {
       text-transform: uppercase;
       font-weight: 600;
     }
@@ -1308,6 +1303,10 @@ canvas.littleD {
     margin-bottom: 0px;
     font-weight: 600;
   }
+}
+
+.listedItem {
+  margin-bottom: 1em;
 }
 
 @media only screen and (max-width: 345px) {
