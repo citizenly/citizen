@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
 var Parse = require('parse');
 var event = require('../events.js');
 
-var Login = React.createClass({
+var OldLogin = React.createClass({
   handleSignup: function(e) {
     e.preventDefault();
     var that = this;
@@ -49,4 +49,4 @@ var Login = React.createClass({
   }
 });
 
-module.exports = withRouter(Login);
+module.exports = withRouter(OldLogin);

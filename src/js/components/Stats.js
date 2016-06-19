@@ -89,7 +89,8 @@ var Stats = React.createClass({
           <h3>See how your representative measures up against others across the country.</h3>
           <p>Shows the match in % between how the below voted, and how the people they represent would have voted.</p>
           <div className="filters">
-              <div>Match</div>
+              <div><b>Most/least represented</b></div>
+              <div>Your best match</div>
           </div>
           <div className="statsMatch">
                 <div>
