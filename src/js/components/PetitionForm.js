@@ -60,8 +60,8 @@ var PetitionForm = React.createClass({
   render: function() {
     return (
         <div className="formPage">
-          <h3 className="formTitle">Start new</h3>
-          <p>Once at least 100 people have agreed with your petition and the deadline is up it will be automatically sent to your MP.  </p>
+          <h1>Start new petition</h1>
+          <h3>Once at least 100 people have agreed with your petition and the deadline is up it will be automatically sent to your MP.  </h3>
           <form className="formEntryFields" method="post">
             <input type="text" name="name" placeholder="topic"/>
             <input type="text" name="summary" placeholder="summary"/>

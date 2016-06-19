@@ -204,7 +204,7 @@ header {
   font-weight: 200;
   font-family: Oswald, sans-serif;
   text-transform: uppercase;
-  padding: 0.8em 0.4em 0.8em 0.4em;
+  padding: 1em 0.4em 1em 0.4em;
   text-align: center;
   color: white;
   font-size: smaller;
@@ -1176,9 +1176,9 @@ canvas.littleD {
 
 ////BILLS, PETITIONS, FEED, COMPARISON////
 
-.billsPage {
+.billsPage, .petitionsPage {
   p {
-    margin-top: 4%;
+    margin-top: 5%;
   }
 }
 
@@ -1299,7 +1299,6 @@ canvas.littleD {
 }
 
 .feedList {
-  margin: 10px;
   list-style: none;
   
   ul, li {
@@ -1359,9 +1358,7 @@ canvas.littleD {
   .disclaimerText {
     font-family: Arimo;
     font-size: 0.9em;
-    margin: 0.5em;
-    max-width: 70%;
-    min-width: 70%;
+    max-width: 80%;
   }
 }
 
@@ -1370,18 +1367,15 @@ canvas.littleD {
   flex-direction: column;
   font-family: Arimo;
   outline: none;
-  font-size: 1rem;
+  font-size: 0.9em;
   align-items: center;
   
   input[type=text], input[type=password] {
-    border-radius: 10px 10px 10px 10px;
     margin: 0.5em;
-    max-width: 60%;
-    min-width: 50%;
-    box-shadow: none;
-    font-size: 0.8em;
+    font-size: 0.9em;
     padding: 0.5em;
-    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    box-shadow: inset 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
     text-align: -webkit-center;
     font-family: Oswald, sans-serif;
@@ -1409,6 +1403,7 @@ canvas.littleD {
   width: 100%;
   font-size: 1.4em;
   padding: 3px;
+  border: 0px;
   text-transform: uppercase;
 }
 

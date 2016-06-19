@@ -67,9 +67,10 @@ var Petitions = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="petitionsPage">
           <h1>PETITIONS</h1>
-          <h3>Below are petitions proposed by the public.</h3><h3>You can agree/disagree with these, </h3><h3>or <Link activeClassName="active" to ="/petitionform">create your own petition</Link>.</h3><h3>Once a petition has 100 people from your constituency agreeing with it, it gets sent to your representative.</h3>
+          <h3>Below are petitions proposed by the public.</h3>
+          <p>You can agree/disagree, or <Link activeClassName="active" to ="/petitionform">create your own petition</Link>. Once a petition has 100 people agreeing with it, it gets sent to your representative.</p>
           
           {/*<div className="searchbox">
             <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for petition by word, eg daycare, streets..." />

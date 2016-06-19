@@ -144,13 +144,9 @@ var Petition = React.createClass({
       <div>
         <div>
           <div>
-            <div className="petitionInfo">
-              <div className="pageHeading petitionHeading">
-                Petition
-              </div>
-                
+            <div className="petitionPage">
               <div className="petitionandid">
-                <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
+                <h1>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h1>
               </div>
                 
               <div className="tagDescriptions">
