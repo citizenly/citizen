@@ -19,11 +19,11 @@ var Bill = React.createClass({
     return (
       <div className="listedItem">
         <Link to={"/bill/" + this.props.billId}>
-          <div className="oneLineBillInfo">
+          <div className="inOneLine">
           <h4>{this.props.billId} -</h4>
           { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <h4 className={resultClass}>- {result}</h4> : "" }
           </div>
-          <div className="oneLineBillInfo">
+          <div className="inOneLine">
           <h4>My representative's action - </h4>
           { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <h4 className={ballotClass}>- {ballot}</h4> : "" } 
           </div>
@@ -104,7 +104,7 @@ var Bills = React.createClass({
         <div className="billList">
           {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
           <div>
-            {this.state.billList.length === 0 ? <p>'We will have more filters coming soon'</p> : this.state.billList.map(this.renderBills)}
+            {this.state.billList.length === 0 ? <p>More filters coming soon</p> : this.state.billList.map(this.renderBills)}
           </div>
         </div>
      </div>

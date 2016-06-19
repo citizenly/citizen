@@ -44,7 +44,7 @@ h2 {
 //Descriptions under the headings for each page//
 h3 {
   font-family: Arimo, sans-serif;
-  font-size: 80%;
+  font-size: 90%;
   text-align: center;
 }
 
@@ -63,6 +63,7 @@ h5 {
   font-size: 0.9em;
   color: #2D81CF;
 }
+
 
 p {
   font-family: Arimo, sans-serif;
@@ -87,6 +88,103 @@ img {
   max-width: 100%;
 }
 
+
+@media only screen and (max-width: 345px) {
+  h3 {
+    font-size: 80%;
+  }
+}
+
+////COLORS////(will compact these soon)
+
+.rep, .resultTie {
+  background-color: #778899;
+}
+
+.feed {
+  background-color: #8675B3;
+}
+
+.bills {
+  background-color: #B095C4;
+}
+
+.petitions {
+  background-color: #44A487;
+}
+
+.compare {
+  background-color: #2D81CF;
+}
+
+.resultFailed {
+  color: #8B2530;
+}
+
+.resultPassed {
+  color: #006729;
+}
+
+.partyLib {
+  color: #EE262E;
+  font-weight: 600;
+}
+
+.partyCon{
+  color: #0C499C;
+  font-weight: 600;
+}
+
+.partyNDP {
+  color: #F6821F;
+  font-weight: 600;
+}
+
+.partyBlo {
+  color: #00AEEF;
+  font-weight: 600;
+}
+
+.partyGre{
+  color: #75C321;
+  font-weight: 600;
+}
+
+
+.dynamic {
+  color: #778899;
+  font-weight: 600;
+}
+
+.dynamicFailed {
+  color: #8B2530;
+  font-weight: 600;
+}
+
+.dynamicPassed {
+  color: #006729;
+  font-weight: 600;
+}
+
+.dynamicTie {
+  color: #778899;
+  font-weight: 600;
+}
+
+.dynamicNo {
+  color: #8B2530;
+  font-weight: 600;
+}
+
+.dynamicYe {
+  color: #006729;
+  font-weight: 600;
+}
+
+.dynamicDi {
+  color: #778899;
+  font-weight: 600;
+}
 
 ////NAVBAR////
 
@@ -116,30 +214,7 @@ a.navbutton.active {
   font-weight: 600;
 }
 
-.rep {
-  background-color: #778899;
-}
 
-.compare {
-  background-color: #2D81CF;
-}
-
-.petitions {
-  background-color: #44A487;
-}
-
-.bills {
-  background-color: #B095C4;
-}
-
-.feed {
-  background-color: #8675B3;
-}
-
-.dot {
-  font-size: 2em;
-  color: #778899;
-}
 /*
 nav {
 border-top: 1px solid #ddd;
@@ -420,10 +495,12 @@ input {
   display: flex;
   margin: 0% 3% 6% 3%;
   border-top: 1px solid #ccc;
+  
   .repPic {
-    img {
-      max-width: 80%;
-    }
+    
+      img {
+        max-width: 80%;
+      }
   }
 }
 
@@ -492,69 +569,6 @@ input {
   border-top: 20px solid rgba(0,0,0,0.1);
 }
 
-
-.partyLib {
-  color: #EE262E;
-  font-weight: 600;
-}
-
-.partyCon{
-  color: #0C499C;
-  font-weight: 600;
-}
-
-.partyNDP {
-  color: #F6821F;
-  font-weight: 600;
-}
-
-.partyBlo {
-  color: #00AEEF;
-  font-weight: 600;
-}
-
-.partyGre{
-  color: #75C321;
-  font-weight: 600;
-}
-
-/*.partyPro {
-color: #778899;
-font-weight: 600;
-}
-
-.partyRef {
-color: #778899;
-font-weight: 600;
-}
-
-.partyCan {
-color: #778899;
-font-weight: 600;
-}
-
-.partyInd {
-color: #778899;
-font-weight: 600;
-}
-*/
-
-.aboutAndLogout {
-  display: flex;
-  justify-content: space around;
-  flex-direction: row;
-  position: fixed;
-  bottom: 0;
-  margin-left: -4%;
-  
-  a{
-    padding: 10px;
-    color: white;
-    background-color: #778899;
-    text-transform: uppercase;
-    border-radius: 20px 0px 0px 0px;
-  }
-}
 
 ////ABOUT////
 
@@ -907,41 +921,6 @@ p.thankYou {
 
 ////SINGLE BILL & PETITION////
 
-.dynamic {
-  color: #778899;
-  font-weight: 600;
-}
-
-.dynamicFailed {
-  color: #8B2530;
-  font-weight: 600;
-}
-
-.dynamicPassed {
-  color: #006729;
-  font-weight: 600;
-}
-
-.dynamicTie {
-  color: #778899;
-  font-weight: 600;
-}
-
-.dynamicNo {
-  color: #8B2530;
-  font-weight: 600;
-}
-
-.dynamicYe {
-  color: #006729;
-  font-weight: 600;
-}
-
-.dynamicDi {
-  color: #778899;
-  font-weight: 600;
-}
-
 .petitionTabs p, .voteCompare p {
   color: black;
   text-align: left;
@@ -1006,7 +985,7 @@ p.thankYou {
   }
 }
 
-.oneLineBillInfo {
+.inOneLine {
   display: flex;
   span {
     font-weight: 600;
@@ -1057,12 +1036,13 @@ p.thankYou {
   
   table td div {
     text-align: left !important;
-    font-family: Arimo;
+    font-family: Arimo, sans-serif;
     font-size: 0.9em;
   }
   
   tr {
     font-size: 0.9em;
+    font-family: Arimo, sans-serif;
   }
   
   td {
@@ -1237,43 +1217,6 @@ canvas.littleD {
   }
 }
 
-.pageHeading {
-  position: fixed;
-  top: 6.5%;
-  width: 100%;
-  font-family: Arimo, sans-serif;
-  font-weight: 200;
-  font-size: 0.8em;
-  color: white;
-  background-color: #B095C4;
-  padding: 0.2em 0.2em 0.2em 0.8em;
-  align-items: center;
-  justify-content: left;
-  text-align: left;
-}
-
-.repHeading {
-  background-color: #778899;
-  text-transform: none;
-}
-
-.billsHeading {
-  background-color: #B095C4;
-}
-
-.petitionsHeading {
-  background-color: #44A487;
-}
-
-.whatTheyreDoingHeading {
-  background-color: #8675B3;
-}
-
-.compareHeading{
-  background-color: #2D81CF;
-}
-
-
 .compareMatch {
   display: flex;
   justify-content: space-around;
@@ -1308,52 +1251,35 @@ canvas.littleD {
   width: 50%;
 }
 
-.addPetition {
-  border-radius: 50%;
-  background-color: #44A487;
-  color: white;
-  display: flex;
-  justify-content: space-around;
-  width: 50px;
-  height: 50px;
-  font-family: Oswald, sans-serif;
-  font-weight: 400;
-  font-size: 2.2em;
-  margin-bottom: 20px;
-  
-  :hover{
-    background-color: #778899;
-  }
+.actionButton {
+    display: flex;
+    justify-content: space around;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin-right: 0.4%;
+    text-transform: uppercase;
+    color: white;
+    -webkit-box-shadow: 3px 6px 5px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 3px 6px 5px 2px rgba(0,0,0,0.1);
+    box-shadow: 3px 6px 5px 2px rgba(0,0,0,0.1);
+    border-radius: 0px 20px 0px 0px;
+    
+    a {
+    color: white;
+    border-radius: 0px 20px 0px 0px;
+    padding: 13px 15px 13px 13px;
+    border-right: 1px solid white;
+    font-size: 0.9em;
+    }
+
 }
 
-.resultFailed {
-  color: #8B2530;
-}
-
-.resultPassed {
-  color: #006729;
-}
-
-.resultTie {
-  color: #778899;
-}
 
 .color-result{
   display: flex;
   text-transform: uppercase;
-  
-  
-  .resultFailed {
-    color: #8B2530;
-  }
-  
-  .resultPassed {
-    color: #006729;
-  }
-  
-  .resultTie {
-    color: #778899;
-  }
 }
 
 .billList {
@@ -1365,33 +1291,11 @@ canvas.littleD {
 }
 
 .petitionList {
-  margin-left: 10px;
-  margin-bottom: 10px;
-  font-size: 0.9em;
-  
-  a {
-    color: #2D81CF;
-  }
-  
-  h4 {
-    font-weight: 100;
-    font-family: Oswald, sans-serif;
-    text-transform: uppercase;
-    font-size: 14.5px;
-  }
-  
-  h5 {
-    font-weight: 100;
-    margin-bottom: 20px;
-    font-size: 13px;
-    font-family: Arimo, sans-serif;
-    color: rgb(85, 85, 85);
-    
+
     b {
       text-transform: uppercase;
       font-weight: 600;
     }
-  }
 }
 
 .feedList {

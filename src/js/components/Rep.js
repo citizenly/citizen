@@ -160,7 +160,7 @@ var Rep = React.createClass({
             <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
           </div>
         </div>
-        <div className="aboutAndLogout">
+        <div className="actionButton rep">
           <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
           <Link activeClassName="active" onClick={this.onMenuItemClick} to="/">Logout</Link>
         </div>
