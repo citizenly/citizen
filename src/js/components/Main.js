@@ -64,18 +64,16 @@ var App = React.createClass({
   },
   render: function() {
     
-    // Login / Signup /Logout Links
+    // Logout Link
     if (this.state.loggedIn) {
-      loginSignup = <li>
-        <a onClick={this.userLogout.bind(this, 'logout')} href="/">Logout</a>
+      var loginSignup = <li>
+        <a onClick={this.userLogout.bind(this, 'logout')} href="/home">Logout</a>
       </li>;
       
     } else {
-      var loginSignup = <div>
-        <li>
-          <Link activeClassName="active" onClick={this.onMenuItemClick} to="/login">Login</Link>
-        </li>
-      </div>;
+       loginSignup = <li>
+        <a onClick={this.userLogout.bind(this, 'logout')} href="/">Logout</a>
+      </li>;
     }
     
     // Representative Link
@@ -103,9 +101,6 @@ var App = React.createClass({
             </div>
             
               <ul className={"clearfix menu " + this.state.menutoggle} >
-                <li>
-                  <IndexLink activeClassName="active" onClick={this.onMenuItemClick} to="/">Home</IndexLink>
-                </li>
                 {loginSignup}
                 <li>
                   <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>

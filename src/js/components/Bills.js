@@ -82,7 +82,7 @@ var Bills = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="whatwouldyoudo">
+        <div className="pageHeading billsHeading">
           What would you do?
         </div>
 
@@ -116,16 +116,3 @@ var Bills = React.createClass({
 });
 
 module.exports = withRouter(Bills);
-
-
-
-////FOOTER, IF WE NEED IT///////
-/*
-        <div className="infoFooter"> {this.props.params.filter === "votedonbymyrep"   ? 
-          <div className="infobgcolor">
-            <div className="color-result">
-              <div className="resultPassed">passed</div> / <div className="resultFailed">failed </div> / <div className="resultTie">tie</div>
-            </div>
-            <p>indicates most recent vote in parliament</p>
-          </div> : null}
-        </div> */

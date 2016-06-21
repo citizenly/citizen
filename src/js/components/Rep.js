@@ -124,8 +124,8 @@ var Rep = React.createClass({
             <img src={this.state.rep.img} />
           </div>
 
-          <div className="rep-text">
-            <p>Welcome {this.state.user.firstName} {this.state.user.lastName}.</p>
+          <div className="repText">
+            <p>Welcome {this.state.user.firstName}</p>
             <p>You are being represented by:</p>
             <h2>{this.state.rep.name}</h2>
             <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>

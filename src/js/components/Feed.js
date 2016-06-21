@@ -91,7 +91,7 @@ var Feed = React.createClass({
     return (
       <div>
       
-          <div className="whatTheyreDoingHeading">
+          <div className="pageHeading whatTheyreDoingHeading">
             What They're Doing
           </div>
           

@@ -69,7 +69,7 @@ var Petitions = React.createClass({
     return (
       <div>
       
-          <div className="petitionsHeading">
+          <div className="pageHeading petitionsHeading">
             Petitions
           </div>
           

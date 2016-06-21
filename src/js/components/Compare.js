@@ -86,7 +86,7 @@ var Compare = React.createClass({
     return (
       <div className="comparePage">
       
-          <div className="compareHeading">
+          <div className="pageHeading compareHeading">
             Compare
           </div>
           
