@@ -1,149 +1,115 @@
-/* global localStorage */
+/*global localStorage */
 
-var Link = require('react-router').Link;
 var React = require('react');
+var Link = require('react-router').Link;
 // required for ajax calls
 var axios = require('axios');
+import { withRouter } from 'react-router';
 
+// Bill constructor
+//Only show the result of last vote and how my MP voted about that when the //filter is "votedonbymyrep"
+var Bill = React.createClass({
 
-var Compare = React.createClass({
-  getInitialState: function() {
-    // set inital state as an empty object, to be populated with rep info on componentDidMount
-    return {
-      rep: {
-        name: "",
-        constituency: "",
-        province: "",
-        party: "",
-        img: "",
-      },
-      repLowest: {
-        name: "Stephen Harper",
-        constituency: "Calgary Heritage",
-        province: "AB",
-        party: "Conservative",
-        img: "https://api.openparliament.ca/media/polpics/132_1.jpg",
-      },
-      repHighest: {
-        name: "Julie Dabrusin",
-        constituency: "Toronto—Danforth",
-        province: "ON",
-        party: "Liberal",
-        img: "https://openparliament.ca/media/polpics/_thumbs/julie-dabrusin_jpg_142x230_autocrop_q85.jpg",
-      },
-      shareButtonToggle: false,
-      facebookButton: "",
-      twitterButton: "",
-    };
-  },
-  componentDidMount: function() {
-    var that = this;
-    // get rep info using nameFormatted in url
-    var nameFormatted = localStorage.getItem('repName');
-    console.log(nameFormatted, 'nameFormatted');
-    axios.post('/repinfoget', {
-      repName: nameFormatted
-    })
-    
-    // update this.state with the rep object
-    .then(function(response) {
-      var updateData = that.state.rep;
-      updateData = response.data;
-      console.log(updateData, 'updateData');
-        that.state.rep = updateData;
-        localStorage.setItem("repFullName", that.state.rep.name);
-       that.setState({rep: updateData});
-    })
-    .catch(function(response) {
-    });
-  },
-  handleShareButtonClick: function(e) {
-    e.preventDefault();
-    this.setState({
-      shareButtonToggle: !this.state.shareButtonToggle
-    });
-  },
   render: function() {
-    console.log(this.state.rep.repName, 'this.state.rep.repName');
-    if(!!this.state.rep.name) {
-      var myRep =
-        <div>
-          <h1>34%</h1>
-          <img src={this.state.rep.img}></img>
-          <h2>{this.state.rep.name}</h2>
-          <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
-        </div>;
-    }
-    else {
-      myRep = 
-      <div>
-        <h1>?</h1>
-        <img src="images/silhouette.jpg" style={{border: "1px solid #ccc"}}></img>
-        <h2>unknown</h2>
-        <p>please <Link to="/">enter your postal code</Link> or <Link to="/login">log in</Link> to find your representative</p>
-      </div>;
-    }
-    return (
-      <div className="comparePage">
+      var result = this.props.resultOfVote || "";
+      var resultClass = "result"+result || "";
+      var ballot = this.props.ballot || "";
+      var ballotClass = "dynamic" + (ballot.substring(0, 2)); 
       
-          <div className="pageHeading compareHeading">
-            Compare
+    return (
+      <div className="listedItem">
+        <Link to={"/bill/" + this.props.billId}>
+          <div className="inOneLine">
+          <h4>{this.props.billId} -</h4>
+          { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <h4 className={resultClass}>- {result}</h4> : "" }
           </div>
-          
-          <p><b>Find how your representative's statistics compare against other representatives across the country.</b></p>
-          
-          <h2>MATCH</h2>
-          <p>Shows the match in % between how the below voted, and how the people they represent would have voted.</p>
-
-          <div className="compareMatch">
-          
-                <div>
-                  <h1 className="dynamicNo">19%</h1>
-                  <img src={this.state.repLowest.img} />
-                  <h2>{this.state.repLowest.name}</h2>
-                  <p><span className={"party" + this.state.repLowest.party.substring(0, 3)}>{this.state.repLowest.party}</span> MP for {this.state.repLowest.constituency} {this.state.repLowest.province}</p>
-                </div>
-          
-                {myRep}
-            
-                <div>
-                  <h1 className="dynamicYe">65%</h1>
-                  <img src={this.state.repHighest.img} />
-                  <h2>{this.state.repHighest.name}</h2>
-                  <p><span className={"party" + this.state.repHighest.party.substring(0, 3)}>{this.state.repHighest.party}</span> MP for {this.state.repHighest.constituency} {this.state.repHighest.province}</p>
-                </div>
-          
+          <div className="inOneLine">
+          <h4>My representative's action - </h4>
+          { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <h4 className={ballotClass}>- {ballot}</h4> : "" } 
           </div>
-          <div className="shareFooter">
-            <div className="onlyFbTwShare">
-              <div className="share">
-                <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
-                <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-                <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
-              </div>
-            </div>
-          </div>
-          
+          <h5>{this.props.billTitle}</h5>
+        </Link>
       </div>
-
     );
   }
 });
 
-module.exports = Compare;
 
+// Bills constructor
+var Compare = React.createClass({
+  getInitialState: function() {
+    // set inital state to determine which list of bills is displayed - 'rep voted' by default
+    return {
+      billList: [],
+      repFullName: ""
+    };
+  },
+  componentDidMount: function() {
+    this.loadData();
+  },
+  componentWillMount: function(){
+    this.setState({
+      repFullName: localStorage.getItem('repFullName')
+    });
+  },
+  componentDidUpdate: function(prevProps) {
+    if(prevProps.params.filter !== this.props.params.filter) {
+      this.loadData();
+    }
+  },
+  loadData: function() {
+    var that = this;
+    // set filter as url parameter
+    var filter = this.props.params.filter;
+    this.setState({loading: true});
 
-/////IN CASE WE NEED A SEARCH OR TAGS IN THE FUTURE////////
-/*
-         <div className="searchbox">
-            <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for comparison by word, eg daycare, streets..." />
+    // post filter to server and this.setState({billList: response.data})
+    var repName = localStorage.getItem("repName");
+    axios.post('/postfilter', {
+      filter: filter,
+      repName: repName
+    })
+    .then(function(response) {
+      that.setState({billList: response.data, loading: false});
+    })
+    .catch(function(response) {
+      console.log(response, 'response');
+    });
+  },
+  renderBills: function(bill) {
+    return (
+      <li key={bill.billId}>
+        <Bill billTitle={bill.billTitle} billId={bill.billId} resultOfVote={bill.resultOfVote} params={{filter: this.props.params.filter}} ballot={bill.ballot}/>
+      </li>
+    );
+  },
+  render: function() {
+    return (
+      <div className="comparePage">
+        <h3>What would you have done?</h3>
+        
+        {/* <div className="searchbox">
+              <input ref="search" className="searchinput" type="text" name="search" maxLength="20" placeholder="Search for bill by word, eg health, crime..." />
+            </div>*/} 
+            
+          {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills {this.state.repFullName} has voted on. <span className="dynamicYe">PASSED</span>/<span className="dynamicNo">FAILED</span>/<span className="dynamicDi">TIE</span> indicates the bill's latest status in parliament</p>  : ""} 
+          {this.props.params.filter === "proposedbymyrep"  ? <p>The below shows bills your representative {this.state.repFullName} has proposed.</p>  : ""} 
+        <div className="filters">
+          <div><Link activeClassName="active" to="/compare/votedonbymyrep">New votes</Link></div>
+          <div><Link activeClassName="active" to="/compare/">My votes</Link></div>
+          <div><Link activeClassName="active" to="/compare/proposedbymyrep">Proposed</Link></div>
+          <div><Link activeClassName="active" to="/compare/active">Active</Link></div>
+          <div><Link activeClassName="active" to="/compare/all">All</Link></div>
+        </div>
+        <div className="list">
+          {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
+          <div>
+            {this.state.billList.length === 0 ? <p>More filters coming soon</p> : this.state.billList.map(this.renderBills)}
           </div>
-  
-          <div className="compareTags">
-              <div><Link activeClassName="active" to="/petitions/active">new</Link></div>
-              <div><Link activeClassName="active" to="/petitions/hot">hot</Link></div>
-              <div><Link activeClassName="active" to="/petitions/passed">passed</Link></div>
-              <div><Link activeClassName="active" to="/petitions/failed">failed</Link></div>
-              <div><Link activeClassName="active" to="/petitions/mine">mine</Link></div>
-              <div><Link activeClassName="active" to="/petitions/all">all</Link></div>
-          </div>*/
+        </div>
+     </div>
+    );
+  }
+});
+
+module.exports = withRouter(Compare);

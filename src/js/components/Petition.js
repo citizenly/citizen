@@ -12,7 +12,7 @@ var DoughnutChart = require("react-chartjs").Doughnut;
 
 
 //HULLO :) the 'value' below is to be replaced with the yes/no votes to the petition.).
-var countryData = [{color: "#006729", value: 250, label: "AGREE"}, {color: "#8B2530", value: 10, label: "DISAGREE"}, {color: "rgba(0,0,0,0.5)", value: 50, label: "REMAINING"}]
+var countryData = [{color: "#006729", value: 150, label: "AGREE"}, {color: "#8B2530", value: 10, label: "DISAGREE"}, {color: "rgba(0,0,0,0.5)", value: 200, label: "REMAINING"}]
 
 
 var Petition = React.createClass({
@@ -20,15 +20,15 @@ var Petition = React.createClass({
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
       petition: {
-        id: 'e-337',
-        title: 'Bank of Canada',
-        summary: 'Whereas: Since 1974 Canadians have been paying billions in needless interest to international financiers called the Bank of International Settlements; Before this, the publicly-owned Bank of Canada had a mandate and practice of lending interest-free money to federal, provincial, and municipal governments for infrastructure and healthcare spending; Since this switch Canadian taxpayers have been needlessly paying anywhere from $20 billion to $60 billion a year in compounded interest; and This is money that could have been used to better the lives of every single Canadian, and instead we have been needlessly paying large sums of money with no gain and massive losses for Canada. We, the undersigned, citizens of Canada, call upon the Government of Canada to restore the use of the Bank of Canada to its original purpose, by exercising its public statutory duty and responsibility. That purpose includes making interest free loans to the municipal, provincial, and federal governments for ‘human capital’ expenditures (education, health, other social services) and/or infrastructure expenditures.',
-        proposedBy: 'Trevor Millar',
-        sponsor: 'Elizabeth May', //For a petition to be valid it needs to have a sponsor (for example your MP). Future functionality: Feed the proposed petitions to your MP, who can choose which ones to sponsor. If they click they'll sponsor it, it becomes active on the petitions page. ALTERNATIVELY adding the 'sponsor' could be in the very final stage, where the petition receives 100 supporters and gets sent to the MP, who gets the choice of sponsoring it. If he/she doesnt, despite the fact that 100 of their constituents would like them to, then we could make this fact visible in a list under 'petitions' (petitions sent to MP (sponsored, not sponsored).
+        id: 'e-119',
+        title: 'Canadian citizenship',
+        summary: 'Whereas: Changes to citizenship regulations have created a two-tiered citizenship system in Canada for adopted children that discriminates against children who have been granted citizenship through the direct route by not allowing them to pass on citizenship to their birth children if born outside of Canada. We, the undersigned, citizens of Canada, call upon the House of Commons to: 1. Amend the citizenship regulations for children who are adopted outside of Canada to ensure that they are treated equally regardless of whether they are granted citizenship through the direct route or the naturalization process; and 2. Request that amendments are made to protect adopted children so other governments in the future cannot strip adopted children of their inalienable rights as Canadian citizens.',
+        proposedBy: 'Graeme Ball',
+        sponsor: 'Nathaniel Erskine-Smith', //For a petition to be valid it needs to have a sponsor (for example your MP). Future functionality: Feed the proposed petitions to your MP, who can choose which ones to sponsor. If they click they'll sponsor it, it becomes active on the petitions page. ALTERNATIVELY adding the 'sponsor' could be in the very final stage, where the petition receives 100 supporters and gets sent to the MP, who gets the choice of sponsoring it. If he/she doesnt, despite the fact that 100 of their constituents would like them to, then we could make this fact visible in a list under 'petitions' (petitions sent to MP (sponsored, not sponsored).
         dateOpen: "2015-06-11",
         dateClose: "2016-06-11",
-        daysLeft: "23"/*NUMBER (diff between dateOpen and dateClose)*/,
-        keywords: "Bank of Canada, Government borrowing, Interest rates",
+        daysLeft: "34"/*NUMBER (diff between dateOpen and dateClose)*/,
+        keywords: "Citizenship, Immigration, International adoption",
         comments: "Start the discussion"
       },
       content: "",
@@ -144,15 +144,10 @@ var Petition = React.createClass({
       <div>
         <div>
           <div>
-            <div className="petitionInfo">
-              <div className="pageHeading petitionHeading">
-                Petition
-              </div>
-                
+            <div className="petitionPage">
               <div className="petitionandid">
-                <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
+                <h1>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h1>
               </div>
-                
               <div className="tagDescriptions">
                 <p>Keywords: <span className="dynamic">{this.state.petition.keywords}</span></p>
               </div>
@@ -160,7 +155,6 @@ var Petition = React.createClass({
                 <p> <span className="dynamic">{this.state.petition.daysLeft}</span> Days left</p>
               </div>
           </div>
-    
           <div className="petitionTabs">
             <ul>
               <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Topic</li>
@@ -177,11 +171,11 @@ var Petition = React.createClass({
         
         </div>
         
-        <div className="legends">
+      <div className="legends">
           <h3 className="petitionNo">Disagree</h3>
           <h3 className="petitionGrey">Remaining</h3>
           <h3 className="petitionYes">Agree</h3>
-        </div>
+      </div>
         
         <div className="petitionChartContainer">
           <div className="petitionVoteComparison">
@@ -209,3 +203,4 @@ var Petition = React.createClass({
 });
 
 module.exports = withRouter(Petition);
+

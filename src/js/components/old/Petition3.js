@@ -144,15 +144,10 @@ var Petition = React.createClass({
       <div>
         <div>
           <div>
-            <div className="petitionInfo">
-              <div className="pageHeading petitionHeading">
-                Petition
-              </div>
-                
+            <div className="petitionPage">
               <div className="petitionandid">
-                <h3>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h3>
+                <h1>Petition  <span className="petitionnumber">{this.state.petition.id}</span></h1>
               </div>
-                
               <div className="tagDescriptions">
                 <p>Keywords: <span className="dynamic">{this.state.petition.keywords}</span></p>
               </div>
@@ -160,14 +155,12 @@ var Petition = React.createClass({
                 <p> <span className="dynamic">{this.state.petition.daysLeft}</span> Days left</p>
               </div>
           </div>
-    
           <div className="petitionTabs">
             <ul>
               <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Topic</li>
               <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
               <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Neighbour comments</li>
             </ul>
-    
           	<div className="box-wrap">
             	<div id="box">
             	  <p>{this.state.content}</p>

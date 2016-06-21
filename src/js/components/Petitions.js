@@ -67,55 +67,63 @@ var Petitions = React.createClass({
 
   render: function() {
     return (
-      <div>
-      
-          <div className="pageHeading petitionsHeading">
-            Petitions
-          </div>
+      <div className="petitionsPage">
+          <h3>Below are petitions proposed by the public.</h3>
+          <p>You can agree/disagree, or <Link activeClassName="active" to ="/petitionform">create your own petition</Link>. Once a petition has 100 people agreeing with it, it gets sent to your representative.</p>
           
-          <div className="searchbox">
+          {/*<div className="searchbox">
             <input ref="search" className="searchinput " type="text" name="search" maxLength="20" placeholder="Search for petition by word, eg daycare, streets..." />
-          </div>
-  
-          <div className="petitionTags">
+            </div>*/} 
+          
+          <div className="filters">
               <div><Link activeClassName="active" to="/petitions/active">new</Link></div>
               <div><Link activeClassName="active" to="/petitions/hot">hot</Link></div>
-              <div><Link activeClassName="active" to="/petitions/passed">passed</Link></div>
+              <div><Link activeClassName="active" to="/petitions/passed">sent</Link></div>
               <div><Link activeClassName="active" to="/petitions/failed">failed</Link></div>
               <div><Link activeClassName="active" to="/petitions/mine">mine</Link></div>
               <div><Link activeClassName="active" to="/petitions/all">all</Link></div>
           </div>
           
-          <div className="petitionList">
-
-         <Link to="/petition1"><h4> e-119 Canadian citizenship </h4>
-         <h5><b>keywords:</b> Citizenship, Immigration, Adoption</h5>
+          <div className="list">
+          <div className="listedItem">
+         <Link to="/petition">
+         <h4><b>e-119</b></h4>
+          <h4>keywords: Citizenship, Immigration, Adoption</h4>
+         <h5>Canadian citizenship</h5>
          </Link>
-         
-         <Link to="/petition2"><h4> e-270 Aquaculture </h4>
-         <h5><b>keywords:</b> Atlantic salmon, Retaining ponds, Water quality</h5>
+         </div>
+        <div className="listedItem">
+         <Link to="/petition2">
+         <h4><b>e-270</b></h4>
+        <h4>keywords: Atlantic salmon, Retaining ponds, Water quality</h4>
+        <h5>Aquaculture</h5>
+        </Link>
+        </div>
+        <div className="listedItem">
+         <Link to="/petition3">
+         <h4><b>e-263</b></h4>
+        <h4>keywords: Freedom, Hospitals, Medical assistance in dying, Mental health, Young people</h4>
+         <h5>Assisted Suicide</h5>
          </Link>
-         
-         
-         <Link to="/petition3"><h4> e-263 Assisted Suicide </h4>
-         <h5><b>keywords:</b> Freedom, Hospitals, Medical assistance in dying, Mental health, Young people</h5>
+        </div>
+        <div className="listedItem">
+         <Link to="/petition4">
+         <h4><b>e-337</b></h4>
+          <h4>keywords: Bank of Canada, Government borrowing, Interest rates</h4>
+          <h5>Bank of Canada</h5>
          </Link>
-         
-         <Link to="/petition4"><h4> e-337 Bank of Canada </h4>
-         <h5><b>keywords:</b> Bank of Canada, Government borrowing, Interest rates</h5>
+         </div>
+          <div className="listedItem">
+         <Link to="/petition5">
+         <h4><b>e-18</b></h4>
+        <h4>keywords: Decriminalization, Marijuana, Possession of a controlled substance</h4>
+         <h5> Cannabis </h5>
          </Link>
-         
-         <Link to="/petition5"><h4> e-18 Cannabis </h4>
-         <h5><b>keywords:</b> Decriminalization, Marijuana, Possession of a controlled substance</h5>
-         </Link>
-
-         
           </div>
-  
-          <footer>
-            <Link className="addPetition" activeClassName="active" to ="/petitionform">+</Link>
-          </footer>
-
+          </div>
+            <div className="actionButton petitions">
+            <Link activeClassName="active" to ="/petitionform">New</Link>
+            </div>
           
         {/*  
         <div className="petitionList">

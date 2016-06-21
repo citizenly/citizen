@@ -67,7 +67,7 @@ var App = React.createClass({
     // Logout Link
     if (this.state.loggedIn) {
       var loginSignup = <li>
-        <a onClick={this.userLogout.bind(this, 'logout')} href="/home">Logout</a>
+        <a onClick={this.userLogout.bind(this, 'logout')} href="/login">Logout</a>
       </li>;
       
     } else {
@@ -91,7 +91,25 @@ var App = React.createClass({
     return (
       <div>
         <header>
-          <nav>
+            <Link className="navbutton rep" activeClassName="active" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
+            <Link className="navbutton feed" activeClassName="active" onClick={this.onMenuItemClick} to={feedLink}>Feed</Link>
+            <Link className="navbutton compare" activeClassName="active" onClick={this.onMenuItemClick} to ="/compare/votedonbymyrep">Compare</Link>
+            <Link className="navbutton petitions" activeClassName="active" onClick={this.onMenuItemClick} to ="/petitions">Petitions</Link>
+            <Link className="navbutton stats" activeClassName="active" onClick={this.onMenuItemClick} to ="/stats">Stats</Link>
+        </header>
+        <div className="site-wrap">
+          <main>{this.props.children}</main>
+        </div>
+      </div>
+    );
+  }
+});
+
+
+module.exports = withRouter(App);
+
+
+/*          <nav>
             <div className="hamburgerDiv">
               <a href="#" onClick={this.onClick} className="hamburger">
                 <div className="line"></div>
@@ -122,19 +140,21 @@ var App = React.createClass({
                 </li>
               </ul>
               
-          </nav>
-          
-        </header>
-
-        <div className="site-wrap">
-          <main>{this.props.children}</main>
-        </div>
-      </div>
-    );
-  }
-});
-
-
-module.exports = withRouter(App);
-
-
+              
+              
+              
+              
+              
+                          <div className="hamburgerDiv">
+              <a href="#" onClick={this.onClick} className="hamburger">
+                <div className="dot">...</div>
+              </a>
+            </div>
+              <ul className={"clearfix menu " + this.state.menutoggle} >
+                {loginSignup}
+                <li>
+                  <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
+                </li>
+              </ul>
+              
+          </nav>*/
