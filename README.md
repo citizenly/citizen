@@ -1,65 +1,81 @@
 # CITIZEN
 
-README FOR DUMMIES (WIP. This is the 2016-11-13 version)
+**README FOR DUMMIES** *2016-11-13 version*
 
-First install:
+
+
+**First time set up, step-by-step:**  
+
+*First install these:*
 
 1. Visual studio code (or whichever code editor you like)
+2. Xcode
+3. Homebrew (and memcached):
+`$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`  `$ brew install memcached`  
+4. Docker: https://www.docker.com/products/docker#/mac - and once you’ve installed Docker, run this in terminal:   
+    `$ docker run --name=mongo --detach -p 27017:27017 --restart=always mongo:3.0`  
+    `$ docker exec -ti mongo mongo`  
 
-2. You would need xcode on your system as well.
+*Then do this:*
 
-3. Install homebrew: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` 
-    1. `brew install memcached`  
-
-4. Install Docker: https://www.docker.com/products/docker#/mac once you’ve installed Docker, run this in terminal:   
-    1. `docker run --name=mongo --detach -p 27017:27017 --restart=always mongo:3.0`  
-    2. `docker exec -ti mongo mongo`  
-
-Step-by-step  
-
-1. go to https://github.com/citizenly/citizen
-2. click ‘clone or download’ and copy the address `https://github.com/citizenly/citizen.git`
-3. open terminal
-4. cd Documents
+1. Go to https://github.com/citizenly/citizen
+2. Click ‘clone or download’ and copy the address `https://github.com/citizenly/citizen.git`
+3. Open terminal
+4. `cd Documents` *...or wherever else you wish to put the project.*
 5. `git clone https://github.com/citizenly/citizen.git`
-6. cd citizen
-7. npm install
-  (IF GET ERROR WITH PERMISSIONS: sudo xcodebuild -license (and agree))
-8. sudo gem install sass
-9. install a parse server:  
+6. `cd citizen`
+7. `npm install`
+  *If get error with permissions: *`sudo xcodebuild -license`* (and agree)*
+8. `sudo gem install sass`
+9. Install a parse server:  
+  `$ cd Documents`
+  `$ git clone https://github.com/ParsePlatform/parse-server.git`
+`$ cd parse-server`  
+`$ docker build --tag parse-server .`  
+`$ docker run --name my-parse-server --link mongo:mongo parse-server --appId “arbitrary” --masterKey “arbitrary” --databaseURI mongodb://mongo/test`
 
-  $ cd Documents
-  $ git clone https://github.com/ParsePlatform/parse-server.git
+10. Open a new tab and run `$ memcached -d`  
+*This will start a memcached server on port 11211 - you can check if it’s running by running *`$ lsof -i :11211` *and you can stop it by running* `$ killall memcached`
 
-  $ cd parse-server
+11. `$ cd citizen`
 
-  $ docker build --tag parse-server .
+12. Start server and webpack (build frontend code)
 
-  $ docker run --name my-parse-server --link mongo:mongo parse-server --appId “arbitrary” --masterKey “arbitrary” --databaseURI mongodb://mongo/test
-
-10. open a new tab and run $ memcached -d
-
-  this will start a memcached server on port 11211 - you can check if it’s running by running lsof -i :11211 you can stop it you can run killall memcached
-
-11. cd citizen
-
-12. start server and webpack (build frontend code)
-
-  $ `npm start`  and in a different tab  $ `npm run build:watch`      when you want to rebuild on frontend code changes
+  `$ npm start`  and in a different tab  `$ npm run build:watch`      when you want to rebuild on frontend code changes
 
   OR
 
-  $ `npm run build`  and in a different tab $ `npm run start:watch`  when you want to rebuild on backend code changes
+  `$ npm run build`  and in a different tab `$ npm run start:watch`  when you want to rebuild on backend code changes
 
   OR
 
-  $ `npm run start:watch`   and in a different tab  $ `npm run build:watch` when you want to rebuild on any code changes
+  `$ npm run start:watch`   and in a different tab  `$ npm run build:watch` when you want to rebuild on any code changes
 
-13. open browser, go to localhost:8080
+13. Open browser, go to localhost:8080
+14. ALL SET. Dandy.
 
 
 
-FROM PREVIOUS README, NOT TESTED, DEPLOY STUFF:
+**When starting in the future:**
+
+1. `$ cd citizen`
+2. `$ code .`
+3. New tab: `$ memcached -d`
+4. New tab: start server and webpack (build frontend code)
+`$ npm start`  and in a different tab  `$ npm run build:watch`      when you want to rebuild on frontend code changes   
+OR  
+`$ npm run build`  and in a different tab `$ npm run start:watch`  when you want to rebuild on backend code changes  
+OR  
+`$ npm run start:watch`   and in a different tab`$ npm run build:watch`      when you want to rebuild on any code changes. 
+
+5. Open browser, go to localhost:8080
+
+
+*If error: Docker should already be running. If not, check step 9 in step-by-step. You might have to start it up again with* `$ docker run --name my-parse-server --link mongo:mongo parse-server --appId “arbitrary” --masterKey “arbitrary” --databaseURI mongodb://mongo/test`  
+
+
+
+**FROM PREVIOUS README, NOT TESTED, DEPLOY STUFF:**
 
 // Run webpack for Prod
 webpack --config webpack.config.prod.js
