@@ -15,7 +15,7 @@ var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B253
 var neighbourData = [{color: "#4EA32A", value: 150, label: "YES"}, {color: "#D56500", value: 120, label: "NO"}]
 
 
-var Bill = React.createClass({
+var SingleBill = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
@@ -220,16 +220,4 @@ var Bill = React.createClass({
 }
 });
 
-module.exports = withRouter(Bill);
-
-
-
-/*      <div className="legends">
-          <h3>What your </h3> <h3>  </h3>
-          <h3 className="cNo">coun</h3>
-          <h3 className="cYes">try</h3>
-          <h3> and </h3>
-          <h3 className="nNo">neigh</h3>
-          <h3 className="cYes">bours</h3>
-          <h3> think</h3>
-      </div>*/
+module.exports = withRouter(SingleBill);

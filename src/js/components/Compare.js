@@ -18,7 +18,7 @@ var Bill = React.createClass({
       
     return (
       <div className="listedItem">
-        <Link to={"/bill/" + this.props.billId}>
+        <Link to={"/singlebill/" + this.props.billId}>
           <div className="inOneLine">
           <h4>{this.props.billId} -</h4>
           { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <h4 className={resultClass}>- {result}</h4> : "" }

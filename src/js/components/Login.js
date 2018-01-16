@@ -67,7 +67,7 @@ var Login = React.createClass({
        
       <form onSubmit={this.handleSubmit}>
         <div className="postcodeinputandentry">
-          <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
+          <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code (eg. H3B1A6)" />
         </div>
         <div className="postcodeinputandentry">
         <input ref="firstname" className="firstname" type="text" name="firstname" maxLength="50" placeholder="first name*" />
