@@ -4,6 +4,7 @@ var React = require('react');
 var axios = require('axios');
 var $ = require('jquery');
 import { withRouter } from 'react-router';
+
 var Parse = require('parse');
 var Vote = Parse.Object.extend('Vote');
 var DoughnutChart = require("react-chartjs").Doughnut;
@@ -156,18 +157,35 @@ var SingleBill = React.createClass({
     return (
       <div>
           <div className="billInfo">
-            <div className="billandid">
-              <h1>BILL <span className="billnumber">{this.state.bill.id}</span></h1>
-            </div>
+            <div className="centered-container">
+              <div className="top-h2">BILL {this.state.bill.id}</div>
+              <p>Latest status in parliament:</p>
+              <div className="sub-h2 dynamic">{this.state.bill.status}</div>
+              <div className="progress-bar">
+                <div className="yes-votes"></div>
+                <div className="no-votes"></div>
+              </div>
 
-            <div className="tagDescriptions">
-              <p>Bill status: <span className="dynamic">{this.state.bill.status}</span></p>
-              <p>My representative voted: {repVoted}</p>
-              <p>Proposed by: <span className="dynamic">{this.state.bill.proposedBy}</span>
-                <span className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}> - {this.state.bill.partyOfSponsor}</span>
-              </p> 
             </div>
-
+            
+            <div className="bill-info">
+              <div className="one-line-spread">
+                <p>Bill status: </p>
+                <p className="dynamic">{this.state.bill.status}</p>
+              </div>
+              <div className="one-line-spread">
+                <p>My representative voted: </p>
+                <p>{repVoted}</p>
+              </div>
+              <div className="one-line-spread">
+                <p>Proposed by: </p>
+                <div className="flex-column">
+                  <p className="dynamic">{this.state.bill.proposedBy}</p>
+                  <div className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}>{this.state.bill.partyOfSponsor}</div>
+                </div>
+              </div>
+            </div>
+            
             {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
 
             <div className="billTabs">
@@ -184,23 +202,7 @@ var SingleBill = React.createClass({
               </div>
             </div>
           </div>
-
-      <div className="legends">
-          <h3>what my -</h3>
-          <h3 className="cNo">coun</h3>
-          <h3 className="cYes">try</h3>
-          <h3> & </h3>
-          <h3 className="nNo">neigh</h3>
-          <h3 className="nYes">bours</h3>
-          <h3>- think</h3>
-      </div>
-      
-      <div className="billChartContainer">
-        <div className="countryAndNeighboursComparison">
-          <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
-          <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
-        </div>
-      </div>
+     
       <div className="votingAndSharingActions">
       <div className="footerExplanation">
         <h3>Choose how you would have voted</h3>

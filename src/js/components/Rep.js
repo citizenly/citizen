@@ -124,7 +124,7 @@ var Rep = React.createClass({
     
     return (
     <div className="repPage">
-      <div className="rep-container">
+      <div className="centered-container">
       
         <div className="top-h2">{this.state.rep.name}</div>
         <div className="sub-h2">SPEAKS FOR YOU</div>
@@ -139,13 +139,13 @@ var Rep = React.createClass({
         <div className="back-line"></div>
 
         <div className="bubble-container-large">
-          <div className="compare top-bubble">
+          <div className="dark-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
               <div className="bubble-text">you agree</div>
               <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '?'}</div>
               </Link>
           </div>
-          <div className="bottom-bubble bubble-button">
+          <div className="compare bottom-bubble bubble-button">
               <Link activeClassName="active" to ="/compare/votedonbymyrep">
               <div className="bubble-button-text">COMPARE</div>
               </Link>
@@ -155,13 +155,13 @@ var Rep = React.createClass({
         <div className="back-line"></div>
 
         <div className="bubble-container-medium">
-          <div className="feed top-bubble">
+          <div className="dark-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to="/rep/marc-miller/feed">
               <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '10'}</div>
               <div className="bubble-text">new statements</div>
               </Link>
           </div>
-          <div className="bottom-bubble bubble-button">
+          <div className="feed bottom-bubble bubble-button">
               <Link activeClassName="active" to ="/compare/votedonbymyrep">
               <div className="bubble-button-text">CHECK</div>
               </Link>
@@ -171,13 +171,13 @@ var Rep = React.createClass({
         <div className="back-line"></div>
 
         <div className="bubble-container-small">
-          <div className="petitions top-bubble">
+          <div className="dark-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/petitions">
               <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '3'}</div>
               <div className="bubble-text">new petitions</div>
               </Link>
           </div>
-          <div className="bottom-bubble bubble-button">
+          <div className="petitions bottom-bubble bubble-button">
               <Link activeClassName="active" to ="/compare/votedonbymyrep">
               <div className="bubble-button-text">ENGAGE</div>
               </Link>
