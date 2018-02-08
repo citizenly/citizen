@@ -161,11 +161,12 @@ var SingleBill = React.createClass({
               <div className="top-h2">BILL {this.state.bill.id}</div>
               <p>Latest status in parliament:</p>
               <div className="sub-h2 dynamic">{this.state.bill.status}</div>
-              <div className="progress-bar">
-                <div className="yes-votes"></div>
-                <div className="no-votes"></div>
-              </div>
-
+            </div>
+            
+            <div className="share">
+              <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
+              <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+              <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
             </div>
             
             <div className="bill-info">
@@ -179,10 +180,7 @@ var SingleBill = React.createClass({
               </div>
               <div className="one-line-spread">
                 <p>Proposed by: </p>
-                <div className="flex-column">
-                  <p className="dynamic">{this.state.bill.proposedBy}</p>
-                  <div className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}>{this.state.bill.partyOfSponsor}</div>
-                </div>
+                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
               </div>
             </div>
             
@@ -203,20 +201,20 @@ var SingleBill = React.createClass({
             </div>
           </div>
      
-      <div className="votingAndSharingActions">
-      <div className="footerExplanation">
-        <h3>Choose how you would have voted</h3>
-      </div>
-        <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
-        <div className="share">
-          <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
-          <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-          <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
+     <div className="fixed-footer white-bg-color">
+        <div className="centered-container">
+          <div className="sub-h2">swipe what you'd vote</div>
         </div>
-
-        <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>
+        <div className="voting-indicators">
+          <div className="no" onClick={this.handleRBtnClick} className={this.state.redBtnToggle}><i className="fa fa-caret-left"></i>  no</div>
+          <div className="yes" onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes  <i className="fa fa-caret-right"></i></div>
+        </div>
+        <div className="progress-bar">
+          <div className="no-votes"></div>
+          <div className="yes-votes"></div>
         </div>
       </div>
+      
     </div>
   );
 }

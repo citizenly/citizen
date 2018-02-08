@@ -34,8 +34,14 @@ body {
   flex-direction: column;
 }
 
+
+//Colors
 .dark-grey-bg-color {
   background-color: #666;
+}
+
+.white-bg-color {
+  background-color: #fff;
 }
 
 //Main headings ('About', 'Bill', 'Petition', 'Start New Petition')//
@@ -105,13 +111,21 @@ img {
   max-width: 100%;
 }
 
+//Fixed footer
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
 //Progress bar
 .progress-bar {
   display: flex;
   align-items: center;
   flex-direction: row;
   width: 100%;
-  height: 1rem;
+  height: 1.5rem;
   
   .yes-votes {
     background-color: #006729;
@@ -124,6 +138,16 @@ img {
     width: 30%;
     height: 100%;
   }
+}
+
+//Voting indicators
+.voting-indicators {
+  display: flex;
+  justify-content: space-between;
+  font-family: Oswald, sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin: 0 5px;
 }
 
 
@@ -715,7 +739,7 @@ p.thankYou {
   display: flex;
   width: 100%;
   justify-content: center;
-  //margin: 0px 20px; //top and bottom 0px, left and right 20px
+  margin: 10px 0;
 }
 
 .shareButton {
@@ -1192,41 +1216,6 @@ canvas.petitionDoughnut {
   margin-top: 10px;
 }
 
-.countryAndNeighboursComparison {
-  width: 50%;
-}
-
-canvas.bigD {
-  width: 50% !important;
-  height: 50% !important;
-  display: block;
-  margin: 0 auto;
-}
-
-canvas.littleD {
-  height: 25% !important;
-  width: 25% !important;
-  display: block;
-  margin: 0 auto;
-  margin-top: -37.5%;
-}
-
-.countryYes {
-  background-color: #006729
-}
-
-.countryNo {
-  background-color: #8B2530
-}
-
-.neighboursYes {
-  background-color: #4EA32A
-}
-
-.neighboursNo {
-  background-color: #D56500
-}
-
 .petitionYes {
   color: #006729
 }
@@ -1237,32 +1226,6 @@ canvas.littleD {
 
 .petitionGrey {
   color: #778899
-}
-
-.legends {
-  font-weight: 200;
-  text-transform: uppercase;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 5vh 0px 1vh;
-  
-  
-  .cYes {
-    color: #006729
-  }
-  
-  .cNo {
-    color: #8B2530
-  }
-  
-  .nYes {
-    color: #4EA32A
-  }
-  
-  .nNo {
-    color: #D56500
-  }
 }
 
 
