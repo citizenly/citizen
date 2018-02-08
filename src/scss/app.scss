@@ -1484,9 +1484,20 @@ canvas.petitionDoughnut {
 .loading {
   overflow: hidden;
   background-color: #B095C4;
-  padding: 10px 0px 0px;
-  width: 50%;
-  margin: 0 auto 40px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 50%;
+  position: fixed;
+  opacity: .85;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+
   p {
     color: #fff;
     text-align: center;
