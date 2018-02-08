@@ -126,10 +126,8 @@ var Rep = React.createClass({
     
       <div className="rep-container">
       
-        <div className="repPic">
-          <img src={this.state.rep.img} />
-        </div>
-        
+        <img src={this.state.rep.img} alt="" className="round-image" />
+
         <div className="repText">
           <h2>{this.state.rep.name}</h2>
           <p className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</p> 
