@@ -123,25 +123,23 @@ var Rep = React.createClass({
     console.log(this.props.params.repName, 'this.props.params.repName')
     return (
     <div className="repPage">
-    
       <div className="rep-container">
-      
-        <img src={this.state.rep.img} alt="" className="round-image" />
-
         <div className="repText">
-          <h2>{this.state.rep.name}</h2>
+          <div className="top-h2">{this.state.rep.name}</div>
+          <div className="sub-h2">SPEAKS FOR YOU</div>
+          <img src={this.state.rep.img} alt="" className="round-image" />
           <p className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</p> 
           <p>{this.state.rep.constituency} {this.state.rep.province}</p>
           <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
-          <h2>SPEAKS FOR YOU</h2>
         </div>
-        
+
+        <div className="back-line"></div>
+
         <div className="bubble-container">
           <div className="repstatsbackgroundcolor top-bubble">
               <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
               <h2>YOU AGREE</h2>
               <div className="percent-value">{this.state.coherence.length > 1 ? this.state.coherence : '?'}</div>
-              <h2>WITH THEIR ACTIONS</h2>
               </Link>
           </div>
           <div className="bottom-bubble bubble-button">
@@ -150,7 +148,9 @@ var Rep = React.createClass({
               </Link>
           </div>
         </div>
-         
+        
+        <div className="back-line"></div>
+
         </div>
         <div className="actionButton rep">
           <Link activeClassName="active" onClick={this.onMenuItemClick} to="/">Logout</Link>

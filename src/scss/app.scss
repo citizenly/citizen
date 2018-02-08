@@ -132,29 +132,36 @@ img {
   font-weight: 600;
 }
 
+.partyLib,
+.partyCon,
+.partyNDP,
+.partyBlo,
+.partyGre {
+  color: white;
+  width: fit-content;
+  padding: 2px 12px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
 .partyLib {
-  color: #EE262E;
-  font-weight: 600;
+  background-color: #EE262E;
 }
 
 .partyCon{
-  color: #0C499C;
-  font-weight: 600;
+  background-color: #0C499C;
 }
 
 .partyNDP {
-  color: #F6821F;
-  font-weight: 600;
+  background-color: #F6821F;
 }
 
 .partyBlo {
-  color: #00AEEF;
-  font-weight: 600;
+  background-color: #00AEEF;
 }
 
 .partyGre{
-  color: #75C321;
-  font-weight: 600;
+  background-color: #75C321;
 }
 
 
@@ -452,13 +459,6 @@ input {
 
 
 ////REP////
-
-
-.percent-value {
-  font-size: 5rem;
-}
-
-
 .rep-container {
   display: flex;
   flex-direction: column;
@@ -467,8 +467,21 @@ input {
   overflow: hidden;
   text-align: center;
   
-  h2 {
-    text-align: center;
+  .top-h2, 
+  .sub-h2 {
+    font-family: Oswald, sans-serif;
+    text-transform: uppercase;
+  }
+  
+  .top-h2 {
+    font-size: 2.2rem;
+    font-weight: 500;
+  }
+  
+  .sub-h2 {
+    font-size: 1.3rem;
+    font-weight: 200;
+    margin-top: 0;
   }
 
   .round-image {
@@ -485,22 +498,32 @@ input {
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
+  
+  .top-bubble,
+  .bottom-bubble {
+    height: 100px;
+    width: 200px;
+  }
+  
+  .top-bubble {
+    border-top-left-radius: 200px;
+    border-top-right-radius: 200px;
+  }
+  
+  .bottom-bubble {
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
+  }
+    
+  .percent-value {
+    font-size: 2.5rem;
+  }
 }
 
-.top-bubble,
-.bottom-bubble {
-  height: 100px;
-  width: 200px;
-}
-
-.top-bubble {
-  border-top-left-radius: 200px;
-  border-top-right-radius: 200px;
-}
-
-.bottom-bubble {
-  border-bottom-left-radius: 200px;
-  border-bottom-right-radius: 200px;
+.back-line {
+  background-color: grey;
+  width: 1px;
+  height: 30px;
 }
 
 //Button
@@ -509,9 +532,11 @@ input {
   -moz-box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.75);
   box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.75);
   background-color: #666;
+  text-align: center;
   
   h2 {
     color: #fff;
+    margin-top: 10px;
   }
 }
 
