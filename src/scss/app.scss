@@ -34,6 +34,9 @@ body {
   flex-direction: column;
 }
 
+.opacity {
+  opacity: .85;
+}
 
 //Colors
 .dark-grey-bg-color {
@@ -43,6 +46,7 @@ body {
 .white-bg-color {
   background-color: #fff;
 }
+
 
 //Main headings ('About', 'Bill', 'Petition', 'Start New Petition')//
 h1 {
@@ -1048,7 +1052,13 @@ p.thankYou {
 
 ////SINGLE BILL & PETITION////
 .bill-info {
-  margin: 20px 0;
+  margin: 20px -15px;
+  padding: 5px 20px;
+  background-color: #fafafa;
+
+  p {
+    margin: 5px 0;
+  }
 }
 
 .petitionTabs p, .voteCompare p {

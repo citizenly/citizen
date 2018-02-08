@@ -201,7 +201,7 @@ var SingleBill = React.createClass({
             </div>
           </div>
      
-     <div className="fixed-footer white-bg-color">
+     <div className="fixed-footer white-bg-color opacity">
         <div className="centered-container">
           <div className="sub-h2">swipe what you'd vote</div>
         </div>
