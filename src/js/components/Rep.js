@@ -124,14 +124,16 @@ var Rep = React.createClass({
     return (
     <div className="repPage">
       <div className="rep-container">
-        <div className="repText">
-          <div className="top-h2">{this.state.rep.name}</div>
-          <div className="sub-h2">SPEAKS FOR YOU</div>
-          <img src={this.state.rep.img} alt="" className="round-image" />
-          <p className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</p> 
-          <p>{this.state.rep.constituency} {this.state.rep.province}</p>
-          <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
-        </div>
+      
+        <div className="top-h2">{this.state.rep.name}</div>
+        <div className="sub-h2">SPEAKS FOR YOU</div>
+        
+        <img src={this.state.rep.img} alt="" className="round-image" />
+        
+        <div className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</div>
+        
+        <p>{this.state.rep.constituency} {this.state.rep.province}</p>
+        <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
 
         <div className="back-line"></div>
 
