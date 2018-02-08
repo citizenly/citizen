@@ -120,7 +120,17 @@ var Rep = React.createClass({
   },
  /* For now, we put the date of the last election to be in 2015 because for some of the MPs, the openparliament API gives us the date of the first time he/she was elected instead of the date of the last election. That is the way to refer to the date get from the openparliament API :{this.state.rep.electedYear} */
   render: function() {
-    console.log(this.props.params.repName, 'this.props.params.repName')
+    console.log(this.props, 'this.props');
+    
+    // Representative Link
+    var feedLink;
+    var repName = this.params.repName;
+    if (repName) {
+      feedLink = '/rep/'+repName+'/feed';
+    }
+    else {
+      feedLink = '/';
+    }
     return (
     <div className="repPage">
       <div className="rep-container">
@@ -137,21 +147,51 @@ var Rep = React.createClass({
 
         <div className="back-line"></div>
 
-        <div className="bubble-container">
-          <div className="repstatsbackgroundcolor top-bubble">
+        <div className="bubble-container-large">
+          <div className="compare top-bubble">
               <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
-              <h2>YOU AGREE</h2>
-              <div className="percent-value">{this.state.coherence.length > 1 ? this.state.coherence : '?'}</div>
+              <div className="bubble-text">you agree</div>
+              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '?'}</div>
               </Link>
           </div>
           <div className="bottom-bubble bubble-button">
               <Link activeClassName="active" to ="/compare/votedonbymyrep">
-              <h2>COMPARE</h2>
+              <div className="bubble-button-text">COMPARE</div>
               </Link>
           </div>
         </div>
         
         <div className="back-line"></div>
+
+        <div className="bubble-container-medium">
+          <div className="feed top-bubble">
+              <Link className="you" activeClassName="active" to={feedLink}>
+              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '10'}</div>
+              <div className="bubble-text">new statements</div>
+              </Link>
+          </div>
+          <div className="bottom-bubble bubble-button">
+              <Link activeClassName="active" to ="/compare/votedonbymyrep">
+              <div className="bubble-button-text">CHECK</div>
+              </Link>
+          </div>
+        </div>
+        
+        <div className="back-line"></div>
+
+        <div className="bubble-container-small">
+          <div className="petitions top-bubble">
+              <Link className="you" activeClassName="active" to ="/petitions">
+              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '3'}</div>
+              <div className="bubble-text">new petitions</div>
+              </Link>
+          </div>
+          <div className="bottom-bubble bubble-button">
+              <Link activeClassName="active" to ="/compare/votedonbymyrep">
+              <div className="bubble-button-text">ENGAGE</div>
+              </Link>
+          </div>
+        </div>
 
         </div>
         <div className="actionButton rep">
