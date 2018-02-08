@@ -122,15 +122,6 @@ var Rep = React.createClass({
   render: function() {
     console.log(this.props, 'this.props');
     
-    // Representative Link
-    var feedLink;
-    var repName = this.params.repName;
-    if (repName) {
-      feedLink = '/rep/'+repName+'/feed';
-    }
-    else {
-      feedLink = '/';
-    }
     return (
     <div className="repPage">
       <div className="rep-container">
@@ -165,7 +156,7 @@ var Rep = React.createClass({
 
         <div className="bubble-container-medium">
           <div className="feed top-bubble">
-              <Link className="you" activeClassName="active" to={feedLink}>
+              <Link className="you" activeClassName="active" to="/rep/marc-miller/feed">
               <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '10'}</div>
               <div className="bubble-text">new statements</div>
               </Link>
