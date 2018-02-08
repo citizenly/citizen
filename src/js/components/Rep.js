@@ -123,48 +123,41 @@ var Rep = React.createClass({
     console.log(this.props.params.repName, 'this.props.params.repName')
     return (
     <div className="repPage">
-    <h3>Hello {this.state.user.firstName}, you are being represented by:</h3>
+    
       <div className="rep-container">
-        <div className="repInfo">
-          <div className="repPic">
-            <img src={this.state.rep.img} />
+      
+        <div className="repPic">
+          <img src={this.state.rep.img} />
+        </div>
+        
+        <div className="repText">
+          <h2>{this.state.rep.name}</h2>
+          <p className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</p> 
+          <p>{this.state.rep.constituency} {this.state.rep.province}</p>
+          <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
+          <h2>SPEAKS FOR YOU</h2>
+        </div>
+        
+        <div className="bubble-container">
+          <div className="repstatsbackgroundcolor top-bubble">
+              <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
+              <h2>YOU AGREE</h2>
+              <div className="percent-value">{this.state.coherence.length > 1 ? this.state.coherence : '?'}</div>
+              <h2>WITH THEIR ACTIONS</h2>
+              </Link>
           </div>
-          <div className="repText">
-            <h2>{this.state.rep.name}</h2>
-            <p><span className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</span> MP for {this.state.rep.constituency} {this.state.rep.province}</p>
-            <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
+          <div className="bottom-bubble bubble-button">
+              <Link activeClassName="active" to ="/compare/votedonbymyrep">
+              <h2>COMPARE</h2>
+              </Link>
           </div>
         </div>
-        <div className="borderForRepStats">
-        <h3>Percentage of how often they vote the same as...</h3>
-        <div className="rep-stats-container">
-          <div className="repstatsbackgroundcolor">
-            <div className="neighbours">
-              <h2>Your neighbours</h2>
-              <h1>34%</h1>
-            </div>
-            <div className="you">
-            <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
-            <h2>you</h2>
-            <h1>{this.state.coherence.length > 1 ? this.state.coherence : '?'}</h1>
-            </Link>
-            </div>
-          </div>
-          <div id="seperator"></div>
-          <div className="down"></div>
-          </div>
-          <div className="onlyFbTwShare">
-            <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
-            <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-            <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out how well my MP actually represents me&url=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
-          </div>
+         
         </div>
         <div className="actionButton rep">
-          <Link activeClassName="active" onClick={this.onMenuItemClick} to="/about">About</Link>
           <Link activeClassName="active" onClick={this.onMenuItemClick} to="/">Logout</Link>
         </div>
       </div>
-    </div>
     );
   }
 });

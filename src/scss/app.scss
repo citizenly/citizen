@@ -453,11 +453,11 @@ input {
 
 ////REP////
 
-.repPage {
-  h1 {
-    margin-bottom: 4%;
-  }
+
+.percent-value {
+  font-size: 5rem;
 }
+
 
 .rep-container {
   display: flex;
@@ -465,43 +465,58 @@ input {
   align-items: center;
   justify-content: space-around;
   overflow: hidden;
-  text-align: left;
-  h3 {
-    text-align: left;
-  }
-}
-
-.repInfo {
-  display: flex;
-  margin: 0% 3% 6% 3%;
-  border-top: 1px solid #ccc;
+  text-align: center;
   
+  h2 {
+    text-align: center;
+  }
+
   .repPic {
     
-      img {
-        max-width: 80%;
-      }
+    img {
+      max-width: 100%;
+      border-radius: 50%;
+    }
   }
 }
 
-.rep-stats-container {
+.bubble-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 
-.borderForRepStats {
-  border-top: 1px solid #ccc;
-  h3 {
-    text-align: left;
+.top-bubble,
+.bottom-bubble {
+  height: 100px;
+  width: 200px;
+}
+
+.top-bubble {
+  border-top-left-radius: 200px;
+  border-top-right-radius: 200px;
+}
+
+.bottom-bubble {
+  border-bottom-left-radius: 200px;
+  border-bottom-right-radius: 200px;
+}
+
+//Button
+.bubble-button {
+  -webkit-box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.75);
+  background-color: #666;
+  
+  h2 {
+    color: #fff;
   }
 }
 
-.you, .neighbours {
+
+.neighbours {
   
   h1 {
     font-family: Oswald, sans-serif;
