@@ -429,7 +429,13 @@ input {
 
 .postcodeinputandentry {
   display: flex;
-  height: 2.5em;
+  flex-direction: column;
+  width: 100%;
+}
+
+.login-field {
+  height: 3.5rem;
+  width: 16rem;
 }
 
 .postcodebutton {
