@@ -142,7 +142,7 @@ var Rep = React.createClass({
           <div className="dark-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
               <div className="bubble-text">you agree</div>
-              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '?'}</div>
+              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '38%'}</div>
               </Link>
           </div>
           <div className="compare bottom-bubble bubble-button">

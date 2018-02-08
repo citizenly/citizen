@@ -100,7 +100,8 @@ var Feed = React.createClass({
     return (
       <div>
           <div className="centered-container">
-            <div className="top-h2">what {this.state.repFullName} has been saying</div>
+            <div className="top-h2">statements</div>
+            <div className="sub-h2">by {this.state.repFullName}</div>
           </div>
           
           <div className="feedList">
