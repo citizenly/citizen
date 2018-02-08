@@ -1,5 +1,12 @@
 # CITIZEN
 
+// CLOUD 9
+Once setup project, run like this:
+1. Terminal: sass --watch src/scss/app.scss:public/css/main.css, webpack --watch
+2. New run configuration: Node.js
+
+
+
 // run these 2 commands and wait for the packages to install
 
 npm install
