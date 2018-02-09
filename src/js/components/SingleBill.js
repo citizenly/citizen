@@ -170,7 +170,7 @@ var SingleBill = React.createClass({
             </div>
           </div>
           
-          <div className="billInfo">
+          <div className="wrapper-w-header">
             <div className="centered-container">
               <div className="top-h2">BILL {this.state.bill.id}</div>
               <p>Latest status in parliament:</p>
