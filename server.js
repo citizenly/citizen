@@ -55,7 +55,7 @@ var api = new ParseServer({
   appId: 'XYZ',
   masterKey: 'ABC', // Keep this key secret!
   fileKey: 'file-key-not-sure',
-  serverURL: process.env.PARSE_URL || 'https://citizen-molecularcode.c9users.io/parse' // Don't forget to change to https if needed
+  serverURL: process.env.PARSE_URL || 'http://localhost:1337/parse' // Don't forget to change to https if needed
 });
 
 // Serve the Parse API on the /parse URL prefix
