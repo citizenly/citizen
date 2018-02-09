@@ -8,13 +8,11 @@ gem install sass
 
 
 //run these commands to get started
-nodemon server.js
-webpack --watch
 memcached -d
 run-mongo
 
 Once setup project, run like this:
-1. Terminal: sass --watch src/scss/app.scss:public/css/main.css, webpack --watch
+1. Terminal: sass --watch src/scss/app.scss:public/css/main.css, webpack --watch, nodemon server.js
 2. New run configuration: Node.js
 
 
