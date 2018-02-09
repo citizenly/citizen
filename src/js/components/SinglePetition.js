@@ -15,7 +15,7 @@ var DoughnutChart = require("react-chartjs").Doughnut;
 var countryData = [{color: "#006729", value: 150, label: "AGREE"}, {color: "#8B2530", value: 10, label: "DISAGREE"}, {color: "rgba(0,0,0,0.5)", value: 200, label: "REMAINING"}]
 
 
-var Petition = React.createClass({
+var SinglePetition = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
@@ -202,5 +202,5 @@ var Petition = React.createClass({
   }
 });
 
-module.exports = withRouter(Petition);
+module.exports = withRouter(SinglePetition);
 

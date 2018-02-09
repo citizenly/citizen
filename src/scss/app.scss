@@ -21,6 +21,33 @@ body {
   margin: 4%;
 }
 
+
+//Helper classes
+.one-line-spread {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.opacity {
+  opacity: .85;
+}
+
+//Colors
+.dark-grey-bg-color {
+  background-color: #666;
+}
+
+.white-bg-color {
+  background-color: #fff;
+}
+
+
 //Main headings ('About', 'Bill', 'Petition', 'Start New Petition')//
 h1 {
   font-weight: 800;
@@ -88,6 +115,45 @@ img {
   max-width: 100%;
 }
 
+//Fixed footer
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+//Progress bar
+.progress-bar {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 1.5rem;
+  
+  .yes-votes {
+    background-color: #006729;
+    width: 70%;
+    height: 100%;
+  }
+  
+  .no-votes {
+    background-color: #8B2530;
+    width: 30%;
+    height: 100%;
+  }
+}
+
+//Voting indicators
+.voting-indicators {
+  display: flex;
+  justify-content: space-between;
+  font-family: Oswald, sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin: 0 5px;
+}
+
 
 @media only screen and (max-width: 345px) {
   h3 {
@@ -117,47 +183,63 @@ img {
   background-color: #2D81CF;
 }
 
+.resultFailed, .dynamicFailed, .dynamicNo,
+.resultPassed, .dynamicPassed, .dynamicYe,
+.dynamic, .dynamicTie, .dynamicDi {
+  color: #fff;
+  font-weight: 400;
+  width: fit-content;
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+
 .resultFailed, .dynamicFailed, .dynamicNo {
-  color: #8B2530;
-  font-weight: 600;
+  background-color: #8B2530;
 }
 
 .resultPassed, .dynamicPassed, .dynamicYe {
-  color: #006729;
-  font-weight: 600;
+  background-color: #006729;
 }
 
 .dynamic, .dynamicTie, .dynamicDi {
-  color: #778899;
-  font-weight: 600;
+  background-color: #778899;
+}
+
+.partyLib,
+.partyCon,
+.partyNDP,
+.partyBlo,
+.partyGre {
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  font-size: .9rem;
+  color: #fff;
+  width: fit-content;
+  padding: 2px 7px;
+  border-radius: 2px;
+  font-weight: 400;
+  margin: 3px 0;
 }
 
 .partyLib {
-  color: #EE262E;
-  font-weight: 600;
+  background-color: #EE262E;
 }
 
 .partyCon{
-  color: #0C499C;
-  font-weight: 600;
+  background-color: #0C499C;
 }
 
 .partyNDP {
-  color: #F6821F;
-  font-weight: 600;
+  background-color: #F6821F;
 }
 
 .partyBlo {
-  color: #00AEEF;
-  font-weight: 600;
+  background-color: #00AEEF;
 }
 
 .partyGre{
-  color: #75C321;
-  font-weight: 600;
+  background-color: #75C321;
 }
-
-
 
 
 ////NAVBAR////
@@ -429,7 +511,13 @@ input {
 
 .postcodeinputandentry {
   display: flex;
-  height: 2.5em;
+  flex-direction: column;
+  width: 100%;
+}
+
+.login-field {
+  height: 3.5rem;
+  width: 16rem;
 }
 
 .postcodebutton {
@@ -446,101 +534,170 @@ input {
 
 
 ////REP////
-
-.repPage {
-  h1 {
-    margin-bottom: 4%;
-  }
-}
-
-.rep-container {
+.centered-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   overflow: hidden;
-  text-align: left;
-  h3 {
-    text-align: left;
-  }
-}
-
-.repInfo {
-  display: flex;
-  margin: 0% 3% 6% 3%;
-  border-top: 1px solid #ccc;
+  text-align: center;
   
-  .repPic {
-    
-      img {
-        max-width: 80%;
-      }
+  .top-h2, 
+  .sub-h2 {
+    font-family: Oswald, sans-serif;
+    text-transform: uppercase;
+  }
+  
+  .top-h2 {
+    font-size: 2.2rem;
+    font-weight: 500;
+  }
+  
+  .sub-h2 {
+    font-size: 1.3rem;
+    font-weight: 200;
+    margin-top: 0;
+  }
+
+  .round-image {
+    width: 150px;
+    height: 170px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center right;
   }
 }
 
-.rep-stats-container {
+.bubble-container-large,
+.bubble-container-medium,
+.bubble-container-small {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.borderForRepStats {
-  border-top: 1px solid #ccc;
-  h3 {
-    text-align: left;
-  }
-}
-
-.you, .neighbours {
   
-  h1 {
-    font-family: Oswald, sans-serif;
-    font-size: 2.5em;
-    font-weight: 800;
-    margin-top: -4px;
-    margin-bottom: 5px;
-    cursor: pointer;
+  .top-bubble,
+  .bottom-bubble {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
   }
   
-  h2 {
+  .bubble-text,
+  .bubble-button-text {
     font-family: Oswald, sans-serif;
-    font-size: 0.9em;
+    font-size: 1rem;
+    font-weight: 200;
+    text-transform: uppercase;
+  }
+  
+  .bubble-button-text {
+    font-size: 1.3rem;
+  }
+  
+  .bubble-value,
+  .bubble-text {
+    color: #fff;
+    margin: -4px 0;
   }
 }
 
-.repstatsbackgroundcolor {
-  display: flex;
-  justify-content: space-around;
-  flex-grow: 1;
-  background: rgba(0,0,0,0.1);
-  padding: 10px;
+.bubble-container-large {
+  
+  .top-bubble,
+  .bottom-bubble {
+    height: 100px;
+    width: 200px;
+  }
+  
+  .top-bubble {
+    border-top-left-radius: 200px;
+    border-top-right-radius: 200px;
+  }
+  
+  .bottom-bubble {
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
+  }
+  
+  .bubble-value {
+    font-size: 3.4rem;
+    margin: -10px 0 -15px 0;
+  }
 }
 
+.bubble-container-medium {
 
-#seperator {
-  background: #34495E;
-  height: 10px;
-  left: 0; right: 0;
+  .top-bubble,
+  .bottom-bubble {
+    height: 80px;
+    width: 160px;
+  }
+  
+  .top-bubble {
+    border-top-left-radius: 160px;
+    border-top-right-radius: 160px;
+  }
+  
+  .bottom-bubble {
+    border-bottom-left-radius: 160px;
+    border-bottom-right-radius: 160px;
+  }
+  
+  .bubble-value {
+    font-size: 2.3rem;
+  }
 }
 
-.down {
-  width: 100%;
-  margin-bottom: 10px;
+.bubble-container-small {
+
+  .top-bubble,
+  .bottom-bubble {
+    height: 60px;
+    width: 120px;
+  }
+  
+  .top-bubble {
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+  }
+  
+  .bottom-bubble {
+    border-bottom-left-radius: 120px;
+    border-bottom-right-radius: 120px;
+  }
+  
+  .bubble-value {
+    font-size: 1.6rem;
+  }
 }
 
-.down:after {
-  content: '';
-  display: block;
-  margin: 0 auto;
-  width: 0px;
-  height: 0px;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid rgba(0,0,0,0.1);
+.back-line {
+  background-color: grey;
+  width: 1px;
+  height: 30px;
+}
+
+//Button
+.bubble-button {
+  -webkit-box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px -3px 5px 0px rgba(0,0,0,0.75);
+  transition: box-shadow 0.3s ease-in-out;
+  text-align: center;
+  
+  .bubble-button-text {
+    color: #fff;
+    text-align: center;
+  }
+}
+
+.bubble-button:hover,
+.bubble-button:focus {
+  -webkit-box-shadow: inset 0px 7px 15px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: inset 0px 7px 15px 0px rgba(0,0,0,0.75);
+  box-shadow: inset 0px 7px 15px 0px rgba(0,0,0,0.75);
 }
 
 
@@ -586,7 +743,7 @@ p.thankYou {
   display: flex;
   width: 100%;
   justify-content: center;
-  //margin: 0px 20px; //top and bottom 0px, left and right 20px
+  margin: 10px 0;
 }
 
 .shareButton {
@@ -894,6 +1051,15 @@ p.thankYou {
 
 
 ////SINGLE BILL & PETITION////
+.bill-info {
+  margin: 20px -15px;
+  padding: 5px 20px;
+  background-color: #fafafa;
+
+  p {
+    margin: 5px 0;
+  }
+}
 
 .petitionTabs p, .voteCompare p {
   color: black;
@@ -920,19 +1086,6 @@ p.thankYou {
   }
 }
 
-
-.tagDescriptions {
-  font-family: Oswald, sans-serif;
-  font-weight: 400;
-  font-size: 0.8em;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 5px;
-  padding-bottom: 30px;
-  text-transform: uppercase;
-}
 
 
 .filters {
@@ -1073,41 +1226,6 @@ canvas.petitionDoughnut {
   margin-top: 10px;
 }
 
-.countryAndNeighboursComparison {
-  width: 50%;
-}
-
-canvas.bigD {
-  width: 50% !important;
-  height: 50% !important;
-  display: block;
-  margin: 0 auto;
-}
-
-canvas.littleD {
-  height: 25% !important;
-  width: 25% !important;
-  display: block;
-  margin: 0 auto;
-  margin-top: -37.5%;
-}
-
-.countryYes {
-  background-color: #006729
-}
-
-.countryNo {
-  background-color: #8B2530
-}
-
-.neighboursYes {
-  background-color: #4EA32A
-}
-
-.neighboursNo {
-  background-color: #D56500
-}
-
 .petitionYes {
   color: #006729
 }
@@ -1118,32 +1236,6 @@ canvas.littleD {
 
 .petitionGrey {
   color: #778899
-}
-
-.legends {
-  font-weight: 200;
-  text-transform: uppercase;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 5vh 0px 1vh;
-  
-  
-  .cYes {
-    color: #006729
-  }
-  
-  .cNo {
-    color: #8B2530
-  }
-  
-  .nYes {
-    color: #4EA32A
-  }
-  
-  .nNo {
-    color: #D56500
-  }
 }
 
 
@@ -1385,16 +1477,25 @@ canvas.littleD {
 }
 
 
-
-
 ///LOADING SPINNER////
 
 .loading {
   overflow: hidden;
   background-color: #B095C4;
-  padding: 10px 0px 0px;
-  width: 50%;
-  margin: 0 auto 40px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 50%;
+  position: fixed;
+  opacity: .85;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+
   p {
     color: #fff;
     text-align: center;

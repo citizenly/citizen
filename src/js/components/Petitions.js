@@ -8,63 +8,6 @@ import { withRouter } from 'react-router';
 // Petition constructor
 var Petitions = React.createClass({
   
-  
-//BELOW IS JUST FOR REFERENCE, IT'S THE MODIFIED CODE BASED ON THE 'BILLS' PAGE. THE ONLY THING DIFFERENT IS THAT bills HAVE BEEN REPLACED WITH petitions. 
-/*
-  render: function() {
-    return (
-      <div>
-        <h2>{this.props.petitionId} <span className="result">{this.props.result}</span></h2>
-        <h4>{this.props.petitionTitle}</h4>
-      </div>
-    );
-  }
-});
-
-
-// Petition constructor
-var Petitions = React.createClass({
-  getInitialState: function() {
-    // set inital state to determine which list of petitions is displayed - active by default
-    // ** need to fix my logic because it's always reverting to /active!
-    return {
-      petitionList: [],
-    };
-  },
-  componentDidMount: function() {
-    this.loadData();
-  },
-  componentDidUpdate: function(prevProps) {
-    if(prevProps.params.filter !== this.props.params.filter) {
-      this.loadData();
-    }
-  },
-  loadData: function() {
-    var that = this;
-    // set filter as url parameter
-    var filter = this.props.params.filter;
-    
-    // post filter to server and this.setState({petitionList: response.data})
-    this.setState({loading: true});
-    axios.post('/postfilter', {
-      filter: filter
-    })
-    .then(function(response) {
-      that.setState({petitionList: response.data, loading: false});
-    })
-    .catch(function(response) {
-      console.log(response, 'response');
-    });
-  },
-  renderPetitions: function(petition) {
-    return (
-      <li key={petition.petitionId}>
-        <Petition petitionTitle={petition.petitionTitle} petitionId={petition.petitionId} result={petition.result}/>
-      </li>
-    );
-  },
-*/
-
   render: function() {
     return (
       <div className="petitionsPage">
@@ -86,7 +29,7 @@ var Petitions = React.createClass({
           
           <div className="list">
           <div className="listedItem">
-         <Link to="/petition">
+         <Link to="/singlepetition">
          <h4><b>e-119</b></h4>
           <h4>keywords: Citizenship, Immigration, Adoption</h4>
          <h5>Canadian citizenship</h5>

@@ -63,19 +63,17 @@ var Login = React.createClass({
       <div className="intro">
           <p>In a democracy you elect someone to make decisions for you. Find out what they're currently doing in your name.</p>
           <h1>WHO'S REPRESENTING ME?</h1>
+          <h3>CANADA</h3>
       </div>
        
       <form onSubmit={this.handleSubmit}>
         <div className="postcodeinputandentry">
-          <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code" />
-        </div>
-        <div className="postcodeinputandentry">
-        <input ref="firstname" className="firstname" type="text" name="firstname" maxLength="50" placeholder="first name*" />
-        <input ref="lastname" className="lastname" type="text" name="lastname" maxLength="50" placeholder="last name*" />
-          <input ref="password" className="password" type="password" name="password" maxLength="50" placeholder="password*" />          
-        </div>
-        <div className="postcodeinputandentry">
-          <button className="postcodebutton" type="submit">FIND OUT</button>
+          <div className="login-field">
+            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code (eg. H3B1A6)" />
+          </div>
+          <div className="login-field">
+            <button className="postcodebutton" type="submit">FIND OUT</button>
+          </div>
         </div>
         <Message/>
       </form>

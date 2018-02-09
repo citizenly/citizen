@@ -4,6 +4,7 @@ var React = require('react');
 var axios = require('axios');
 var $ = require('jquery');
 import { withRouter } from 'react-router';
+
 var Parse = require('parse');
 var Vote = Parse.Object.extend('Vote');
 var DoughnutChart = require("react-chartjs").Doughnut;
@@ -15,7 +16,7 @@ var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B253
 var neighbourData = [{color: "#4EA32A", value: 150, label: "YES"}, {color: "#D56500", value: 120, label: "NO"}]
 
 
-var Bill = React.createClass({
+var SingleBill = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with bill info on componentDidMount
     return {
@@ -156,18 +157,33 @@ var Bill = React.createClass({
     return (
       <div>
           <div className="billInfo">
-            <div className="billandid">
-              <h1>BILL <span className="billnumber">{this.state.bill.id}</span></h1>
+            <div className="centered-container">
+              <div className="top-h2">BILL {this.state.bill.id}</div>
+              <p>Latest status in parliament:</p>
+              <div className="sub-h2 dynamic">{this.state.bill.status}</div>
             </div>
-
-            <div className="tagDescriptions">
-              <p>Bill status: <span className="dynamic">{this.state.bill.status}</span></p>
-              <p>My representative voted: {repVoted}</p>
-              <p>Proposed by: <span className="dynamic">{this.state.bill.proposedBy}</span>
-                <span className={"party" + this.state.bill.partyOfSponsor.substring(0, 3)}> - {this.state.bill.partyOfSponsor}</span>
-              </p> 
+            
+            <div className="share">
+              <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
+              <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+              <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
             </div>
-
+            
+            <div className="bill-info">
+              <div className="one-line-spread">
+                <p>Bill status: </p>
+                <p className="dynamic">{this.state.bill.status}</p>
+              </div>
+              <div className="one-line-spread">
+                <p>My representative voted: </p>
+                <p>{repVoted}</p>
+              </div>
+              <div className="one-line-spread">
+                <p>Proposed by: </p>
+                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
+              </div>
+            </div>
+            
             {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
 
             <div className="billTabs">
@@ -184,52 +200,24 @@ var Bill = React.createClass({
               </div>
             </div>
           </div>
-
-      <div className="legends">
-          <h3>what my -</h3>
-          <h3 className="cNo">coun</h3>
-          <h3 className="cYes">try</h3>
-          <h3> & </h3>
-          <h3 className="nNo">neigh</h3>
-          <h3 className="nYes">bours</h3>
-          <h3>- think</h3>
+     
+     <div className="fixed-footer white-bg-color opacity">
+        <div className="centered-container">
+          <div className="sub-h2">swipe what you'd vote</div>
+        </div>
+        <div className="voting-indicators">
+          <div className="no" onClick={this.handleRBtnClick} className={this.state.redBtnToggle}><i className="fa fa-caret-left"></i>  no</div>
+          <div className="yes" onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes  <i className="fa fa-caret-right"></i></div>
+        </div>
+        <div className="progress-bar">
+          <div className="no-votes"></div>
+          <div className="yes-votes"></div>
+        </div>
       </div>
       
-      <div className="billChartContainer">
-        <div className="countryAndNeighboursComparison">
-          <DoughnutChart className="bigD" data={countryData} options={{animateRotate: true, animation: true, responsive: true}} width="200" height= "200" />
-          <DoughnutChart className="littleD" data={neighbourData} options={{animateRotate: true, animation: true, responsive: true}} width="100" height= "100" />
-        </div>
-      </div>
-      <div className="votingAndSharingActions">
-      <div className="footerExplanation">
-        <h3>Choose how you would have voted</h3>
-      </div>
-        <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
-        <div className="share">
-          <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
-          <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-          <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
-        </div>
-
-        <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>
-        </div>
-      </div>
     </div>
   );
 }
 });
 
-module.exports = withRouter(Bill);
-
-
-
-/*      <div className="legends">
-          <h3>What your </h3> <h3>  </h3>
-          <h3 className="cNo">coun</h3>
-          <h3 className="cYes">try</h3>
-          <h3> and </h3>
-          <h3 className="nNo">neigh</h3>
-          <h3 className="cYes">bours</h3>
-          <h3> think</h3>
-      </div>*/
+module.exports = withRouter(SingleBill);
