@@ -8,7 +8,6 @@ html {
 
 body {
   margin: 0;
-  margin-top: 15%;
   height: 100%;
   font-family: Oswald, sans-serif;
   color: #555;
@@ -36,6 +35,26 @@ body {
 
 .opacity {
   opacity: .85;
+}
+
+.wrapper-w-header {
+  margin-top: 27%;
+}
+
+.fixed-home-btn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #778899;
+  border-radius: 0 3px 3px 0;
+  z-index: 10;
+  padding: 4px 6px;
+  
+  a {
+    font-family: Oswald, sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+  }
 }
 
 //Colors
@@ -115,12 +134,21 @@ img {
   max-width: 100%;
 }
 
-//Fixed footer
+//Fixed header/footer
+.fixed-header,
 .fixed-footer {
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%;
+}
+
+.fixed-header {
+  top: 0;
+  padding-top: 15px;
+}
+
+.fixed-footer {
+  bottom: 0;
 }
 
 //Progress bar
@@ -133,13 +161,13 @@ img {
   
   .yes-votes {
     background-color: #006729;
-    width: 70%;
+    width: 50%;
     height: 100%;
   }
   
   .no-votes {
     background-color: #8B2530;
-    width: 30%;
+    width: 50%;
     height: 100%;
   }
 }
@@ -245,6 +273,7 @@ img {
 ////NAVBAR////
 
 header {
+  display: none !important;
   position: fixed;
   bottom: 0;
   display: flex;
@@ -429,7 +458,6 @@ input {
 
 .main {
   height: 100%;
-  margin-top: -15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1051,8 +1079,9 @@ p.thankYou {
 
 
 ////SINGLE BILL & PETITION////
+
 .bill-info {
-  margin: 20px -15px;
+  margin: 20px 0;
   padding: 5px 20px;
   background-color: #fafafa;
 

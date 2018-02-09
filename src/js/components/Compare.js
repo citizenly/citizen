@@ -99,9 +99,9 @@ var Compare = React.createClass({
           <div><Link activeClassName="active" to="/compare/all">All</Link></div>
         </div>
         <div className="list">
-          {this.state.loading ? <p>Please wait while we find all the Bills...</p> : null}
+          {this.state.loading ? <div className="loading"><p>Gathering bills</p><div className="loader">Loading...</div></div> : null}
           <div>
-            {this.state.billList.length === 0 ? <p>More filters coming soon</p> : this.state.billList.map(this.renderBills)}
+            {this.state.billList.length === 0 ? <p>Hold on...</p> : this.state.billList.map(this.renderBills)}
           </div>
         </div>
      </div>

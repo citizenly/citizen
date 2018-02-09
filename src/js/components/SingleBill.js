@@ -1,5 +1,6 @@
 /*global localStorage*/
 var React = require('react');
+
 // required for ajax calls
 var axios = require('axios');
 var $ = require('jquery');
@@ -7,13 +8,6 @@ import { withRouter } from 'react-router';
 
 var Parse = require('parse');
 var Vote = Parse.Object.extend('Vote');
-var DoughnutChart = require("react-chartjs").Doughnut;
-
-
-
-//HULLO :) the 'value' below is to be replaced with the yes/no votes of the whole country and the yes/no votes of the 'neighbours' (ie constituency).
-var countryData = [{color: "#006729", value: 150, label: "YES"}, {color: "#8B2530", value: 50, label: "NO"}]
-var neighbourData = [{color: "#4EA32A", value: 150, label: "YES"}, {color: "#D56500", value: 120, label: "NO"}]
 
 
 var SingleBill = React.createClass({
@@ -31,7 +25,8 @@ var SingleBill = React.createClass({
         proposedBy: '',
         partyOfSponsor: '',
         repsVote: '' ,
-        date: '' 
+        date: '',
+        textUrl: ''
       },
       content: "",
       vote: 0,
@@ -147,6 +142,8 @@ var SingleBill = React.createClass({
     });
   },
   render: function() {
+    console.log(this.state.bill, 'this.state.bill');
+
     if (this.state.bill.repsVote) {
       var repVoted = <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)} >{this.state.bill.repsVote}</span>;
     }
@@ -156,7 +153,21 @@ var SingleBill = React.createClass({
     
     return (
       <div>
-          <div className="billInfo">
+          <div className="fixed-header white-bg-color opacity">
+            <div className="centered-container">
+              <div className="sub-h2">swipe what you'd vote</div>
+            </div>
+            <div className="voting-indicators">
+              <div className="no" onClick={this.handleRBtnClick} className={this.state.redBtnToggle}><i className="fa fa-caret-left"></i>  no</div>
+              <div className="yes" onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes  <i className="fa fa-caret-right"></i></div>
+            </div>
+            <div className="progress-bar">
+              <div className="no-votes"></div>
+              <div className="yes-votes"></div>
+            </div>
+          </div>
+          
+          <div className="wrapper-w-header">
             <div className="centered-container">
               <div className="top-h2">BILL {this.state.bill.id}</div>
               <p>Latest status in parliament:</p>
@@ -169,7 +180,26 @@ var SingleBill = React.createClass({
               <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
             </div>
             
-            <div className="bill-info">
+            {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
+            
+            <div className="centered-container">
+              <div className="sub-h2">title/summary</div>
+              <p>{this.state.bill.title}</p>
+              <p>{this.state.bill.summary}</p>
+            </div>
+            <br/>
+            <div className="centered-container">
+              <div className="sub-h2">full text</div>
+              <a href={this.state.bill.textUrl} activeClassName="active">
+                <p>See full info</p>
+              </a>
+            </div>
+            <br/>
+            <p>{this.state.bill.text}</p>
+            
+          </div>
+          
+          <div className="bill-info fixed-footer">
               <div className="one-line-spread">
                 <p>Bill status: </p>
                 <p className="dynamic">{this.state.bill.status}</p>
@@ -182,38 +212,7 @@ var SingleBill = React.createClass({
                 <p>Proposed by: </p>
                 <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
               </div>
-            </div>
-            
-            {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
-
-            <div className="billTabs">
-              <ul>
-                <li id="tab-1" onClick={this.handleTabClick.bind(this, 1)}>Title</li>
-                <li id="tab-2" onClick={this.handleTabClick.bind(this, 2)}>Summary</li>
-                <li id="tab-3" onClick={this.handleTabClick.bind(this, 3)}>Full text</li>
-              </ul>
-
-              <div className="box-wrap">
-                <div id="box">
-                  <table id="billText"><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
-                </div>
-              </div>
-            </div>
           </div>
-     
-     <div className="fixed-footer white-bg-color opacity">
-        <div className="centered-container">
-          <div className="sub-h2">swipe what you'd vote</div>
-        </div>
-        <div className="voting-indicators">
-          <div className="no" onClick={this.handleRBtnClick} className={this.state.redBtnToggle}><i className="fa fa-caret-left"></i>  no</div>
-          <div className="yes" onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes  <i className="fa fa-caret-right"></i></div>
-        </div>
-        <div className="progress-bar">
-          <div className="no-votes"></div>
-          <div className="yes-votes"></div>
-        </div>
-      </div>
       
     </div>
   );
@@ -221,3 +220,10 @@ var SingleBill = React.createClass({
 });
 
 module.exports = withRouter(SingleBill);
+
+// Old code for getting the full text of the bill - not working
+//   <div className="box-wrap">
+//     <div id="box">
+//       <table id="billText"><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
+//     </div>
+//   </div>
