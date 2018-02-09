@@ -118,7 +118,7 @@ img {
 //Fixed footer
 .fixed-footer {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
 }
@@ -246,7 +246,7 @@ img {
 
 header {
   position: fixed;
-  top: 0;
+  bottom: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
