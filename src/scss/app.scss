@@ -38,22 +38,23 @@ body {
 }
 
 .wrapper-w-header {
-  margin-top: 15%;
+  margin-top: 27%;
 }
 
 .fixed-home-btn {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: auto;
-  height: 20px;
   background-color: #778899;
-  color: #fff;
   border-radius: 0 3px 3px 0;
-  font-family: Oswald, sans-serif;
-  text-tranform: uppercase;
   z-index: 10;
   padding: 4px 6px;
+  
+  a {
+    font-family: Oswald, sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+  }
 }
 
 //Colors
@@ -143,6 +144,7 @@ img {
 
 .fixed-header {
   top: 0;
+  padding-top: 15px;
 }
 
 .fixed-footer {
