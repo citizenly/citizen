@@ -156,6 +156,20 @@ var SingleBill = React.createClass({
     
     return (
       <div>
+          <div className="fixed-header white-bg-color opacity">
+            <div className="centered-container">
+              <div className="sub-h2">swipe what you'd vote</div>
+            </div>
+            <div className="voting-indicators">
+              <div className="no" onClick={this.handleRBtnClick} className={this.state.redBtnToggle}><i className="fa fa-caret-left"></i>  no</div>
+              <div className="yes" onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes  <i className="fa fa-caret-right"></i></div>
+            </div>
+            <div className="progress-bar">
+              <div className="no-votes"></div>
+              <div className="yes-votes"></div>
+            </div>
+          </div>
+          
           <div className="billInfo">
             <div className="centered-container">
               <div className="top-h2">BILL {this.state.bill.id}</div>
@@ -200,20 +214,6 @@ var SingleBill = React.createClass({
               </div>
             </div>
           </div>
-     
-     <div className="fixed-footer white-bg-color opacity">
-        <div className="centered-container">
-          <div className="sub-h2">swipe what you'd vote</div>
-        </div>
-        <div className="voting-indicators">
-          <div className="no" onClick={this.handleRBtnClick} className={this.state.redBtnToggle}><i className="fa fa-caret-left"></i>  no</div>
-          <div className="yes" onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes  <i className="fa fa-caret-right"></i></div>
-        </div>
-        <div className="progress-bar">
-          <div className="no-votes"></div>
-          <div className="yes-votes"></div>
-        </div>
-      </div>
       
     </div>
   );

@@ -115,12 +115,20 @@ img {
   max-width: 100%;
 }
 
-//Fixed footer
+//Fixed header/footer
+.fixed-header,
 .fixed-footer {
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%;
+}
+
+.fixed-header {
+  top: 0;
+}
+
+.fixed-footer {
+  bottom: 0;
 }
 
 //Progress bar
@@ -245,7 +253,7 @@ img {
 ////NAVBAR////
 
 header {
-  display: none;
+  display: none !important;
   position: fixed;
   bottom: 0;
   display: flex;
