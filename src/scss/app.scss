@@ -62,8 +62,16 @@ body {
   background-color: #666;
 }
 
+.light-grey-bg-color {
+  background-color: #e9e9e9;
+}
+
 .white-bg-color {
   background-color: #fff;
+}
+
+.red-color {
+  color: #F00;
 }
 
 
@@ -622,12 +630,16 @@ input {
   
   .bubble-button-text {
     font-size: 1.3rem;
+    margin-bottom: 10px;
   }
   
   .bubble-value,
   .bubble-text {
-    color: #fff;
     margin: -4px 0;
+  }
+  
+  .percent {
+    font-size: 3rem;
   }
 }
 
@@ -722,7 +734,8 @@ input {
 }
 
 .bubble-button:hover,
-.bubble-button:focus {
+.bubble-button:focus,
+.bubble-button:active {
   -webkit-box-shadow: inset 0px 7px 15px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: inset 0px 7px 15px 0px rgba(0,0,0,0.75);
   box-shadow: inset 0px 7px 15px 0px rgba(0,0,0,0.75);

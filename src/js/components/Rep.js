@@ -147,15 +147,15 @@ var Rep = React.createClass({
         <div className="back-line"></div>
 
         <div className="bubble-container-large">
-          <div className="dark-grey-bg-color top-bubble">
+          <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
               <div className="bubble-text">you agree</div>
-              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '38%'}</div>
+              <div className="bubble-value red-color">{this.state.coherence.length > 1 ? this.state.coherence : '17'}<span className="percent red-color">%</span></div>
               </Link>
           </div>
           <div className="compare bottom-bubble bubble-button">
               <Link activeClassName="active" to ="/compare/votedonbymyrep">
-              <div className="bubble-button-text">COMPARE 2/35</div>
+              <div className="bubble-button-text">COMPARE 9/35</div>
               </Link>
           </div>
         </div>
@@ -163,7 +163,7 @@ var Rep = React.createClass({
         <div className="back-line"></div>
 
         <div className="bubble-container-medium">
-          <div className="dark-grey-bg-color top-bubble">
+          <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to="/rep/marc-miller/feed">
               <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '10'}</div>
               <div className="bubble-text">new statements</div>
@@ -179,7 +179,7 @@ var Rep = React.createClass({
         <div className="back-line"></div>
 
         <div className="bubble-container-small">
-          <div className="dark-grey-bg-color top-bubble">
+          <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/petitions">
               <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '3'}</div>
               <div className="bubble-text">new petitions</div>
