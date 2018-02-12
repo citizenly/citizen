@@ -136,18 +136,19 @@ var Rep = React.createClass({
     return (
     <div className="repPage">
       <div className="centered-container">
-        <div className="bubble-container-x-small">
-          <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
-        </div>
-        <div className="back-line"></div>
-        <div className="top-h2">{this.state.rep.name}</div>
+        <div className="top-h2">{this.state.rep.name > 1 ? this.state.rep.name : 'Marc Miller'}</div>
         <div className="sub-h2">SPEAKS FOR YOU</div>
-        
-        <img src={this.state.rep.img} alt="" className="round-image" />
-        <div className="side-line"></div>
-        
+         <Link activeClassName="active" to={repLink}>
+          <img src="https://api.openparliament.ca/media/polpics/shannon-stubbs.jpg" alt="" className="left-side-pic-link" />
+        </Link>
+        <div className="percent-low red-color">-4%</div>
+        <img src={this.state.rep.img > 1 ? this.state.rep.img : 'https://api.openparliament.ca/media/polpics/marc-miller.jpg'} alt="" className="round-image" />
+        <Link activeClassName="active" to ="/repbetter">
+          <img src="https://api.openparliament.ca/media/polpics/alexandra-mendes.jpg" alt="" className="right-side-pic-link" />
+        </Link>
+        <div className="percent-high green-color">+5%</div>
         <div className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</div>
-        
+
         <div className="white-bg-section">
           <p>{this.state.rep.constituency} {this.state.rep.province}</p>
           <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
@@ -211,3 +212,10 @@ var Rep = React.createClass({
 });
 
 module.exports = Rep;
+
+
+
+
+        // <div className="bubble-container-x-small">
+        //   <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
+        // </div>
