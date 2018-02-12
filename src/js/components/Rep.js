@@ -122,28 +122,37 @@ var Rep = React.createClass({
   render: function() {
     console.log(this.props, 'this.props');
      // Representative Link
+    var repLink;
     var feedLink;
     var repName = localStorage.getItem('repName');
     if (repName) {
+      repLink = '/rep/'+repName;
       feedLink = '/rep/'+repName+'/feed';
     }
     else {
+      repLink = '/';
       feedLink = '/';
     }
     return (
     <div className="repPage">
       <div className="centered-container">
-      
+        <div className="bubble-container-x-small">
+          <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
+        </div>
+        <div className="back-line"></div>
         <div className="top-h2">{this.state.rep.name}</div>
         <div className="sub-h2">SPEAKS FOR YOU</div>
         
         <img src={this.state.rep.img} alt="" className="round-image" />
+        <div className="side-line"></div>
         
         <div className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</div>
         
-        <p>{this.state.rep.constituency} {this.state.rep.province}</p>
-        <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
-
+        <div className="white-bg-section">
+          <p>{this.state.rep.constituency} {this.state.rep.province}</p>
+          <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
+        </div>
+        
         <div className="back-line"></div>
 
         <div className="bubble-container-large">
@@ -191,10 +200,10 @@ var Rep = React.createClass({
               </Link>
           </div>
         </div>
-
-        </div>
-        <div className="actionButton rep">
-          <Link activeClassName="active" onClick={this.onMenuItemClick} to="/">Logout</Link>
+         <div className="back-line"></div>
+         <div className="bubble-container-x-small">
+           <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to="/">Logout</Link>
+         </div>          
         </div>
       </div>
     );

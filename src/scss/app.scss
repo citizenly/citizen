@@ -17,7 +17,7 @@ body {
 }
 
 .site-wrap {
-  margin: 4%;
+  margin: -4% 4%;
 }
 
 
@@ -74,6 +74,12 @@ body {
   color: #F00;
 }
 
+
+//Section
+.white-bg-section {
+  background-color: #fff;
+  padding: 5px;
+}
 
 //Main headings ('About', 'Bill', 'Petition', 'Start New Petition')//
 h1 {
@@ -606,7 +612,8 @@ input {
 
 .bubble-container-large,
 .bubble-container-medium,
-.bubble-container-small {
+.bubble-container-small,
+.bubble-container-x-small {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -713,10 +720,36 @@ input {
   }
 }
 
+.bubble-container-x-small {
+  
+  .full-bubble {
+    font-size: .9rem;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+  }
+}
+
+//COMPONENTS
+
+//lines
 .back-line {
   background-color: grey;
   width: 1px;
   height: 30px;
+}
+
+.side-line {
+  position: fixed;
+  top: 20px;
+  z-index: -1;
+  background-color: grey;
+  height: 1px;
+  width: 100%;
 }
 
 //Button
