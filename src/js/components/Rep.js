@@ -121,7 +121,15 @@ var Rep = React.createClass({
  /* For now, we put the date of the last election to be in 2015 because for some of the MPs, the openparliament API gives us the date of the first time he/she was elected instead of the date of the last election. That is the way to refer to the date get from the openparliament API :{this.state.rep.electedYear} */
   render: function() {
     console.log(this.props, 'this.props');
-    
+     // Representative Link
+    var feedLink;
+    var repName = localStorage.getItem('repName');
+    if (repName) {
+      feedLink = '/rep/'+repName+'/feed';
+    }
+    else {
+      feedLink = '/';
+    }
     return (
     <div className="repPage">
       <div className="centered-container">
@@ -162,7 +170,7 @@ var Rep = React.createClass({
               </Link>
           </div>
           <div className="feed bottom-bubble bubble-button">
-              <Link activeClassName="active" to ="/compare/votedonbymyrep">
+              <Link activeClassName="active" to ={feedLink}>
               <div className="bubble-button-text">CHECK</div>
               </Link>
           </div>
