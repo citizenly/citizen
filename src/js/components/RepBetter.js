@@ -138,6 +138,7 @@ var RepBetter = React.createClass({
       <div className="centered-container">
         <div className="top-h2">{this.state.rep.name}</div>
         <p>Represents you 5% better than your current representative</p>
+        <div className="percent-low red-color">-5%</div>
          <Link activeClassName="active" to="/rep/marc-miller">
           <img src="https://api.openparliament.ca/media/polpics/marc-miller.jpg" alt="" className="left-side-pic-link" />
         </Link>       
@@ -145,6 +146,7 @@ var RepBetter = React.createClass({
         <Link activeClassName="active" to="/rep/darshan-singh-kang">
           <img src="https://api.openparliament.ca/media/polpics/darshan-singh-kang.jpg" alt="" className="right-side-pic-link" />
         </Link>
+        <div className="percent-high green-color">+8%</div>
         <div className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</div>
 
         <div className="white-bg-section">

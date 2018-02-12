@@ -136,13 +136,13 @@ var Rep = React.createClass({
     return (
     <div className="repPage">
       <div className="centered-container">
-        <div className="top-h2">{this.state.rep.name > 1 ? this.state.rep.name : 'Marc Miller'}</div>
+        <div className="top-h2">{this.state.rep.name}</div>
         <div className="sub-h2">SPEAKS FOR YOU</div>
          <Link activeClassName="active" to={repLink}>
           <img src="https://api.openparliament.ca/media/polpics/shannon-stubbs.jpg" alt="" className="left-side-pic-link" />
         </Link>
         <div className="percent-low red-color">-4%</div>
-        <img src={this.state.rep.img > 1 ? this.state.rep.img : 'https://api.openparliament.ca/media/polpics/marc-miller.jpg'} alt="" className="round-image" />
+        <img src={this.state.rep.img} alt="https://api.openparliament.ca/media/polpics/marc-miller.jpg" className="round-image" />
         <Link activeClassName="active" to ="/repbetter">
           <img src="https://api.openparliament.ca/media/polpics/alexandra-mendes.jpg" alt="" className="right-side-pic-link" />
         </Link>
