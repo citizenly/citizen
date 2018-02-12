@@ -19,7 +19,7 @@
   "keywords": [
     "react"
   ],
-  "author": "Marie Eve Gauthier, Osa Isacson, Alex Ruaux",
+  "author": "v2: Osa Isacson v1: Osa Isacson, Alex Ruaux, Marie Eve Gauthier",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^6.3.6",
@@ -52,6 +52,7 @@
     "react-chartjs": "^0.7.3",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.0",
+    "react-swipe-card": "^0.1.4",
     "request": "^2.72.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",

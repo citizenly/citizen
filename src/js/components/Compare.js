@@ -88,7 +88,7 @@ var Compare = React.createClass({
     return (
       <div className="comparePage">
           <div className="centered-container">
-              <div className="top-h2">bills</div>
+              <div className="top-h2">compare</div>
               {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills {this.state.repFullName} has voted on.</p>  : ""} 
               {this.props.params.filter === "proposedbymyrep"  ? <p>The below shows bills your representative {this.state.repFullName} has proposed.</p>  : ""} 
           </div>

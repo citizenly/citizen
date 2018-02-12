@@ -90,9 +90,6 @@ var App = React.createClass({
     }
     return (
       <div>
-      <div className="fixed-home-btn">
-        <Link activeClassName="active" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
-      </div>
         <header>
             <Link className="navbutton rep" activeClassName="active" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
             <Link className="navbutton feed" activeClassName="active" onClick={this.onMenuItemClick} to={feedLink}>Feed</Link>

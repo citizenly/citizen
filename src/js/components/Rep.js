@@ -121,33 +121,50 @@ var Rep = React.createClass({
  /* For now, we put the date of the last election to be in 2015 because for some of the MPs, the openparliament API gives us the date of the first time he/she was elected instead of the date of the last election. That is the way to refer to the date get from the openparliament API :{this.state.rep.electedYear} */
   render: function() {
     console.log(this.props, 'this.props');
-    
+     // Representative Link
+    var repLink;
+    var feedLink;
+    var repName = localStorage.getItem('repName');
+    if (repName) {
+      repLink = '/rep/'+repName;
+      feedLink = '/rep/'+repName+'/feed';
+    }
+    else {
+      repLink = '/';
+      feedLink = '/';
+    }
     return (
     <div className="repPage">
       <div className="centered-container">
-      
+        <div className="bubble-container-x-small">
+          <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
+        </div>
+        <div className="back-line"></div>
         <div className="top-h2">{this.state.rep.name}</div>
         <div className="sub-h2">SPEAKS FOR YOU</div>
         
         <img src={this.state.rep.img} alt="" className="round-image" />
+        <div className="side-line"></div>
         
         <div className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</div>
         
-        <p>{this.state.rep.constituency} {this.state.rep.province}</p>
-        <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
-
+        <div className="white-bg-section">
+          <p>{this.state.rep.constituency} {this.state.rep.province}</p>
+          <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
+        </div>
+        
         <div className="back-line"></div>
 
         <div className="bubble-container-large">
-          <div className="dark-grey-bg-color top-bubble">
+          <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
               <div className="bubble-text">you agree</div>
-              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '38%'}</div>
+              <div className="bubble-value red-color">{this.state.coherence.length > 1 ? this.state.coherence : '17'}<span className="percent red-color">%</span></div>
               </Link>
           </div>
           <div className="compare bottom-bubble bubble-button">
               <Link activeClassName="active" to ="/compare/votedonbymyrep">
-              <div className="bubble-button-text">COMPARE 2/35</div>
+              <div className="bubble-button-text">COMPARE 9/35</div>
               </Link>
           </div>
         </div>
@@ -155,14 +172,14 @@ var Rep = React.createClass({
         <div className="back-line"></div>
 
         <div className="bubble-container-medium">
-          <div className="dark-grey-bg-color top-bubble">
+          <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to="/rep/marc-miller/feed">
               <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '10'}</div>
               <div className="bubble-text">new statements</div>
               </Link>
           </div>
           <div className="feed bottom-bubble bubble-button">
-              <Link activeClassName="active" to ="/compare/votedonbymyrep">
+              <Link activeClassName="active" to ={feedLink}>
               <div className="bubble-button-text">CHECK</div>
               </Link>
           </div>
@@ -171,22 +188,22 @@ var Rep = React.createClass({
         <div className="back-line"></div>
 
         <div className="bubble-container-small">
-          <div className="dark-grey-bg-color top-bubble">
+          <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/petitions">
               <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '3'}</div>
               <div className="bubble-text">new petitions</div>
               </Link>
           </div>
           <div className="petitions bottom-bubble bubble-button">
-              <Link activeClassName="active" to ="/compare/votedonbymyrep">
+              <Link activeClassName="active" to ="/petitions">
               <div className="bubble-button-text">ENGAGE</div>
               </Link>
           </div>
         </div>
-
-        </div>
-        <div className="actionButton rep">
-          <Link activeClassName="active" onClick={this.onMenuItemClick} to="/">Logout</Link>
+         <div className="back-line"></div>
+         <div className="bubble-container-x-small">
+           <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to="/">Logout</Link>
+         </div>          
         </div>
       </div>
     );
