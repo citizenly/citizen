@@ -178,7 +178,7 @@ var Rep = React.createClass({
               </Link>
           </div>
           <div className="petitions bottom-bubble bubble-button">
-              <Link activeClassName="active" to ="/compare/votedonbymyrep">
+              <Link activeClassName="active" to ="/petitions">
               <div className="bubble-button-text">ENGAGE</div>
               </Link>
           </div>
