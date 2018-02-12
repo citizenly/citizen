@@ -12,18 +12,18 @@ var event = require('../events.js');
 
 
 
-var Rep = React.createClass({
+var RepBetter = React.createClass({
   getInitialState: function() {
     // set inital state as an empty object, to be populated with rep info on componentDidMount
     return {
       loggedIn: !!Parse.User.current(),
       rep: {
-        name: "",
+        name: "Alexandra Mendes",
         constituency: "",
-        province: "",
-        party: "",
+        province: "Ontario",
+        party: "Conservative",
         img: "",
-        electedYear: "",
+        electedYear: "2016",
         electedVote: ""
       },
        user: {   //placeholder, to be connected to our internal user database.
@@ -137,16 +137,16 @@ var Rep = React.createClass({
     <div className="repPage">
       <div className="centered-container">
         <div className="top-h2">{this.state.rep.name}</div>
-        <div className="sub-h2">SPEAKS FOR YOU</div>
-         <Link activeClassName="active" to={repLink}>
-          <img src="https://api.openparliament.ca/media/polpics/shannon-stubbs.jpg" alt="" className="left-side-pic-link" />
+        <p>Represents you 5% better than your current representative</p>
+        <div className="percent-low red-color">-5%</div>
+         <Link activeClassName="active" to="/rep/marc-miller">
+          <img src="https://api.openparliament.ca/media/polpics/marc-miller.jpg" alt="" className="left-side-pic-link" />
+        </Link>       
+        <img src="https://api.openparliament.ca/media/polpics/alexandra-mendes.jpg" alt="" className="round-image" />
+        <Link activeClassName="active" to="/rep/darshan-singh-kang">
+          <img src="https://api.openparliament.ca/media/polpics/darshan-singh-kang.jpg" alt="" className="right-side-pic-link" />
         </Link>
-        <div className="percent-low red-color">-4%</div>
-        <img src={this.state.rep.img} alt="https://api.openparliament.ca/media/polpics/marc-miller.jpg" className="round-image" />
-        <Link activeClassName="active" to ="/repbetter">
-          <img src="https://api.openparliament.ca/media/polpics/alexandra-mendes.jpg" alt="" className="right-side-pic-link" />
-        </Link>
-        <div className="percent-high green-color">+5%</div>
+        <div className="percent-high green-color">+8%</div>
         <div className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</div>
 
         <div className="white-bg-section">
@@ -160,7 +160,7 @@ var Rep = React.createClass({
           <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
               <div className="bubble-text">you agree</div>
-              <div className="bubble-value red-color">{this.state.coherence.length > 1 ? this.state.coherence : '17'}<span className="percent red-color">%</span></div>
+              <div className="bubble-value reddish-color">{this.state.coherence.length > 1 ? this.state.coherence : '22'}<span className="percent reddish-color">%</span></div>
               </Link>
           </div>
           <div className="compare bottom-bubble bubble-button">
@@ -175,7 +175,7 @@ var Rep = React.createClass({
         <div className="bubble-container-medium">
           <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to="/rep/marc-miller/feed">
-              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '10'}</div>
+              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '15'}</div>
               <div className="bubble-text">new statements</div>
               </Link>
           </div>
@@ -191,7 +191,7 @@ var Rep = React.createClass({
         <div className="bubble-container-small">
           <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/petitions">
-              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '3'}</div>
+              <div className="bubble-value">{this.state.coherence.length > 1 ? this.state.coherence : '2'}</div>
               <div className="bubble-text">new petitions</div>
               </Link>
           </div>
@@ -211,11 +211,4 @@ var Rep = React.createClass({
   }
 });
 
-module.exports = Rep;
-
-
-
-
-        // <div className="bubble-container-x-small">
-        //   <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
-        // </div>
+module.exports = RepBetter;

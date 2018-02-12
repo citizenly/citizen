@@ -18,6 +18,7 @@ var App = require('./components/Main.js');
 var Login = require('./components/Login.js');
 var About = require('./components/About.js');
 var Rep = require('./components/Rep.js');
+var RepBetter = require('./components/RepBetter.js');
 var Stats = require('./components/Stats.js');
 var Petitions = require('./components/Petitions.js');
 var SinglePetition = require('./components/SinglePetition.js');
@@ -49,6 +50,7 @@ var routes = (
       <IndexRoute component={Login}/>
       <Route path="about" component={About}/>
       <Route path="rep/:repName" component={Rep}/>
+      <Route path="repbetter" component={RepBetter}/>
       <Route path="stats" component={Stats}/>
       <Route path="petitions" component={Petitions}/>
       <Route path="singlepetition" component={SinglePetition}/>

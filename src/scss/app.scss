@@ -17,7 +17,7 @@ body {
 }
 
 .site-wrap {
-  margin: -4% 4%;
+  margin: 0% 4%;
 }
 
 
@@ -70,8 +70,20 @@ body {
   background-color: #fff;
 }
 
+.dark-red-color {
+  color: #820110;
+}
+
 .red-color {
   color: #F00;
+}
+
+.reddish-color {
+  color: #f47d42;
+}
+
+.green-color {
+  color: #00700b;
 }
 
 
@@ -745,7 +757,7 @@ input {
 
 .side-line {
   position: fixed;
-  top: 20px;
+  top: 200px;
   z-index: -1;
   background-color: grey;
   height: 1px;
@@ -774,6 +786,45 @@ input {
   box-shadow: inset 0px 7px 15px 0px rgba(0,0,0,0.75);
 }
 
+
+//profile-links
+.left-side-pic-link,
+.right-side-pic-link {
+  position: absolute;
+  top: 155px;
+  width: 50px;
+  height: 63px;
+  border-radius: 50%;
+  background-color: grey;
+  object-fit: cover;
+  object-position: center right;
+}
+
+.left-side-pic-link,
+.percent-low {
+  left: 0;
+  margin-left: 5px;
+}
+
+.right-side-pic-link,
+.percent-high {
+  right: 0;
+  margin-right: 5px;
+}
+
+.percent-low,
+.percent-high {
+  position: absolute;
+  top: 220px;
+}
+
+.percent-low {
+  margin-left: 10px;
+}
+
+.percent-high {
+  margin-right: 10px;
+}
 
 ////ABOUT////
 
