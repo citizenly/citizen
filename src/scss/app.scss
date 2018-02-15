@@ -177,35 +177,33 @@ img {
   bottom: 0;
 }
 
-//Progress bar
-.progress-bar {
+//Voting indicators
+.voting-indicators {
   display: flex;
   align-items: center;
   flex-direction: row;
   width: 100%;
-  height: 1.5rem;
+  height: 2.5rem;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 15px;
+  
+  .yes-votes,
+  .no-votes {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
   .yes-votes {
     background-color: #006729;
-    width: 50%;
-    height: 100%;
   }
   
   .no-votes {
     background-color: #8B2530;
-    width: 50%;
-    height: 100%;
   }
-}
-
-//Voting indicators
-.voting-indicators {
-  display: flex;
-  justify-content: space-between;
-  font-family: Oswald, sans-serif;
-  font-size: 1rem;
-  text-transform: uppercase;
-  margin: 0 5px;
 }
 
 
