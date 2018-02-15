@@ -1,5 +1,6 @@
 /*global localStorage*/
 var React = require('react');
+var Link = require('react-router').Link;
 
 // required for ajax calls
 var axios = require('axios');
@@ -72,7 +73,7 @@ var SingleBill = React.createClass({
     });
     
     // use Parse to store and retrieve user's vote status on this bill
-    Parse.Cloud.run('findMyVote', {billId: this.props.params.billId}).then(function(vote) {
+    /*Parse.Cloud.run('findMyVote', {billId: this.props.params.billId}).then(function(vote) {
       if (vote) {
         if (vote.get('vote') === 1) {
           that.setState({
@@ -89,7 +90,24 @@ var SingleBill = React.createClass({
           });
         }
       }
-    });
+    });*/
+    
+    var vote = this.getUserVote();
+    
+    if (vote === 1) {
+      that.setState({
+        greenBtnToggle: "greenbutton-clicked",
+        redBtnToggle: "redbutton",
+        vote: 1
+      });
+    }
+    else if (vote === -1) {
+      that.setState({
+        greenBtnToggle: "greenbutton",
+        redBtnToggle: "redbutton-clicked",
+        vote: -1
+      });
+    }
   },
   handleTabClick: function(data){
     if(data===1) {
@@ -112,13 +130,15 @@ var SingleBill = React.createClass({
     if (this.state.greenBtnToggle === "greenbutton") {
       this.setState({greenBtnToggle:"greenbutton-clicked", redBtnToggle:"redbutton", vote: 1});
       vote.vote = 1;
-      Parse.Cloud.run('handleVote',  vote);
+      //Parse.Cloud.run('handleVote',  vote);
     }
     else if (this.state.greenBtnToggle === "greenbutton-clicked") {
       this.setState({greenBtnToggle:"greenbutton", vote: 0});
       vote.vote = 0;
-      Parse.Cloud.run('handleVote', vote);
+      //Parse.Cloud.run('handleVote', vote);
     }
+    
+    this.saveUserVote(vote);
   },
   handleRBtnClick: function(e) {
     e.preventDefault();
@@ -126,13 +146,15 @@ var SingleBill = React.createClass({
     if (this.state.redBtnToggle === "redbutton") {
       this.setState({redBtnToggle:"redbutton-clicked", greenBtnToggle: "greenbutton", vote: -1});
       vote.vote = -1;
-      Parse.Cloud.run('handleVote', vote);
+      //Parse.Cloud.run('handleVote', vote);
     }
     else if (this.state.redBtnToggle === "redbutton-clicked") {
       this.setState({redBtnToggle:"redbutton", vote: 0});
       vote.vote = 0;
-      Parse.Cloud.run('handleVote', vote);
+      //Parse.Cloud.run('handleVote', vote);
     }
+    
+    this.saveUserVote(vote);
   },
   handleShareButtonClick: function(e) {
     e.preventDefault();
@@ -140,6 +162,23 @@ var SingleBill = React.createClass({
     this.setState({
       shareButtonToggle: !this.state.shareButtonToggle
     });
+  },
+  saveUserVote: function(vote) {
+    var billId = vote.billId;
+    var value = vote.vote;
+    
+    window.localStorage.setItem(`bill-vote_${billId}`, value);
+  },
+  getUserVote: function() {
+    var {billId} = this.props.params;
+    
+    var vote = window.localStorage.getItem(`bill-vote_${billId}`);
+    
+    if (vote) {
+      return Number(vote);
+    } else {
+      return 0;
+    }
   },
   render: function() {
     console.log(this.state.bill, 'this.state.bill');
@@ -151,23 +190,22 @@ var SingleBill = React.createClass({
       repVoted = <span>?</span>;
     }
     
+    var repLink;
+    var repName = localStorage.getItem('repName');
+    if (repName) {
+      repLink = '/rep/'+repName;
+    }
+    else {
+      repLink = '/';
+    }
+    
     return (
       <div>
-          <div className="fixed-header white-bg-color opacity">
-            <div className="centered-container">
-              <div className="sub-h2">swipe what you'd vote</div>
-            </div>
-            <div className="voting-indicators">
-              <div className="no" onClick={this.handleRBtnClick} className={this.state.redBtnToggle}><i className="fa fa-caret-left"></i>  no</div>
-              <div className="yes" onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes  <i className="fa fa-caret-right"></i></div>
-            </div>
-            <div className="progress-bar">
-              <div className="no-votes"></div>
-              <div className="yes-votes"></div>
-            </div>
-          </div>
+        <div className="bubble-container-x-small">
+          <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
+        </div>
           
-          <div className="wrapper-w-header">
+          <div>
             <div className="centered-container">
               <div className="top-h2">BILL {this.state.bill.id}</div>
               <p>Latest status in parliament:</p>
@@ -200,17 +238,30 @@ var SingleBill = React.createClass({
           </div>
           
           <div className="bill-info fixed-footer">
+            <div className="white-bg-color opacity">
+              <div className="centered-container">
+                <div className="sub-h2">click what you'd vote</div>
+              </div>
+              <div className="voting-indicators">
+                <div onClick={this.handleRBtnClick} className="yes-votes">no</div>
+                <div onClick={this.handleGBtnClick} className="no-votes">yes</div>
+              </div>
+            </div>
               <div className="one-line-spread">
-                <p>Bill status: </p>
-                <p className="dynamic">{this.state.bill.status}</p>
+                <p>Proposed by: </p>
+                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
               </div>
               <div className="one-line-spread">
                 <p>My representative voted: </p>
                 <p>{repVoted}</p>
               </div>
               <div className="one-line-spread">
-                <p>Proposed by: </p>
-                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
+                <p>You would have voted: </p>
+                <p>{this.state.vote}</p>
+              </div>
+              <div className="one-line-spread">
+                <p>Bill status: </p>
+                <p className="dynamic">{this.state.bill.status}</p>
               </div>
           </div>
       
