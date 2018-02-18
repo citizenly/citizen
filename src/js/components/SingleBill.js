@@ -7,9 +7,6 @@ var axios = require('axios');
 var $ = require('jquery');
 import { withRouter } from 'react-router';
 
-var Parse = require('parse');
-var Vote = Parse.Object.extend('Vote');
-
 
 var SingleBill = React.createClass({
   getInitialState: function() {
@@ -31,6 +28,7 @@ var SingleBill = React.createClass({
       },
       content: "",
       vote: 0,
+      voteInText: "Not voted yet",
       greenBtnToggle: "greenbutton",
       redBtnToggle: "redbutton",
       shareButtonToggle: false,
@@ -41,8 +39,6 @@ var SingleBill = React.createClass({
   componentDidMount: function() {
     this.loadBillData();
     this.setState({content: this.state.bill.title});
-    $(".billTabs li").removeClass("active");
-    $("#tab-" + 1).addClass("active");
   },
   componentDidUpdate: function(prevProps) {
     if(prevProps.params.filter !== this.props.params.filter) {
@@ -101,27 +97,13 @@ var SingleBill = React.createClass({
         vote: 1
       });
     }
-    else if (vote === -1) {
+    if (vote === -1) {
       that.setState({
         greenBtnToggle: "inactive-button",
         redBtnToggle: "redbutton-clicked",
         vote: -1
       });
     }
-  },
-  handleTabClick: function(data){
-    if(data===1) {
-      this.setState({content: this.state.bill.title});
-    }
-    else if(data===2) {
-      this.setState({content: this.state.bill.summary});
-    }
-    else if(data===3) {
-      this.setState({content: this.state.bill.text});
-    }
-
-    $(".billTabs li").removeClass("active");
-    $("#tab-" + data).addClass("active");
   },
   handleGBtnClick: function(e) {
     e.preventDefault();
