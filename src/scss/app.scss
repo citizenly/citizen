@@ -188,8 +188,11 @@ img {
   color: #fff;
   margin-bottom: 15px;
   
-  .yes-votes,
-  .no-votes {
+  .redbutton, 
+  .greenbutton, 
+  .redbutton-clicked, 
+  .greenbutton-clicked,
+  .inactive-button {
     width: 50%;
     height: 100%;
     display: flex;
@@ -197,12 +200,18 @@ img {
     justify-content: center;
   }
   
-  .yes-votes {
+  .redbutton,
+  .redbutton-clicked {
     background-color: #8B2530;
   }
   
-  .no-votes {
+  .greenbutton, 
+  .greenbutton-clicked {
     background-color: #006729;
+  }
+  
+  .inactive-button {
+    background-color: #808080;
   }
 }
 
@@ -933,84 +942,6 @@ p.thankYou {
     display: none;
   }
 }
-
-
-
-////////COMPARE + PETITIONS - SHARING & VOTING//////
-.votingAndSharingActions {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: white;
-  width: 100%;
-  position: fixed;
-  cursor: pointer;
-  bottom: 0;
-  
-  .redbutton, .greenbutton, .redbutton-clicked, .greenbutton-clicked, .redglovebutton, .greenglovebutton, .redglovebutton-clicked, .greenglovebutton-clicked {
-    padding: 10px;
-    max-width: 63px;
-    width: 50%;
-    height: 100px;
-    background: no-repeat center;
-    background-size: contain;
-  }
-  
-  /////BILL VOTE BUTTONS//////
-  .redbutton {
-    background-image: url("/images/redButton.png");
-    margin-left: 2.2em;
-  }
-  
-  .redbutton-clicked {
-    background-image: url("/images/redButtonPressed.png");
-    margin-left: 2.2em;
-  }
-  
-  .greenbutton {
-    background-image: url("/images/greenButton.png");
-    margin-right: 2.2em;
-  }
-  
-  .greenbutton-clicked {
-    background-image: url("/images/greenButtonPressed.png");
-    margin-right: 2.2em;
-  }
-  
-  
-  ///////PETITION VOTE BUTTONS///////
-  .redglovebutton {
-    background-image: url("/images/redGlovePressed.png");
-    position: relative;
-    top: 10px;
-    margin-left: 10px;
-    opacity: 0.5;
-  }
-  
-  .redglovebutton-clicked {
-    background-image: url("/images/redGlovePressed.png");
-    position: relative;
-    top: 2.2em;
-    margin-left: 2.2em;
-  }
-  
-  .greenglovebutton {
-    background-image: url("/images/greenGlovePressed.png");
-    position: relative;
-    top: -2.2em;
-    margin-right: 2.2em;
-    opacity: 0.5;
-  }
-  
-  .greenglovebutton-clicked {
-    background-image: url("/images/greenGlovePressed.png");
-    position: relative;
-    top: -2.2em;
-    margin-right: 2.2em;
-  }
-  
-}
-
 
 
 //BOUNCE IN LEFT

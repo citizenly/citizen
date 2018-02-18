@@ -97,13 +97,13 @@ var SingleBill = React.createClass({
     if (vote === 1) {
       that.setState({
         greenBtnToggle: "greenbutton-clicked",
-        redBtnToggle: "redbutton",
+        redBtnToggle: "inactive-button",
         vote: 1
       });
     }
     else if (vote === -1) {
       that.setState({
-        greenBtnToggle: "greenbutton",
+        greenBtnToggle: "inactive-button",
         redBtnToggle: "redbutton-clicked",
         vote: -1
       });
@@ -128,13 +128,18 @@ var SingleBill = React.createClass({
     var vote = {billId: this.props.params.billId};
     
     if (this.state.greenBtnToggle === "greenbutton") {
-      this.setState({greenBtnToggle:"greenbutton-clicked", redBtnToggle:"redbutton", vote: 1});
-      vote.vote = 1;
+      this.setState({greenBtnToggle:"greenbutton-clicked", redBtnToggle:"inactive-button", vote: 1});
+      vote.vote = 0;
       //Parse.Cloud.run('handleVote',  vote);
     }
-    else if (this.state.greenBtnToggle === "greenbutton-clicked") {
-      this.setState({greenBtnToggle:"greenbutton", vote: 0});
-      vote.vote = 0;
+    if (this.state.greenBtnToggle === "inactive-button") {
+      this.setState({greenBtnToggle:"greenbutton-clicked", redBtnToggle:"inactive-button", vote: 1});
+      vote.vote = 1;
+      //Parse.Cloud.run('handleVote', vote);
+    }
+    if (this.state.greenBtnToggle === "greenbutton-clicked") {
+      this.setState({greenBtnToggle:"greenbutton", redBtnToggle:"redbutton", vote: 0});
+      vote.vote = 1;
       //Parse.Cloud.run('handleVote', vote);
     }
     
@@ -144,13 +149,18 @@ var SingleBill = React.createClass({
     e.preventDefault();
     var vote = {billId: this.props.params.billId};
     if (this.state.redBtnToggle === "redbutton") {
-      this.setState({redBtnToggle:"redbutton-clicked", greenBtnToggle: "greenbutton", vote: -1});
-      vote.vote = -1;
+      this.setState({redBtnToggle:"redbutton-clicked", greenBtnToggle: "inactive-button", vote: -1});
+      vote.vote = 0;
       //Parse.Cloud.run('handleVote', vote);
     }
-    else if (this.state.redBtnToggle === "redbutton-clicked") {
-      this.setState({redBtnToggle:"redbutton", vote: 0});
+    if (this.state.redBtnToggle === "inactive-button") {
+      this.setState({redBtnToggle:"redbutton-clicked", greenBtnToggle: "inactive-button", vote: -1});
       vote.vote = 0;
+      //Parse.Cloud.run('handleVote', vote);
+    }
+    if (this.state.redBtnToggle === "redbutton-clicked") {
+      this.setState({redBtnToggle:"redbutton", greenBtnToggle:"greenbutton", vote: 0});
+      vote.vote = -1;
       //Parse.Cloud.run('handleVote', vote);
     }
     
@@ -243,8 +253,8 @@ var SingleBill = React.createClass({
                 <div className="sub-h2">click what you'd vote</div>
               </div>
               <div className="voting-indicators">
-                <div onClick={this.handleRBtnClick} className="yes-votes">no</div>
-                <div onClick={this.handleGBtnClick} className="no-votes">yes</div>
+                <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}>no</div>
+                <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes</div>
               </div>
             </div>
               <div className="one-line-spread">
