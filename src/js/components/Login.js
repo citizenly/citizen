@@ -54,7 +54,7 @@ var Login = React.createClass({
   render: function() {
     // user enters postalcode and rep's name is retrieved from Represent API - https://represent.opennorth.ca/api/
     return (
-    <div className="main">
+    <div className="login-page">
     <div className="square"></div>
       <div className= "citizenlogo"> 
         <img alt="citizen app logo" src="images/citizenlogo.png"></img>
@@ -74,8 +74,8 @@ var Login = React.createClass({
           <div className="login-field">
             <button className="postcodebutton" type="submit">FIND OUT</button>
           </div>
-        </div>
         <Message/>
+        </div>
       </form>
   
       <div className= "canadamap"> 

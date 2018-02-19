@@ -86,7 +86,7 @@ var Compare = React.createClass({
   },
   render: function() {
     return (
-      <div className="comparePage">
+      <div className="comparePage scrollable-content">
           <div className="centered-container">
               <div className="top-h2">compare</div>
               {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills {this.state.repFullName} has voted on.</p>  : ""} 

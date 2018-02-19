@@ -134,7 +134,7 @@ var Rep = React.createClass({
       feedLink = '/';
     }
     return (
-    <div className="repPage">
+    <div className="scrollable-content repPage">
       <div className="centered-container">
         <div className="top-h2">{this.state.rep.name}</div>
         <div className="sub-h2">SPEAKS FOR YOU</div>
@@ -204,7 +204,7 @@ var Rep = React.createClass({
          <div className="back-line"></div>
          <div className="bubble-container-x-small">
            <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to="/">Logout</Link>
-         </div>          
+         </div>
         </div>
       </div>
     );

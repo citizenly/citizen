@@ -193,22 +193,16 @@ var SingleBill = React.createClass({
     
     return (
       <div>
-        <div className="bubble-container-x-small">
-          <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
-        </div>
-          
-          <div>
+          <div className="scrollable-content">
             <div className="centered-container">
+              <div className="bubble-container-x-small">
+                <Link activeClassName="active" className="light-grey-bg-color full-bubble" to="/">Home</Link>
+              </div>
               <div className="top-h2">BILL {this.state.bill.id}</div>
               <p>Latest status in parliament:</p>
               <div className="sub-h2 dynamic">{this.state.bill.status}</div>
             </div>
             
-            <div className="share">
-              <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
-              <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-              <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
-            </div>
             
             {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
             
@@ -216,6 +210,12 @@ var SingleBill = React.createClass({
               <div className="sub-h2">title/summary</div>
               <p>{this.state.bill.title}</p>
               <p>{this.state.bill.summary}</p>
+            </div>
+            <div className="centered-container">
+             <div className="one-line-spread">
+                <span>Proposed by: </span>
+                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
+              </div>
             </div>
             <br/>
             <div className="centered-container">
@@ -226,11 +226,19 @@ var SingleBill = React.createClass({
             </div>
             <br/>
             <p>{this.state.bill.text}</p>
-            
           </div>
-          
-          <div className="bill-info fixed-footer">
-            <div className="white-bg-color opacity">
+          <div className="bill-status">
+              <div className="bill-status-box">
+                <span>My rep voted</span>
+                <div>{repVoted}</div>
+              </div>
+              <div className="bill-status-box">
+                <span>You would have voted</span>
+                <div>{this.state.vote}</div>
+              </div>
+            </div>
+          <div className="footer">
+            <div className="bill-info">
               <div className="centered-container">
                 <div className="sub-h2">click what you'd vote</div>
               </div>
@@ -239,24 +247,7 @@ var SingleBill = React.createClass({
                 <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes</div>
               </div>
             </div>
-              <div className="one-line-spread">
-                <p>Proposed by: </p>
-                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
-              </div>
-              <div className="one-line-spread">
-                <p>My representative voted: </p>
-                <p>{repVoted}</p>
-              </div>
-              <div className="one-line-spread">
-                <p>You would have voted: </p>
-                <p>{this.state.vote}</p>
-              </div>
-              <div className="one-line-spread">
-                <p>Bill status: </p>
-                <p className="dynamic">{this.state.bill.status}</p>
-              </div>
           </div>
-      
     </div>
   );
 }
@@ -270,3 +261,10 @@ module.exports = withRouter(SingleBill);
 //       <table id="billText"><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
 //     </div>
 //   </div>
+
+
+    // <div className="share">
+    //   <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
+    //   <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+    //   <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
+    // </div>
