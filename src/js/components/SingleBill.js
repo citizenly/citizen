@@ -196,7 +196,7 @@ var SingleBill = React.createClass({
           <div className="scrollable-content">
             <div className="centered-container bill-main-headings">
               <div className="bubble-container-x-small">
-                <Link activeClassName="active" className="light-grey-bg-color full-bubble" to="/">Home</Link>
+                <Link activeClassName="active" className="light-grey-bg-color full-bubble" to={repLink}>Home</Link>
               </div>
               <div className="top-h2">BILL {this.state.bill.id}</div>
               <p>Latest status in parliament:</p>
