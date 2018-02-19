@@ -99,7 +99,6 @@ h1 {
   font-size: 1.3em;
   text-align: center;
   color: black;
-  text-transform: uppercase;
   margin: 0px;
 }
 
@@ -109,7 +108,6 @@ h2 {
   font-size: 1.3em;
   text-align: left;
   margin-top: 4%;
-  text-transform: uppercase;
   color: black;
 }
 
@@ -118,14 +116,14 @@ h3 {
   font-family: Arimo, sans-serif;
   font-size: 90%;
   text-align: center;
+  text-transform: initial;
 }
 
 //list titles//
 h4 {
-  font-family: Oswald, sans-serif;
   font-weight: 200;
   font-size: 0.8em;
-  text-transform: uppercase;
+  margin: 0;
 }
 
 //list descriptions, blue///
@@ -134,6 +132,8 @@ h5 {
   font-weight: 400;
   font-size: 0.9em;
   color: #2D81CF;
+  text-transform: initial;
+  margin: 0 0 15px;
 }
 
 
@@ -207,7 +207,7 @@ img {
   }
 }
 
-////COLORS////(will sass these soon)
+////COLORS////
 
 .rep, 
 .resultTie {
@@ -242,6 +242,7 @@ img {
   color: #fff;
   font-weight: 400;
   width: 100%;
+  text-align: center;
   padding: 2px 7px;
 }
 
@@ -275,6 +276,7 @@ img {
   border-radius: 2px;
   font-weight: 400;
   margin: 3px 0;
+  text-align: center;
 }
 
 .partyLib {
@@ -429,10 +431,6 @@ img {
 }
 
 
-
-
-
-
 ////REP////
 .centered-container {
   display: flex;
@@ -441,6 +439,7 @@ img {
   justify-content: space-around;
   overflow: hidden;
   text-align: center;
+  margin-bottom: 10px;
   
   .top-h2, 
   .sub-h2 {
@@ -589,6 +588,19 @@ img {
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
+  }
+}
+
+//////COMPARE////
+
+.compare-page {
+  margin: 0 20px;
+  
+  .listedItem {
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 15px 0;
+    background-color: #f2f2f2;
   }
 }
 
@@ -943,11 +955,11 @@ p.thankYou {
 }
 
 
-////SINGLE BILL & PETITION////
-
+////SINGLE BILL////
 .bill-status {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  text-align: center;
   align-items: center;
   height: 40px;
   margin: 10px 0;
@@ -956,11 +968,11 @@ p.thankYou {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    padding: 2px;
-    
+
     div {
-      height: 30px;
       width: 100%;
+      text-align: center;
+      flex-grow: 1;
     }
   }
 }
@@ -972,12 +984,6 @@ p.thankYou {
   }
 }
 
-.petitionTabs p, .voteCompare p {
-  color: black;
-  text-align: left;
-  padding: 10px;
-}
-
 .box-wrap {
   min-height: 70px;
   font-family: Arimo;
@@ -986,7 +992,8 @@ p.thankYou {
 }
 
 
-.billandid, .petitionandid {
+.billandid, 
+.petitionandid {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -996,8 +1003,6 @@ p.thankYou {
     font-weight: 200;
   }
 }
-
-
 
 .filters {
   display: flex;
@@ -1267,9 +1272,6 @@ canvas.petitionDoughnut {
   }
 }
 
-.listedItem {
-  margin-bottom: 1em;
-}
 
 @media only screen and (max-width: 345px) {
   .billList {

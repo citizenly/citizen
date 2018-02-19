@@ -176,10 +176,10 @@ var SingleBill = React.createClass({
     console.log(this.state.bill, 'this.state.bill');
 
     if (this.state.bill.repsVote) {
-      var repVoted = <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)} >{this.state.bill.repsVote}</span>;
+      var repVoted = <div className={"dynamic" + this.state.bill.repsVote.substring(0, 2)} >{this.state.bill.repsVote}</div>;
     }
     else {
-      repVoted = <span>?</span>;
+      repVoted = <div>?</div>;
     }
     
     var repLink;
@@ -194,7 +194,7 @@ var SingleBill = React.createClass({
     return (
       <div>
           <div className="scrollable-content">
-            <div className="centered-container">
+            <div className="centered-container bill-main-headings">
               <div className="bubble-container-x-small">
                 <Link activeClassName="active" className="light-grey-bg-color full-bubble" to="/">Home</Link>
               </div>
@@ -202,7 +202,13 @@ var SingleBill = React.createClass({
               <p>Latest status in parliament:</p>
               <div className="sub-h2 dynamic">{this.state.bill.status}</div>
             </div>
-            
+            <div className="centered-container">
+             <div className="one-line-spread">
+                <p>Proposed by: </p>
+                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
+              </div>
+            </div>
+            <br/>
             
             {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
             
@@ -211,30 +217,25 @@ var SingleBill = React.createClass({
               <p>{this.state.bill.title}</p>
               <p>{this.state.bill.summary}</p>
             </div>
-            <div className="centered-container">
-             <div className="one-line-spread">
-                <span>Proposed by: </span>
-                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
-              </div>
-            </div>
-            <br/>
+
             <div className="centered-container">
               <div className="sub-h2">full text</div>
               <a href={this.state.bill.textUrl} activeClassName="active">
                 <p>See full info</p>
               </a>
             </div>
-            <br/>
             <p>{this.state.bill.text}</p>
+            <br/>
+            <br/>
           </div>
           <div className="bill-status">
               <div className="bill-status-box">
                 <span>My rep voted</span>
-                <div>{repVoted}</div>
+                {repVoted}
               </div>
               <div className="bill-status-box">
                 <span>You would have voted</span>
-                <div>{this.state.vote}</div>
+                <div className={this.state.vote === -1 ? "dynamicNo" : this.state.vote === 1 ? "dynamicYe" : "?"}>{this.state.vote === -1 ? "No" : this.state.vote === 1 ? "Yes" : "?"}</div>
               </div>
             </div>
           <div className="footer">
