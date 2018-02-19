@@ -88,17 +88,11 @@ var App = React.createClass({
       repLink = '/';
       feedLink = '/';
     }
+      
     return (
       <div>
-        <header>
-            <Link className="navbutton rep" activeClassName="active" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
-            <Link className="navbutton feed" activeClassName="active" onClick={this.onMenuItemClick} to={feedLink}>Feed</Link>
-            <Link className="navbutton compare" activeClassName="active" onClick={this.onMenuItemClick} to ="/compare/votedonbymyrep">Compare</Link>
-            <Link className="navbutton petitions" activeClassName="active" onClick={this.onMenuItemClick} to ="/petitions">Petitions</Link>
-            <Link className="navbutton stats" activeClassName="active" onClick={this.onMenuItemClick} to ="/stats">Stats</Link>
-        </header>
-        <div className="site-wrap">
-          <main>{this.props.children}</main>
+        <div className="layout">
+          {this.props.children}
         </div>
       </div>
     );

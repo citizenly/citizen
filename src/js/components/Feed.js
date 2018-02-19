@@ -99,6 +99,7 @@ var Feed = React.createClass({
   render: function() {
     return (
       <div>
+        <div className="scrollable-content">
           <div className="centered-container">
             <div className="top-h2">statements</div>
             <div className="sub-h2">by {this.state.repFullName}</div>
@@ -117,7 +118,7 @@ var Feed = React.createClass({
               
             </div>
           </div>
-          
+        </div>
      </div>
     );
   }

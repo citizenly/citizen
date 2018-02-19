@@ -7,9 +7,6 @@ var axios = require('axios');
 var $ = require('jquery');
 import { withRouter } from 'react-router';
 
-var Parse = require('parse');
-var Vote = Parse.Object.extend('Vote');
-
 
 var SingleBill = React.createClass({
   getInitialState: function() {
@@ -31,6 +28,7 @@ var SingleBill = React.createClass({
       },
       content: "",
       vote: 0,
+      voteInText: "Not voted yet",
       greenBtnToggle: "greenbutton",
       redBtnToggle: "redbutton",
       shareButtonToggle: false,
@@ -41,8 +39,6 @@ var SingleBill = React.createClass({
   componentDidMount: function() {
     this.loadBillData();
     this.setState({content: this.state.bill.title});
-    $(".billTabs li").removeClass("active");
-    $("#tab-" + 1).addClass("active");
   },
   componentDidUpdate: function(prevProps) {
     if(prevProps.params.filter !== this.props.params.filter) {
@@ -97,44 +93,35 @@ var SingleBill = React.createClass({
     if (vote === 1) {
       that.setState({
         greenBtnToggle: "greenbutton-clicked",
-        redBtnToggle: "redbutton",
+        redBtnToggle: "inactive-button",
         vote: 1
       });
     }
-    else if (vote === -1) {
+    if (vote === -1) {
       that.setState({
-        greenBtnToggle: "greenbutton",
+        greenBtnToggle: "inactive-button",
         redBtnToggle: "redbutton-clicked",
         vote: -1
       });
     }
-  },
-  handleTabClick: function(data){
-    if(data===1) {
-      this.setState({content: this.state.bill.title});
-    }
-    else if(data===2) {
-      this.setState({content: this.state.bill.summary});
-    }
-    else if(data===3) {
-      this.setState({content: this.state.bill.text});
-    }
-
-    $(".billTabs li").removeClass("active");
-    $("#tab-" + data).addClass("active");
   },
   handleGBtnClick: function(e) {
     e.preventDefault();
     var vote = {billId: this.props.params.billId};
     
     if (this.state.greenBtnToggle === "greenbutton") {
-      this.setState({greenBtnToggle:"greenbutton-clicked", redBtnToggle:"redbutton", vote: 1});
-      vote.vote = 1;
+      this.setState({greenBtnToggle:"greenbutton-clicked", redBtnToggle:"inactive-button", vote: 1});
+      vote.vote = 0;
       //Parse.Cloud.run('handleVote',  vote);
     }
-    else if (this.state.greenBtnToggle === "greenbutton-clicked") {
-      this.setState({greenBtnToggle:"greenbutton", vote: 0});
-      vote.vote = 0;
+    if (this.state.greenBtnToggle === "inactive-button") {
+      this.setState({greenBtnToggle:"greenbutton-clicked", redBtnToggle:"inactive-button", vote: 1});
+      vote.vote = 1;
+      //Parse.Cloud.run('handleVote', vote);
+    }
+    if (this.state.greenBtnToggle === "greenbutton-clicked") {
+      this.setState({greenBtnToggle:"greenbutton", redBtnToggle:"redbutton", vote: 0});
+      vote.vote = 1;
       //Parse.Cloud.run('handleVote', vote);
     }
     
@@ -144,13 +131,18 @@ var SingleBill = React.createClass({
     e.preventDefault();
     var vote = {billId: this.props.params.billId};
     if (this.state.redBtnToggle === "redbutton") {
-      this.setState({redBtnToggle:"redbutton-clicked", greenBtnToggle: "greenbutton", vote: -1});
-      vote.vote = -1;
+      this.setState({redBtnToggle:"redbutton-clicked", greenBtnToggle: "inactive-button", vote: -1});
+      vote.vote = 0;
       //Parse.Cloud.run('handleVote', vote);
     }
-    else if (this.state.redBtnToggle === "redbutton-clicked") {
-      this.setState({redBtnToggle:"redbutton", vote: 0});
+    if (this.state.redBtnToggle === "inactive-button") {
+      this.setState({redBtnToggle:"redbutton-clicked", greenBtnToggle: "inactive-button", vote: -1});
       vote.vote = 0;
+      //Parse.Cloud.run('handleVote', vote);
+    }
+    if (this.state.redBtnToggle === "redbutton-clicked") {
+      this.setState({redBtnToggle:"redbutton", greenBtnToggle:"greenbutton", vote: 0});
+      vote.vote = -1;
       //Parse.Cloud.run('handleVote', vote);
     }
     
@@ -184,10 +176,10 @@ var SingleBill = React.createClass({
     console.log(this.state.bill, 'this.state.bill');
 
     if (this.state.bill.repsVote) {
-      var repVoted = <span className={"dynamic" + this.state.bill.repsVote.substring(0, 2)} >{this.state.bill.repsVote}</span>;
+      var repVoted = <div className={"dynamic" + this.state.bill.repsVote.substring(0, 2)} >{this.state.bill.repsVote}</div>;
     }
     else {
-      repVoted = <span>?</span>;
+      repVoted = <div>?</div>;
     }
     
     var repLink;
@@ -201,22 +193,22 @@ var SingleBill = React.createClass({
     
     return (
       <div>
-        <div className="bubble-container-x-small">
-          <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to={repLink}>Home</Link>
-        </div>
-          
-          <div>
-            <div className="centered-container">
+          <div className="scrollable-content">
+            <div className="centered-container bill-main-headings">
+              <div className="bubble-container-x-small">
+                <Link activeClassName="active" className="light-grey-bg-color full-bubble" to={repLink}>Home</Link>
+              </div>
               <div className="top-h2">BILL {this.state.bill.id}</div>
               <p>Latest status in parliament:</p>
               <div className="sub-h2 dynamic">{this.state.bill.status}</div>
             </div>
-            
-            <div className="share">
-              <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
-              <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
-              <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
+            <div className="centered-container">
+             <div className="one-line-spread">
+                <p>Proposed by: </p>
+                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
+              </div>
             </div>
+            <br/>
             
             {this.state.loading ? <div className="loading"><p>Fetching bill info</p><div className="loader">Loading...</div></div> : null}
             
@@ -225,46 +217,38 @@ var SingleBill = React.createClass({
               <p>{this.state.bill.title}</p>
               <p>{this.state.bill.summary}</p>
             </div>
-            <br/>
+
             <div className="centered-container">
               <div className="sub-h2">full text</div>
               <a href={this.state.bill.textUrl} activeClassName="active">
                 <p>See full info</p>
               </a>
             </div>
-            <br/>
             <p>{this.state.bill.text}</p>
-            
+            <br/>
+            <br/>
           </div>
-          
-          <div className="bill-info fixed-footer">
-            <div className="white-bg-color opacity">
+          <div className="bill-status">
+              <div className="bill-status-box">
+                <span>My rep voted</span>
+                {repVoted}
+              </div>
+              <div className="bill-status-box">
+                <span>You would have voted</span>
+                <div className={this.state.vote === -1 ? "dynamicNo" : this.state.vote === 1 ? "dynamicYe" : "?"}>{this.state.vote === -1 ? "No" : this.state.vote === 1 ? "Yes" : "?"}</div>
+              </div>
+            </div>
+          <div className="footer">
+            <div className="bill-info">
               <div className="centered-container">
                 <div className="sub-h2">click what you'd vote</div>
               </div>
               <div className="voting-indicators">
-                <div onClick={this.handleRBtnClick} className="yes-votes">no</div>
-                <div onClick={this.handleGBtnClick} className="no-votes">yes</div>
+                <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}>no</div>
+                <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes</div>
               </div>
             </div>
-              <div className="one-line-spread">
-                <p>Proposed by: </p>
-                <p>{this.state.bill.proposedBy} - {this.state.bill.partyOfSponsor}</p>
-              </div>
-              <div className="one-line-spread">
-                <p>My representative voted: </p>
-                <p>{repVoted}</p>
-              </div>
-              <div className="one-line-spread">
-                <p>You would have voted: </p>
-                <p>{this.state.vote}</p>
-              </div>
-              <div className="one-line-spread">
-                <p>Bill status: </p>
-                <p className="dynamic">{this.state.bill.status}</p>
-              </div>
           </div>
-      
     </div>
   );
 }
@@ -278,3 +262,10 @@ module.exports = withRouter(SingleBill);
 //       <table id="billText"><tbody><tr dangerouslySetInnerHTML={{__html: (this.state.content)}}/></tbody></table>
 //     </div>
 //   </div>
+
+
+    // <div className="share">
+    //   <a className={this.state.shareButtonToggle ? "facebookButton fbtn share facebook fa-2x" : "hidden"} href="http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com"><i className="fa fa-facebook"></i></a>
+    //   <i onClick={this.handleShareButtonClick} className= {"shareButton fa fa-share-alt fa-2x"}></i>
+    //   <a className={this.state.shareButtonToggle ? "twitterButton fbtn share twitter fa-2x" : "hidden"} href="https://twitter.com/intent/tweet?text=I found out me and my MP vote the same on 39% of all bills they vote on&url=http://www.facebook.com/sharer/sharer.php?u=http://citizenly.herokuapp.com&via=CITIZEN"><i className="fa fa-twitter"></i></a>
+    // </div>

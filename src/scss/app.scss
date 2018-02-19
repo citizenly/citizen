@@ -2,22 +2,38 @@
 
 
 /* Global --------------------------------------------------------------- */
-html {
+html, body {
   height: 100%;
-}
-
-body {
-  margin: 0;
-  height: 100%;
+  min-height: 100%;
   font-family: Oswald, sans-serif;
+  text-transform: uppercase;
   color: #555;
-  background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.site-wrap {
-  margin: 0% 4%;
+body {
+  display: flex;
+  flex-direction: column;
+	box-sizing: border-box;	
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  background-color: #fafafa;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 100px;
+}
+
+.scrollable-content {
+  flex: 1 1 auto;
+  overflow-y: scroll;
 }
 
 
@@ -28,7 +44,7 @@ body {
   align-items: center;
 }
 
-.flex-column{
+.flex-column {
   display: flex;
   flex-direction: column;
 }
@@ -39,22 +55,6 @@ body {
 
 .wrapper-w-header {
   margin-top: 27%;
-}
-
-.fixed-home-btn {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #778899;
-  border-radius: 0 3px 3px 0;
-  z-index: 10;
-  padding: 4px 6px;
-  
-  a {
-    font-family: Oswald, sans-serif;
-    text-transform: uppercase;
-    color: #fff;
-  }
 }
 
 //Colors
@@ -99,7 +99,6 @@ h1 {
   font-size: 1.3em;
   text-align: center;
   color: black;
-  text-transform: uppercase;
   margin: 0px;
 }
 
@@ -109,7 +108,6 @@ h2 {
   font-size: 1.3em;
   text-align: left;
   margin-top: 4%;
-  text-transform: uppercase;
   color: black;
 }
 
@@ -118,14 +116,14 @@ h3 {
   font-family: Arimo, sans-serif;
   font-size: 90%;
   text-align: center;
+  text-transform: initial;
 }
 
 //list titles//
 h4 {
-  font-family: Oswald, sans-serif;
   font-weight: 200;
   font-size: 0.8em;
-  text-transform: uppercase;
+  margin: 0;
 }
 
 //list descriptions, blue///
@@ -134,14 +132,17 @@ h5 {
   font-weight: 400;
   font-size: 0.9em;
   color: #2D81CF;
+  text-transform: initial;
+  margin: 0 0 15px;
 }
 
 
 p {
+  margin: 0;
   font-family: Arimo, sans-serif;
   font-size: 0.9em;
+  text-transform: initial;
 }
-
 
 li {
   text-decoration: none;
@@ -160,22 +161,6 @@ img {
   max-width: 100%;
 }
 
-//Fixed header/footer
-.fixed-header,
-.fixed-footer {
-  position: fixed;
-  left: 0;
-  width: 100%;
-}
-
-.fixed-header {
-  top: 0;
-  padding-top: 15px;
-}
-
-.fixed-footer {
-  bottom: 0;
-}
 
 //Voting indicators
 .voting-indicators {
@@ -188,8 +173,11 @@ img {
   color: #fff;
   margin-bottom: 15px;
   
-  .yes-votes,
-  .no-votes {
+  .redbutton, 
+  .greenbutton, 
+  .redbutton-clicked, 
+  .greenbutton-clicked,
+  .inactive-button {
     width: 50%;
     height: 100%;
     display: flex;
@@ -197,12 +185,18 @@ img {
     justify-content: center;
   }
   
-  .yes-votes {
+  .redbutton,
+  .redbutton-clicked {
+    background-color: #8B2530;
+  }
+  
+  .greenbutton, 
+  .greenbutton-clicked {
     background-color: #006729;
   }
   
-  .no-votes {
-    background-color: #8B2530;
+  .inactive-button {
+    background-color: #808080;
   }
 }
 
@@ -213,9 +207,10 @@ img {
   }
 }
 
-////COLORS////(will sass these soon)
+////COLORS////
 
-.rep, .resultTie {
+.rep, 
+.resultTie {
   background-color: #778899;
 }
 
@@ -235,25 +230,37 @@ img {
   background-color: #2D81CF;
 }
 
-.resultFailed, .dynamicFailed, .dynamicNo,
-.resultPassed, .dynamicPassed, .dynamicYe,
-.dynamic, .dynamicTie, .dynamicDi {
+.resultFailed, 
+.dynamicFailed, 
+.dynamicNo,
+.resultPassed, 
+.dynamicPassed, 
+.dynamicYe,
+.dynamic, 
+.dynamicTie, 
+.dynamicDi {
   color: #fff;
   font-weight: 400;
-  width: fit-content;
+  width: 100%;
+  text-align: center;
   padding: 2px 7px;
-  border-radius: 2px;
 }
 
-.resultFailed, .dynamicFailed, .dynamicNo {
+.resultFailed, 
+.dynamicFailed, 
+.dynamicNo {
   background-color: #8B2530;
 }
 
-.resultPassed, .dynamicPassed, .dynamicYe {
+.resultPassed, 
+.dynamicPassed, 
+.dynamicYe {
   background-color: #006729;
 }
 
-.dynamic, .dynamicTie, .dynamicDi {
+.dynamic, 
+.dynamicTie, 
+.dynamicDi {
   background-color: #778899;
 }
 
@@ -262,8 +269,6 @@ img {
 .partyNDP,
 .partyBlo,
 .partyGre {
-  font-family: Oswald, sans-serif;
-  text-transform: uppercase;
   font-size: .9rem;
   color: #fff;
   width: fit-content;
@@ -271,6 +276,7 @@ img {
   border-radius: 2px;
   font-weight: 400;
   margin: 3px 0;
+  text-align: center;
 }
 
 .partyLib {
@@ -294,172 +300,7 @@ img {
 }
 
 
-////NAVBAR////
-
-header {
-  display: none !important;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-start;
-  width: 100%;
-  background-color: white;
-}
-
-.navbutton {
-  width: 100%;
-  font-weight: 200;
-  font-family: Oswald, sans-serif;
-  text-transform: uppercase;
-  padding: 1em 0.4em 1em 0.4em;
-  text-align: center;
-  color: white;
-  font-size: smaller;
-}
-
-a.navbutton.active {
-  font-weight: 600;
-}
-
-
-/*
-nav {
-border-top: 1px solid #ddd;
-border-bottom: 1px solid #ddd;
-background-color: #f5f5f5;
-width: 100%;
-
-ul {
-font-family: Oswald, sans-serif;
-font-weight: 400;
-text-transform: uppercase;
-list-style: none;
-margin: 0 auto;
-position: relative;
-}
-
-a {
-display: block;
-padding: 10px;
-font-size: 13px;
-font-weight: 400;
-text-align: right;
-color: #aaa;
-cursor: pointer;
-text-decoration: none;
-}
-
-a:hover, a:focus {
-}
-
-li {
-float: left;
-border-right: 1px solid #ddd;
-}
-
-li:last-child {
-border-right: none;
-}
-
-}*/
-
-
-input {
-  display: inline-block;
-  outline: none;
-  margin: 0;
-  border: 1px solid white;
-  background-color: rgba(0,0,0,0.1);
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  box-shadow: none;
-  font-family: Arimo;
-  font-size: 0.8em;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-
-////HAMBURGER MENU////
-
-.hamburger {
-  display: block;
-  flex-direction: row;
-}
-
-*, *:before, *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-
 @media only screen and (max-width: 767px) {
-  
-  .hamburger {
-    display: block;
-  }
-  
-  nav {
-    border-top: none;
-    border-bottom: none;
-    width: 100%;
-    background-color: white;
-    
-    a {
-      display: block;
-      padding: 10px;
-      font-size: 13px;
-      font-weight: 200;
-      text-align: right;
-      color: #aaa;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    
-    a:hover, a:focus {
-    }
-    
-    li {
-      float: left;
-      border-right: 1px solid #ddd;
-    }
-    
-    li:last-child {
-      border-right: none;
-    }
-    
-    .active {
-      font-weight: 600;
-    }
-    
-    ul {
-      border-left: none;
-      border-right: none;
-      font-family: Oswald, sans-serif;
-      font-weight: 400;
-      text-transform: uppercase;
-      list-style: none;
-      margin: 0 auto;
-      position: relative;
-    }
-    
-    li {
-      width: 100%;
-      border-right: none;
-    }
-  }
-  
   
   .menu {
     height: 0;
@@ -467,20 +308,11 @@ input {
     transition: height 0.3s linear;
     background-color: white;
   }
-  
-  .slide-down {
-    height: 93%;
-  }
-  
-  .slide-up {
-    height: 0%;
-  }
 }
 
 
-//////HOME////
-
-.main {
+//////LOGIN////
+.login-page {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -564,24 +396,38 @@ input {
 .postcodeinputandentry {
   display: flex;
   flex-direction: column;
-  width: 100%;
-}
-
-.login-field {
-  height: 3.5rem;
-  width: 16rem;
-}
-
-.postcodebutton {
-  background-color: #778899;
-  color: white;
-  font-family: Oswald, sans-serif;
-  width: 100%;
-  height: 100%;
-  font-size: 0.8em;
-  padding: 3px;
-  border: none;
-  margin: 0;
+  justify-content: center;
+  width: 250px;
+  
+  input {
+    display: inline-block;
+    outline: none;
+    margin: 0;
+    border: 0;
+    background-color: rgba(0,0,0,0.1);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    box-shadow: none;
+    font-family: Arimo;
+    font-size: 0.8em;
+  }
+    
+  .login-field,
+  .postcodebutton {
+    height: 3.5rem;
+    width: 100%;
+  }
+  
+  .postcodebutton {
+    background-color: #778899;
+    color: white;
+    font-family: Oswald, sans-serif;
+    font-size: 0.8em;
+    border: none;
+    margin: 0;
+  }
 }
 
 
@@ -593,6 +439,7 @@ input {
   justify-content: space-around;
   overflow: hidden;
   text-align: center;
+  margin-bottom: 10px;
   
   .top-h2, 
   .sub-h2 {
@@ -741,6 +588,19 @@ input {
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
+  }
+}
+
+//////COMPARE////
+
+.compare-page {
+  margin: 0 20px;
+  
+  .listedItem {
+    margin-bottom: 15px;
+    text-align: center;
+    padding: 15px 0;
+    background-color: #f2f2f2;
   }
 }
 
@@ -935,84 +795,6 @@ p.thankYou {
 }
 
 
-
-////////COMPARE + PETITIONS - SHARING & VOTING//////
-.votingAndSharingActions {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: white;
-  width: 100%;
-  position: fixed;
-  cursor: pointer;
-  bottom: 0;
-  
-  .redbutton, .greenbutton, .redbutton-clicked, .greenbutton-clicked, .redglovebutton, .greenglovebutton, .redglovebutton-clicked, .greenglovebutton-clicked {
-    padding: 10px;
-    max-width: 63px;
-    width: 50%;
-    height: 100px;
-    background: no-repeat center;
-    background-size: contain;
-  }
-  
-  /////BILL VOTE BUTTONS//////
-  .redbutton {
-    background-image: url("/images/redButton.png");
-    margin-left: 2.2em;
-  }
-  
-  .redbutton-clicked {
-    background-image: url("/images/redButtonPressed.png");
-    margin-left: 2.2em;
-  }
-  
-  .greenbutton {
-    background-image: url("/images/greenButton.png");
-    margin-right: 2.2em;
-  }
-  
-  .greenbutton-clicked {
-    background-image: url("/images/greenButtonPressed.png");
-    margin-right: 2.2em;
-  }
-  
-  
-  ///////PETITION VOTE BUTTONS///////
-  .redglovebutton {
-    background-image: url("/images/redGlovePressed.png");
-    position: relative;
-    top: 10px;
-    margin-left: 10px;
-    opacity: 0.5;
-  }
-  
-  .redglovebutton-clicked {
-    background-image: url("/images/redGlovePressed.png");
-    position: relative;
-    top: 2.2em;
-    margin-left: 2.2em;
-  }
-  
-  .greenglovebutton {
-    background-image: url("/images/greenGlovePressed.png");
-    position: relative;
-    top: -2.2em;
-    margin-right: 2.2em;
-    opacity: 0.5;
-  }
-  
-  .greenglovebutton-clicked {
-    background-image: url("/images/greenGlovePressed.png");
-    position: relative;
-    top: -2.2em;
-    margin-right: 2.2em;
-  }
-  
-}
-
-
-
 //BOUNCE IN LEFT
 
 .twitterButton {
@@ -1173,22 +955,33 @@ p.thankYou {
 }
 
 
-////SINGLE BILL & PETITION////
+////SINGLE BILL////
+.bill-status {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  height: 40px;
+  margin: 10px 0;
+  
+  .bill-status-box {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 
-.bill-info {
-  margin: 20px 0;
-  padding: 5px 20px;
-  background-color: #fafafa;
-
-  p {
-    margin: 5px 0;
+    div {
+      width: 100%;
+      text-align: center;
+      flex-grow: 1;
+    }
   }
 }
 
-.petitionTabs p, .voteCompare p {
-  color: black;
-  text-align: left;
-  padding: 10px;
+.bill-info {
+  
+  p {
+    margin: 5px 0;
+  }
 }
 
 .box-wrap {
@@ -1199,7 +992,8 @@ p.thankYou {
 }
 
 
-.billandid, .petitionandid {
+.billandid, 
+.petitionandid {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1209,8 +1003,6 @@ p.thankYou {
     font-weight: 200;
   }
 }
-
-
 
 .filters {
   display: flex;
@@ -1243,7 +1035,7 @@ p.thankYou {
 }
 
 
-.billTabs, .petitionTabs {
+.petitionTabs {
   p {
     color: black;
     text-align: left;
@@ -1364,52 +1156,11 @@ canvas.petitionDoughnut {
 
 
 ////COMPARE, PETITIONS, FEED, STATS////
-
-.comparePage, .petitionsPage, .statsPage {
-  p {
-    margin-top: 5%;
-  }
-}
-
-.searchbox {
-  font-family: Arimo, sans-serif;
-  outline: none;
-  height: 1.5rem;
-  font-size: 1rem;
-  margin-top: 10px;
-  padding: 0;
-  transition: all 0.3s;
-  display: flex;
-  justify-content: space-around;
-  
-  input[type=text] {
-    border-radius: 15px;
-    text-align: center;
-    width: 300px;
-    height: 100%;
-    padding: 0;
-    font-family: Arimo;
-    font-size: 0.8em;
-    padding-left: 15px;
-    padding-right: 15px;
-    box-shadow: inset 0px 0px 4px rgba(0,0,0,0.3);
-    -webkit-box-shadow: inset 0px 0px 4px rgba(0,0,0,0.3);
-    -moz-box-shadow: inset 0px 0px 4px rgba(0,0,0,0.3);
-  }
-  
-  input, select, textarea {
-    font: inherit;
-    margin: 0;
-    border: 0px;
-  }
-}
-
 .statsMatch {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   width: 100%;
-  
   
   img {
     width: 100px;
@@ -1462,7 +1213,6 @@ canvas.petitionDoughnut {
     }
 
 }
-
 
 .color-result{
   display: flex;
@@ -1522,84 +1272,12 @@ canvas.petitionDoughnut {
   }
 }
 
-.listedItem {
-  margin-bottom: 1em;
-}
 
 @media only screen and (max-width: 345px) {
   .billList {
     margin-bottom: 70px;
   }
 }
-
-
-////FORMS////
-
-.formPage {
-  display: flex;
-  flex-direction: column;
-  
-  p {
-    margin-top: 4%;
-    margin-bottom: 4%;
-  }
-  
-  .disclaimerText {
-    font-family: Arimo;
-    font-size: 0.9em;
-  }
-}
-
-.formEntryFields {
-  display: flex;
-  flex-direction: column;
-  font-family: Arimo;
-  outline: none;
-  font-size: 0.9em;
-  align-items: center;
-  
-  input[type=text], input[type=password] {
-    margin: 0.5em;
-    font-size: 0.9em;
-    padding: 0.5em;
-    background-color: white;
-    -webkit-line-height: 1.2em;
-    -webkit-box-shadow: inset 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc;
-    text-align: -webkit-center;
-    font-family: Oswald, sans-serif;
-    font-weight: 200;
-    line-height: 1.2em;
-
-  }
-  input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    text-transform: uppercase;
-  }
-  input::-moz-placeholder { /* Firefox 19+ */
-    text-transform: uppercase;
-  }
-  input:-ms-input-placeholder { /* IE 10+ */
-    text-transform: uppercase;
-  }
-  input:-moz-placeholder { /* Firefox 18- */
-    text-transform: uppercase;
-  }
-}
-
-.formButton {
-  background-color: #778899;
-  color: white;
-  font-family: Oswald, sans-serif;
-  height: 100%;
-  width: 100%;
-  font-size: 1.4em;
-  padding: 3px;
-  border: 0px;
-  text-transform: uppercase;
-}
-
 
 ///LOADING SPINNER////
 

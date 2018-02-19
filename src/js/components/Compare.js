@@ -20,15 +20,17 @@ var Bill = React.createClass({
       <div className="listedItem">
         <Link to={"/singlebill/" + this.props.billId}>
           <div className="sub-h2">{this.props.billId}</div>
-          <div className="one-line-spread">
-            <h4>Latest status in parliament: </h4>
-            { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <h4 className={resultClass}>{result}</h4> : <h4 class="dynamicDi">No action yet</h4> }
-          </div>
-          <div className="one-line-spread">
-          <h4>My representative voted: </h4>
-          { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <h4 className={ballotClass}>{ballot}</h4> : <h4 class="dynamicDi">No action yet</h4> } 
-          </div>
           <h5>{this.props.billTitle}</h5>
+          <div className="one-line-spread">
+            <div>
+              <h4>Latest status in parliament</h4>
+              { ( this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ? <h4 className={resultClass}>{result}</h4> : <h4 class="dynamicDi">No action yet</h4> }
+            </div>
+            <div>
+              <h4>My representative voted: </h4>
+              { (this.props.params.filter === "votedonbymyrep" &&  this.props.ballot) ?  <h4 className={ballotClass}>{ballot}</h4> : <h4 class="dynamicDi">No action yet</h4> } 
+            </div>
+          </div>
         </Link>
       </div>
     );
@@ -86,7 +88,7 @@ var Compare = React.createClass({
   },
   render: function() {
     return (
-      <div className="comparePage">
+      <div className="compare-page scrollable-content">
           <div className="centered-container">
               <div className="top-h2">compare</div>
               {this.props.params.filter === "votedonbymyrep"  ? <p>The below shows the bills {this.state.repFullName} has voted on.</p>  : ""} 
