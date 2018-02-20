@@ -599,7 +599,7 @@ img {
   .listedItem {
     margin-bottom: 15px;
     text-align: center;
-    padding: 15px 0;
+    padding: 15px 10px;
     background-color: #f2f2f2;
   }
 }
@@ -967,6 +967,7 @@ p.thankYou {
   .bill-status-box {
     display: flex;
     flex-grow: 1;
+    width: 100%;
     flex-direction: column;
 
     div {
