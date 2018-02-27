@@ -6,56 +6,55 @@ var percentageVotes = require("./percentageVotes.js");
 var makeRequest = require("./openAPI.js");
 var makePcRequest = require("./representAPI.js");
 
+/*PEDRO, I found this function for tests to see if string is in correct UK style postcode: AL1 1AB, BM1 5YZ etc. We should also add something that makes the input be in capitals if not originally so. */ 
+// function isValidPostcode(p) { 
+//     var postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i; 
+//     return postcodeRegEx.test(p); 
+// }
+
 
 //The user inputs their postal code.  With this data, we request the name of their MP and format it as name-surname
 function getRepName (postalCode, callback) {
   //At this point, we have a valid postal code, so we look for the name of the MP
-  var findMPbyPC = `postcodes/${postalCode}/?sets=federal-electoral-districts`;
+  console.log("it works");
+  var findMPbyPC = `getMP?postcode=${postalCode}&key=GYEChCGV3YEuA6ezszEvyj7J&output=js`;
   makePcRequest(findMPbyPC, function(err, mpInfo){
     if (err) {
       callback(err);
     }
     else {
-    var name = mpInfo.representatives_centroid[0].name;
     //we have to format the name to be sure that is all lowercase, without accent and with a dash between firstname and lastname
-    var nameFormatted = unaccented.unaccented(name); 
-    callback(null, nameFormatted);
+    // var nameFormatted = mpInfo.name.replace(" ","-").toLowerCase();
+    // mpInfo.nameFormatted = nameFormatted;
+    callback(null, {allRepData: mpInfo});
     }
   });
 }  
 
-function getRepInfo(nameFormatted, callback) {
-  //with the name of MP formatted, we fetch his data
-  var findMP = `politicians/${nameFormatted}/`;
-  // Make request to api.openparliament.ca and cache
-  makeRequest(findMP, function(err, result) {
-    if (err) {
-      callback(err);
-    }
-    else {
-      var mp = result;
-      var name = mp.name;
-      var constituency = mp.memberships[0].riding.name.en;
-      var party = mp.memberships[0].party.short_name.en;
-      var image = "https://api.openparliament.ca" + mp.image;
-      var electedOn = mp.memberships[0].start_date.substring(0, 4);
-      var ridingId = mp.memberships[0].riding.id;
-      var favoriteWord = mp.other_info.favourite_word[0];
-      var province = mp.memberships[0].riding.province;
+function getRepInfo(repData, callback) {
+
+      var mp = repData;
+      var name = repData.name;
+      var constituency = repData.constituency;
+      var party = repData.party;
+      var image = repData.repImage;
+      var enteredHouse = repData.entered_house;
+      var ridingId = "";
+      var province = "";
 
       var rep = {
+        mp: mp,
         name: name,
-        nameFormatted: nameFormatted,
+        nameFormatted: repData.name,
         constituency: constituency,
         province: province,
         party: party,
         img: image,
         ridingId: ridingId,
-        electedYear: electedOn,
+        electedYear: enteredHouse,
       };
+      console.log('rep whole obj', rep);
       callback(null, rep);
-    }
-  });
 }
 
 // return the majority vote percentage using the riding ID and parsing a .csv

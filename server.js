@@ -84,6 +84,7 @@ app.post('/repnameget', function(req, res) {
 
 //AJAX call to get the Rep object and make it available to the frontend
 app.post('/repinfoget', function(req, res) {
+  console.log('getRepInfo is being called');
   getRepInfo(req.body.repName, function(err, rep) {
     if (err) {
       console.log(err);

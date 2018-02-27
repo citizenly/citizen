@@ -6,7 +6,7 @@ and that these characters follow LNL NLN and have the valide letters
 function validatePC(postcode) {
 var pc = postcode.toUpperCase().replace(/\s+/g, "");
 pc = pc.replace(/\-/g, "");
-  var valid = /([ABCEGHJKLMNPRSTVXY]\d)([ABCEGHJKLMNPRSTVWXYZ]\d){2}/i;
+  var valid = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i; 
   var ok = valid.test(pc);
   if (!ok){
     return "invalid";
