@@ -38,79 +38,79 @@ var Rep = React.createClass({
   },
   componentDidMount: function() {
     var that = this;
-    var nameFormatted = this.props.params.repName;
-    
+    that.setState({rep: that.props.location.state.allRepData});
+
     // get rep info using nameFormatted in url
-    axios.post('/repinfoget', {
-      repName: nameFormatted
-    })
+    // axios.post('/repinfoget', {
+    //   repName: nameFormatted
+    // })
     // update this.state with the rep object
-    .then(function(response) {
-      var updateData = that.state.rep;
-      updateData = response.data;
-      that.state.rep = updateData;
-      localStorage.setItem("repFullName", that.state.rep.name);
-      localStorage.setItem("repName", that.props.params.repName);
-      that.setState({rep: updateData});
-    })
-    .catch(function(response) {
-    });
+    // .then(function(response) {
+      // var updateData = ourBloodyRepData;
+      // console.log('GAH ourBloodyRepData', ourBloodyRepData)
+      // that.state.rep = updateData;
+      // localStorage.setItem("repFullName", that.state.rep.name);
+      // localStorage.setItem("repName", that.props.params.repName);
+      // that.setState({rep: updateData});
+    // })
+    // .catch(function(response) {
+    // });
 
     // Get array of repVote objects - billId and ballot
-    var repVotes = axios.post('/repvoteinfo', {
-      repName: nameFormatted
-    }).then(
-      function(res) {
-        var voteArray = res.data.map(function(vote){
-          return {
-            ballot: vote.ballot,
-            billId: vote.billId
-          };
-        });
-        console.log(voteArray);
-        return voteArray;
-      }
-    );
+    // var repVotes = axios.post('/repvoteinfo', {
+    //   repName: nameFormatted
+    // }).then(
+    //   function(res) {
+    //     var voteArray = res.data.map(function(vote){
+    //       return {
+    //         ballot: vote.ballot,
+    //         billId: vote.billId
+    //       };
+    //     });
+    //     console.log(voteArray);
+    //     return voteArray;
+    //   }
+    // );
     
-    // Get array of myVote objects - billId and vote
-    var myVotes = Parse.Cloud.run('myVoteInfo').then(console.log(myVotes));
+    // // Get array of myVote objects - billId and vote
+    // var myVotes = Parse.Cloud.run('myVoteInfo').then(console.log(myVotes));
     
-    //var that = this;
-    Promise.all([repVotes, myVotes]).then(
+    // //var that = this;
+    // Promise.all([repVotes, myVotes]).then(
       
-      function(results) {
-        var repVotes = results[0];
-        var myVotes = results[1];
+    //   function(results) {
+    //     var repVotes = results[0];
+    //     var myVotes = results[1];
 
-        // Compare Rep and User array of votes and create a single array, with 1 = agreement and 0 = disagreement
-        var voteCompare = [];
+    //     // Compare Rep and User array of votes and create a single array, with 1 = agreement and 0 = disagreement
+    //     var voteCompare = [];
 
-        myVotes.forEach(function(userVote) {
-          repVotes.forEach(function(repVote) {
-            if ((userVote.get('billId') === repVote.billId) && (repVote.ballot !== "Didn't Vote")) {
-              if ((userVote.get('vote') === 1 && repVote.ballot === "Yes") || (userVote.get('vote') === -1 && repVote.ballot === "No")) {
-                return voteCompare.push(1);
-              }
-              else {
-                return voteCompare.push(0);
-              }
-            }
-          });
-        });
+    //     myVotes.forEach(function(userVote) {
+    //       repVotes.forEach(function(repVote) {
+    //         if ((userVote.get('billId') === repVote.billId) && (repVote.ballot !== "Didn't Vote")) {
+    //           if ((userVote.get('vote') === 1 && repVote.ballot === "Yes") || (userVote.get('vote') === -1 && repVote.ballot === "No")) {
+    //             return voteCompare.push(1);
+    //           }
+    //           else {
+    //             return voteCompare.push(0);
+    //           }
+    //         }
+    //       });
+    //     });
 
-        var total = voteCompare.length;
-        if (total > 0) {
-          var sum = voteCompare.reduce(function(cur, next){return cur+next;});
-          var coherence = ((sum/total)*100).toFixed(1);
+    //     var total = voteCompare.length;
+    //     if (total > 0) {
+    //       var sum = voteCompare.reduce(function(cur, next){return cur+next;});
+    //       var coherence = ((sum/total)*100).toFixed(1);
 
-          that.setState({coherence: coherence + '%'});
-        }
-      }
-    )
-    .catch(
-      function(err) {
-        console.log(err);
-    });
+    //       that.setState({coherence: coherence + '%'});
+    //     }
+    //   }
+    // )
+    // .catch(
+    //   function(err) {
+    //     console.log(err);
+    // });
   },
   handleShareButtonClick: function(e) {
     e.preventDefault();
@@ -118,10 +118,10 @@ var Rep = React.createClass({
       shareButtonToggle: !this.state.shareButtonToggle
     });
   },
- /* For now, we put the date of the last election to be in 2015 because for some of the MPs, the openparliament API gives us the date of the first time he/she was elected instead of the date of the last election. That is the way to refer to the date get from the openparliament API :{this.state.rep.electedYear} */
+
   render: function() {
     console.log(this.props, 'this.props');
-     // Representative Link
+    // Representative Link
     var repLink;
     var feedLink;
     var repName = localStorage.getItem('repName');
@@ -134,15 +134,15 @@ var Rep = React.createClass({
       feedLink = '/';
     }
     return (
-    <div className="scrollable-content repPage">
+    <div className="repPage">
       <div className="centered-container">
-        <div className="top-h2">{this.state.rep.name}</div>
+        <div className="top-h2">{this.state.rep.full_name}</div>
         <div className="sub-h2">SPEAKS FOR YOU</div>
-         <Link activeClassName="active" to={repLink}>
-          <img src="https://api.openparliament.ca/media/polpics/shannon-stubbs.jpg" alt="" className="left-side-pic-link" />
+        <Link activeClassName="active" to={repLink}>
+          <img src={this.state.rep.image} alt="" className="left-side-pic-link" />
         </Link>
         <div className="percent-low red-color">-4%</div>
-        <img src={this.state.rep.img} alt="https://api.openparliament.ca/media/polpics/marc-miller.jpg" className="round-image" />
+        <img src={'https://www.theyworkforyou.com/' + this.state.rep.image} alt="https://api.openparliament.ca/media/polpics/marc-miller.jpg" className="round-image" />
         <Link activeClassName="active" to ="/repbetter">
           <img src="https://api.openparliament.ca/media/polpics/alexandra-mendes.jpg" alt="" className="right-side-pic-link" />
         </Link>
@@ -201,10 +201,10 @@ var Rep = React.createClass({
               </Link>
           </div>
         </div>
-         <div className="back-line"></div>
-         <div className="bubble-container-x-small">
-           <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to="/">Logout</Link>
-         </div>
+        <div className="back-line"></div>
+        <div className="bubble-container-x-small">
+          <Link activeClassName="active" className="light-grey-bg-color full-bubble" onClick={this.onMenuItemClick} to="/">Logout</Link>
+        </div>          
         </div>
       </div>
     );

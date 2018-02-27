@@ -1,6 +1,27 @@
 var request = require("request");
 var server = require('../memcached.js');
-var API_URL = "http://represent.opennorth.ca/";
+var API_URL = "https://www.theyworkforyou.com/api/";
+// For a postcode the above API_URL returns
+// {
+//   "member_id" : "41553",
+//   "house" : "1",
+//   "constituency" : "Bristol South",
+//   "party" : "Labour",
+//   "entered_house" : "2017-06-09",
+//   "left_house" : "9999-12-31",
+//   "entered_reason" : "general_election",
+//   "left_reason" : "still_in_office",
+//   "person_id" : "25390",
+//   "lastupdate" : "2017-06-09 02:52:19",
+//   "title" : "",
+//   "given_name" : "Karin",
+//   "family_name" : "Smyth",
+//   "full_name" : "Karin Smyth",
+//   "url" : "/mp/25390/karin_smyth/bristol_south",
+//   "image" : "/images/mpsL/25390.jpeg",
+//   "image_height" : 80,
+//   "image_width" : 60
+// }
 
 function makePcRequest(path, callback) {
   server.get(path, function(err, data){
@@ -21,7 +42,8 @@ function makePcRequest(path, callback) {
       else {
         mark = "&";
       }
-      request(`${API_URL}${path}${mark}sets=federal-electoral-districts`, function(err, res){
+      console.log("path22", path);
+      request(`${API_URL}${path}`, function(err, res){
         if(err){
           callback(err);
         }

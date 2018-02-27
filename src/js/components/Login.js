@@ -1,8 +1,8 @@
 /* global localStorage */
 var React = require('react');
 var axios = require('axios');
-var formattedPc = require("../helperFunctions/validatePc.js");
 import { withRouter } from 'react-router';
+var formattedPc = require("../helperFunctions/validatePc.js");
 var event = require('../events');
 var Message = require('./InvalidPcMessage');
 
@@ -21,12 +21,14 @@ var Login = React.createClass({
     // check if the postal code is in a valid format
     var pc = this.refs.postalcode.value;
     var userPostalCode = formattedPc.validatePC(pc);
+    console.log('HERE', userPostalCode);
     
     // show an error message if the user has not entered a postal code in a valid format
-    if(userPostalCode === "invalid") {
+    if (userPostalCode === "invalid") {
       this.setState({invalidPostalCode: "alert"});
       event.emit('show_message', {message:"Enter a valid postal code"});
     }
+    
     
     // send the server a valid postal code and fetch the appropriate formatted MP name
     else {
@@ -34,16 +36,22 @@ var Login = React.createClass({
         postalcode: userPostalCode
       })
       .then(function(response) {
+        //this needs adapting, not doing anything right now
         if(response.data === "invalid") {
           that.setState({invalidPostalCode: "alert"});
           event.emit('show_message', {message:"There is no constituency associated with your postal code."});  
         }
         else {
-          var path = '/rep/' + response.data;
+          var repName = response.data.allRepData.full_name.replace(" ","-").toLowerCase();
+          var path = '/rep/' + repName;
           // store 'repName' in the browser cache
-          localStorage.setItem('repName', response.data);
+          localStorage.setItem('repName', response.data.allRepData);
           // redirect to the path of rep/your-rep-name
-          that.props.router.push(path);
+          // that.props.router.push(path);
+          that.props.router.push({
+            pathname: path,
+            state: {allRepData: response.data.allRepData}
+          });
         }
       })
       .catch(function(response) {
@@ -54,34 +62,33 @@ var Login = React.createClass({
   render: function() {
     // user enters postalcode and rep's name is retrieved from Represent API - https://represent.opennorth.ca/api/
     return (
-    <div className="login-page">
-    <div className="square"></div>
-      <div className= "citizenlogo"> 
-        <img alt="citizen app logo" src="images/citizenlogo.png"></img>
-      </div>
+    <div>
+      <img alt="" src="images/uk-map.png" className="bg-image"></img>
       
-      <div className="intro">
-          <p>In a democracy you elect someone to make decisions for you. Find out what they're currently doing in your name.</p>
-          <h1>WHO'S REPRESENTING ME?</h1>
-          <h3>CANADA</h3>
-      </div>
-       
-      <form onSubmit={this.handleSubmit}>
-        <div className="postcodeinputandentry">
-          <div className="login-field">
-            <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code (eg. H3B1A6)" />
-          </div>
-          <div className="login-field">
-            <button className="postcodebutton" type="submit">FIND OUT</button>
-          </div>
-        <Message/>
+      <div className="login-page">
+        <div className= "citizenlogo"> 
+          <img alt="citizen app logo" src="images/citizenlogo.png"></img>
         </div>
-      </form>
-  
-      <div className= "canadamap"> 
-        <img alt="canada map" src="images/canadamap.png"></img>
-      </div>
         
+        <div className="intro">
+            <p>In a democracy you elect someone to make decisions for you. 
+            <br/>Find out what they're currently doing in your name.</p>
+            <h1>WHO'S REPRESENTING ME?</h1>
+            <h3>UK</h3>
+        </div>
+         
+        <form onSubmit={this.handleSubmit}>
+          <div className="postcodeinputandentry">
+            <div className="login-field">
+              <input ref="postalcode" className={"postcodeinput " + this.state.invalidPostalCode } type="text" name="postalcode" maxLength="7" placeholder="enter your postal code (eg. BS3 1QP)" />
+            </div>
+            <div className="login-field">
+              <button className="postcodebutton" type="submit">FIND OUT</button>
+            </div>
+          <Message/>
+          </div>
+        </form>
+       </div>   
       </div>
     );
   }
@@ -89,3 +96,8 @@ var Login = React.createClass({
 
 //marker
 module.exports = withRouter(Login);
+
+
+      // <div className= "canadamap"> 
+      //   <img alt="canada map" src="images/canadamap.png"></img>
+      // </div>
