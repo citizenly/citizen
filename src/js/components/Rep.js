@@ -121,6 +121,7 @@ var Rep = React.createClass({
 
   render: function() {
     console.log(this.props, 'this.props');
+    console.log(this.state, 'this state');
     // Representative Link
     var repLink;
     var feedLink;
@@ -150,8 +151,8 @@ var Rep = React.createClass({
         <div className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</div>
 
         <div className="white-bg-section">
-          <p>{this.state.rep.constituency} {this.state.rep.province}</p>
-          <p>Won in 2015 with {this.state.rep.electedVote}% of the vote</p>
+          <p>{this.state.rep.constituency}</p>
+          <p>Entered house {this.state.rep.entered_house} through {this.state.rep.entered_reason}</p>
         </div>
         
         <div className="back-line"></div>
