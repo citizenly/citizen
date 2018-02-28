@@ -244,8 +244,8 @@ var SingleBill = React.createClass({
                 <div className="sub-h2">click what you'd vote</div>
               </div>
               <div className="voting-indicators">
-                <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}>no</div>
-                <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>yes</div>
+                <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}>I agree</div>
+                <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}>I don't agree</div>
               </div>
             </div>
           </div>

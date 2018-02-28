@@ -7,6 +7,7 @@ var request = require('request');
 var ParseServer = require('parse-server').ParseServer;
 var RepAPI = require('./src/js/helperFunctions/repAPI.js');
 var getRepName = RepAPI.getRepName;
+var getHansard = RepAPI.getHansard;
 var getRepInfo = RepAPI.getRepInfo;
 var getPercentageVote = RepAPI.getPercentageVote;
 var bodyParser = require("body-parser");
@@ -78,6 +79,19 @@ app.post('/repnameget', function(req, res) {
     }
     else {
       res.send(nameFormatted);
+    }
+  });
+});
+
+// New AJAX call to get the full hansard for the rep id
+app.post('/rephansardget', function(req, res) {
+  getHansard(req.body.person_id, function(err, fullHansard) {
+    if(err) {
+      console.log(err);
+      res.send("no hansard");
+    }
+    else {
+      res.send(fullHansard);
     }
   });
 });

@@ -5,12 +5,7 @@ var unaccented = require("./unaccented.js");
 var percentageVotes = require("./percentageVotes.js");
 var makeRequest = require("./openAPI.js");
 var makePcRequest = require("./representAPI.js");
-
-/*PEDRO, I found this function for tests to see if string is in correct UK style postcode: AL1 1AB, BM1 5YZ etc. We should also add something that makes the input be in capitals if not originally so. */ 
-// function isValidPostcode(p) { 
-//     var postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i; 
-//     return postcodeRegEx.test(p); 
-// }
+var makeHansardRequest = require("./representAPI.js");
 
 
 //The user inputs their postal code.  With this data, we request the name of their MP and format it as name-surname
@@ -29,7 +24,20 @@ function getRepName (postalCode, callback) {
     callback(null, {allRepData: mpInfo});
     }
   });
-}  
+}
+
+function getHansard (repId, callback) {
+  console.log("getHansard is getting called", "repId", repId);
+  var findHansardById = `getHansard?person=${repId}&key=GYEChCGV3YEuA6ezszEvyj7J&output=js`;
+  makeHansardRequest(findHansardById, function(err, hansardInfo){
+    if (err) {
+      callback(err);
+    }
+    else {
+    callback(null, {allHansardData: hansardInfo});
+    }
+  });
+}
 
 function getRepInfo(repData, callback) {
 
@@ -75,6 +83,7 @@ function getPercentageVote(ridingId, callback){
 
 module.exports = {
   getRepName: getRepName,
+  getHansard: getHansard,
   getRepInfo: getRepInfo,
   getPercentageVote: getPercentageVote
 };

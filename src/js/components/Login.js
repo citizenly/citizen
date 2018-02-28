@@ -45,7 +45,9 @@ var Login = React.createClass({
           var repName = response.data.allRepData.full_name.replace(" ","-").toLowerCase();
           var path = '/rep/' + repName;
           // store 'repName' in the browser cache
+          console.log("RESPONSE", response)
           localStorage.setItem('repName', response.data.allRepData);
+
           // redirect to the path of rep/your-rep-name
           // that.props.router.push(path);
           that.props.router.push({

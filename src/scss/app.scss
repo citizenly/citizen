@@ -473,6 +473,42 @@ img {
   }
 }
 
+.hansard-statement-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  
+  .hansard-content {
+    width: 90%;
+    height: 170px;
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  .redbutton,
+  .redbutton-clicked {
+    background-color: #8B2530;
+    width: 5%;
+    height: 180px;
+    padding: 5px 0;
+  }
+  
+  .greenbutton, 
+  .greenbutton-clicked {
+    background-color: #006729;
+    width: 5%;
+    height: 180px;
+    padding: 5px 0;
+  }
+  
+  .inactive-button {
+    background-color: #808080;
+    width: 10%;
+    height: 100%;
+    padding: 5px 0;
+  }
+}
+
 .bubble-container-large,
 .bubble-container-medium,
 .bubble-container-small,
