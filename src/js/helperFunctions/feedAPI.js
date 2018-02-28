@@ -2,7 +2,7 @@ var makeRequest = require("./openAPI.js");
 var withoutHtml = require("./withoutHtml.js");
 var moment = require('moment');
 
-/* For each politician, we can get what they are doing by their speeches in the House, their tweeter feed or their ballots
+/* For each politician, we can get what they are doing by their speeches in the House, their twitter feed or their ballots
 For each of this three sources, we will get an array of objects. Each of these objects will have a date to clasify
  them from the most recent to the oldest.  After that, we will do section: yesterday, two days ago, later this week and one week ago
  
@@ -22,7 +22,7 @@ function getSpeechInTheHouseBySubAndDayAndRep(rep, callback) {
       callback(err);
     }
     else {
-      //speeches is an aray of all the speeches as object
+      //speeches is an array of all the speeches as object
       //Only the speeches in the House have an h1 propriety(so, as value, they will recive "in the House") 
       //and h2 propriety(that means the subject)
       //For the moment, we keep only the speeches in the House as an array
