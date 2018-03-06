@@ -273,12 +273,12 @@ var Rep = React.createClass({
         <div className="top-h2">{this.state.rep.full_name}</div>
         <div className="sub-h2">SPEAKS FOR YOU</div>
         <Link activeClassName="active" to={repLink}>
-          <img src="https://api.parliament.uk/Live/photo/qMlFiE3L.jpeg?crop=MCU_3:4&width=260&quality=80" alt="" className="left-side-pic-link" />
+          <img src="https://www.theyworkforyou.com/images/mpsL/25411.jpeg" alt="" className="left-side-pic-link" />
         </Link>
         <div className="percent-low red-color">-4%</div>
         <img src={'https://www.theyworkforyou.com/' + this.state.rep.image} alt="https://api.openparliament.ca/media/polpics/marc-miller.jpg" className="round-image" />
         <Link activeClassName="active" to ="/repbetter">
-          <img src="https://api.openparliament.ca/media/polpics/alexandra-mendes.jpg" alt="" className="right-side-pic-link" />
+          <img src="https://www.theyworkforyou.com/images/mpsL/25320.jpeg" alt="" className="right-side-pic-link" />
         </Link>
         <div className="percent-high green-color">+5%</div>
         <div className={"party" + this.state.rep.party.substring(0, 3)}>{this.state.rep.party}</div>
@@ -288,8 +288,6 @@ var Rep = React.createClass({
           <p>Entered house {this.state.rep.entered_house} <br/>through {this.state.rep.entered_reason}</p>
         </div>
         
-        <div className="back-line"></div>
-
         <div className="bubble-container-large">
           <div className="light-grey-bg-color top-bubble">
               <Link className="you" activeClassName="active" to ="/compare/votedonbymyrep">
@@ -306,31 +304,99 @@ var Rep = React.createClass({
         
         <div className="back-line"></div>
         
-        <div className="centered-container hansard-statement-box">
-          <div className="sub-h2 dynamic">{this.state.hansard.topic}</div>
+        <div className="main-title-box">
+          <div className="category-header">Recent Debates</div>
+          <p className="category-description">Debates in the House of Commons are an opportunity for MPs from all parties to scrutinise government legislation and raise important local, national or topical issues.
+          <br/>And sometimes to shout at each other.
+          </p>
+        </div>
+        
+        <div className="topic-title-box">
+          <div className="topic-header">Uk/EU Future Economic Partnership</div>
+          <div className="topic-description">– in the House of Commons at 3:34 pm on 5th March 2018.</div>
+        </div>
+        
+        <div className="statement-box">
+          <div className="statement-header-and-body">
+            <div className="statement-header">
+              <img src="https://www.theyworkforyou.com/images/mps/10426.jpg" alt="" />
+              <div>
+                <div className="name-of-speaker">Theresa May</div>
+                <p className="title-of-speaker">The Prime Minister <br/>Leader of the Conservative Party</p>
+              </div>
+            </div>
+            <p className="statement-body">
+            With permission, Mr Speaker, I shall make a statement on our future economic partnership with the European Union. In December we agreed the key elements of our departure from the EU, and we are turning that agreement into draft legal text. We have made clear our concerns about the first draft that the Commission published last week, but no one should doubt our commitment (...)
+            </p>
+          </div>
+          <div className="btn-container">
+            <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+            <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
+          </div>
+        </div>
+        
+        <div className="statement-box">
+          <div className="statement-header-and-body">
+            <div className="statement-header">
+              <img src="https://www.theyworkforyou.com/images/mpsL/10040.jpeg" alt="" />
+              <div>
+                <div className="name-of-speaker">John Bercow</div>
+                <p className="title-of-speaker">Speaker of the House of Commons</p>
+              </div>
+            </div>
+            <p className="statement-body">
+           Order. A very considerable level of orchestrated heckling is taking place in the House, including heckling from some Members who will doubtless later grin at me and seek to catch my eye. They may find that there is a clash between the two. We should set a good example that will impress our dear and loyal Canadian friends, and indeed, for that matter, the British people. The House can rest assured that I will allow the maximum possible questioning and scrutiny on this occasion, as I always do, but the Prime Minister is entitled to be heard with courtesy. (...)
+            </p>
+          </div>
+          <div className="btn-container">
+            <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+            <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
+          </div>
+        </div>
+        
+        <div className="statement-box">
+          <div className="statement-header-and-body">
+            <div className="statement-header">
+              <img src="https://www.theyworkforyou.com/images/mpsL/10180.jpeg" alt="" />
+              <div>
+                <div className="name-of-speaker">Iain Duncan Smith</div>
+                <p className="title-of-speaker">Conservative <br/>Chingford and Woodford Green</p>
+              </div>
+            </div>
+            <p className="statement-body">
+            I congratulate my right hon. Friend on what I thought was an excellent speech—clear and determined, giving the European Union a very clear sense of direction. I thought that perhaps the most important point in the speech—the point voted on in the referendum—was about taking back control, so does she agree that bringing back to a British Parliament all decisions about our arrangements is exactly about delivering on that? When she gets into negotiations about trade arrangements with her European counterparts, will she remind them that cake exists to be eaten and cherries exist to be picked?            
+            </p>
+          </div>
+          <div className="btn-container">
+            <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+            <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
+          </div>
+        </div>
+        
+        <div className="statement-box">
+          <div className="statement-header-and-body">
+            <div className="statement-header">
+              <img src="https://www.theyworkforyou.com/images/mpsL/25390.jpeg" alt="" />
+              <div>
+                <div className="name-of-speaker">Karin Smyth</div>
+                <p className="title-of-speaker">Labour <br/>Bristol South</p>
+              </div>
+            </div>
+            <p className="statement-body">
+The Prime Minister said today that no one should doubt our commitment to the entirety of the joint report published in December. With regard to Ireland, paragraph 47 of the joint report stated:
+“The two Parties have carried out a mapping exercise, which shows that North-South cooperation relies to a significant extent on a common European Union legal and policy framework.”
+Will she commit to publishing that mapping exercise?
+</p>
+          </div>
+          <div className="btn-container">
+            <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
+            <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
+          </div>
         </div>
         
         <div className="back-line"></div>
         
-        <div className="centered-container hansard-statement-box">
-          <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
-          <div className="hansard-content">
-            <p>{this.state.hansard.title}</p><br/>
-            <p>{this.state.hansard.comment}</p>
-          </div>
-          <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
-        </div>
-        
-        <div className="back-line"></div>
-        
-        <div className="centered-container hansard-statement-box">
-          <div onClick={this.handleRBtnClick} className={this.state.redBtnToggle}></div>
-          <div className="hansard-content">
-            <p>{this.state.hansard.title}</p><br/>
-            <p>{this.state.hansard.comment}</p>
-          </div>
-          <div onClick={this.handleGBtnClick} className={this.state.greenBtnToggle}></div>
-        </div>
+
 
 
         
