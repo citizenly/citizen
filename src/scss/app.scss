@@ -474,12 +474,42 @@ img {
 }
 
 
+//BUBBLES
+.bubble {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  .bubble-text {
+    font-size: 1rem;
+  }
+  
+  .bubble-value {
+    font-size: 3rem;
+    line-height: 2.6rem;
+  }
+}
+
+.large-bubble {
+  height: 150px;
+  width: 150px;
+}
+
+.small-bubble {
+  height: 80px;
+  width: 80px;
+}
+
+
 //MAIN TITLE BOX
 .main-title-box {
   width: 100%;
-  background-color: green;
+  background-color: black;
   color: white;
   text-align: center;
+  padding-bottom: 10px;
   
   .category-header {
     font-size: 2rem;
@@ -492,10 +522,13 @@ img {
 }
 
 //TOPIC TITLE BOX
+.debate-one {
+  background-color: #666;
+}
+
 .topic-title-box {
   width: 100%;
-  background-color: lightgreen;
-  color: white;
+  color: #fff;
   text-align: center;
   
   .topic-header {
