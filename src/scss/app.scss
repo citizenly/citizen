@@ -473,39 +473,148 @@ img {
   }
 }
 
-.hansard-statement-box {
+
+//BUBBLES
+.bubble {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  .bubble-text {
+    font-size: 1rem;
+  }
+  
+  .bubble-value {
+    font-size: 3rem;
+    line-height: 2.6rem;
+  }
+}
+
+.large-bubble {
+  height: 150px;
+  width: 150px;
+}
+
+.small-bubble {
+  height: 80px;
+  width: 80px;
+}
+
+
+//MAIN TITLE BOX
+.main-title-box {
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding-bottom: 10px;
+  
+  .category-header {
+    font-size: 2rem;
+  }
+
+  .category-description {
+    font-size: .9rem;
+    text-transform: initial;
+  }
+}
+
+//TOPIC TITLE BOX
+.debate-one {
+  background-color: #666;
+}
+
+.topic-title-box {
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  
+  .topic-header {
+    font-size: 1.5rem;
+  }
+
+  .topic-description {
+    font-size: .8rem;
+    font-style: italic;
+    text-transform: initial;
+  }
+}
+
+//STATEMENT BOX
+.statement-box {
   width: 100%;
   display: flex;
+  height: auto;
   flex-direction: row;
+  margin: 10px;
   
-  .hansard-content {
+  .statement-header-and-body {
+    display: flex;
+    flex-direction: column;
     width: 90%;
-    height: 170px;
-    background-color: #f2f2f2;
-    padding: 10px;
+    
+    .statement-header {
+      display: flex;
+      flex-direction: row;
+      background-color: #fafafa;
+      padding: 5px 10px;
+      align-items: center;
+      
+      img {
+        width: 50px;
+        height: 63px;
+        border-radius: 50%;
+        background-color: grey;
+        object-fit: cover;
+        object-position: center right;
+        margin-right: 10px;
+      }
+      
+      .name-of-speaker {
+        font-size: 1rem;
+        text-align: left;
+      }
+      
+      .title-of-speaker {
+        font-size: .9rem;
+        text-transform: capitalize;
+        text-align: left;
+      }
+    }
+    
+    .statement-body {
+      font-size: .9rem;
+      text-transform: initial;
+      text-align: left;
+      background-color: #fafafa;
+      padding: 10px;
+    }
   }
   
-  .redbutton,
-  .redbutton-clicked {
-    background-color: #8B2530;
-    width: 5%;
-    height: 180px;
-    padding: 5px 0;
-  }
-  
-  .greenbutton, 
-  .greenbutton-clicked {
-    background-color: #006729;
-    width: 5%;
-    height: 180px;
-    padding: 5px 0;
-  }
-  
-  .inactive-button {
-    background-color: #808080;
+  .btn-container {
     width: 10%;
-    height: 100%;
-    padding: 5px 0;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+  
+    .redbutton,
+    .redbutton-clicked {
+      background-color: #8B2530;
+      height: 50%;
+    }
+    
+    .greenbutton, 
+    .greenbutton-clicked {
+      background-color: #006729;
+      height: 50%;
+    }
+    
+    .inactive-button {
+      background-color: #808080;
+      height: 50%;
+    }
   }
 }
 
